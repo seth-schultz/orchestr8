@@ -70,14 +70,10 @@ While other projects provide agent collections, this system delivers a **complet
 **Easiest method - install directly from Claude Code:**
 
 ```bash
-# Add the Orchestr8 marketplace:
-/plugin marketplace add seth-schultz/orchestr8-marketplace
-
-# Install Orchestr8:
-/plugin install orchestr8
+/plugin marketplace add seth-schultz/orchestr8
 ```
 
-That's it! The orchestration system will be installed in your current project's `.claude/` directory.
+That's it! The orchestration system will be automatically installed.
 
 **Verification:**
 ```bash
@@ -2096,8 +2092,13 @@ Built on research and inspiration from:
 **Ready to transform your development workflow?**
 
 ```bash
+# Install from marketplace
+/plugin marketplace add seth-schultz/orchestr8
+
+# Or clone directly to existing project
 git clone https://github.com/seth-schultz/orchestr8 .claude
-claude-code
+
+# Start building
 /new-project "Your amazing idea here"
 ```
 
