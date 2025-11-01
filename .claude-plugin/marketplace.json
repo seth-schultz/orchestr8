@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Enterprise orchestration system for Claude Code with 81+ specialized agents and 13 autonomous workflows",
-    "version": "1.2.3"
+    "version": "1.2.4"
   },
   "plugins": [
     {
       "name": "orchestr8",
       "source": ".claude",
       "description": "Complete autonomous software engineering organization with 81+ specialized agents, 13 autonomous workflows, enterprise compliance, game development, AI/ML, and blockchain/Web3 support",
-      "version": "1.2.3"
+      "version": "1.2.4"
     }
   ]
 }

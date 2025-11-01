@@ -5,6 +5,38 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4] - 2025-11-01
+
+### 📢 Public Release
+
+**Repository Now Public**
+- Made `seth-schultz/orchestr8` repository public on GitHub
+  - Available for community access and contributions
+  - Visible on GitHub search and discovery
+  - Open for stars, forks, and issues
+
+**Documentation Updates**
+- Updated README.md installation instructions
+  - Simplified marketplace installation to single command
+  - Removed reference to deprecated orchestr8-marketplace repo
+  - Clarified installation options (marketplace vs manual)
+  - Updated quick start examples
+
+**Repository Management**
+- Set `main` as default branch
+- Removed deprecated `orchestr8-marketplace` repository
+- Consolidated distribution to single repository
+
+**What's New:**
+- ✅ Repository is now publicly accessible
+- ✅ Streamlined installation documentation
+- ✅ Single source of truth for plugin distribution
+- ✅ Ready for community contributions
+
+This is a documentation and visibility release with no functional changes.
+
+---
+
 ## [1.2.3] - 2025-11-01
 
 ### 🔧 Marketplace Compatibility
