@@ -17,8 +17,9 @@ While other projects provide agent collections, this system delivers a **complet
 | **Meta-Orchestration** | ✅ Hierarchical coordination | ❌ Flat agent lists |
 | **Quality Gates** | ✅ Built-in (security, testing, perf) | ❌ Manual or missing |
 | **Enterprise Standards** | ✅ SOC2, GDPR, OWASP built-in | ❌ DIY |
+| **Cross-Platform** | ✅ macOS, Linux, Windows | ⚠️ Often Linux-only |
 | **All Major Languages** | ✅ Python, TS, Java, Go, Rust, etc. | ⚠️ Limited coverage |
-| **Cloud & Infrastructure** | ✅ AWS, K8s, Terraform | ⚠️ Partial |
+| **Cloud & Infrastructure** | ✅ AWS, Azure, GCP + Docker | ⚠️ Partial |
 | **End-to-End Workflows** | ✅ `/new-project`, `/add-feature` | ❌ Manual orchestration |
 | **Testing Strategy** | ✅ 80%+ coverage requirement | ❌ Optional |
 
@@ -28,6 +29,7 @@ While other projects provide agent collections, this system delivers a **complet
 
 - [Quick Start](#-quick-start)
 - [System Overview](#-system-overview)
+- [Cross-Platform Support](#-cross-platform-support)
 - [Usage Guide](#-usage-guide)
 - [Extending the System](#-extending-the-system)
 - [Examples](#-real-world-examples)
@@ -42,9 +44,24 @@ While other projects provide agent collections, this system delivers a **complet
 
 ### Prerequisites
 
+**The system works on all platforms: macOS, Linux, and Windows!**
+
+**Required:**
 - [Claude Code](https://claude.ai/code) installed and configured
-- Git
-- Basic understanding of your project's technology stack
+- [Git](https://git-scm.com/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (for infrastructure services)
+
+**Recommended:**
+- [Node.js](https://nodejs.org/) 18+ (for TypeScript/JavaScript projects)
+- [Python](https://www.python.org/) 3.11+ (for Python projects)
+- [VS Code](https://code.visualstudio.com/) (best IDE for Claude Code)
+
+**Platform-Specific Notes:**
+- **Windows:** WSL2 recommended for best compatibility with Docker
+- **macOS:** Xcode Command Line Tools for git (`xcode-select --install`)
+- **Linux:** Docker and git available via package manager (apt/dnf/yum)
+
+📖 **See [Cross-Platform Guide](.claude/docs/CROSS_PLATFORM.md) for detailed setup instructions**
 
 ### Installation
 
@@ -310,6 +327,158 @@ git init
 - `code-archaeologist` - Legacy code analysis
 
 </details>
+
+---
+
+## 🌍 Cross-Platform Support
+
+**All agents work seamlessly on macOS, Linux, and Windows!**
+
+### How We Ensure Cross-Platform Compatibility
+
+The orchestration system follows strict cross-platform principles:
+
+1. **🐳 Docker First** - All infrastructure (databases, caches, message queues, monitoring) runs in Docker
+2. **📦 Language Package Managers** - npm, pip, cargo, go get work identically on all platforms
+3. **🔍 Path Libraries** - Using `path.join()` (Node.js) and `pathlib` (Python) instead of hardcoded paths
+4. **🧪 CI/CD Matrix Testing** - GitHub Actions tests on Ubuntu, macOS, and Windows
+5. **📝 Clear Prerequisites** - Docker Desktop is the only platform-specific requirement
+
+### Quick Setup by Platform
+
+<details>
+<summary><b>🍎 macOS Setup</b></summary>
+
+```bash
+# Install Homebrew (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install prerequisites
+brew install git
+brew install --cask docker           # Docker Desktop
+brew install node                    # Node.js
+brew install python@3.11             # Python
+
+# Clone orchestration system
+cd your-project
+git clone https://github.com/your-org/claude-orchestration .claude
+
+# Start infrastructure
+cd .claude
+docker-compose up -d
+```
+
+</details>
+
+<details>
+<summary><b>🐧 Linux Setup (Ubuntu/Debian)</b></summary>
+
+```bash
+# Update package list
+sudo apt-get update
+
+# Install prerequisites
+sudo apt-get install -y git curl
+
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER  # Add user to docker group
+newgrp docker                  # Activate group
+
+# Install Node.js (via nvm)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.bashrc
+nvm install 20
+
+# Install Python
+sudo apt-get install -y python3.11 python3-pip
+
+# Clone orchestration system
+cd your-project
+git clone https://github.com/your-org/claude-orchestration .claude
+
+# Start infrastructure
+cd .claude
+docker-compose up -d
+```
+
+</details>
+
+<details>
+<summary><b>🪟 Windows Setup</b></summary>
+
+```powershell
+# Install Chocolatey (as Administrator in PowerShell)
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Install prerequisites
+choco install -y git
+choco install -y docker-desktop
+choco install -y nodejs
+choco install -y python311
+
+# Restart to activate Docker Desktop
+
+# Clone orchestration system (in PowerShell or Git Bash)
+cd your-project
+git clone https://github.com/your-org/claude-orchestration .claude
+
+# Start infrastructure
+cd .claude
+docker-compose up -d
+```
+
+**Windows Users:** We recommend enabling WSL2 for best Docker compatibility:
+```powershell
+wsl --install
+wsl --set-default-version 2
+```
+
+</details>
+
+### Why Docker Everywhere?
+
+All infrastructure components use Docker because:
+
+- ✅ **Identical behavior** across macOS, Linux, Windows
+- ✅ **No OS-specific installation** hassles (apt vs brew vs choco)
+- ✅ **Isolated environments** - No conflicts with system packages
+- ✅ **Easy cleanup** - `docker-compose down` removes everything
+- ✅ **Version consistency** - Same PostgreSQL 16, Redis 7, etc. everywhere
+- ✅ **Production parity** - Dev matches prod (containers in both)
+
+### Cross-Platform Code Examples
+
+All agents use cross-platform patterns:
+
+```typescript
+// ✅ GOOD - Works everywhere
+import path from 'path';
+const dataPath = path.join(__dirname, 'data', 'users.json');
+
+// ❌ BAD - Windows-specific
+const dataPath = 'C:\\Users\\data\\users.json';
+
+// ✅ GOOD - Docker everywhere
+docker-compose up postgres
+
+// ❌ BAD - OS-specific
+brew services start postgresql  // macOS only
+```
+
+### Platform-Specific Agents
+
+Some agents are intentionally platform-specific:
+
+- **`swiftui-specialist`** - macOS/iOS only (Apple platforms)
+- **`compose-specialist`** - Cross-platform with Android Studio
+
+All other 70+ agents work on all platforms! 🎉
+
+📖 **Full details:** [Cross-Platform Guide](.claude/docs/CROSS_PLATFORM.md)
 
 ---
 
