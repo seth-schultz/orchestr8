@@ -1,0 +1,68 @@
+{
+  "name": "claude-orchestration",
+  "displayName": "Claude Code Enterprise Orchestration System",
+  "version": "1.0.0",
+  "description": "Complete autonomous software engineering organization with 72+ specialized agents, 13 autonomous workflows, and enterprise compliance. Transform Claude Code into a full development team.",
+  "author": "Claude Code Community",
+  "license": "MIT",
+  "repository": "https://github.com/anthropics/claude-orchestration",
+  "homepage": "https://github.com/anthropics/claude-orchestration",
+  "bugs": "https://github.com/anthropics/claude-orchestration/issues",
+  "keywords": [
+    "agents",
+    "orchestration",
+    "automation",
+    "enterprise",
+    "devops",
+    "ci-cd",
+    "security",
+    "compliance",
+    "multi-agent",
+    "workflows",
+    "aws",
+    "azure",
+    "gcp",
+    "kubernetes",
+    "docker",
+    "terraform",
+    "python",
+    "typescript",
+    "java",
+    "go",
+    "rust"
+  ],
+  "categories": [
+    "Development",
+    "DevOps",
+    "Quality",
+    "Security",
+    "Compliance",
+    "Infrastructure",
+    "Testing"
+  ],
+  "engines": {
+    "claudeCode": ">=1.0.0"
+  },
+  "main": ".claude/CLAUDE.md",
+  "files": [
+    ".claude/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "docker": ">=20.0.0"
+  },
+  "optionalDependencies": {
+    "node": ">=18.0.0",
+    "python": ">=3.11.0",
+    "terraform": ">=1.0.0"
+  },
+  "features": {
+    "agents": 72,
+    "workflows": 13,
+    "languages": 11,
+    "cloudProviders": 3,
+    "compliance": 5,
+    "crossPlatform": true
+  }
+}
