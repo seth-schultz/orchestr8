@@ -94,7 +94,7 @@ ls .claude/
 cd your-project
 
 # Clone into .claude directory
-git clone https://github.com/seth-schultz/claude-org .claude
+git clone https://github.com/seth-schultz/orchestr8 .claude
 
 # Verify installation
 ls .claude/
@@ -116,7 +116,7 @@ cd my-awesome-project
 git init
 
 # Clone orchestration system
-git clone https://github.com/seth-schultz/claude-org .claude
+git clone https://github.com/seth-schultz/orchestr8 .claude
 
 # Verify installation
 ls .claude/
@@ -390,7 +390,7 @@ brew install python@3.11             # Python
 
 # Clone orchestration system
 cd your-project
-git clone https://github.com/seth-schultz/claude-org .claude
+git clone https://github.com/seth-schultz/orchestr8 .claude
 
 # Start infrastructure
 cd .claude
@@ -425,7 +425,7 @@ sudo apt-get install -y python3.11 python3-pip
 
 # Clone orchestration system
 cd your-project
-git clone https://github.com/seth-schultz/claude-org .claude
+git clone https://github.com/seth-schultz/orchestr8 .claude
 
 # Start infrastructure
 cd .claude
@@ -453,7 +453,7 @@ choco install -y python311
 
 # Clone orchestration system (in PowerShell or Git Bash)
 cd your-project
-git clone https://github.com/seth-schultz/claude-org .claude
+git clone https://github.com/seth-schultz/orchestr8 .claude
 
 # Start infrastructure
 cd .claude
@@ -2083,8 +2083,8 @@ Built on research and inspiration from:
 ## 📞 Support & Community
 
 - **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md) for deep dive
-- **Issues**: [GitHub Issues](https://github.com/seth-schultz/claude-org/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/seth-schultz/claude-org/discussions)
+- **Issues**: [GitHub Issues](https://github.com/seth-schultz/orchestr8/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/seth-schultz/orchestr8/discussions)
 - **Website**: [Your Website]
 - **Twitter**: [@YourHandle]
 
@@ -2093,7 +2093,7 @@ Built on research and inspiration from:
 **Ready to transform your development workflow?**
 
 ```bash
-git clone https://github.com/seth-schultz/claude-org .claude
+git clone https://github.com/seth-schultz/orchestr8 .claude
 claude-code
 /new-project "Your amazing idea here"
 ```
@@ -2106,6 +2106,6 @@ claude-code
 
 **Built with ❤️ for the Claude Code community**
 
-[⭐ Star this repo](https://github.com/seth-schultz/claude-org) • [🐛 Report Bug](https://github.com/seth-schultz/claude-org/issues) • [💡 Request Feature](https://github.com/seth-schultz/claude-org/issues)
+[⭐ Star this repo](https://github.com/seth-schultz/orchestr8) • [🐛 Report Bug](https://github.com/seth-schultz/orchestr8/issues) • [💡 Request Feature](https://github.com/seth-schultz/orchestr8/issues)
 
 </div>

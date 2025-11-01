@@ -1,13 +1,13 @@
 {
   "name": "orchestr8",
   "displayName": "Orchestr8 - Enterprise Orchestration System",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Complete autonomous software engineering organization with 81+ specialized agents, 13 autonomous workflows, enterprise compliance, game development, AI/ML, and blockchain/Web3 support. Transform Claude Code into a full development team.",
   "author": "Claude Code Community",
   "license": "MIT",
-  "repository": "https://github.com/seth-schultz/claude-org",
-  "homepage": "https://github.com/seth-schultz/claude-org",
-  "bugs": "https://github.com/seth-schultz/claude-org/issues",
+  "repository": "https://github.com/seth-schultz/orchestr8",
+  "homepage": "https://github.com/seth-schultz/orchestr8",
+  "bugs": "https://github.com/seth-schultz/orchestr8/issues",
   "keywords": [
     "agents",
     "orchestration",
