@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-green.svg)](https://claude.ai)
 
-**The most comprehensive, enterprise-grade orchestration system for Claude Code** — featuring 64+ specialized agents, 13 autonomous workflows, enterprise compliance (FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS), ML/data pipelines, API design (GraphQL/gRPC), and message queues (Kafka/RabbitMQ).
+**The most comprehensive, enterprise-grade orchestration system for Claude Code** — featuring 72+ specialized agents, 13 autonomous workflows, enterprise compliance (FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS), ML/data pipelines, API design (GraphQL/gRPC), message queues (Kafka/RabbitMQ), search (Elasticsearch/Algolia), multi-cloud (AWS/Azure/GCP), and observability (Prometheus/ELK).
 
 ## 🎯 What Makes This Different
 
@@ -118,8 +118,8 @@ git init
 └─────────────────────────────────────────────────────────────┘
                           ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ Layer 2: Specialized Agents (64+)                          │
-│ Dev, API, Testing, Messaging, SRE, DBs, Frontend, Mobile   │
+│ Layer 2: Specialized Agents (72+)                          │
+│ Dev, API, Testing, Messaging, SRE, DBs, Search, Cloud      │
 └─────────────────────────────────────────────────────────────┘
                           ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -264,6 +264,38 @@ git init
 
 - `playwright-specialist` - E2E testing, browser automation, visual regression, Page Object Model, cross-browser
 - `load-testing-specialist` - k6, Locust, stress testing, capacity planning, performance benchmarking
+
+</details>
+
+<details>
+<summary><b>🔍 Search Infrastructure (2)</b> - Full-text search and discovery</summary>
+
+- `elasticsearch-specialist` - Full-text search, aggregations, analyzers, distributed search, log analytics with Elasticsearch
+- `algolia-specialist` - Hosted search-as-a-service, instant search UI, typo tolerance, personalization, A/B testing
+
+</details>
+
+<details>
+<summary><b>⚡ Caching Infrastructure (2)</b> - High-performance caching</summary>
+
+- `redis-cache-specialist` - Distributed caching, cache-aside/write-through patterns, rate limiting, session management
+- `cdn-specialist` - Cloudflare, CloudFront edge caching, DDoS protection, edge computing, global content delivery
+
+</details>
+
+<details>
+<summary><b>☁️ Multi-Cloud Providers (2)</b> - Azure and GCP deployments</summary>
+
+- `azure-specialist` - Azure Functions, App Service, Cosmos DB, AKS, Service Bus, Azure DevOps, enterprise integrations
+- `gcp-specialist` - Cloud Functions, Cloud Run, Firestore, BigQuery, Pub/Sub, GKE, data analytics
+
+</details>
+
+<details>
+<summary><b>📈 Monitoring & Logging (2)</b> - Observability and operational intelligence</summary>
+
+- `prometheus-grafana-specialist` - Prometheus metrics, PromQL queries, Grafana dashboards, alerting, SLI/SLO tracking
+- `elk-stack-specialist` - Elasticsearch, Logstash, Kibana for centralized logging, log analysis, operational intelligence
 
 </details>
 
@@ -1824,12 +1856,12 @@ We welcome contributions! Here's how:
 
 ## 📊 Project Stats
 
-- **25+ Agents** across 4 layers
-- **8,000+ Lines** of documentation and agent definitions
-- **7 Languages** with specialized developers
+- **72+ Agents** across 4 layers
+- **12,000+ Lines** of documentation and agent definitions
+- **11 Languages** with specialized developers (Python, TypeScript, Java, Go, Rust, C#, Swift, Kotlin, Ruby, PHP, C++)
 - **5 Quality Gates** for enterprise standards
-- **4 Workflow** commands (with more in architecture)
-- **100%** Autonomous operation
+- **13 Workflow** commands for autonomous operations
+- **100%** Autonomous operation from requirements to production
 
 ---
 
