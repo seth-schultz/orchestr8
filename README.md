@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-green.svg)](https://claude.ai)
 
-**The most comprehensive, enterprise-grade orchestration system for Claude Code** — featuring 45+ specialized agents, hierarchical orchestration, enterprise compliance (FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS), autonomous web UI testing, and complete project lifecycle automation.
+**The most comprehensive, enterprise-grade orchestration system for Claude Code** — featuring 50+ specialized agents, hierarchical orchestration, enterprise compliance (FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS), autonomous web UI testing, ML/data pipelines, and complete project lifecycle automation.
 
 ## 🎯 What Makes This Different
 
@@ -118,8 +118,8 @@ git init
 └─────────────────────────────────────────────────────────────┘
                           ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ Layer 2: Specialized Agents (25+)                          │
-│ Development, Quality, DevOps, Documentation, Analysis      │
+│ Layer 2: Specialized Agents (50+)                          │
+│ Development, Quality, DevOps, Data/ML, SRE, Databases      │
 └─────────────────────────────────────────────────────────────┘
                           ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -195,6 +195,32 @@ git init
 - `ci-cd-engineer` - Pipeline automation
 - `docker-specialist` - Containerization
 - `kubernetes-expert` - K8s orchestration
+
+</details>
+
+<details>
+<summary><b>🗄️ Database Specialists (3)</b> - Data storage & optimization</summary>
+
+- `postgresql-specialist` - Query optimization, pgvector for AI embeddings, replication, partitioning, EXPLAIN analysis
+- `mongodb-specialist` - Aggregation pipelines, sharding, replication sets, Atlas Vector Search, change streams
+- `redis-specialist` - Caching strategies, pub/sub, rate limiting, session management, clustering
+
+</details>
+
+<details>
+<summary><b>🤖 Data & ML Engineering (3)</b> - Machine Learning pipelines</summary>
+
+- `data-engineer` - Apache Spark, Airflow, dbt, ETL/ELT pipelines, data quality (Great Expectations), CDC
+- `ml-engineer` - PyTorch, TensorFlow/Keras, scikit-learn, hyperparameter tuning (Optuna), SHAP/LIME interpretability
+- `mlops-specialist` - MLflow, Kubeflow pipelines, model serving, A/B testing, continuous training, model monitoring
+
+</details>
+
+<details>
+<summary><b>📊 Site Reliability & Observability (2)</b> - Production excellence</summary>
+
+- `sre-specialist` - SLOs/SLIs, error budgets, incident response, on-call procedures, chaos engineering, toil automation
+- `observability-specialist` - Prometheus, Grafana, OpenTelemetry, distributed tracing, ELK stack, APM, alerting
 
 </details>
 
@@ -465,6 +491,81 @@ Workflows are the easiest way to accomplish complex tasks.
 - Accessibility compliance audits
 - Visual regression testing
 - Automated test generation
+
+---
+
+#### 9. Build ML Pipeline: `/build-ml-pipeline`
+
+**Syntax:**
+```bash
+/build-ml-pipeline "ML problem description with data sources and requirements"
+```
+
+**Example:**
+```bash
+/build-ml-pipeline "Build customer churn prediction model. Data in PostgreSQL. Need real-time predictions via API. Weekly retraining."
+```
+
+**What Happens:**
+1. **Requirements & Design** - Problem type, architecture design, success metrics
+2. **Data Pipeline** - Ingestion, feature engineering, data quality checks (Great Expectations)
+3. **Model Training** - Multiple models, hyperparameter tuning (Optuna), experiment tracking (MLflow)
+4. **MLOps Deployment** - Model registry, FastAPI serving, Kubernetes deployment, A/B testing
+5. **Monitoring** - Prediction monitoring, data drift detection, performance tracking
+6. **Continuous Training** - Automated retraining triggers, canary deployment
+
+**Deliverables:**
+- Airflow data pipelines
+- Trained models with MLflow tracking
+- Containerized API (FastAPI + Docker)
+- Kubernetes deployment with auto-scaling
+- Grafana dashboards for model metrics
+- Automated retraining pipeline
+
+**When to Use:**
+- Building ML systems from scratch
+- Deploying ML models to production
+- Need automated ML lifecycle
+- Data science → production gap
+
+---
+
+#### 10. Setup Monitoring: `/setup-monitoring`
+
+**Syntax:**
+```bash
+/setup-monitoring [system-description]
+```
+
+**Example:**
+```bash
+/setup-monitoring "Kubernetes cluster with 20 microservices. Need metrics, logs, traces, and SLO monitoring with PagerDuty."
+```
+
+**What Happens:**
+1. **Requirements & Architecture** - Analyze system, define SLOs, design monitoring stack
+2. **Metrics Infrastructure** - Deploy Prometheus, Grafana, exporters
+3. **Application Instrumentation** - Add metrics, structured logging, distributed tracing
+4. **Logging Infrastructure** - Deploy Loki/ELK stack, log aggregation, retention policies
+5. **Distributed Tracing** - Deploy Tempo/Jaeger, OpenTelemetry collector
+6. **Dashboards** - Infrastructure, application, SLO, database dashboards
+7. **Alerting** - Configure Alertmanager, PagerDuty, Slack, runbooks
+8. **Performance Optimization** - HA setup, long-term storage, query optimization
+
+**Deliverables:**
+- Prometheus + Grafana stack
+- Loki/ELK for log aggregation
+- Tempo/Jaeger for distributed tracing
+- Comprehensive dashboards
+- Alert rules with PagerDuty/Slack integration
+- SLO tracking and error budgets
+- On-call runbooks
+
+**When to Use:**
+- New production deployments
+- Replacing legacy monitoring
+- Implementing SRE practices
+- Compliance requirements (SOC2, ISO27001)
 
 ---
 
