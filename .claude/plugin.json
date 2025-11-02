@@ -1,7 +1,7 @@
 {
   "name": "orchestr8",
-  "version": "1.3.0",
-  "description": "Complete autonomous software engineering organization with 82+ specialized agents, 16 autonomous workflows, enterprise compliance, game development, AI/ML, and blockchain/Web3 support. Features multi-stage iterative code review system. Transform Claude Code into a full development team.",
+  "version": "1.4.0",
+  "description": "Complete autonomous software engineering organization with 69 specialized agents, 19 autonomous workflows, enterprise compliance, game development, AI/ML, blockchain/Web3 support, and meta-orchestration capabilities. Features multi-stage iterative code review system and self-extending plugin architecture. Transform Claude Code into a full development team that can create its own agents, workflows, and skills.",
   "author": {
     "name": "Seth Schultz",
     "url": "https://github.com/seth-schultz"
@@ -46,7 +46,12 @@
     "blockchain",
     "web3",
     "solidity",
-    "ethereum"
+    "ethereum",
+    "meta-orchestration",
+    "self-extending",
+    "agent-creation",
+    "workflow-creation",
+    "plugin-development"
   ],
   "commands": "commands/**/*.md",
   "agents": "agents/**/*.md"
