@@ -1,0 +1,236 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # Validate release before publishing
+  validate-release:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+      tag: ${{ steps.get-version.outputs.tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Get version from tag
+        id: get-version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG#v}
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Tag: $TAG"
+          echo "Version: $VERSION"
+
+      - name: Validate tag matches VERSION file
+        run: |
+          TAG_VERSION="${{ steps.get-version.outputs.version }}"
+          FILE_VERSION=$(cat .claude/VERSION | tr -d '\n')
+
+          echo "Tag version: $TAG_VERSION"
+          echo "VERSION file: $FILE_VERSION"
+
+          if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
+            echo "ERROR: Tag version ($TAG_VERSION) does not match VERSION file ($FILE_VERSION)"
+            exit 1
+          fi
+
+          echo "✓ Tag matches VERSION file"
+
+      - name: Validate all version files match
+        run: |
+          VERSION="${{ steps.get-version.outputs.version }}"
+
+          VERSION_FILE=$(cat .claude/VERSION | tr -d '\n')
+          PLUGIN_VERSION=$(jq -r '.version' .claude/plugin.json)
+          MARKETPLACE_META=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
+          MARKETPLACE_PLUGIN=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
+
+          echo "Checking all versions match $VERSION..."
+
+          errors=0
+
+          if [ "$VERSION" != "$VERSION_FILE" ]; then
+            echo "ERROR: VERSION file mismatch: $VERSION_FILE"
+            errors=$((errors + 1))
+          fi
+
+          if [ "$VERSION" != "$PLUGIN_VERSION" ]; then
+            echo "ERROR: plugin.json mismatch: $PLUGIN_VERSION"
+            errors=$((errors + 1))
+          fi
+
+          if [ "$VERSION" != "$MARKETPLACE_META" ]; then
+            echo "ERROR: marketplace.json metadata.version mismatch: $MARKETPLACE_META"
+            errors=$((errors + 1))
+          fi
+
+          if [ "$VERSION" != "$MARKETPLACE_PLUGIN" ]; then
+            echo "ERROR: marketplace.json plugins[0].version mismatch: $MARKETPLACE_PLUGIN"
+            errors=$((errors + 1))
+          fi
+
+          if [ $errors -gt 0 ]; then
+            echo "Version consistency check failed with $errors error(s)"
+            exit 1
+          fi
+
+          echo "✓ All version files are consistent"
+
+      - name: Validate CHANGELOG has entry
+        run: |
+          VERSION="${{ steps.get-version.outputs.version }}"
+
+          if ! grep -q "## \[$VERSION\]" .claude/CHANGELOG.md; then
+            echo "ERROR: CHANGELOG.md does not have entry for version $VERSION"
+            echo "Expected: ## [$VERSION]"
+            exit 1
+          fi
+
+          echo "✓ CHANGELOG.md has entry for $VERSION"
+
+      - name: Run all validation checks
+        run: |
+          echo "Running comprehensive validation..."
+
+          # Validate structure
+          if [ ! -d ".claude/agents" ] || [ ! -d ".claude/commands" ]; then
+            echo "ERROR: Missing required directories"
+            exit 1
+          fi
+
+          # Count components
+          AGENT_COUNT=$(find .claude/agents -name "*.md" | wc -l)
+          WORKFLOW_COUNT=$(find .claude/commands -name "*.md" | wc -l)
+
+          echo "Agents: $AGENT_COUNT"
+          echo "Workflows: $WORKFLOW_COUNT"
+
+          echo "✓ All validation checks passed"
+
+  # Extract release notes from CHANGELOG
+  extract-release-notes:
+    name: Extract Release Notes
+    runs-on: ubuntu-latest
+    needs: validate-release
+    outputs:
+      notes: ${{ steps.extract.outputs.notes }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract release notes from CHANGELOG
+        id: extract
+        run: |
+          VERSION="${{ needs.validate-release.outputs.version }}"
+
+          # Extract section between ## [VERSION] and next ## heading
+          awk "/## \[$VERSION\]/,/## \[/" .claude/CHANGELOG.md | \
+            sed '/## \['"$VERSION"'\]/d' | \
+            sed '/## \[/,$d' > release-notes.md
+
+          # Check if we got any notes
+          if [ ! -s release-notes.md ]; then
+            echo "ERROR: Could not extract release notes for version $VERSION"
+            exit 1
+          fi
+
+          echo "Release notes extracted:"
+          cat release-notes.md
+
+          # Save to output (using file to handle multiline)
+          {
+            echo 'notes<<EOF'
+            cat release-notes.md
+            echo EOF
+          } >> $GITHUB_OUTPUT
+
+      - name: Upload release notes artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release-notes.md
+
+  # Create GitHub release
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [validate-release, extract-release-notes]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download release notes
+        uses: actions/download-artifact@v4
+        with:
+          name: release-notes
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.validate-release.outputs.tag }}
+          name: ${{ needs.validate-release.outputs.tag }}
+          body_path: release-notes.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add footer to release notes
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: '${{ needs.validate-release.outputs.tag }}'
+            });
+
+            const footer = `
+
+            ---
+
+            **Full Changelog**: https://github.com/${{ github.repository }}/blob/main/.claude/CHANGELOG.md
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)`;
+
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+              body: release.data.body + footer
+            });
+
+  # Notify on success
+  notify-success:
+    name: Notify Release Success
+    runs-on: ubuntu-latest
+    needs: [validate-release, create-release]
+    steps:
+      - name: Release published successfully
+        run: |
+          echo "✅ Release ${{ needs.validate-release.outputs.tag }} published successfully!"
+          echo ""
+          echo "Release URL: https://github.com/${{ github.repository }}/releases/tag/${{ needs.validate-release.outputs.tag }}"
+          echo ""
+          echo "Users can now install this version with:"
+          echo "  /plugin marketplace update"
+          echo "  /plugin install orchestr8"

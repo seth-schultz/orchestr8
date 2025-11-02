@@ -1,0 +1,360 @@
+name: PR Quality Gates
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  # PR metadata validation
+  pr-validation:
+    name: Validate PR Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            refactor
+            test
+            chore
+            release
+          requireScope: false
+
+      - name: Check PR description
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+
+            if (!pr.body || pr.body.trim().length === 0) {
+              core.setFailed('PR description is required');
+              return;
+            }
+
+            if (pr.body.trim().length < 20) {
+              core.setFailed('PR description is too short (minimum 20 characters)');
+              return;
+            }
+
+            console.log('✓ PR description is valid');
+
+  # Check what files changed
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      agents: ${{ steps.filter.outputs.agents }}
+      workflows: ${{ steps.filter.outputs.workflows }}
+      docs: ${{ steps.filter.outputs.docs }}
+      config: ${{ steps.filter.outputs.config }}
+      version: ${{ steps.filter.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Detect file changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            agents:
+              - '.claude/agents/**/*.md'
+            workflows:
+              - '.claude/commands/**/*.md'
+            docs:
+              - 'README.md'
+              - 'ARCHITECTURE.md'
+              - 'CLAUDE.md'
+              - '.claude/CHANGELOG.md'
+              - '.claude/CLAUDE.md'
+            config:
+              - '.claude/plugin.json'
+              - '.claude-plugin/marketplace.json'
+            version:
+              - '.claude/VERSION'
+              - '.claude/plugin.json'
+              - '.claude-plugin/marketplace.json'
+
+  # Validate new/modified agents
+  validate-agents:
+    name: Validate Agent Changes
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.agents == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed agent files
+        id: changed-files
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | \
+            grep '.claude/agents/.*\.md$' > changed-agents.txt || true
+
+          if [ -s changed-agents.txt ]; then
+            echo "Changed agents:"
+            cat changed-agents.txt
+          else
+            echo "No agent files changed"
+          fi
+
+      - name: Validate agent frontmatter
+        run: |
+          if [ ! -s changed-agents.txt ]; then
+            echo "No agents to validate"
+            exit 0
+          fi
+
+          echo "Validating changed agents..."
+
+          while IFS= read -r file; do
+            echo "Checking $file..."
+
+            # Check frontmatter exists
+            if ! head -n 1 "$file" | grep -q "^---$"; then
+              echo "ERROR: Missing frontmatter in $file"
+              exit 1
+            fi
+
+            # Extract and validate required fields
+            if ! grep -A 20 "^---$" "$file" | grep -q "name:"; then
+              echo "ERROR: Missing 'name' field in $file"
+              exit 1
+            fi
+
+            if ! grep -A 20 "^---$" "$file" | grep -q "description:"; then
+              echo "ERROR: Missing 'description' field in $file"
+              exit 1
+            fi
+
+            if ! grep -A 20 "^---$" "$file" | grep -q "model:"; then
+              echo "WARNING: Missing 'model' field in $file (will use default)"
+            fi
+
+            echo "✓ $file is valid"
+          done < changed-agents.txt
+
+          echo "✓ All changed agents are valid"
+
+      - name: Check agent documentation quality
+        run: |
+          if [ ! -s changed-agents.txt ]; then
+            exit 0
+          fi
+
+          echo "Checking documentation quality..."
+
+          while IFS= read -r file; do
+            # Count lines (excluding frontmatter)
+            line_count=$(tail -n +10 "$file" | wc -l)
+
+            if [ "$line_count" -lt 50 ]; then
+              echo "WARNING: $file has less than 50 lines of documentation"
+            fi
+
+            # Check for code examples (looking for ``` blocks)
+            example_count=$(grep -c '```' "$file" || true)
+
+            if [ "$example_count" -lt 2 ]; then
+              echo "WARNING: $file has few or no code examples (found $example_count)"
+            fi
+
+          done < changed-agents.txt
+
+          echo "✓ Documentation quality check complete"
+
+  # Validate new/modified workflows
+  validate-workflows:
+    name: Validate Workflow Changes
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.workflows == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed workflow files
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | \
+            grep '.claude/commands/.*\.md$' > changed-workflows.txt || true
+
+          if [ -s changed-workflows.txt ]; then
+            echo "Changed workflows:"
+            cat changed-workflows.txt
+          fi
+
+      - name: Validate workflow frontmatter
+        run: |
+          if [ ! -s changed-workflows.txt ]; then
+            echo "No workflows to validate"
+            exit 0
+          fi
+
+          while IFS= read -r file; do
+            echo "Checking $file..."
+
+            if ! head -n 1 "$file" | grep -q "^---$"; then
+              echo "ERROR: Missing frontmatter in $file"
+              exit 1
+            fi
+
+            if ! grep -A 10 "^---$" "$file" | grep -q "description:"; then
+              echo "ERROR: Missing 'description' field in $file"
+              exit 1
+            fi
+
+            echo "✓ $file is valid"
+          done < changed-workflows.txt
+
+          echo "✓ All changed workflows are valid"
+
+  # Validate version changes
+  validate-version-change:
+    name: Validate Version Changes
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.version == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Check version consistency
+        run: |
+          echo "Checking version consistency..."
+
+          VERSION_FILE=$(cat .claude/VERSION | tr -d '\n')
+          PLUGIN_VERSION=$(jq -r '.version' .claude/plugin.json)
+          MARKETPLACE_META=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
+          MARKETPLACE_PLUGIN=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
+
+          echo "VERSION file: $VERSION_FILE"
+          echo "plugin.json: $PLUGIN_VERSION"
+          echo "marketplace.json (metadata): $MARKETPLACE_META"
+          echo "marketplace.json (plugins[0]): $MARKETPLACE_PLUGIN"
+
+          errors=0
+
+          if [ "$VERSION_FILE" != "$PLUGIN_VERSION" ]; then
+            echo "ERROR: Version mismatch between VERSION and plugin.json"
+            errors=$((errors + 1))
+          fi
+
+          if [ "$VERSION_FILE" != "$MARKETPLACE_META" ]; then
+            echo "ERROR: Version mismatch between VERSION and marketplace.json metadata"
+            errors=$((errors + 1))
+          fi
+
+          if [ "$VERSION_FILE" != "$MARKETPLACE_PLUGIN" ]; then
+            echo "ERROR: Version mismatch between VERSION and marketplace.json plugins[0]"
+            errors=$((errors + 1))
+          fi
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "❌ Version consistency check failed!"
+            echo "All version files must match. Please update:"
+            echo "  - .claude/VERSION"
+            echo "  - .claude/plugin.json (version field)"
+            echo "  - .claude-plugin/marketplace.json (metadata.version)"
+            echo "  - .claude-plugin/marketplace.json (plugins[0].version)"
+            exit 1
+          fi
+
+          echo "✓ All version files are consistent"
+
+      - name: Check CHANGELOG updated
+        run: |
+          VERSION=$(cat .claude/VERSION | tr -d '\n')
+
+          if ! grep -q "## \[$VERSION\]" .claude/CHANGELOG.md; then
+            echo "ERROR: CHANGELOG.md must have entry for version $VERSION"
+            echo "Add: ## [$VERSION] - $(date +%Y-%m-%d)"
+            exit 1
+          fi
+
+          echo "✓ CHANGELOG has entry for version $VERSION"
+
+  # Comment on PR with validation results
+  pr-comment:
+    name: Post PR Comment
+    runs-on: ubuntu-latest
+    needs: [pr-validation, detect-changes, validate-agents, validate-workflows, validate-version-change]
+    if: always()
+    steps:
+      - name: Post validation summary
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const needs = ${{ toJSON(needs) }};
+            const allPassed = Object.values(needs).every(job =>
+              job.result === 'success' || job.result === 'skipped'
+            );
+
+            let comment = '## 🤖 PR Quality Gates\n\n';
+
+            // PR Validation
+            const prValidation = needs['pr-validation'];
+            comment += `- ${prValidation.result === 'success' ? '✅' : '❌'} PR Metadata Validation\n`;
+
+            // Agent validation
+            if (needs['detect-changes'].outputs.agents === 'true') {
+              const agentValidation = needs['validate-agents'];
+              comment += `- ${agentValidation.result === 'success' ? '✅' : '❌'} Agent Changes Validation\n`;
+            }
+
+            // Workflow validation
+            if (needs['detect-changes'].outputs.workflows === 'true') {
+              const workflowValidation = needs['validate-workflows'];
+              comment += `- ${workflowValidation.result === 'success' ? '✅' : '❌'} Workflow Changes Validation\n`;
+            }
+
+            // Version validation
+            if (needs['detect-changes'].outputs.version === 'true') {
+              const versionValidation = needs['validate-version-change'];
+              comment += `- ${versionValidation.result === 'success' ? '✅' : '❌'} Version Consistency Check\n`;
+            }
+
+            comment += '\n';
+
+            if (allPassed) {
+              comment += '✅ **All quality gates passed!** This PR is ready for review.\n';
+            } else {
+              comment += '❌ **Some quality gates failed.** Please review the checks above.\n';
+            }
+
+            // Post comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: comment
+            });

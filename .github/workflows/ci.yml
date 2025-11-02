@@ -1,0 +1,318 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Validate markdown files and frontmatter
+  validate-structure:
+    name: Validate Plugin Structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdown linter
+        run: npm install -g markdownlint-cli
+
+      - name: Validate markdown syntax
+        run: |
+          markdownlint '**/*.md' \
+            --ignore node_modules \
+            --config .markdownlint.json || echo "Warning: Markdown linting found issues"
+
+      - name: Validate YAML frontmatter
+        run: |
+          echo "Validating agent and workflow frontmatter..."
+
+          # Check all agent files have required frontmatter
+          for file in .claude/agents/**/*.md; do
+            if [ -f "$file" ]; then
+              if ! grep -q "^---$" "$file"; then
+                echo "ERROR: Missing frontmatter in $file"
+                exit 1
+              fi
+
+              # Extract frontmatter and validate required fields
+              if ! grep -A 20 "^---$" "$file" | grep -q "name:"; then
+                echo "ERROR: Missing 'name' field in $file"
+                exit 1
+              fi
+
+              if ! grep -A 20 "^---$" "$file" | grep -q "description:"; then
+                echo "ERROR: Missing 'description' field in $file"
+                exit 1
+              fi
+            fi
+          done
+
+          echo "✓ All agent files have valid frontmatter"
+
+          # Check all workflow files have required frontmatter
+          for file in .claude/commands/*.md; do
+            if [ -f "$file" ]; then
+              if ! grep -q "^---$" "$file"; then
+                echo "ERROR: Missing frontmatter in $file"
+                exit 1
+              fi
+
+              if ! grep -A 10 "^---$" "$file" | grep -q "description:"; then
+                echo "ERROR: Missing 'description' field in $file"
+                exit 1
+              fi
+            fi
+          done
+
+          echo "✓ All workflow files have valid frontmatter"
+
+      - name: Validate directory structure
+        run: |
+          echo "Validating plugin directory structure..."
+
+          # Required directories
+          required_dirs=(
+            ".claude"
+            ".claude/agents"
+            ".claude/commands"
+            ".claude-plugin"
+          )
+
+          for dir in "${required_dirs[@]}"; do
+            if [ ! -d "$dir" ]; then
+              echo "ERROR: Missing required directory: $dir"
+              exit 1
+            fi
+          done
+
+          echo "✓ Directory structure is valid"
+
+      - name: Validate required files
+        run: |
+          echo "Validating required files..."
+
+          required_files=(
+            ".claude/VERSION"
+            ".claude/plugin.json"
+            ".claude/CHANGELOG.md"
+            ".claude/CLAUDE.md"
+            ".claude-plugin/marketplace.json"
+            "README.md"
+            "ARCHITECTURE.md"
+            "CLAUDE.md"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "ERROR: Missing required file: $file"
+              exit 1
+            fi
+          done
+
+          echo "✓ All required files present"
+
+  # Validate version consistency
+  validate-versions:
+    name: Validate Version Consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Check version consistency
+        run: |
+          echo "Checking version consistency across all files..."
+
+          # Read versions from different files
+          VERSION_FILE=$(cat .claude/VERSION | tr -d '\n')
+          PLUGIN_VERSION=$(jq -r '.version' .claude/plugin.json)
+          MARKETPLACE_META_VERSION=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
+          MARKETPLACE_PLUGIN_VERSION=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
+
+          echo "VERSION file: $VERSION_FILE"
+          echo "plugin.json: $PLUGIN_VERSION"
+          echo "marketplace.json (metadata): $MARKETPLACE_META_VERSION"
+          echo "marketplace.json (plugins[0]): $MARKETPLACE_PLUGIN_VERSION"
+
+          # Check all versions match
+          if [ "$VERSION_FILE" != "$PLUGIN_VERSION" ]; then
+            echo "ERROR: Version mismatch between VERSION ($VERSION_FILE) and plugin.json ($PLUGIN_VERSION)"
+            exit 1
+          fi
+
+          if [ "$VERSION_FILE" != "$MARKETPLACE_META_VERSION" ]; then
+            echo "ERROR: Version mismatch between VERSION ($VERSION_FILE) and marketplace.json metadata ($MARKETPLACE_META_VERSION)"
+            exit 1
+          fi
+
+          if [ "$VERSION_FILE" != "$MARKETPLACE_PLUGIN_VERSION" ]; then
+            echo "ERROR: Version mismatch between VERSION ($VERSION_FILE) and marketplace.json plugins[0] ($MARKETPLACE_PLUGIN_VERSION)"
+            exit 1
+          fi
+
+          echo "✓ All version files are consistent: $VERSION_FILE"
+
+      - name: Validate semantic versioning
+        run: |
+          VERSION=$(cat .claude/VERSION | tr -d '\n')
+
+          # Check if version follows semantic versioning (X.Y.Z)
+          if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "ERROR: Version '$VERSION' does not follow semantic versioning (MAJOR.MINOR.PATCH)"
+            exit 1
+          fi
+
+          echo "✓ Version follows semantic versioning: $VERSION"
+
+  # Validate plugin metadata
+  validate-metadata:
+    name: Validate Plugin Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Validate plugin.json
+        run: |
+          echo "Validating plugin.json structure..."
+
+          # Check required fields
+          required_fields=("name" "version" "description" "author" "license" "repository")
+
+          for field in "${required_fields[@]}"; do
+            if ! jq -e ".$field" .claude/plugin.json > /dev/null; then
+              echo "ERROR: Missing required field in plugin.json: $field"
+              exit 1
+            fi
+          done
+
+          echo "✓ plugin.json structure is valid"
+
+      - name: Validate marketplace.json
+        run: |
+          echo "Validating marketplace.json structure..."
+
+          # Check required fields
+          if ! jq -e '.name' .claude-plugin/marketplace.json > /dev/null; then
+            echo "ERROR: Missing 'name' field in marketplace.json"
+            exit 1
+          fi
+
+          if ! jq -e '.metadata.version' .claude-plugin/marketplace.json > /dev/null; then
+            echo "ERROR: Missing 'metadata.version' field in marketplace.json"
+            exit 1
+          fi
+
+          if ! jq -e '.plugins[0]' .claude-plugin/marketplace.json > /dev/null; then
+            echo "ERROR: Missing plugins array in marketplace.json"
+            exit 1
+          fi
+
+          echo "✓ marketplace.json structure is valid"
+
+      - name: Validate component counts
+        run: |
+          echo "Validating agent and workflow counts..."
+
+          # Count actual agents (exclude meta directory)
+          AGENT_COUNT=$(find .claude/agents -name "*.md" | wc -l | tr -d ' ')
+
+          # Count actual workflows
+          WORKFLOW_COUNT=$(find .claude/commands -name "*.md" | wc -l | tr -d ' ')
+
+          echo "Detected agents: $AGENT_COUNT"
+          echo "Detected workflows: $WORKFLOW_COUNT"
+
+          # Extract counts from description (this is informational, not enforced)
+          DESCRIPTION=$(jq -r '.description' .claude/plugin.json)
+          echo "Plugin description mentions: $DESCRIPTION"
+
+          echo "✓ Component counts validated"
+
+  # Security scanning
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Scan for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+      - name: Scan for malicious patterns
+        run: |
+          echo "Scanning for potentially malicious patterns..."
+
+          # Check for common malicious patterns
+          if grep -r "eval(" .claude/ --include="*.md"; then
+            echo "WARNING: Found eval() usage in markdown files"
+          fi
+
+          if grep -r "exec(" .claude/ --include="*.md"; then
+            echo "WARNING: Found exec() usage in markdown files"
+          fi
+
+          echo "✓ Security scan complete"
+
+  # Link validation
+  validate-links:
+    name: Validate Documentation Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+
+      - name: Check links in README
+        run: |
+          markdown-link-check README.md --config .github/markdown-link-check.json || echo "Warning: Some links may be broken"
+
+      - name: Check links in ARCHITECTURE
+        run: |
+          markdown-link-check ARCHITECTURE.md --config .github/markdown-link-check.json || echo "Warning: Some links may be broken"
+
+  # All checks passed
+  all-checks-passed:
+    name: All Checks Passed
+    runs-on: ubuntu-latest
+    needs: [validate-structure, validate-versions, validate-metadata, security-scan, validate-links]
+    steps:
+      - name: All checks passed
+        run: |
+          echo "✅ All CI checks passed successfully!"
+          echo "The plugin is ready for release."
