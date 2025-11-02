@@ -5,15 +5,15 @@
     "email": "orchestr8@sethschultz.com"
   },
   "metadata": {
-    "description": "Enterprise orchestration system for Claude Code with 81+ specialized agents and 13 autonomous workflows",
-    "version": "1.2.5"
+    "description": "Self-extending enterprise orchestration system with 69 specialized agents, 19 autonomous workflows, and meta-orchestration capabilities. Create agents, workflows, and skills autonomously.",
+    "version": "1.4.0"
   },
   "plugins": [
     {
       "name": "orchestr8",
       "source": "./.claude",
-      "description": "Complete autonomous software engineering organization with 81+ specialized agents, 13 autonomous workflows, enterprise compliance, game development, AI/ML, and blockchain/Web3 support",
-      "version": "1.2.5"
+      "description": "Complete autonomous software engineering organization with 69 specialized agents, 19 autonomous workflows, enterprise compliance, game development, AI/ML, blockchain/Web3 support, and meta-orchestration capabilities. Self-extending plugin architecture.",
+      "version": "1.4.0"
     }
   ]
 }
