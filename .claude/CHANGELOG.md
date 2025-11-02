@@ -5,6 +5,32 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.5] - 2025-11-02
+
+### 🐛 Bug Fixes
+
+**Plugin Installation Issues**
+- Fixed marketplace name from `orchestr8-marketplace` to `orchestr8`
+  - Corrected `.claude-plugin/marketplace.json` name field
+  - Plugin now installs as `orchestr8@orchestr8` (previously `orchestr8@orchestr8-marketplace`)
+  - Resolves 64 plugin errors related to non-existent `claude-code-workflows` marketplace
+
+**Installation Documentation**
+- Updated README.md with complete installation steps
+  - Added explicit `/plugin install orchestr8` command
+  - Clarified two-step installation process (add marketplace, then install plugin)
+  - Updated verification instructions
+
+**What Changed:**
+- ✅ Marketplace correctly named `orchestr8`
+- ✅ Plugin installation works without errors
+- ✅ No more `claude-code-workflows` error messages
+- ✅ Clear installation documentation with both steps
+
+This is a bug fix release to ensure clean plugin installation.
+
+---
+
 ## [1.2.4] - 2025-11-01
 
 ### 📢 Public Release

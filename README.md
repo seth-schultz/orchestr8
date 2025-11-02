@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-green.svg)](https://claude.ai)
 
-**The most comprehensive, enterprise-grade orchestration system for Claude Code** — featuring 72+ specialized agents, 13 autonomous workflows, enterprise compliance (FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS), ML/data pipelines, API design (GraphQL/gRPC), message queues (Kafka/RabbitMQ), search (Elasticsearch/Algolia), multi-cloud (AWS/Azure/GCP), and observability (Prometheus/ELK).
+**The most comprehensive, enterprise-grade orchestration system for Claude Code** — featuring 81+ specialized agents, 13 autonomous workflows, enterprise compliance (FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS), ML/data pipelines, API design (GraphQL/gRPC), message queues (Kafka/RabbitMQ), search (Elasticsearch/Algolia), multi-cloud (AWS/Azure/GCP), and observability (Prometheus/ELK).
 
 ## 🎯 What Makes This Different
 
@@ -70,16 +70,19 @@ While other projects provide agent collections, this system delivers a **complet
 **Easiest method - install directly from Claude Code:**
 
 ```bash
+# Step 1: Add the marketplace
 /plugin marketplace add seth-schultz/orchestr8
+
+# Step 2: Install the plugin
+/plugin install orchestr8
 ```
 
-That's it! The orchestration system will be automatically installed.
+That's it! The orchestration system is now installed and ready to use.
 
 **Verification:**
 ```bash
-# Check installation
-ls .claude/
-# Should see: CLAUDE.md, agents/, commands/, plugin.json, etc.
+# Verify the plugin is installed
+# Run /doctor in Claude Code - should show no plugin errors
 ```
 
 ---
