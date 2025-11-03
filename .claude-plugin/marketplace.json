@@ -5,14 +5,14 @@
     "email": "orchestr8@sethschultz.com"
   },
   "metadata": {
-    "description": "Complete autonomous software engineering organization with 81+ specialized agents, 20 autonomous workflows, and revolutionary intelligence database system with persistent learning across all agents",
+    "description": "Complete autonomous software engineering organization with 72 specialized agents, 19 autonomous workflows, 8 reusable skills, and revolutionary intelligence database system with persistent learning across all agents",
     "version": "2.2.0"
   },
   "plugins": [
     {
       "name": "orchestr8",
       "source": "./.claude",
-      "description": "Complete autonomous software engineering organization with 81+ specialized agents, 20 autonomous workflows, and revolutionary intelligence database system. Features persistent learning across all agents with SQLite database in .orchestr8/ - automatic initialization on plugin install, 25+ helper functions for workflow tracking, error learning, agent knowledge sharing, and quality gates. All 81+ agents integrated with database access for cross-agent learning and pattern recognition. Reduces token usage by 80-90% through intelligent caching and context optimization. Self-extending plugin architecture with meta-orchestration, multi-stage code review, enterprise compliance, game development, AI/ML, and blockchain/Web3 support. Install once, work 8+ hours autonomously without context limits.",
+      "description": "Complete autonomous software engineering organization with 72 specialized agents, 19 autonomous workflows, 8 reusable skills, and revolutionary intelligence database system. Features persistent learning across all agents with SQLite database in .orchestr8/ - automatic initialization on plugin install, 25+ helper functions for workflow tracking, error learning, agent knowledge sharing, and quality gates. All 72 agents integrated with database access for cross-agent learning and pattern recognition. Reduces token usage by 80-90% through intelligent caching and context optimization. Self-extending plugin architecture with meta-orchestration, multi-stage code review, enterprise compliance, game development, AI/ML, and blockchain/Web3 support. Install once, work 8+ hours autonomously without context limits.",
       "version": "2.2.0"
     }
   ]
