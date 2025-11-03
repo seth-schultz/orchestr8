@@ -141,10 +141,27 @@ jobs:
         run: |
           VERSION="${{ needs.validate-release.outputs.version }}"
 
-          # Extract section between ## [VERSION] and next ## heading
-          awk "/## \[$VERSION\]/,/## \[/" .claude/CHANGELOG.md | \
-            sed '/## \['"$VERSION"'\]/d' | \
-            sed '/## \[/,$d' > release-notes.md
+          # Find line numbers for version headers
+          START_LINE=$(grep -n "^## \[$VERSION\]" .claude/CHANGELOG.md | cut -d: -f1)
+          if [ -z "$START_LINE" ]; then
+            echo "ERROR: Version $VERSION not found in CHANGELOG.md"
+            exit 1
+          fi
+
+          # Find the next version header
+          NEXT_LINE=$(awk "NR > $START_LINE && /^## \[/ {print NR; exit}" .claude/CHANGELOG.md)
+
+          if [ -z "$NEXT_LINE" ]; then
+            # No next version, extract to end of file
+            TOTAL_LINES=$(wc -l < .claude/CHANGELOG.md)
+            END_LINE=$TOTAL_LINES
+          else
+            END_LINE=$((NEXT_LINE - 1))
+          fi
+
+          # Extract release notes (skip the version header line)
+          EXTRACT_START=$((START_LINE + 1))
+          sed -n "${EXTRACT_START},${END_LINE}p" .claude/CHANGELOG.md > release-notes.md
 
           # Check if we got any notes
           if [ ! -s release-notes.md ]; then
