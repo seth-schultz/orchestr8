@@ -5,6 +5,38 @@ argumentHint: "[skill-requirements-description]"
 
 # Create Skill Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the skill-architect using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "skill-architect"
+- description: "Create new auto-activated skill"
+- prompt: "Execute the create-skill workflow for: [user's skill requirements].
+
+Create a complete new skill:
+1. Validate this should be a skill (not agent) (25%)
+2. Design skill with auto-activation triggers and methodology (30%)
+3. Implement skill file with comprehensive patterns and examples (25%)
+4. Test skill auto-activation behavior (10%)
+5. Update plugin.json metadata and VERSION (5%)
+6. Update CHANGELOG.md with skill addition (5%)
+
+Follow all phases, enforce quality gates, and meet all success criteria."
+```
+
+**After delegation:**
+- The skill-architect will handle entire skill creation autonomously
+- Returns to main context when complete or if user input required
+
+---
+
+## Skill Creation Instructions for Orchestrator
+
 You are orchestrating the complete creation of a new auto-activated skill from requirements analysis to plugin integration.
 
 ## Workflow Overview

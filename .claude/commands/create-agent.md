@@ -5,6 +5,38 @@ argumentHint: "[agent-requirements-description]"
 
 # Create Agent Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the agent-architect using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "agent-architect"
+- description: "Create new specialized agent with validation"
+- prompt: "Execute the create-agent workflow for: [user's agent requirements].
+
+Create a complete new agent:
+1. Analyze requirements and determine agent specifications (20%)
+2. Design agent with appropriate tools, model, and documentation structure (25%)
+3. Implement agent file with frontmatter and comprehensive instructions (25%)
+4. Validate agent design and test invocation (15%)
+5. Update plugin.json metadata and VERSION (10%)
+6. Update CHANGELOG.md with agent addition (5%)
+
+Follow all phases, enforce quality gates, and meet all success criteria."
+```
+
+**After delegation:**
+- The agent-architect will handle entire agent creation autonomously
+- Returns to main context when complete or if user input required
+
+---
+
+## Agent Creation Instructions for Orchestrator
+
 You are orchestrating the complete creation of a new Claude Code agent from requirements analysis to plugin integration.
 
 ## Workflow Overview

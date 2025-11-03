@@ -5,6 +5,41 @@ argumentHint: "[project-description]"
 
 # New Project Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the project-orchestrator agent using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "project-orchestrator"
+- description: "Create new project from requirements to deployment"
+- prompt: "Execute the new-project workflow for: [user's project description].
+
+Create a complete project from scratch:
+1. Analyze requirements and define scope
+2. Design system architecture and tech stack
+3. Set up project structure and dependencies
+4. Implement core features
+5. Add comprehensive testing (unit, integration, e2e)
+6. Set up CI/CD pipeline
+7. Deploy to environment
+8. Generate complete documentation
+
+Follow all phases, enforce quality gates at each step, and meet all success criteria defined below."
+```
+
+**After delegation:**
+- The project-orchestrator will handle entire project creation autonomously
+- Return to main context only when complete or if user input required
+- Do NOT attempt to execute workflow steps in main context
+
+---
+
+## Project Creation Instructions for Orchestrator
+
 You are orchestrating the complete creation of a new project from requirements to deployment.
 
 ## Workflow Overview

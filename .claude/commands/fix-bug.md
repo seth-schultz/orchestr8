@@ -5,6 +5,38 @@ argumentHint: "[bug-description]"
 
 # Fix Bug Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the debugger agent using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "debugger"
+- description: "Debug and fix reported bug with regression test"
+- prompt: "Execute the fix-bug workflow for: [user's bug description and reproduction steps].
+
+Complete bug fix lifecycle:
+1. Reproduce the bug and confirm behavior
+2. Identify root cause through debugging
+3. Design and implement fix
+4. Write regression test to prevent recurrence
+5. Validate fix and ensure no new issues
+6. Document fix and update relevant docs
+
+Follow all phases, enforce quality gates, and meet all success criteria."
+```
+
+**After delegation:**
+- The debugger will handle bug fix autonomously
+- Returns to main context when complete or if user input required
+
+---
+
+## Bug Fix Instructions for Orchestrator
+
 Autonomous bug fixing from reproduction to production deployment with root cause analysis and regression prevention.
 
 ## Database Intelligence Integration

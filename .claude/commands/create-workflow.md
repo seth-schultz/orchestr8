@@ -5,6 +5,38 @@ argumentHint: "[workflow-requirements-description]"
 
 # Create Workflow Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the workflow-architect using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "workflow-architect"
+- description: "Create new autonomous workflow command"
+- prompt: "Execute the create-workflow workflow for: [user's workflow requirements].
+
+Create a complete new workflow:
+1. Analyze requirements and define workflow specifications (20%)
+2. Design multi-phase execution with quality gates (25%)
+3. Implement workflow file with delegation pattern (25%)
+4. Test workflow invocation and orchestration (15%)
+5. Update plugin.json metadata and VERSION (10%)
+6. Update CHANGELOG.md with workflow addition (5%)
+
+Follow all phases, enforce quality gates, and meet all success criteria."
+```
+
+**After delegation:**
+- The workflow-architect will handle entire workflow creation autonomously
+- Returns to main context when complete or if user input required
+
+---
+
+## Workflow Creation Instructions for Orchestrator
+
 You are orchestrating the complete creation of a new autonomous workflow (slash command) from requirements analysis to plugin integration.
 
 ## Workflow Overview

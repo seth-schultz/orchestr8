@@ -5,11 +5,39 @@ argumentHint: "[feature-description]"
 
 # Add Feature Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the feature-orchestrator agent using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "feature-orchestrator"
+- description: "Implement complete feature from analysis to deployment"
+- prompt: "Execute the add-feature workflow for: [user's feature description].
+
+Implement the complete feature lifecycle:
+1. Analyze requirements and design solution (20%)
+2. Implement frontend/backend/database changes (30%)
+3. Write comprehensive tests (unit, integration, e2e) (20%)
+4. Code review and security audit (15%)
+5. Documentation and deployment (15%)
+
+Follow all phases, enforce quality gates, track with TodoWrite, and meet all success criteria defined below."
+```
+
+**After delegation:**
+- The feature-orchestrator will handle all phases autonomously
+- Return to main context only when complete or if user input required
+- Do NOT attempt to execute workflow steps in main context
+
+---
+
+## Feature Implementation Instructions for Orchestrator
+
 You are orchestrating the complete implementation of a new feature from requirements to deployment.
-
-## Workflow Overview
-
-Use the `feature-orchestrator` agent to coordinate this entire workflow.
 
 ## Database Intelligence Integration
 

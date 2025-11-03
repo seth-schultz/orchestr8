@@ -5,6 +5,39 @@ argumentHint: "[target: frontend|backend|database|fullstack]"
 
 # Optimize Performance Workflow
 
+## ⚠️ CRITICAL: Autonomous Orchestration Required
+
+**DO NOT execute this workflow in the main Claude Code context.**
+
+You MUST immediately delegate this entire workflow to the fullstack-developer orchestrator using the Task tool.
+
+**Delegation Instructions:**
+```
+Use Task tool with:
+- subagent_type: "fullstack-developer"
+- description: "Optimize application performance end-to-end"
+- prompt: "Execute the optimize-performance workflow for: [user's target/requirements].
+
+Perform comprehensive performance optimization:
+1. Profile and establish baseline metrics (frontend, backend, database as applicable)
+2. Identify bottlenecks and prioritize optimizations
+3. Implement optimizations (code, queries, caching, etc.)
+4. Benchmark improvements with before/after metrics
+5. Validate no regressions or broken functionality
+6. Document all optimizations and performance gains
+
+Follow all phases (20%/15%/20%/20%/15%/10%), enforce quality gates, and meet all success criteria defined below."
+```
+
+**After delegation:**
+- The orchestrator will work autonomously through all phases
+- Return to main context only when complete or if user input required
+- Do NOT attempt to execute workflow steps in main context
+
+---
+
+## Performance Optimization Instructions for Orchestrator
+
 Autonomous, comprehensive performance optimization from profiling to production with measurable improvements.
 
 ## Performance Targets
