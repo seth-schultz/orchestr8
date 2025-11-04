@@ -74,9 +74,9 @@ jobs:
         with:
           filters: |
             agents:
-              - '.claude/agents/**/*.md'
+              - 'plugins/*/agents/**/*.md'
             workflows:
-              - '.claude/commands/**/*.md'
+              - 'plugins/*/commands/**/*.md'
             docs:
               - 'README.md'
               - 'ARCHITECTURE.md'
@@ -86,6 +86,7 @@ jobs:
             config:
               - '.claude/plugin.json'
               - '.claude-plugin/marketplace.json'
+              - 'plugins/*/plugin.json'
             version:
               - '.claude/VERSION'
               - '.claude/plugin.json'
@@ -107,7 +108,7 @@ jobs:
         id: changed-files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | \
-            grep '.claude/agents/.*\.md$' > changed-agents.txt || true
+            grep 'plugins/.*/agents/.*\.md$' > changed-agents.txt || true
 
           if [ -s changed-agents.txt ]; then
             echo "Changed agents:"
@@ -196,7 +197,7 @@ jobs:
       - name: Get changed workflow files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | \
-            grep '.claude/commands/.*\.md$' > changed-workflows.txt || true
+            grep 'plugins/.*/commands/.*\.md$' > changed-workflows.txt || true
 
           if [ -s changed-workflows.txt ]; then
             echo "Changed workflows:"

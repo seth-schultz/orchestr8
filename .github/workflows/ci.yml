@@ -34,7 +34,7 @@ jobs:
           echo "Validating agent and workflow frontmatter..."
 
           # Check all agent files have required frontmatter
-          for file in .claude/agents/**/*.md; do
+          find plugins/*/agents -name "*.md" 2>/dev/null | while read -r file; do
             if [ -f "$file" ]; then
               if ! grep -q "^---$" "$file"; then
                 echo "ERROR: Missing frontmatter in $file"
@@ -57,7 +57,7 @@ jobs:
           echo "✓ All agent files have valid frontmatter"
 
           # Check all workflow files have required frontmatter
-          for file in .claude/commands/*.md; do
+          find plugins/*/commands -name "*.md" 2>/dev/null | while read -r file; do
             if [ -f "$file" ]; then
               if ! grep -q "^---$" "$file"; then
                 echo "ERROR: Missing frontmatter in $file"
@@ -80,8 +80,7 @@ jobs:
           # Required directories
           required_dirs=(
             ".claude"
-            ".claude/agents"
-            ".claude/commands"
+            "plugins"
             ".claude-plugin"
           )
 
@@ -92,7 +91,14 @@ jobs:
             fi
           done
 
-          echo "✓ Directory structure is valid"
+          # Check that at least one plugin exists with agents/commands structure
+          plugin_count=$(find plugins -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
+          if [ "$plugin_count" -eq 0 ]; then
+            echo "ERROR: No plugins found in plugins/ directory"
+            exit 1
+          fi
+
+          echo "✓ Directory structure is valid ($plugin_count plugins found)"
 
       - name: Validate required files
         run: |
@@ -113,6 +119,16 @@ jobs:
             if [ ! -f "$file" ]; then
               echo "ERROR: Missing required file: $file"
               exit 1
+            fi
+          done
+
+          # Check that each plugin has required structure
+          for plugin_dir in plugins/*/; do
+            plugin_name=$(basename "$plugin_dir")
+            plugin_json="$plugin_dir/plugin.json"
+
+            if [ ! -f "$plugin_json" ]; then
+              echo "WARNING: Plugin $plugin_name missing plugin.json"
             fi
           done
 
@@ -237,18 +253,38 @@ jobs:
         run: |
           echo "Validating agent and workflow counts..."
 
-          # Count actual agents (exclude meta directory)
-          AGENT_COUNT=$(find .claude/agents -name "*.md" | wc -l | tr -d ' ')
+          # Count actual agents across all plugins
+          AGENT_COUNT=$(find plugins/*/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
-          # Count actual workflows
-          WORKFLOW_COUNT=$(find .claude/commands -name "*.md" | wc -l | tr -d ' ')
+          # Count actual workflows across all plugins
+          WORKFLOW_COUNT=$(find plugins/*/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+
+          # Count actual plugins
+          PLUGIN_COUNT=$(find plugins -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
 
           echo "Detected agents: $AGENT_COUNT"
           echo "Detected workflows: $WORKFLOW_COUNT"
+          echo "Detected plugins: $PLUGIN_COUNT"
 
-          # Extract counts from description (this is informational, not enforced)
-          DESCRIPTION=$(jq -r '.description' .claude/plugin.json)
-          echo "Plugin description mentions: $DESCRIPTION"
+          # Get counts from plugin.json
+          PLUGIN_AGENT_COUNT=$(jq -r '.features.agents' .claude/plugin.json)
+          PLUGIN_WORKFLOW_COUNT=$(jq -r '.features.workflows' .claude/plugin.json)
+          PLUGIN_PLUGIN_COUNT=$(jq -r '.features.plugins' .claude/plugin.json)
+
+          echo "plugin.json reports: $PLUGIN_AGENT_COUNT agents, $PLUGIN_WORKFLOW_COUNT workflows, $PLUGIN_PLUGIN_COUNT plugins"
+
+          # Validate counts match
+          if [ "$AGENT_COUNT" != "$PLUGIN_AGENT_COUNT" ]; then
+            echo "WARNING: Agent count mismatch (found: $AGENT_COUNT, plugin.json: $PLUGIN_AGENT_COUNT)"
+          fi
+
+          if [ "$WORKFLOW_COUNT" != "$PLUGIN_WORKFLOW_COUNT" ]; then
+            echo "WARNING: Workflow count mismatch (found: $WORKFLOW_COUNT, plugin.json: $PLUGIN_WORKFLOW_COUNT)"
+          fi
+
+          if [ "$PLUGIN_COUNT" != "$PLUGIN_PLUGIN_COUNT" ]; then
+            echo "WARNING: Plugin count mismatch (found: $PLUGIN_COUNT, plugin.json: $PLUGIN_PLUGIN_COUNT)"
+          fi
 
           echo "✓ Component counts validated"
 
@@ -275,13 +311,22 @@ jobs:
         run: |
           echo "Scanning for potentially malicious patterns..."
 
-          # Check for common malicious patterns
-          if grep -r "eval(" .claude/ --include="*.md"; then
+          # Check for common malicious patterns in plugin directories
+          if grep -r "eval(" plugins/ --include="*.md" 2>/dev/null; then
             echo "WARNING: Found eval() usage in markdown files"
           fi
 
-          if grep -r "exec(" .claude/ --include="*.md"; then
+          if grep -r "exec(" plugins/ --include="*.md" 2>/dev/null; then
             echo "WARNING: Found exec() usage in markdown files"
+          fi
+
+          # Also check .claude directory
+          if grep -r "eval(" .claude/ --include="*.md" 2>/dev/null; then
+            echo "WARNING: Found eval() usage in .claude markdown files"
+          fi
+
+          if grep -r "exec(" .claude/ --include="*.md" 2>/dev/null; then
+            echo "WARNING: Found exec() usage in .claude markdown files"
           fi
 
           echo "✓ Security scan complete"
