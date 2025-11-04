@@ -10,17 +10,14 @@ You are orchestrating a comprehensive pull request review with multi-stage code 
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "review-pr" "$(date +%s)" "{\"pr_number\":\"$1\"}")
 
 echo "🚀 Starting PR Review Workflow"
 echo "PR Number: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar PR review patterns
-db_query_similar_workflows "review-pr" 5
 ```
 
 ## Workflow Overview
@@ -112,14 +109,12 @@ PR_NUMBER="$1"
 # Validate PR exists
 if ! gh pr view "$PR_NUMBER" &>/dev/null; then
   echo "❌ PR #$PR_NUMBER not found"
-  db_log_error "$workflow_id" "PRNotFound" "Pull request does not exist" "review-pr" "phase-1" "0"
   exit 1
 fi
 
 # Validate context files created
 if [ ! -f "pr-context-$PR_NUMBER.json" ]; then
   echo "❌ PR context not gathered"
-  db_log_error "$workflow_id" "ContextMissing" "PR context file not created" "review-pr" "phase-1" "0"
   exit 1
 fi
 
@@ -129,10 +124,8 @@ echo "✅ PR context gathered successfully"
 **Track Progress:**
 ```bash
 TOKENS_USED=3000
-db_track_tokens "$workflow_id" "context-gathering" $TOKENS_USED "10%"
 
 # Store PR metadata
-db_store_knowledge "pr-review" "context" "pr-$PR_NUMBER" \
   "PR #$PR_NUMBER context and metadata" \
   "$(head -n 50 pr-context-$PR_NUMBER.json)"
 ```
@@ -212,7 +205,6 @@ echo "✅ Metadata validation complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=2000
-db_track_tokens "$workflow_id" "metadata-validation" $TOKENS_USED "15%"
 ```
 
 ---
@@ -278,7 +270,6 @@ Expected outputs:
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "style-review" $TOKENS_USED "30%"
 ```
 
 ### Stage 2: Logic & Correctness (30-45%)
@@ -324,7 +315,6 @@ Expected outputs:
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "logic-review" $TOKENS_USED "45%"
 ```
 
 ### Stage 3: Security Audit (45-60%)
@@ -384,7 +374,6 @@ CRITICAL_SECURITY=$(jq '.issues[] | select(.severity=="critical")' security-revi
 
 if [ "$CRITICAL_SECURITY" -gt 0 ]; then
   echo "🔴 CRITICAL: Found $CRITICAL_SECURITY critical security issues"
-  db_log_error "$workflow_id" "CriticalSecurity" "Critical security vulnerabilities found" "review-pr" "phase-3-security" "0"
   # Continue but flag for blocking merge
 fi
 
@@ -394,7 +383,6 @@ echo "✅ Security audit complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "security-audit" $TOKENS_USED "60%"
 ```
 
 ### Stage 4: Performance Analysis (60-72%)
@@ -448,7 +436,6 @@ Expected outputs:
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "performance-analysis" $TOKENS_USED "72%"
 ```
 
 ### Stage 5: Architecture Review (72-85%)
@@ -502,7 +489,6 @@ Expected outputs:
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "architecture-review" $TOKENS_USED "85%"
 ```
 
 ---
@@ -587,7 +573,6 @@ Expected outputs:
 # Validate summary generated
 if [ ! -f "review-summary-$PR_NUMBER.md" ]; then
   echo "❌ Review summary not generated"
-  db_log_error "$workflow_id" "SummaryMissing" "Review summary file not created" "review-pr" "phase-4" "0"
   exit 1
 fi
 
@@ -595,7 +580,6 @@ fi
 LINE_COUNT=$(wc -l < "review-summary-$PR_NUMBER.md")
 if [ "$LINE_COUNT" -lt 50 ]; then
   echo "❌ Review summary too short: $LINE_COUNT lines"
-  db_log_error "$workflow_id" "SummaryTooShort" "Review summary only $LINE_COUNT lines" "review-pr" "phase-4" "0"
   exit 1
 fi
 
@@ -605,10 +589,8 @@ echo "✅ Review summary generated ($LINE_COUNT lines)"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "summary-generation" $TOKENS_USED "95%"
 
 # Store review summary
-db_store_knowledge "pr-review" "summary" "pr-$PR_NUMBER" \
   "Review summary for PR #$PR_NUMBER" \
   "$(head -n 100 review-summary-$PR_NUMBER.md)"
 ```
@@ -698,7 +680,6 @@ Expected outputs:
 # Verify review was posted
 if ! gh pr view "$PR_NUMBER" --json reviews | grep -q "reviews"; then
   echo "❌ Review not posted to GitHub"
-  db_log_error "$workflow_id" "GitHubPostFailed" "Failed to post review to GitHub" "review-pr" "phase-5" "0"
   exit 1
 fi
 
@@ -708,7 +689,6 @@ echo "✅ Review posted to GitHub successfully"
 **Track Progress:**
 ```bash
 TOKENS_USED=2000
-db_track_tokens "$workflow_id" "github-post" $TOKENS_USED "100%"
 ```
 
 ---
@@ -727,7 +707,6 @@ else
   VERDICT="APPROVED"
 fi
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "PR #$PR_NUMBER reviewed: $VERDICT ($CRITICAL_COUNT critical issues)"
 
 echo "
@@ -759,8 +738,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ---

@@ -10,17 +10,14 @@ Autonomous workflow for creating new auto-activated skills that augment agent ca
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "create-skill" "$(date +%s)" "{\"requirements\":\"$1\"}")
 
 echo "🚀 Starting Create Skill Workflow"
 echo "Requirements: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar skill patterns
-db_query_similar_workflows "create-skill" 5
 ```
 
 ---
@@ -95,21 +92,18 @@ Provide a structured validation report with clear decision and reasoning.
 # Validation script should create validation-report.txt with decision
 if [ ! -f "validation-report.txt" ]; then
   echo "❌ Skill validation report missing"
-  db_log_error "$workflow_id" "ValidationError" "Skill validation report not created" "create-skill" "phase-1" "0"
   exit 1
 fi
 
 # Check if validation passed
 if ! grep -q "✅ PROCEED" validation-report.txt; then
   echo "❌ Skill validation failed - requirements should be implemented as agent instead"
-  db_log_error "$workflow_id" "ValidationError" "Requirements not suitable for skill" "create-skill" "phase-1" "0"
 
   # Extract alternative recommendation
   ALTERNATIVE=$(grep -A 5 "❌ REJECT" validation-report.txt)
   echo "$ALTERNATIVE"
 
   # Store this for learning
-  db_store_knowledge "skill-creation" "validation" "rejected-skill" \
     "Requirements rejected as skill: $1" \
     "$ALTERNATIVE"
 
@@ -122,11 +116,9 @@ echo "✅ Skill validation passed - proceeding with skill creation"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "skill-validation" $TOKENS_USED "15%"
 
 # Store validation results
 SKILL_TYPE=$(grep "Skill Type:" validation-report.txt | cut -d: -f2 | xargs)
-db_store_knowledge "skill-creation" "validation" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Validated skill: Type=$SKILL_TYPE" \
   "$(cat validation-report.txt | head -100)"
 ```
@@ -226,7 +218,6 @@ Provide a comprehensive skill design document with structure, category, and deta
 ```bash
 if [ ! -f "skill-design.md" ]; then
   echo "❌ Skill design document missing"
-  db_log_error "$workflow_id" "DesignError" "Skill design not created" "create-skill" "phase-2" "0"
   exit 1
 fi
 
@@ -235,7 +226,6 @@ REQUIRED_SECTIONS=("Introduction" "Core Concept" "Best Practices" "Application" 
 for section in "${REQUIRED_SECTIONS[@]}"; do
   if ! grep -q "$section" skill-design.md; then
     echo "❌ Missing required section: $section"
-    db_log_error "$workflow_id" "DesignError" "Skill design missing section: $section" "create-skill" "phase-2" "0"
     exit 1
   fi
 done
@@ -244,7 +234,6 @@ done
 EXAMPLE_COUNT=$(grep -c "Example [0-9]" examples-plan.md 2>/dev/null || echo "0")
 if [ "$EXAMPLE_COUNT" -lt 5 ]; then
   echo "❌ Insufficient code examples: $EXAMPLE_COUNT (minimum 5)"
-  db_log_error "$workflow_id" "DesignError" "Only $EXAMPLE_COUNT examples planned" "create-skill" "phase-2" "0"
   exit 1
 fi
 
@@ -254,11 +243,9 @@ echo "✅ Skill design validated with $EXAMPLE_COUNT code examples"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "skill-design" $TOKENS_USED "35%"
 
 # Store design patterns
 SKILL_NAME=$(grep "^# " skill-design.md | head -1 | sed 's/^# //' | tr -dc '[:alnum:]' | head -c 30)
-db_store_knowledge "skill-creation" "design" "$SKILL_NAME" \
   "Skill design completed with examples plan" \
   "$(cat skill-design.md | head -150)"
 ```
@@ -443,7 +430,6 @@ SKILL_FILE=$(find .claude/skills -name "SKILL.md" -type f -newer skill-design.md
 
 if [ -z "$SKILL_FILE" ]; then
   echo "❌ SKILL.md file not created"
-  db_log_error "$workflow_id" "ImplementationError" "SKILL.md not found" "create-skill" "phase-3" "0"
   exit 1
 fi
 
@@ -453,7 +439,6 @@ echo "Found skill file: $SKILL_FILE"
 LINE_COUNT=$(wc -l < "$SKILL_FILE")
 if [ "$LINE_COUNT" -lt 200 ]; then
   echo "❌ Skill file too short: $LINE_COUNT lines (minimum 200)"
-  db_log_error "$workflow_id" "ImplementationError" "Skill file only $LINE_COUNT lines" "create-skill" "phase-3" "0"
   exit 1
 fi
 
@@ -462,26 +447,22 @@ echo "✅ Skill file length: $LINE_COUNT lines"
 # Validate frontmatter (should be simple)
 if ! grep -q "^name:" "$SKILL_FILE"; then
   echo "❌ Missing name in frontmatter"
-  db_log_error "$workflow_id" "ImplementationError" "No name field" "create-skill" "phase-3" "0"
   exit 1
 fi
 
 if ! grep -q "^description:" "$SKILL_FILE"; then
   echo "❌ Missing description in frontmatter"
-  db_log_error "$workflow_id" "ImplementationError" "No description field" "create-skill" "phase-3" "0"
   exit 1
 fi
 
 # Check for incorrect fields (should not have model, tools, etc.)
 if grep -q "^model:" "$SKILL_FILE"; then
   echo "❌ Skill should not have model field"
-  db_log_error "$workflow_id" "ImplementationError" "Invalid frontmatter: model field present" "create-skill" "phase-3" "0"
   exit 1
 fi
 
 if grep -q "^tools:" "$SKILL_FILE"; then
   echo "❌ Skill should not have tools field"
-  db_log_error "$workflow_id" "ImplementationError" "Invalid frontmatter: tools field present" "create-skill" "phase-3" "0"
   exit 1
 fi
 
@@ -491,13 +472,11 @@ DONT_COUNT=$(grep -c "❌.*DON'T:" "$SKILL_FILE" || grep -c "### DON'T" "$SKILL_
 
 if [ "$DO_COUNT" -lt 1 ]; then
   echo "❌ No DO examples found"
-  db_log_error "$workflow_id" "ImplementationError" "No DO examples" "create-skill" "phase-3" "0"
   exit 1
 fi
 
 if [ "$DONT_COUNT" -lt 1 ]; then
   echo "❌ No DON'T examples found"
-  db_log_error "$workflow_id" "ImplementationError" "No DON'T examples" "create-skill" "phase-3" "0"
   exit 1
 fi
 
@@ -515,7 +494,6 @@ done
 
 if [ ${#MISSING_SECTIONS[@]} -gt 0 ]; then
   echo "❌ Missing required sections: ${MISSING_SECTIONS[*]}"
-  db_log_error "$workflow_id" "ImplementationError" "Missing sections: ${MISSING_SECTIONS[*]}" "create-skill" "phase-3" "0"
   exit 1
 fi
 
@@ -526,13 +504,11 @@ echo "✅ Skill implementation validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "skill-implementation" $TOKENS_USED "65%"
 
 # Store implementation metrics
 SKILL_NAME=$(basename "$(dirname "$SKILL_FILE")")
 SKILL_CATEGORY=$(basename "$(dirname "$(dirname "$SKILL_FILE")")")
 
-db_store_knowledge "skill-creation" "implementation" "$SKILL_NAME" \
   "Skill implemented: Category=$SKILL_CATEGORY, Lines=$LINE_COUNT" \
   "$(cat "$SKILL_FILE" | head -100)"
 ```
@@ -640,7 +616,6 @@ Provide comprehensive testing report with validation results and quality scores.
 ```bash
 if [ ! -f "skill-test-report.md" ]; then
   echo "❌ Testing report missing"
-  db_log_error "$workflow_id" "TestingError" "Skill testing report not created" "create-skill" "phase-4" "0"
   exit 1
 fi
 
@@ -649,14 +624,12 @@ if grep -q "❌ REDUNDANT" skill-test-report.md; then
   echo "❌ Skill is redundant with existing skill"
   EXISTING_SKILL=$(grep "use existing skill" skill-test-report.md | grep -oP '\[.*?\]' | tr -d '[]')
   echo "Use existing skill: $EXISTING_SKILL"
-  db_log_error "$workflow_id" "ValidationError" "Skill redundant with $EXISTING_SKILL" "create-skill" "phase-4" "0"
   exit 1
 fi
 
 # Check frontmatter validation
 if grep -q "CRITICAL.*frontmatter" skill-test-report.md; then
   echo "❌ Frontmatter has incorrect fields"
-  db_log_error "$workflow_id" "ValidationError" "Frontmatter validation failed" "create-skill" "phase-4" "0"
   exit 1
 fi
 
@@ -664,7 +637,6 @@ fi
 CLARITY_SCORE=$(grep "Clarity score" quality-metrics.txt | grep -oP '\d+' | head -1 || echo "0")
 if [ "$CLARITY_SCORE" -lt 7 ]; then
   echo "⚠️  Warning: Low clarity score: $CLARITY_SCORE/10"
-  db_log_error "$workflow_id" "ValidationWarning" "Clarity score only $CLARITY_SCORE" "create-skill" "phase-4" "1"
 fi
 
 # Check for consolidation recommendation
@@ -672,7 +644,6 @@ if grep -q "⚠️  CONSOLIDATE" skill-test-report.md; then
   echo "⚠️  Warning: Skill should be consolidated with existing skill"
   CONSOLIDATE_WITH=$(grep "⚠️  CONSOLIDATE" skill-test-report.md | grep -oP 'skill \K\[.*?\]' | tr -d '[]' || echo "unknown")
   echo "Consider consolidating with: $CONSOLIDATE_WITH"
-  db_log_error "$workflow_id" "ValidationWarning" "Consider consolidating with $CONSOLIDATE_WITH" "create-skill" "phase-4" "1"
 fi
 
 echo "✅ Testing validation passed"
@@ -681,13 +652,11 @@ echo "✅ Testing validation passed"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "testing-validation" $TOKENS_USED "85%"
 
 # Store testing metrics
 CLARITY_SCORE=$(grep "Clarity score" quality-metrics.txt | grep -oP '\d+' | head -1 || echo "0")
 PRACTICALITY_SCORE=$(grep "Practicality score" quality-metrics.txt | grep -oP '\d+' | head -1 || echo "0")
 
-db_store_knowledge "skill-creation" "testing" "$SKILL_NAME" \
   "Skill tested: Clarity=$CLARITY_SCORE, Practicality=$PRACTICALITY_SCORE" \
   "$(cat skill-test-report.md | head -100)"
 ```
@@ -841,21 +810,18 @@ VERSION_JSON=$(jq -r '.version' .claude/plugin.json)
 
 if [ "$VERSION_FILE" != "$VERSION_JSON" ]; then
   echo "❌ Version mismatch: VERSION=$VERSION_FILE, plugin.json=$VERSION_JSON"
-  db_log_error "$workflow_id" "IntegrationError" "Version files out of sync" "create-skill" "phase-5" "0"
   exit 1
 fi
 
 # Validate CHANGELOG has new entry
 if ! grep -q "\[$VERSION_FILE\]" .claude/CHANGELOG.md; then
   echo "❌ CHANGELOG not updated with version $VERSION_FILE"
-  db_log_error "$workflow_id" "IntegrationError" "CHANGELOG missing entry" "create-skill" "phase-5" "0"
   exit 1
 fi
 
 # Validate plugin.json is valid JSON
 if ! jq empty .claude/plugin.json 2>/dev/null; then
   echo "❌ plugin.json is not valid JSON"
-  db_log_error "$workflow_id" "IntegrationError" "Invalid JSON in plugin.json" "create-skill" "phase-5" "0"
   exit 1
 fi
 
@@ -866,10 +832,8 @@ echo "Version: $VERSION_FILE"
 **Track Progress:**
 ```bash
 TOKENS_USED=3000
-db_track_tokens "$workflow_id" "integration" $TOKENS_USED "100%"
 
 # Store integration results
-db_store_knowledge "skill-creation" "integration" "$SKILL_NAME" \
   "Skill integrated: Version=$VERSION_FILE" \
   "$(cat integration-summary.md)"
 ```
@@ -880,7 +844,6 @@ db_store_knowledge "skill-creation" "integration" "$SKILL_NAME" \
 
 ```bash
 # Mark workflow complete
-db_complete_workflow "$workflow_id" "success" "Skill created and integrated successfully"
 
 # Display final metrics
 echo ""
@@ -898,7 +861,6 @@ echo "  - Clarity Score: $CLARITY_SCORE/10"
 echo "  - Practicality Score: $PRACTICALITY_SCORE/10"
 echo ""
 echo "Token Usage:"
-TOTAL_TOKENS=$(db_workflow_metrics "$workflow_id" | grep "Total tokens" | grep -oP '\d+')
 echo "  - Total Tokens: $TOTAL_TOKENS"
 echo "  - Avg per Phase: $((TOTAL_TOKENS / 5))"
 echo ""

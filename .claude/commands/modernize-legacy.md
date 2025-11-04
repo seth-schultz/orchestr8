@@ -10,17 +10,14 @@ Autonomous transformation of legacy codebases to modern patterns, languages, and
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "modernize-legacy" "$(date +%s)" "{\"target\":\"$1\"}")
 
 echo "🚀 Starting Legacy Modernization Workflow"
 echo "Target: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar modernization patterns
-db_query_similar_workflows "modernize-legacy" 5
 ```
 
 ---
@@ -120,21 +117,18 @@ Expected outputs:
 # Validate analysis report exists
 if [ ! -f "code-analysis-report.md" ]; then
   echo "❌ Code analysis report not created"
-  db_log_error "ValidationError" "Analysis report missing" "modernize-legacy" "phase-1" "0"
   exit 1
 fi
 
 # Validate strategy document exists
 if [ ! -f "migration-strategy.md" ]; then
   echo "❌ Migration strategy not created"
-  db_log_error "ValidationError" "Strategy document missing" "modernize-legacy" "phase-1" "0"
   exit 1
 fi
 
 # Validate risk assessment exists
 if [ ! -f "risk-matrix.md" ]; then
   echo "❌ Risk matrix not created"
-  db_log_error "ValidationError" "Risk assessment missing" "modernize-legacy" "phase-1" "0"
   exit 1
 fi
 
@@ -144,10 +138,8 @@ echo "✅ Assessment and strategy complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "assessment-strategy" $TOKENS_USED "20%"
 
 # Store assessment results
-db_store_knowledge "legacy-modernization" "assessment" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Legacy system assessment and strategy" \
   "$(head -n 50 code-analysis-report.md)"
 ```
@@ -256,14 +248,12 @@ Expected outputs:
 # Validate test directories exist
 if [ ! -d "tests/characterization" ]; then
   echo "❌ Characterization tests not created"
-  db_log_error "ValidationError" "Characterization tests missing" "modernize-legacy" "phase-2" "0"
   exit 1
 fi
 
 # Run tests to ensure they pass
 if ! pytest tests/ -v; then
   echo "❌ Tests failing"
-  db_log_error "TestFailure" "Test suite has failures" "modernize-legacy" "phase-2" "0"
   exit 1
 fi
 
@@ -280,10 +270,8 @@ echo "✅ Test coverage established (${COVERAGE}%)"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "test-coverage" $TOKENS_USED "40%"
 
 # Store test suite info
-db_store_knowledge "legacy-modernization" "testing" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Test suite with ${COVERAGE}% coverage" \
   "Characterization, integration, and e2e tests created"
 ```
@@ -438,7 +426,6 @@ Expected outputs:
 # Run full test suite
 if ! pytest tests/ -v; then
   echo "❌ Tests failing after modernization"
-  db_log_error "TestFailure" "Modernization broke tests" "modernize-legacy" "phase-3" "0"
   exit 1
 fi
 
@@ -446,7 +433,6 @@ fi
 CURRENT_COVERAGE=$(pytest --cov=. --cov-report=term | grep "TOTAL" | awk '{print $4}' | sed 's/%//')
 if [ "$CURRENT_COVERAGE" -lt "$COVERAGE" ]; then
   echo "❌ Coverage decreased from ${COVERAGE}% to ${CURRENT_COVERAGE}%"
-  db_log_error "ValidationError" "Test coverage decreased" "modernize-legacy" "phase-3" "0"
   exit 1
 fi
 
@@ -454,7 +440,6 @@ fi
 if command -v bandit &> /dev/null; then
   if ! bandit -r . -ll; then
     echo "❌ Security issues detected"
-    db_log_error "SecurityError" "Security scan failed" "modernize-legacy" "phase-3" "0"
     exit 1
   fi
 fi
@@ -465,10 +450,8 @@ echo "✅ Modernization complete with all tests passing"
 **Track Progress:**
 ```bash
 TOKENS_USED=10000
-db_track_tokens "$workflow_id" "modernization" $TOKENS_USED "70%"
 
 # Store modernization results
-db_store_knowledge "legacy-modernization" "implementation" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Modernized with ${CURRENT_COVERAGE}% coverage" \
   "$(tail -n 50 migration-log.md)"
 ```
@@ -571,14 +554,12 @@ Expected outputs:
 if grep -q "database schema" migration-strategy.md; then
   if [ ! -d "migration-scripts" ]; then
     echo "❌ Migration scripts not created"
-    db_log_error "ValidationError" "Migration scripts missing" "modernize-legacy" "phase-4" "0"
     exit 1
   fi
 
   # Test migrations
   if ! bash migration-scripts/test-migrations.sh; then
     echo "❌ Migration tests failed"
-    db_log_error "MigrationError" "Migration validation failed" "modernize-legacy" "phase-4" "0"
     exit 1
   fi
 fi
@@ -589,10 +570,8 @@ echo "✅ Data migration prepared and validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "data-migration" $TOKENS_USED "80%"
 
 # Store migration info
-db_store_knowledge "legacy-modernization" "data-migration" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Data migration with dual-write strategy" \
   "$(head -n 30 cutover-plan.md)"
 ```
@@ -691,7 +670,6 @@ Expected outputs:
 # Validate performance report exists
 if [ ! -f "performance-report.md" ]; then
   echo "❌ Performance report not created"
-  db_log_error "ValidationError" "Performance report missing" "modernize-legacy" "phase-5" "0"
   exit 1
 fi
 
@@ -707,10 +685,8 @@ echo "✅ Performance optimization complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "performance-optimization" $TOKENS_USED "90%"
 
 # Store performance results
-db_store_knowledge "legacy-modernization" "performance" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Performance optimized" \
   "$(head -n 30 performance-report.md)"
 ```
@@ -803,7 +779,6 @@ REQUIRED_DOCS=(
 for doc in "${REQUIRED_DOCS[@]}"; do
   if [ ! -f "$doc" ]; then
     echo "❌ Required documentation missing: $doc"
-    db_log_error "ValidationError" "Documentation incomplete: $doc" "modernize-legacy" "phase-6" "0"
     exit 1
   fi
 done
@@ -843,10 +818,8 @@ if (featureFlags.isEnabled('modern_user_service', userId)) {
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "documentation-deployment" $TOKENS_USED "100%"
 
 # Store documentation
-db_store_knowledge "legacy-modernization" "documentation" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Complete documentation and deployment guides" \
   "$(ls -lh docs/)"
 ```
@@ -859,7 +832,6 @@ db_store_knowledge "legacy-modernization" "documentation" "$(echo $1 | tr -dc '[
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Legacy system modernization complete: $1"
 
 echo "
@@ -904,8 +876,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ---

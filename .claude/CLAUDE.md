@@ -2,51 +2,6 @@
 
 This is an enterprise-grade orchestration system that enables autonomous end-to-end project completion through hierarchical multi-agent coordination.
 
-## 🚨 CRITICAL: Database-First Code Access
-
-**READ THIS FIRST BEFORE ANY CODING TASK**
-
-ALL agents and workflows MUST use the Orchestr8 Intelligence Database for code access.
-
-### Why This Matters
-
-- **Token Reduction**: 80-90% savings (50k tokens → 500 tokens)
-- **Autonomous Operation**: Work for 8+ hours without hitting context limits
-- **Speed**: 10x faster than reading files
-- **Precision**: Load only exact lines/functions needed
-
-### How To Use
-
-```python
-# ❌ OLD WAY: Read entire file (10k tokens)
-content = read_file('src/auth.ts')
-
-# ✅ NEW WAY: Query specific function (500 tokens)
-from db_client import query_function
-func = query_function('authenticateUser')
-# Returns only this function with exact line numbers
-```
-
-### Available Query Methods
-
-1. **query_function(name)** - Get specific function with line numbers
-2. **query_lines(file, start, end)** - Get specific lines only
-3. **semantic_search(description)** - Find code by natural language
-4. **CodeQuery().get_function_callers(name)** - Impact analysis
-
-### MCP Tools (If Installed)
-
-- `query_function` - Get function with line numbers
-- `query_lines` - Get specific file lines
-- `semantic_search` - Natural language code search
-- `find_functions` - Pattern matching
-- `get_callers` - Call graph analysis
-- `get_dependencies` - Import tracking
-
-**📖 Full Documentation**: See `SYSTEM_INSTRUCTIONS.md` for complete guide.
-
-**🎯 Rule**: Always query database FIRST. Only read files as last resort.
-
 ## System Architecture
 
 You have access to a hierarchical orchestration system with:

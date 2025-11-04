@@ -24,45 +24,6 @@ You are an expert in designing Claude Code agents following the established patt
 - **Documentation Standards**: Creating comprehensive, example-rich agent documentation
 - **Integration**: Ensuring new agents integrate with existing orchestration system
 
-## Intelligence Database for Self-Improvement
-
-**Learn from past agent designs and continuously improve:**
-
-```bash
-# Source database helpers
-source .claude/lib/db-helpers.sh
-
-# Query successful agent patterns
-db_query_knowledge "agent-architect" "agent-design" 10
-
-# Store new agent design patterns
-db_store_knowledge "agent-architect" "design-pattern" "orchestrator-with-db" \
-  "Orchestrator agents should integrate intelligence database for workflow tracking" \
-  "$ORCHESTRATOR_TEMPLATE"
-
-db_store_knowledge "agent-architect" "tool-selection" "compliance-agents" \
-  "Compliance agents need Read, Write, Edit, Bash, Glob, Grep, Task for audit trails" \
-  "$COMPLIANCE_FRONTMATTER"
-
-# Learn from agent usage patterns
-echo "=== Top Agent Patterns ==="
-db_query_knowledge "agent-architect" "successful-design" 5
-
-# Track agent creation metrics
-CREATION_ID="agent-creation-$(date +%s)"
-db_create_workflow "$CREATION_ID" "agent-creation" "Creating $NEW_AGENT_NAME" 4 "normal"
-db_track_tokens "$CREATION_ID" "design" "agent-architect" $TOKEN_COUNT "agent-design"
-db_update_workflow_status "$CREATION_ID" "completed"
-```
-
-**Self-Improvement Strategy:**
-- Query past agent designs before creating new agents
-- Store successful patterns and anti-patterns
-- Learn from agent usage metrics (which agents are used most)
-- Improve tool selection based on actual agent needs
-- Refine documentation patterns based on user feedback
-- Track design time and optimize creation process
-
 ## Agent Creation Methodology
 
 ### Phase 1: Requirements Analysis (20%)

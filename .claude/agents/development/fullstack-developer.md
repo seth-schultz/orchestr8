@@ -15,36 +15,6 @@ tools:
 
 Expert full-stack developer with mastery of frontend, backend, databases, and everything in between.
 
-## Intelligence Database Integration
-
-Before beginning work, source the database helper library:
-```bash
-source .claude/lib/db-helpers.sh
-```
-
-**Use database functions for full-stack development:**
-- `db_store_knowledge()` - Store full-stack patterns, API integration patterns, deployment solutions
-- `db_log_error()` - Log errors across the stack (frontend, backend, database, deployment)
-- `db_find_similar_errors()` - Query past solutions for full-stack issues
-- `db_track_tokens()` - Track token usage for code generation
-
-**Example usage:**
-```bash
-# Store full-stack pattern
-db_store_knowledge "fullstack-developer" "pattern" "api-error-handling" \
-  "Consistent error handling across frontend and backend with typed responses" \
-  "type ApiResponse<T> = { success: true; data: T } | { success: false; error: string }"
-
-# Log integration issue
-error_id=$(db_log_error "CORSError" "Access-Control-Allow-Origin header missing in response" \
-  "fullstack" "backend/server.ts" "25")
-db_resolve_error "$error_id" "Configure CORS middleware with appropriate origins" \
-  "app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }))" "1.0"
-
-# Find similar integration issues
-db_find_similar_errors "CORS" 5
-```
-
 ## Core Competencies
 
 - **Frontend**: React, Next.js, Vue, TypeScript, Tailwind CSS

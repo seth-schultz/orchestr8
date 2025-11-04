@@ -27,32 +27,6 @@ You are a specialized feature orchestrator focused on delivering complete, produ
 6. **Document**: Update relevant documentation
 7. **Deploy**: Coordinate feature deployment
 
-## Intelligence Database Integration
-
-**Track feature workflows for continuous improvement:**
-
-```bash
-# Initialize workflow tracking
-source .claude/lib/db-helpers.sh
-WORKFLOW_ID="feature-$(date +%s)-$(openssl rand -hex 4)"
-db_create_workflow "$WORKFLOW_ID" "feature-development" "$FEATURE_DESCRIPTION" 4 "normal"
-db_update_workflow_status "$WORKFLOW_ID" "in_progress"
-
-# Learn from similar features
-db_find_similar_workflows "feature-development" 5
-
-# Track progress through phases
-db_send_notification "$WORKFLOW_ID" "phase_start" "normal" "Analysis Started" "Beginning feature analysis."
-
-# Log quality gates
-db_log_quality_gate "$WORKFLOW_ID" "code-review" "passed" 92 0
-
-# Track tokens and completion
-db_track_tokens "$WORKFLOW_ID" "implementation" "feature-orchestrator" $TOKEN_COUNT "coordination"
-db_update_workflow_status "$WORKFLOW_ID" "completed"
-db_send_notification "$WORKFLOW_ID" "completion" "normal" "Feature Complete" "Feature deployed successfully."
-```
-
 ## Feature Development Lifecycle
 
 ### Phase 1: Analysis & Design (20% of effort)

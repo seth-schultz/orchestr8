@@ -15,37 +15,6 @@ tools:
 
 Expert in Playwright for E2E testing, browser automation, and reliable test suites.
 
-## Intelligence Database Integration
-
-**Setup:**
-```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
-```
-
-**Track E2E Testing:**
-```bash
-# After E2E test run
-TESTS_PASSED=45
-TESTS_FAILED=3
-SUCCESS_RATE=$(( TESTS_PASSED * 100 / (TESTS_PASSED + TESTS_FAILED) ))
-db_log_quality_gate "$workflow_id" "e2e-testing" "passed" "$SUCCESS_RATE" "$TESTS_FAILED"
-
-# Log flaky tests
-db_log_error "flaky-e2e-test" "Login test fails intermittently" "testing" "$test_file" "$line"
-
-# Store UI testing patterns
-db_store_knowledge "playwright-specialist" "pattern" \
-  "Reliable async waiting" \
-  "Use waitFor with specific conditions instead of arbitrary timeouts." \
-  "await page.waitForSelector('[data-testid=\"loaded\"]')"
-
-# Store anti-patterns
-db_store_knowledge "playwright-specialist" "anti-pattern" \
-  "Brittle selectors" \
-  "Avoid CSS selectors that break on style changes. Use data-testid attributes." \
-  "<button data-testid=\"submit-btn\">Submit</button>"
-```
-
 ## Basic Test Structure
 
 ```typescript

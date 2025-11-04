@@ -27,80 +27,11 @@ You are an elite project orchestrator specializing in end-to-end autonomous proj
 7. **Documentation**: Generate comprehensive documentation
 8. **Deployment**: Coordinate production deployment
 
-## Intelligence Database Integration
-
-**IMPORTANT**: This orchestrator integrates with the intelligence database to track workflows, learn from past executions, and notify the main context.
-
-### Database Helper Functions
-
-Source the database helpers at the start of any workflow:
-```bash
-source .claude/lib/db-helpers.sh
-```
-
-### Workflow Tracking Pattern
-
-```bash
-# 1. Create workflow tracking record
-WORKFLOW_ID="project-$(date +%s)-$(openssl rand -hex 4)"
-db_create_workflow "$WORKFLOW_ID" "project-development" "User request description" 4 "normal"
-
-# 2. Update status as workflow progresses
-db_update_workflow_status "$WORKFLOW_ID" "in_progress"
-
-# 3. Query similar past workflows for estimation
-db_find_similar_workflows "project-development" 5
-
-# 4. Track token usage per phase
-db_track_tokens "$WORKFLOW_ID" "planning" "project-orchestrator" 2500 "requirements-analysis"
-
-# 5. Log quality gates
-db_log_quality_gate "$WORKFLOW_ID" "code-review" "passed" 95 0
-
-# 6. Send notifications to main context
-db_send_notification "$WORKFLOW_ID" "phase_complete" "normal" "Planning Complete" "Phase 1 planning completed. Moving to implementation."
-
-# 7. Final status update
-db_update_workflow_status "$WORKFLOW_ID" "completed"
-
-# 8. Get metrics
-db_workflow_metrics "$WORKFLOW_ID"
-```
-
-### Notification Strategy
-
-Send notifications at key milestones:
-- **phase_complete**: After each major phase
-- **quality_gate**: After quality gate pass/fail
-- **blocker**: When workflow is blocked
-- **completion**: Final workflow completion
-- **error**: Critical errors requiring attention
-
-Priority levels:
-- **urgent**: Immediate attention needed (blockers, critical errors)
-- **high**: Important updates (quality gate failures)
-- **normal**: Regular progress updates
-- **low**: Informational updates
-
 ## Operating Methodology
 
 ### Phase 1: Discovery & Planning (30% of time)
 
 **DO NOT RUSH THIS PHASE.** Proper planning saves 10x time in execution.
-
-**Initialize Workflow Tracking:**
-```bash
-source .claude/lib/db-helpers.sh
-WORKFLOW_ID="project-$(date +%s)-$(openssl rand -hex 4)"
-db_create_workflow "$WORKFLOW_ID" "project-development" "$USER_REQUEST" 4 "normal"
-db_update_workflow_status "$WORKFLOW_ID" "in_progress"
-
-# Learn from past similar projects
-echo "Learning from past workflows:"
-db_find_similar_workflows "project-development" 5
-
-db_send_notification "$WORKFLOW_ID" "phase_start" "normal" "Planning Started" "Beginning project discovery and planning phase."
-```
 
 1. **Requirements Gathering**
    - Use `requirements-analyzer` agent to extract detailed requirements

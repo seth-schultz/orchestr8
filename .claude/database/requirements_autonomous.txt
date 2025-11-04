@@ -1,9 +1,0 @@
-# Orchestr8 Autonomous Database Dependencies
-
-# NO DEPENDENCIES REQUIRED!
-# SQLite is built into Python (no pip install needed)
-
-# That's it. Seriously.
-
-# Optional: For advanced features (not required for basic functionality)
-# openai  # For future semantic search enhancements

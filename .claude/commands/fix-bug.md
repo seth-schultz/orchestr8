@@ -43,20 +43,15 @@ Autonomous bug fixing from reproduction to production deployment with root cause
 
 **At workflow start:**
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Create workflow record
 WORKFLOW_ID="fix-bug-$(date +%s)"
-db_create_workflow "$WORKFLOW_ID" "fix-bug" "$*" 5 "high"
-db_update_workflow_status "$WORKFLOW_ID" "in_progress"
 
 # Check for similar past bugs (learn from history!)
 echo "=== Searching for similar past bugs ==="
 BUG_PATTERN=$(echo "$*" | head -c 100)
-db_find_similar_errors "$BUG_PATTERN" 5
 
 # Query past bug fix workflows for estimation
-db_find_similar_workflows "fix-bug" 5
 ```
 
 ## Execution Instructions
@@ -122,7 +117,6 @@ Expected outputs:
 ```bash
 if [ ! -f "bug-reproduction.md" ]; then
   echo "❌ Bug reproduction documentation missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Bug not reproduced" "fix-bug" "phase-1" "0"
   exit 1
 fi
 
@@ -130,7 +124,6 @@ fi
 TEST_COUNT=$(find . -name "*test*" -newer /tmp/workflow-start-$WORKFLOW_ID | wc -l)
 if [ "$TEST_COUNT" -eq 0 ]; then
   echo "❌ No failing test created"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Missing regression test" "fix-bug" "phase-1" "0"
   exit 1
 fi
 
@@ -146,19 +139,16 @@ CATEGORY=$(categorize_error)  # e.g., "sql", "authentication", "validation"
 FILE_PATH=$(get_affected_file)
 LINE_NUM=$(get_error_line)
 
-ERROR_ID=$(db_log_error "$ERROR_TYPE" "$ERROR_MSG" "$CATEGORY" "$FILE_PATH" "$LINE_NUM")
 echo "Error logged with ID: $ERROR_ID"
 
 # Send notification for critical bugs
 SEVERITY=$(assess_bug_severity)
 if [ "$SEVERITY" = "critical" ]; then
-  db_send_notification "$WORKFLOW_ID" "bug_critical" "urgent" \
     "Critical Bug Reproduced" \
     "Bug affects: ${CATEGORY}. Requires immediate attention."
 fi
 
 TOKENS_USED=3000
-db_track_tokens "$WORKFLOW_ID" "triage-reproduction" $TOKENS_USED "15%"
 ```
 
 ---
@@ -230,14 +220,12 @@ Expected outputs:
 ```bash
 if [ ! -f "root-cause-analysis.md" ]; then
   echo "❌ Root cause analysis missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Root cause not identified" "fix-bug" "phase-2" "0"
   exit 1
 fi
 
 # Verify root cause is documented
 if ! grep -q "ROOT CAUSE:" "root-cause-analysis.md"; then
   echo "❌ Root cause not documented"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Root cause section missing" "fix-bug" "phase-2" "0"
   exit 1
 fi
 
@@ -247,11 +235,9 @@ echo "✅ Root cause identified and documented"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$WORKFLOW_ID" "root-cause-analysis" $TOKENS_USED "35%"
 
 # Store root cause for learning
 ROOT_CAUSE=$(grep -A 3 "ROOT CAUSE:" root-cause-analysis.md | tail -n 2)
-db_store_knowledge "debugger" "root_cause" "$CATEGORY" \
   "Root cause for $ERROR_TYPE: $ROOT_CAUSE" \
   "$FILE_PATH:$LINE_NUM"
 ```
@@ -328,7 +314,6 @@ Expected outputs:
 echo "Running regression test..."
 if ! run_tests; then
   echo "❌ Tests still failing"
-  db_log_error "$WORKFLOW_ID" "TestFailure" "Fix did not resolve bug" "fix-bug" "phase-3" "0"
   exit 1
 fi
 
@@ -336,7 +321,6 @@ fi
 echo "Running full test suite..."
 if ! run_all_tests; then
   echo "❌ New test failures introduced"
-  db_log_error "$WORKFLOW_ID" "RegressionError" "Fix broke other functionality" "fix-bug" "phase-3" "0"
   exit 1
 fi
 
@@ -346,11 +330,9 @@ echo "✅ Fix implemented and verified locally"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$WORKFLOW_ID" "implementation" $TOKENS_USED "60%"
 
 # Store fix code
 FIX_CODE=$(git diff HEAD -- "$FILE_PATH" | head -n 50)
-db_store_knowledge "developer" "bug_fix" "$CATEGORY" \
   "Fix for $ERROR_TYPE in $FILE_PATH" \
   "$FIX_CODE"
 ```
@@ -498,39 +480,33 @@ Expected outputs:
 # Check test report
 if [ ! -f "test-report.md" ]; then
   echo "❌ Test report missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Testing incomplete" "fix-bug" "phase-4" "0"
   exit 1
 fi
 
 if grep -q "FAILED" "test-report.md"; then
   echo "❌ Tests failed"
-  db_log_error "$WORKFLOW_ID" "TestFailure" "Quality gate failed: tests" "fix-bug" "phase-4" "0"
   exit 1
 fi
 
 # Check code review
 if [ ! -f "code-review-report.md" ]; then
   echo "❌ Code review missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Code review incomplete" "fix-bug" "phase-4" "0"
   exit 1
 fi
 
 if grep -q "REJECT" "code-review-report.md"; then
   echo "❌ Code review rejected"
-  db_log_error "$WORKFLOW_ID" "ReviewFailure" "Quality gate failed: code review" "fix-bug" "phase-4" "0"
   exit 1
 fi
 
 # Check security audit
 if [ ! -f "security-audit.md" ]; then
   echo "❌ Security audit missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Security audit incomplete" "fix-bug" "phase-4" "0"
   exit 1
 fi
 
 if grep -q "VULNERABILITY" "security-audit.md"; then
   echo "❌ Security vulnerabilities found"
-  db_log_error "$WORKFLOW_ID" "SecurityError" "Quality gate failed: security" "fix-bug" "phase-4" "0"
   exit 1
 fi
 
@@ -540,13 +516,9 @@ echo "✅ All quality gates passed"
 **Track Progress:**
 ```bash
 # Log quality gates for bug fix
-db_log_quality_gate "$WORKFLOW_ID" "regression_test" "passed" 100 0
-db_log_quality_gate "$WORKFLOW_ID" "code_review" "passed" 95 0
-db_log_quality_gate "$WORKFLOW_ID" "security" "passed" 100 0
 
 # Track token usage for testing phase
 TOKENS_USED=6000
-db_track_tokens "$WORKFLOW_ID" "comprehensive-testing" $TOKENS_USED "85%"
 ```
 
 ---
@@ -688,26 +660,22 @@ Expected outputs:
 # Validate documentation
 if [ ! -f "bug-fix-docs.md" ]; then
   echo "❌ Bug fix documentation missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Documentation incomplete" "fix-bug" "phase-5" "0"
   exit 1
 fi
 
 if [ ! -f "commit-message.txt" ]; then
   echo "❌ Commit message not prepared"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Commit message missing" "fix-bug" "phase-5" "0"
   exit 1
 fi
 
 # Validate deployment
 if [ ! -f "deployment-report.md" ]; then
   echo "❌ Deployment report missing"
-  db_log_error "$WORKFLOW_ID" "ValidationError" "Deployment not completed" "fix-bug" "phase-5" "0"
   exit 1
 fi
 
 if grep -q "FAILED" "deployment-report.md"; then
   echo "❌ Deployment failed"
-  db_log_error "$WORKFLOW_ID" "DeploymentError" "Deployment unsuccessful" "fix-bug" "phase-5" "0"
   exit 1
 fi
 
@@ -717,10 +685,8 @@ echo "✅ Documented and deployed"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$WORKFLOW_ID" "documentation-deployment" $TOKENS_USED "100%"
 
 # Store post-mortem
-db_store_knowledge "debugger" "post_mortem" "$CATEGORY" \
   "Post-mortem for $ERROR_TYPE" \
   "$(head -n 50 post-mortem.md)"
 ```
@@ -736,39 +702,31 @@ RESOLUTION_SUMMARY="[Brief description of fix]"
 RESOLUTION_CODE="[Key code snippet that fixed the issue]"
 CONFIDENCE=0.95  # How confident we are this fully fixes the issue
 
-db_resolve_error "$ERROR_ID" "$RESOLUTION_SUMMARY" "$RESOLUTION_CODE" $CONFIDENCE
 
 # Calculate total token usage
 TOTAL_TOKENS=$(sum_agent_token_usage)
-db_track_tokens "$WORKFLOW_ID" "completion" $TOTAL_TOKENS "100%"
 
 # Update workflow status
-db_update_workflow_status "$WORKFLOW_ID" "completed"
 
 # Store lessons learned
 ROOT_CAUSE=$(summarize_root_cause)
 PREVENTION=$(list_prevention_measures)
-db_store_knowledge "debugger" "bug_pattern" "$CATEGORY" \
   "Bug type: ${ERROR_TYPE}. Root cause: ${ROOT_CAUSE}. Prevention: ${PREVENTION}" \
   "$RESOLUTION_CODE"
 
 # Get workflow metrics
 echo "=== Bug Fix Metrics ==="
-db_workflow_metrics "$WORKFLOW_ID"
 
 # Get error statistics to track improvement
 echo "=== Error Statistics (Last 30 days) ==="
-db_error_stats 30
 
 # Send completion notification
 DURATION=$(calculate_workflow_duration)
-db_send_notification "$WORKFLOW_ID" "workflow_complete" "high" \
   "Bug Fixed & Deployed" \
   "Bug resolved in ${DURATION} minutes. Root cause: ${ROOT_CAUSE}. Confidence: ${CONFIDENCE}"
 
 # Display token usage
 echo "=== Token Usage Report ==="
-db_token_savings "$WORKFLOW_ID"
 
 echo "
 ✅ BUG FIX COMPLETE

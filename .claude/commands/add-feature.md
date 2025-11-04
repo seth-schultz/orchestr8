@@ -39,24 +39,6 @@ Follow all phases, enforce quality gates, track with TodoWrite, and meet all suc
 
 You are orchestrating the complete implementation of a new feature from requirements to deployment.
 
-## Database Intelligence Integration
-
-**At workflow start, source the database helpers:**
-```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
-
-# Create workflow record
-workflow_id="add-feature-$(date +%s)"
-db_create_workflow "$workflow_id" "add-feature" "$*" 4 "normal"
-db_update_workflow_status "$workflow_id" "in_progress"
-
-# Query similar past workflows for estimation
-echo "=== Learning from past feature additions ==="
-db_find_similar_workflows "add-feature" 5
-```
-
----
-
 ## Phase 1: Analysis & Design (0-20%)
 
 **⚡ EXECUTE TASK TOOL:**
@@ -124,21 +106,18 @@ Expected outputs:
 # Validate requirements analysis exists
 if [ ! -f "requirements-analysis.md" ]; then
   echo "❌ Requirements analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "Requirements analysis missing" "add-feature" "phase-1" "0"
   exit 1
 fi
 
 # Validate design document exists
 if [ ! -f "design-document.md" ]; then
   echo "❌ Design document not created"
-  db_log_error "$workflow_id" "ValidationError" "Design document missing" "add-feature" "phase-1" "0"
   exit 1
 fi
 
 # Validate acceptance criteria defined
 if ! grep -q "acceptance criteria" requirements-analysis.md; then
   echo "❌ Acceptance criteria not defined"
-  db_log_error "$workflow_id" "ValidationError" "No acceptance criteria" "add-feature" "phase-1" "0"
   exit 1
 fi
 
@@ -148,10 +127,8 @@ echo "✅ Requirements analyzed and design complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "analysis-design" $TOKENS_USED "20%"
 
 # Store requirements and design
-db_store_knowledge "feature-development" "requirements" "$(echo $* | tr -dc '[:alnum:]' | head -c 20)" \
   "Feature requirements and design" \
   "$(head -n 50 requirements-analysis.md)"
 ```
@@ -237,7 +214,6 @@ Expected outputs:
 # Run backend tests
 if ! npm test 2>/dev/null && ! python -m pytest 2>/dev/null && ! cargo test 2>/dev/null; then
   echo "❌ Backend tests failing"
-  db_log_error "$workflow_id" "TestFailure" "Backend tests not passing" "add-feature" "phase-2a" "0"
   exit 1
 fi
 
@@ -248,7 +224,6 @@ echo "✅ Backend implementation complete and tested"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "backend-implementation" $TOKENS_USED "45%"
 ```
 
 ### Phase 2B: Frontend Implementation (45-70%)
@@ -329,7 +304,6 @@ Expected outputs:
 # Run frontend tests
 if ! npm test 2>/dev/null; then
   echo "❌ Frontend tests failing"
-  db_log_error "$workflow_id" "TestFailure" "Frontend tests not passing" "add-feature" "phase-2b" "0"
   exit 1
 fi
 
@@ -345,10 +319,8 @@ echo "✅ Frontend implementation complete and tested"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "frontend-implementation" $TOKENS_USED "70%"
 
 # Store implementation patterns
-db_store_knowledge "feature-development" "implementation" "$(echo $* | tr -dc '[:alnum:]' | head -c 20)" \
   "Implementation patterns and code structure" \
   "# Key patterns used in implementation"
 ```
@@ -418,26 +390,21 @@ Expected outputs:
 **Validation:**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "code_review" "running"
 
 # Validate code review completed
 if [ ! -f "code-review-report.md" ]; then
   echo "❌ Code review not completed"
-  db_log_quality_gate "$workflow_id" "code_review" "failed" 0 1
   exit 1
 fi
 
 # Check if critical issues found
 if grep -q "CRITICAL" code-review-report.md; then
   echo "❌ Critical issues found in code review"
-  db_log_quality_gate "$workflow_id" "code_review" "failed" 0 1
   exit 1
 fi
 
 # Log success
 QUALITY_SCORE=95
-db_log_quality_gate "$workflow_id" "code_review" "passed" $QUALITY_SCORE 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Code Review Passed" "Feature code meets quality standards (Score: $QUALITY_SCORE)"
 
 echo "✅ Code review passed"
 ```
@@ -499,12 +466,10 @@ Expected outputs:
 **Validation:**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "testing" "running"
 
 # Validate test report
 if [ ! -f "test-report.md" ]; then
   echo "❌ Test report not generated"
-  db_log_quality_gate "$workflow_id" "testing" "failed" 0 1
   exit 1
 fi
 
@@ -516,13 +481,10 @@ fi
 
 if [ "$COVERAGE" -lt 80 ]; then
   echo "❌ Test coverage below 80%: $COVERAGE%"
-  db_log_quality_gate "$workflow_id" "testing" "failed" $COVERAGE 1
   exit 1
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "testing" "passed" $COVERAGE 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Tests Passed" "Coverage: ${COVERAGE}%"
 
 echo "✅ Testing validation passed (Coverage: ${COVERAGE}%)"
 ```
@@ -590,12 +552,10 @@ Expected outputs:
 **Validation:**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "security" "running"
 
 # Validate security report
 if [ ! -f "security-report.md" ]; then
   echo "❌ Security report not generated"
-  db_log_quality_gate "$workflow_id" "security" "failed" 0 1
   exit 1
 fi
 
@@ -604,13 +564,10 @@ ISSUES_FOUND=0
 if grep -qE "CRITICAL|HIGH" security-report.md; then
   ISSUES_FOUND=$(grep -cE "CRITICAL|HIGH" security-report.md)
   echo "❌ Critical/high security issues found: $ISSUES_FOUND"
-  db_log_quality_gate "$workflow_id" "security" "failed" 0 $ISSUES_FOUND
   exit 1
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "security" "passed" 100 $ISSUES_FOUND
-db_send_notification "$workflow_id" "quality_gate" "high" "Security Scan Clean" "No critical vulnerabilities found"
 
 echo "✅ Security audit passed"
 ```
@@ -670,19 +627,15 @@ Expected outputs:
 **Validation:**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "performance" "running"
 
 # Validate performance report
 if [ ! -f "performance-report.md" ]; then
   echo "❌ Performance report not generated"
-  db_log_quality_gate "$workflow_id" "performance" "failed" 0 1
   exit 1
 fi
 
 # Extract performance score (simplified)
 PERF_SCORE=90
-db_log_quality_gate "$workflow_id" "performance" "passed" $PERF_SCORE 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Performance Check Passed" "Score: ${PERF_SCORE}"
 
 echo "✅ Performance analysis passed (Score: ${PERF_SCORE})"
 ```
@@ -742,26 +695,21 @@ Expected outputs:
 **Validation:**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "accessibility" "running"
 
 # Validate accessibility report
 if [ ! -f "accessibility-report.md" ]; then
   echo "❌ Accessibility report not generated"
-  db_log_quality_gate "$workflow_id" "accessibility" "failed" 0 1
   exit 1
 fi
 
 # Check for critical accessibility issues
 if grep -qE "CRITICAL|BLOCKER" accessibility-report.md; then
   echo "❌ Critical accessibility issues found"
-  db_log_quality_gate "$workflow_id" "accessibility" "failed" 0 1
   exit 1
 fi
 
 # Log success
 A11Y_SCORE=95
-db_log_quality_gate "$workflow_id" "accessibility" "passed" $A11Y_SCORE 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Accessibility Passed" "WCAG 2.1 AA compliant (Score: $A11Y_SCORE)"
 
 echo "✅ Accessibility audit passed (Score: ${A11Y_SCORE})"
 ```
@@ -769,7 +717,6 @@ echo "✅ Accessibility audit passed (Score: ${A11Y_SCORE})"
 **Track Progress:**
 ```bash
 TOKENS_USED=12000
-db_track_tokens "$workflow_id" "quality-gates" $TOKENS_USED "90%"
 ```
 
 **All gates must PASS before proceeding**
@@ -848,14 +795,12 @@ Expected outputs:
 # Validate deployment guide exists
 if [ ! -f "deployment-guide.md" ]; then
   echo "❌ Deployment guide not created"
-  db_log_error "$workflow_id" "ValidationError" "Deployment guide missing" "add-feature" "phase-4" "0"
   exit 1
 fi
 
 # Validate commit message exists
 if [ ! -f "commit-message.txt" ]; then
   echo "❌ Commit message not prepared"
-  db_log_error "$workflow_id" "ValidationError" "Commit message missing" "add-feature" "phase-4" "0"
   exit 1
 fi
 
@@ -882,7 +827,6 @@ echo "✅ Changes committed and pushed to $BRANCH_NAME"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "documentation-deployment" $TOKENS_USED "100%"
 ```
 
 ---
@@ -893,29 +837,23 @@ db_track_tokens "$workflow_id" "documentation-deployment" $TOKENS_USED "100%"
 ```bash
 # Calculate token usage across all agents
 TOTAL_TOKENS=$(sum_agent_token_usage)
-db_track_tokens "$workflow_id" "completion" $TOTAL_TOKENS "workflow-complete"
 
 # Update workflow status
-db_update_workflow_status "$workflow_id" "completed"
 
 # Store lessons learned
-db_store_knowledge "feature-orchestrator" "best_practice" "add-feature" \
   "Key learnings from this feature addition: [summarize what worked well, what challenges occurred, optimization opportunities]" \
   "# Example code pattern that worked well"
 
 # Get final metrics
 echo "=== Workflow Metrics ==="
-db_workflow_metrics "$workflow_id"
 
 # Send completion notification
 DURATION=$(calculate_workflow_duration)
-db_send_notification "$workflow_id" "workflow_complete" "high" \
   "Feature Added Successfully" \
   "Feature completed in ${DURATION} minutes. All quality gates passed. Token usage: ${TOTAL_TOKENS}."
 
 # Display token savings compared to average
 echo "=== Token Usage Report ==="
-db_token_savings "$workflow_id"
 
 echo "
 ✅ ADD FEATURE WORKFLOW COMPLETE

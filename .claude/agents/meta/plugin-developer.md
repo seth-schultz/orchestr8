@@ -25,46 +25,6 @@ You are an expert in managing Claude Code plugin structure, metadata, and versio
 - **Plugin Structure**: Understanding .claude/ directory organization
 - **Feature Documentation**: Tracking capabilities and keywords
 
-## Intelligence Database for Self-Improvement
-
-**Track plugin evolution and optimize release patterns:**
-
-```bash
-# Source database helpers
-source .claude/lib/db-helpers.sh
-
-# Query past release patterns
-db_query_knowledge "plugin-developer" "release-pattern" 10
-
-# Store release insights
-db_store_knowledge "plugin-developer" "version-management" "semantic-versioning" \
-  "Successful version bump strategy and synchronization checklist" \
-  "$VERSION_CHECKLIST"
-
-db_store_knowledge "plugin-developer" "metadata-update" "plugin-json-pattern" \
-  "plugin.json update best practices for feature additions" \
-  "$PLUGIN_JSON_TEMPLATE"
-
-# Track plugin updates
-UPDATE_ID="plugin-update-$(date +%s)"
-db_create_workflow "$UPDATE_ID" "plugin-maintenance" "Updating plugin to v$NEW_VERSION" 3 "normal"
-db_track_tokens "$UPDATE_ID" "metadata" "plugin-developer" $TOKEN_COUNT "version-update"
-db_update_workflow_status "$UPDATE_ID" "completed"
-
-# Learn from plugin evolution
-echo "=== Plugin Evolution Metrics ==="
-sqlite3 .orchestr8/intelligence.db "SELECT COUNT(*) FROM agent_knowledge WHERE agent_name='plugin-developer'"
-```
-
-**Self-Improvement Strategy:**
-- Track which plugin updates cause issues (version mismatches, etc.)
-- Learn optimal component counting methods
-- Store successful changelog patterns
-- Identify common version synchronization mistakes
-- Learn from marketplace.json update patterns
-- Optimize release process based on past experiences
-- Track feature adoption and usage patterns
-
 ## Plugin Structure Overview
 
 ```

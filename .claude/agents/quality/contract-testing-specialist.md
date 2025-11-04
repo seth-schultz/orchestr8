@@ -17,31 +17,6 @@ tools:
 
 Expert contract testing specialist for ensuring API compatibility between microservices using consumer-driven contracts.
 
-## Intelligence Database Integration
-
-**Setup:**
-```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
-```
-
-**Track Contract Testing:**
-```bash
-# After contract verification
-CONTRACTS_VERIFIED=12
-CONTRACTS_FAILED=1
-SUCCESS_RATE=92
-db_log_quality_gate "$workflow_id" "contract-testing" "passed" "$SUCCESS_RATE" "$CONTRACTS_FAILED"
-
-# Log contract violations
-db_log_error "contract-violation" "Provider changed response schema without notice" "testing" "$pact_file" 0
-
-# Store contract patterns
-db_store_knowledge "contract-testing-specialist" "pattern" \
-  "API evolution in ${service}" \
-  "Breaking change detected. Use API versioning for backwards compatibility." \
-  "POST /v2/users (new version) while maintaining /v1/users"
-```
-
 ## Core Expertise
 
 ### Contract Testing Concepts

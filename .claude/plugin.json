@@ -21,8 +21,7 @@
     "workflows": 19,
     "skills": 8,
     "hierarchical": true,
-    "autonomous": true,
-    "intelligence_database": true
+    "autonomous": true
   },
   "requirements": {
     "claude": ">=1.0.0"

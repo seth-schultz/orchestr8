@@ -45,16 +45,12 @@ You are orchestrating complete cloud cost optimization from analysis to implemen
 
 **At workflow start, source the database helpers:**
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Create workflow record
 workflow_id="optimize-costs-$(date +%s)"
-db_create_workflow "$workflow_id" "optimize-costs" "$*" 7 "high"
-db_update_workflow_status "$workflow_id" "in_progress"
 
 # Query similar past optimizations for estimation
 echo "=== Learning from past cost optimizations ==="
-db_find_similar_workflows "optimize-costs" 5
 ```
 
 ---
@@ -141,14 +137,12 @@ Expected outputs:
 # Validate cost analysis report exists
 if [ ! -f "cost-analysis-report.md" ]; then
   echo "❌ Cost analysis report not created"
-  db_log_error "$workflow_id" "ValidationError" "Cost analysis missing" "optimize-costs" "phase-1" "0"
   exit 1
 fi
 
 # Validate quick wins identified
 if ! grep -q "quick wins" cost-analysis-report.md; then
   echo "❌ Quick wins not identified"
-  db_log_error "$workflow_id" "ValidationError" "No quick wins identified" "optimize-costs" "phase-1" "0"
   exit 1
 fi
 
@@ -158,10 +152,8 @@ echo "✅ Cost analysis complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "cost-analysis" $TOKENS_USED "15%"
 
 # Store cost analysis findings
-db_store_knowledge "cost-optimization" "analysis" "$(echo $* | tr -dc '[:alnum:]' | head -c 20)" \
   "Initial cost analysis and waste identification" \
   "$(head -n 50 cost-analysis-report.md)"
 ```
@@ -272,19 +264,16 @@ Expected outputs:
 **Quality Gate: Right-Sizing Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "rightsizing_analysis" "running"
 
 # Validate right-sizing report exists
 if [ ! -f "rightsizing-report.md" ]; then
   echo "❌ Right-sizing report not created"
-  db_log_quality_gate "$workflow_id" "rightsizing_analysis" "failed" 0 1
   exit 1
 fi
 
 # Validate savings calculated
 if ! grep -q "savings" rightsizing-report.md; then
   echo "❌ Savings not calculated"
-  db_log_quality_gate "$workflow_id" "rightsizing_analysis" "failed" 0 1
   exit 1
 fi
 
@@ -292,8 +281,6 @@ fi
 ESTIMATED_SAVINGS=$(grep -oP 'savings.*?(\d+)%' rightsizing-report.md | grep -oP '\d+' | head -1 || echo "20")
 
 # Log success
-db_log_quality_gate "$workflow_id" "rightsizing_analysis" "passed" $ESTIMATED_SAVINGS 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Right-Sizing Complete" "Estimated savings: ${ESTIMATED_SAVINGS}%"
 
 echo "✅ Right-sizing analysis complete (Estimated savings: ${ESTIMATED_SAVINGS}%)"
 ```
@@ -301,7 +288,6 @@ echo "✅ Right-sizing analysis complete (Estimated savings: ${ESTIMATED_SAVINGS
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "rightsizing-analysis" $TOKENS_USED "30%"
 ```
 
 ---
@@ -406,12 +392,10 @@ Expected outputs:
 **Quality Gate: Storage Optimization Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "storage_optimization" "running"
 
 # Validate storage optimization report exists
 if [ ! -f "storage-optimization-report.md" ]; then
   echo "❌ Storage optimization report not created"
-  db_log_quality_gate "$workflow_id" "storage_optimization" "failed" 0 1
   exit 1
 fi
 
@@ -424,8 +408,6 @@ fi
 STORAGE_SAVINGS=$(grep -oP 'savings.*?(\d+)%' storage-optimization-report.md | grep -oP '\d+' | head -1 || echo "25")
 
 # Log success
-db_log_quality_gate "$workflow_id" "storage_optimization" "passed" $STORAGE_SAVINGS 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Storage Optimized" "Storage savings: ${STORAGE_SAVINGS}%"
 
 echo "✅ Storage optimization complete (Savings: ${STORAGE_SAVINGS}%)"
 ```
@@ -433,7 +415,6 @@ echo "✅ Storage optimization complete (Savings: ${STORAGE_SAVINGS}%)"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "storage-optimization" $TOKENS_USED "45%"
 ```
 
 ---
@@ -518,19 +499,16 @@ Expected outputs:
 **Quality Gate: Reserved Capacity Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "reserved_capacity" "running"
 
 # Validate reserved capacity report exists
 if [ ! -f "reserved-capacity-report.md" ]; then
   echo "❌ Reserved capacity report not created"
-  db_log_quality_gate "$workflow_id" "reserved_capacity" "failed" 0 1
   exit 1
 fi
 
 # Validate recommendations provided
 if ! grep -q "recommendation" reserved-capacity-report.md; then
   echo "❌ No reserved capacity recommendations"
-  db_log_quality_gate "$workflow_id" "reserved_capacity" "failed" 0 1
   exit 1
 fi
 
@@ -538,8 +516,6 @@ fi
 RESERVED_SAVINGS=$(grep -oP 'savings.*?(\d+)%' reserved-capacity-report.md | grep -oP '\d+' | head -1 || echo "50")
 
 # Log success
-db_log_quality_gate "$workflow_id" "reserved_capacity" "passed" $RESERVED_SAVINGS 0
-db_send_notification "$workflow_id" "quality_gate" "high" "Reserved Capacity Analysis Complete" "Potential savings: ${RESERVED_SAVINGS}% with commitments"
 
 echo "✅ Reserved capacity analysis complete (Potential savings: ${RESERVED_SAVINGS}%)"
 ```
@@ -547,7 +523,6 @@ echo "✅ Reserved capacity analysis complete (Potential savings: ${RESERVED_SAV
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "reserved-capacity" $TOKENS_USED "60%"
 ```
 
 ---
@@ -663,12 +638,10 @@ Expected outputs:
 **Quality Gate: Auto-Scaling Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "autoscaling" "running"
 
 # Validate autoscaling report exists
 if [ ! -f "autoscaling-report.md" ]; then
   echo "❌ Auto-scaling report not created"
-  db_log_quality_gate "$workflow_id" "autoscaling" "failed" 0 1
   exit 1
 fi
 
@@ -681,8 +654,6 @@ fi
 SCALING_SAVINGS=$(grep -oP 'savings.*?(\d+)%' autoscaling-report.md | grep -oP '\d+' | head -1 || echo "30")
 
 # Log success
-db_log_quality_gate "$workflow_id" "autoscaling" "passed" $SCALING_SAVINGS 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Auto-Scaling Configured" "Savings: ${SCALING_SAVINGS}%"
 
 echo "✅ Auto-scaling configuration complete (Savings: ${SCALING_SAVINGS}%)"
 ```
@@ -690,7 +661,6 @@ echo "✅ Auto-scaling configuration complete (Savings: ${SCALING_SAVINGS}%)"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "autoscaling" $TOKENS_USED "75%"
 ```
 
 ---
@@ -753,12 +723,10 @@ Expected outputs:
 **Quality Gate: Networking Optimization Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "networking" "running"
 
 # Validate networking report exists
 if [ ! -f "networking-optimization-report.md" ]; then
   echo "❌ Networking optimization report not created"
-  db_log_quality_gate "$workflow_id" "networking" "failed" 0 1
   exit 1
 fi
 
@@ -766,8 +734,6 @@ fi
 NETWORK_SAVINGS=$(grep -oP 'savings.*?(\d+)%' networking-optimization-report.md | grep -oP '\d+' | head -1 || echo "15")
 
 # Log success
-db_log_quality_gate "$workflow_id" "networking" "passed" $NETWORK_SAVINGS 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Networking Optimized" "Savings: ${NETWORK_SAVINGS}%"
 
 echo "✅ Networking optimization complete (Savings: ${NETWORK_SAVINGS}%)"
 ```
@@ -775,7 +741,6 @@ echo "✅ Networking optimization complete (Savings: ${NETWORK_SAVINGS}%)"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "networking-optimization" $TOKENS_USED "85%"
 ```
 
 ---
@@ -870,12 +835,10 @@ Expected outputs:
 **Quality Gate: FinOps Monitoring Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "finops_monitoring" "running"
 
 # Validate finops monitoring report exists
 if [ ! -f "finops-monitoring-report.md" ]; then
   echo "❌ FinOps monitoring report not created"
-  db_log_quality_gate "$workflow_id" "finops_monitoring" "failed" 0 1
   exit 1
 fi
 
@@ -885,8 +848,6 @@ if ! grep -q "monitoring" finops-monitoring-report.md; then
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "finops_monitoring" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "high" "FinOps Monitoring Active" "Continuous cost optimization enabled"
 
 echo "✅ FinOps monitoring and governance complete"
 ```
@@ -894,7 +855,6 @@ echo "✅ FinOps monitoring and governance complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "finops-monitoring" $TOKENS_USED "100%"
 ```
 
 ---
@@ -917,29 +877,23 @@ AVG_SAVINGS=$((TOTAL_SAVINGS / 6))
 
 # Calculate token usage across all agents
 TOTAL_TOKENS=$(sum_agent_token_usage)
-db_track_tokens "$workflow_id" "completion" $TOTAL_TOKENS "workflow-complete"
 
 # Update workflow status
-db_update_workflow_status "$workflow_id" "completed"
 
 # Store lessons learned
-db_store_knowledge "cost-optimization" "best_practice" "optimize-costs" \
   "Key learnings from this cost optimization: Achieved ${AVG_SAVINGS}% savings. Most impactful: [list top 3 optimization strategies]. Challenges: [any obstacles encountered]." \
   "# Optimization patterns that worked well"
 
 # Get final metrics
 echo "=== Workflow Metrics ==="
-db_workflow_metrics "$workflow_id"
 
 # Send completion notification
 DURATION=$(calculate_workflow_duration)
-db_send_notification "$workflow_id" "workflow_complete" "high" \
   "Cost Optimization Complete" \
   "Achieved ${AVG_SAVINGS}% cost reduction in ${DURATION} minutes. Token usage: ${TOTAL_TOKENS}."
 
 # Display token savings compared to average
 echo "=== Token Usage Report ==="
-db_token_savings "$workflow_id"
 
 echo "
 ✅ OPTIMIZE COSTS WORKFLOW COMPLETE

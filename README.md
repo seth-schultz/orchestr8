@@ -2125,9 +2125,7 @@ Built on research and inspiration from:
 
 - **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md) for deep dive
 - **Issues**: [GitHub Issues](https://github.com/seth-schultz/orchestr8/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/seth-schultz/orchestr8/discussions)
-- **Website**: [Your Website]
-- **Twitter**: [@YourHandle]
+- **Website**: [https://sethschultz.com](https://sethschultz.com)
 
 ---
 

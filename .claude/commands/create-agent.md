@@ -42,17 +42,14 @@ You are orchestrating the complete creation of a new Claude Code agent from requ
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "create-agent" "$(date +%s)" "{\"requirements\":\"$1\"}")
 
 echo "🚀 Starting Create Agent Workflow"
 echo "Requirements: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar agent patterns
-db_query_similar_agents "create-agent" 5
 ```
 
 ---
@@ -143,14 +140,12 @@ Expected outputs:
 # Validate requirements provided
 if [ -z "$1" ]; then
   echo "❌ Agent requirements not provided"
-  db_log_error "ValidationError" "Requirements missing" "create-agent" "phase-1" "0"
   exit 1
 fi
 
 # Validate agent-specs document exists
 if [ ! -f "agent-specs.md" ]; then
   echo "❌ Agent specifications document missing"
-  db_log_error "ValidationError" "Specs document not created" "create-agent" "phase-1" "0"
   exit 1
 fi
 
@@ -160,10 +155,8 @@ echo "✅ Requirements analyzed and validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "requirements-analysis" $TOKENS_USED "20%"
 
 # Store requirements
-db_store_knowledge "agent-creation" "requirements" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Requirements for new agent" \
   "$(cat agent-specs.md)"
 ```
@@ -257,7 +250,6 @@ Expected outputs:
 # Validate design document exists
 if [ ! -f "agent-design.md" ]; then
   echo "❌ Agent design document missing"
-  db_log_error "ValidationError" "Design document not created" "create-agent" "phase-2" "0"
   exit 1
 fi
 
@@ -266,7 +258,6 @@ required_sections=("Frontmatter" "Core Competencies" "Examples" "Best Practices"
 for section in "${required_sections[@]}"; do
   if ! grep -qi "$section" agent-design.md; then
     echo "❌ Missing section: $section"
-    db_log_error "ValidationError" "Missing section: $section" "create-agent" "phase-2" "0"
     exit 1
   fi
 done
@@ -277,10 +268,8 @@ echo "✅ Agent design validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "agent-design" $TOKENS_USED "45%"
 
 # Store design patterns
-db_store_knowledge "agent-creation" "design" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Agent design architecture" \
   "$(head -n 50 agent-design.md)"
 ```
@@ -399,14 +388,12 @@ AGENT_FILE=$(find /Users/seth/Projects/orchestr8/.claude/agents -name "${AGENT_N
 # Validate agent file exists
 if [ ! -f "$AGENT_FILE" ]; then
   echo "❌ Agent file not created"
-  db_log_error "ValidationError" "Agent file missing" "create-agent" "phase-3" "0"
   exit 1
 fi
 
 # Validate frontmatter
 if ! grep -q "^---$" "$AGENT_FILE"; then
   echo "❌ Invalid frontmatter structure"
-  db_log_error "ValidationError" "Missing YAML frontmatter" "create-agent" "phase-3" "0"
   exit 1
 fi
 
@@ -415,7 +402,6 @@ required_fields=("name:" "description:" "model:" "tools:")
 for field in "${required_fields[@]}"; do
   if ! grep -q "^$field" "$AGENT_FILE"; then
     echo "❌ Missing frontmatter field: $field"
-    db_log_error "ValidationError" "Missing field: $field" "create-agent" "phase-3" "0"
     exit 1
   fi
 done
@@ -423,13 +409,11 @@ done
 # Validate content sections
 if ! grep -q "## Core Competencies" "$AGENT_FILE"; then
   echo "❌ Missing Core Competencies section"
-  db_log_error "ValidationError" "Missing Core Competencies" "create-agent" "phase-3" "0"
   exit 1
 fi
 
 if ! grep -q "## Best Practices" "$AGENT_FILE"; then
   echo "❌ Missing Best Practices section"
-  db_log_error "ValidationError" "Missing Best Practices" "create-agent" "phase-3" "0"
   exit 1
 fi
 
@@ -437,7 +421,6 @@ fi
 LINE_COUNT=$(wc -l < "$AGENT_FILE")
 if [ "$LINE_COUNT" -lt 200 ]; then
   echo "❌ Agent file too short: $LINE_COUNT lines (minimum 200)"
-  db_log_error "ValidationError" "Agent only $LINE_COUNT lines" "create-agent" "phase-3" "0"
   exit 1
 fi
 
@@ -447,10 +430,8 @@ echo "✅ Agent implementation validated ($LINE_COUNT lines)"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "implementation" $TOKENS_USED "70%"
 
 # Store implementation
-db_store_knowledge "agent-creation" "implementation" "$(basename \"$AGENT_FILE\" .md)" \
   "Implementation of agent with $(wc -l < \"$AGENT_FILE\") lines" \
   "$(head -n 100 \"$AGENT_FILE\")"
 ```
@@ -534,7 +515,6 @@ Expected outputs:
 # Validate validation report exists
 if [ ! -f "validation-report.md" ]; then
   echo "❌ Validation report missing"
-  db_log_error "ValidationError" "Validation report not created" "create-agent" "phase-4" "0"
   exit 1
 fi
 
@@ -542,7 +522,6 @@ fi
 if grep -qi "failed\|error" validation-report.md; then
   echo "❌ Validation found issues"
   cat validation-report.md
-  db_log_error "ValidationError" "Agent validation failed" "create-agent" "phase-4" "0"
   exit 1
 fi
 
@@ -552,10 +531,8 @@ echo "✅ All validations passed"
 **Track Progress:**
 ```bash
 TOKENS_USED=3000
-db_track_tokens "$workflow_id" "validation" $TOKENS_USED "85%"
 
 # Store validation results
-db_store_knowledge "agent-creation" "validation" "$(basename \"$AGENT_FILE\" .md)" \
   "Validation results for agent" \
   "$(cat validation-report.md)"
 ```
@@ -652,7 +629,6 @@ NEW_VERSION=$(cat /Users/seth/Projects/orchestr8/.claude/VERSION)
 # Validate VERSION file updated
 if [ -z "$NEW_VERSION" ]; then
   echo "❌ VERSION file not updated"
-  db_log_error "ValidationError" "VERSION file empty or missing" "create-agent" "phase-5" "0"
   exit 1
 fi
 
@@ -660,7 +636,6 @@ fi
 JSON_VERSION=$(grep '"version":' /Users/seth/Projects/orchestr8/.claude/plugin.json | cut -d'"' -f4)
 if [ "$NEW_VERSION" != "$JSON_VERSION" ]; then
   echo "❌ Version mismatch: VERSION=$NEW_VERSION, plugin.json=$JSON_VERSION"
-  db_log_error "ValidationError" "Version sync failed" "create-agent" "phase-5" "0"
   exit 1
 fi
 
@@ -676,10 +651,8 @@ echo "✅ Plugin metadata updated (version: $NEW_VERSION, agents: $AGENT_COUNT)"
 **Track Progress:**
 ```bash
 TOKENS_USED=3000
-db_track_tokens "$workflow_id" "metadata-update" $TOKENS_USED "95%"
 
 # Store metadata info
-db_store_knowledge "agent-creation" "metadata" "$(basename \"$AGENT_FILE\" .md)" \
   "Metadata update at version $NEW_VERSION" \
   "Version: $NEW_VERSION, Agents: $AGENT_COUNT"
 ```
@@ -761,14 +734,12 @@ Expected outputs:
 AGENT_BASENAME=$(basename "$AGENT_FILE" .md)
 if ! grep -q "$AGENT_BASENAME" /Users/seth/Projects/orchestr8/.claude/CHANGELOG.md; then
   echo "❌ CHANGELOG not updated with agent"
-  db_log_error "ValidationError" "Agent not in CHANGELOG" "create-agent" "phase-6" "0"
   exit 1
 fi
 
 # Validate version in CHANGELOG
 if ! grep -q "$NEW_VERSION" /Users/seth/Projects/orchestr8/.claude/CHANGELOG.md; then
   echo "❌ Version $NEW_VERSION not in CHANGELOG"
-  db_log_error "ValidationError" "Version not in CHANGELOG" "create-agent" "phase-6" "0"
   exit 1
 fi
 
@@ -778,10 +749,8 @@ echo "✅ Documentation complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=2000
-db_track_tokens "$workflow_id" "documentation" $TOKENS_USED "100%"
 
 # Store documentation info
-db_store_knowledge "agent-creation" "documentation" "$(basename \"$AGENT_FILE\" .md)" \
   "Documentation completed in CHANGELOG" \
   "Version: $NEW_VERSION, Agent: $AGENT_BASENAME"
 ```
@@ -794,7 +763,6 @@ db_store_knowledge "agent-creation" "documentation" "$(basename \"$AGENT_FILE\" 
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Agent created: $(basename \"$AGENT_FILE\" .md) at version $NEW_VERSION"
 
 echo "
@@ -832,8 +800,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ## Success Criteria Checklist

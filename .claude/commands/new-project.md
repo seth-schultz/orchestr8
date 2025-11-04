@@ -10,17 +10,14 @@ Autonomous workflow for creating complete projects from requirements to deployme
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "new-project" "$(date +%s)" "{\"description\":\"$1\"}")
 
 echo "🚀 Starting New Project Workflow"
 echo "Project Description: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar project patterns
-db_query_similar_workflows "new-project" 5
 ```
 
 ---
@@ -81,14 +78,12 @@ Expected outputs:
 # Validate requirements provided
 if [ -z "$1" ]; then
   echo "❌ Project description not provided"
-  db_log_error "$workflow_id" "ValidationError" "No project description" "new-project" "phase-1" "0"
   exit 1
 fi
 
 # Validate requirements document
 if [ ! -f "requirements.md" ]; then
   echo "❌ Requirements document not created"
-  db_log_error "$workflow_id" "ValidationError" "Missing requirements.md" "new-project" "phase-1" "0"
   exit 1
 fi
 
@@ -98,10 +93,8 @@ echo "✅ Requirements analyzed and validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "requirements-analysis" $TOKENS_USED "10%"
 
 # Store requirements
-db_store_knowledge "project-creation" "requirements" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Requirements for new project" \
   "$(head -n 50 requirements.md)"
 ```
@@ -176,14 +169,12 @@ Expected outputs:
 # Validate architecture document
 if [ ! -f "architecture.md" ]; then
   echo "❌ Architecture document not created"
-  db_log_error "$workflow_id" "ValidationError" "Missing architecture.md" "new-project" "phase-2" "0"
   exit 1
 fi
 
 # Validate tech stack defined
 if [ ! -f "tech-stack.md" ]; then
   echo "❌ Technology stack not defined"
-  db_log_error "$workflow_id" "ValidationError" "Missing tech-stack.md" "new-project" "phase-2" "0"
   exit 1
 fi
 
@@ -197,10 +188,8 @@ Ask user: "Review the architecture in architecture.md and tech-stack.md. Approve
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "architecture-design" $TOKENS_USED "25%"
 
 # Store architecture
-db_store_knowledge "project-creation" "architecture" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "System architecture and tech stack" \
   "$(head -n 50 architecture.md)"
 ```
@@ -281,21 +270,18 @@ Expected outputs:
 # Validate project initialized
 if [ ! -f "package.json" ] && [ ! -f "pyproject.toml" ] && [ ! -f "pom.xml" ] && [ ! -f "Cargo.toml" ]; then
   echo "❌ Project not initialized (no package manifest found)"
-  db_log_error "$workflow_id" "ValidationError" "No package manifest file" "new-project" "phase-3" "0"
   exit 1
 fi
 
 # Validate .env.example exists
 if [ ! -f ".env.example" ]; then
   echo "❌ Missing .env.example file"
-  db_log_error "$workflow_id" "ValidationError" "No .env.example" "new-project" "phase-3" "0"
   exit 1
 fi
 
 # Validate database schema
 if [ ! -d "prisma" ] && [ ! -d "migrations" ] && [ ! -f "alembic.ini" ]; then
   echo "❌ Database schema not initialized"
-  db_log_error "$workflow_id" "ValidationError" "No database schema" "new-project" "phase-3" "0"
   exit 1
 fi
 
@@ -305,10 +291,8 @@ echo "✅ Project structure initialized"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "project-initialization" $TOKENS_USED "35%"
 
 # Store project structure
-db_store_knowledge "project-creation" "initialization" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Project initialized with dependencies" \
   "$(ls -la)"
 ```
@@ -393,14 +377,12 @@ Expected outputs:
 # Validate models directory exists
 if [ ! -d "src/models" ] && [ ! -d "src/entities" ]; then
   echo "❌ Models not implemented"
-  db_log_error "$workflow_id" "ValidationError" "No models directory" "new-project" "phase-4" "0"
   exit 1
 fi
 
 # Validate API routes exist
 if [ ! -d "src/routes" ] && [ ! -d "src/controllers" ]; then
   echo "❌ API routes not implemented"
-  db_log_error "$workflow_id" "ValidationError" "No routes/controllers" "new-project" "phase-4" "0"
   exit 1
 fi
 
@@ -415,10 +397,8 @@ echo "✅ Backend implementation complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=12000
-db_track_tokens "$workflow_id" "backend-implementation" $TOKENS_USED "55%"
 
 # Store backend code patterns
-db_store_knowledge "project-creation" "backend" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Backend API implementation" \
   "$(find src -name '*.ts' -o -name '*.py' -o -name '*.java' | head -5 | xargs head -20)"
 ```
@@ -514,7 +494,6 @@ if [ -d "src/components" ] || [ -d "src/pages" ]; then
   # Validate components directory
   if [ ! -d "src/components" ]; then
     echo "❌ Components not implemented"
-    db_log_error "$workflow_id" "ValidationError" "No components directory" "new-project" "phase-5" "0"
     exit 1
   fi
 
@@ -532,10 +511,8 @@ fi
 **Track Progress:**
 ```bash
 TOKENS_USED=10000
-db_track_tokens "$workflow_id" "frontend-implementation" $TOKENS_USED "65%"
 
 # Store frontend patterns
-db_store_knowledge "project-creation" "frontend" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Frontend UI implementation" \
   "$(find src/components -name '*.tsx' -o -name '*.jsx' 2>/dev/null | head -5 | xargs head -20)"
 ```
@@ -619,7 +596,6 @@ Expected outputs:
 # Validate test directory exists
 if [ ! -d "tests" ] && [ ! -d "__tests__" ] && [ ! -d "test" ]; then
   echo "❌ No tests directory found"
-  db_log_error "$workflow_id" "ValidationError" "No tests implemented" "new-project" "phase-6" "0"
   exit 1
 fi
 
@@ -628,13 +604,11 @@ echo "Running test suite..."
 if [ -f "package.json" ]; then
   npm test || {
     echo "❌ Tests failed"
-    db_log_error "$workflow_id" "TestFailure" "Test suite failed" "new-project" "phase-6" "0"
     exit 1
   }
 elif [ -f "pyproject.toml" ]; then
   pytest || {
     echo "❌ Tests failed"
-    db_log_error "$workflow_id" "TestFailure" "Test suite failed" "new-project" "phase-6" "0"
     exit 1
   }
 fi
@@ -653,10 +627,8 @@ echo "✅ All tests passing"
 **Track Progress:**
 ```bash
 TOKENS_USED=10000
-db_track_tokens "$workflow_id" "testing" $TOKENS_USED "80%"
 
 # Store test patterns
-db_store_knowledge "project-creation" "testing" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Test suite with coverage" \
   "$(find tests -name '*.test.*' 2>/dev/null | head -5 | xargs head -20)"
 ```
@@ -836,7 +808,6 @@ Expected outputs:
 for report in code-review-report.md security-audit-report.md performance-report.md; do
   if [ ! -f "$report" ]; then
     echo "❌ Missing report: $report"
-    db_log_error "$workflow_id" "ValidationError" "Missing $report" "new-project" "phase-7" "0"
     exit 1
   fi
 done
@@ -844,7 +815,6 @@ done
 # Check for critical issues in reports
 if grep -i "critical" *.md | grep -v "✅"; then
   echo "❌ Critical issues found in quality gates"
-  db_log_error "$workflow_id" "QualityGateFailure" "Critical issues detected" "new-project" "phase-7" "0"
   exit 1
 fi
 
@@ -854,10 +824,8 @@ echo "✅ All quality gates passed"
 **Track Progress:**
 ```bash
 TOKENS_USED=9000
-db_track_tokens "$workflow_id" "quality-gates" $TOKENS_USED "90%"
 
 # Store quality gate results
-db_store_knowledge "project-creation" "quality" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Quality gate results" \
   "$(cat code-review-report.md security-audit-report.md performance-report.md)"
 ```
@@ -1105,7 +1073,6 @@ Expected outputs:
 # Validate CI/CD configuration
 if [ ! -d ".github/workflows" ] && [ ! -f ".gitlab-ci.yml" ]; then
   echo "❌ No CI/CD configuration found"
-  db_log_error "$workflow_id" "ValidationError" "Missing CI/CD config" "new-project" "phase-8" "0"
   exit 1
 fi
 
@@ -1117,7 +1084,6 @@ fi
 # Validate README
 if [ ! -f "README.md" ]; then
   echo "❌ README.md missing"
-  db_log_error "$workflow_id" "ValidationError" "Missing README" "new-project" "phase-8" "0"
   exit 1
 fi
 
@@ -1133,10 +1099,8 @@ echo "✅ DevOps setup and deployment complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=12000
-db_track_tokens "$workflow_id" "devops-deployment" $TOKENS_USED "100%"
 
 # Store deployment info
-db_store_knowledge "project-creation" "deployment" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Deployment configuration and documentation" \
   "$(cat README.md | head -50)"
 ```
@@ -1149,7 +1113,6 @@ db_store_knowledge "project-creation" "deployment" "$(echo $1 | tr -dc '[:alnum:
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Project created and deployed successfully"
 
 echo "
@@ -1194,8 +1157,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ## Success Criteria Checklist

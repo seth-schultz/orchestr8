@@ -14,17 +14,14 @@ This workflow provides thorough code quality validation through specialized revi
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "review-code" "$(date +%s)" "{\"scope\":\"$1\"}")
 
 echo "🚀 Starting Multi-Stage Code Review Workflow"
 echo "Scope: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar code review patterns
-db_query_similar_workflows "review-code" 5
 ```
 
 ---
@@ -120,12 +117,10 @@ if [[ "$SCOPE" =~ ^PR-[0-9]+$ ]]; then
   PR_NUMBER=${SCOPE#PR-}
   if ! gh pr view $PR_NUMBER &>/dev/null; then
     echo "❌ Invalid PR number: $PR_NUMBER"
-    db_log_error "$workflow_id" "ScopeError" "PR $PR_NUMBER not found" "review-code" "phase-1" "0"
     exit 1
   fi
 elif [ "$SCOPE" != "changed" ] && [ ! -d "$SCOPE" ] && [ ! -f "$SCOPE" ]; then
   echo "❌ Invalid scope: $SCOPE (not a file, directory, or PR)"
-  db_log_error "$workflow_id" "ScopeError" "Invalid scope provided" "review-code" "phase-1" "0"
   exit 1
 fi
 
@@ -135,10 +130,8 @@ echo "✅ Review scope validated: $SCOPE"
 **Track Progress:**
 ```bash
 TOKENS_USED=2000
-db_track_tokens "$workflow_id" "scope-detection" $TOKENS_USED "5%"
 
 # Store scope info
-db_store_knowledge "code-review" "scope" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Review scope: $SCOPE" \
   "Type: [full|directory|file|PR|changed], Files: [count]"
 ```
@@ -206,14 +199,12 @@ Expected outputs:
 ```bash
 if [ ! -f "style-review-report.md" ]; then
   echo "❌ Style review report missing"
-  db_log_error "$workflow_id" "ReviewError" "Style review not completed" "review-code" "stage-1" "0"
   exit 1
 fi
 
 # Check report has content
 if [ $(wc -l < style-review-report.md) -lt 20 ]; then
   echo "❌ Style review report too short"
-  db_log_error "$workflow_id" "ReviewError" "Incomplete style review" "review-code" "stage-1" "0"
   exit 1
 fi
 
@@ -223,10 +214,8 @@ echo "✅ Stage 1: Style & Readability Review complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "style-review" $TOKENS_USED "20%"
 
 # Store review findings
-db_store_knowledge "code-review" "style" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Style review findings for $SCOPE" \
   "$(head -n 50 style-review-report.md)"
 ```
@@ -302,7 +291,6 @@ Expected outputs:
 ```bash
 if [ ! -f "logic-review-report.md" ]; then
   echo "❌ Logic review report missing"
-  db_log_error "$workflow_id" "ReviewError" "Logic review not completed" "review-code" "stage-2" "0"
   exit 1
 fi
 
@@ -318,10 +306,8 @@ echo "✅ Stage 2: Logic & Correctness Review complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=10000
-db_track_tokens "$workflow_id" "logic-review" $TOKENS_USED "35%"
 
 # Store logic findings
-db_store_knowledge "code-review" "logic" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Logic review findings for $SCOPE" \
   "$(head -n 50 logic-review-report.md)"
 ```
@@ -403,7 +389,6 @@ Expected outputs:
 ```bash
 if [ ! -f "security-audit-report.md" ]; then
   echo "❌ Security audit report missing"
-  db_log_error "$workflow_id" "ReviewError" "Security audit not completed" "review-code" "stage-3" "0"
   exit 1
 fi
 
@@ -412,7 +397,6 @@ if grep -q "🔴 Critical" security-audit-report.md; then
   CRITICAL_COUNT=$(grep -c "🔴 Critical" security-audit-report.md)
   echo "❌ BLOCKING: $CRITICAL_COUNT critical security vulnerabilities found"
   echo "Cannot merge until critical vulnerabilities are fixed"
-  db_log_error "$workflow_id" "SecurityError" "$CRITICAL_COUNT critical vulnerabilities found" "review-code" "stage-3" "0"
   # Don't exit - continue to generate full report, but mark as failed
 fi
 
@@ -421,7 +405,6 @@ if grep -q "Hardcoded secret" security-audit-report.md; then
   SECRET_COUNT=$(grep -c "Hardcoded secret" security-audit-report.md)
   echo "❌ BLOCKING: $SECRET_COUNT hardcoded secrets found"
   echo "Remove all secrets before merge"
-  db_log_error "$workflow_id" "SecurityError" "$SECRET_COUNT secrets detected" "review-code" "stage-3" "0"
 fi
 
 echo "✅ Stage 3: Security Audit complete"
@@ -430,10 +413,8 @@ echo "✅ Stage 3: Security Audit complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=12000
-db_track_tokens "$workflow_id" "security-audit" $TOKENS_USED "50%"
 
 # Store security findings
-db_store_knowledge "code-review" "security" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Security audit findings for $SCOPE" \
   "$(head -n 50 security-audit-report.md)"
 ```
@@ -508,7 +489,6 @@ Expected outputs:
 ```bash
 if [ ! -f "performance-analysis-report.md" ]; then
   echo "❌ Performance analysis report missing"
-  db_log_error "$workflow_id" "ReviewError" "Performance analysis not completed" "review-code" "stage-4" "0"
   exit 1
 fi
 
@@ -524,10 +504,8 @@ echo "✅ Stage 4: Performance Analysis complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=9000
-db_track_tokens "$workflow_id" "performance-analysis" $TOKENS_USED "65%"
 
 # Store performance findings
-db_store_knowledge "code-review" "performance" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Performance analysis for $SCOPE" \
   "$(head -n 50 performance-analysis-report.md)"
 ```
@@ -605,7 +583,6 @@ Expected outputs:
 ```bash
 if [ ! -f "architecture-review-report.md" ]; then
   echo "❌ Architecture review report missing"
-  db_log_error "$workflow_id" "ReviewError" "Architecture review not completed" "review-code" "stage-5" "0"
   exit 1
 fi
 
@@ -615,10 +592,8 @@ echo "✅ Stage 5: Architecture Review complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=10000
-db_track_tokens "$workflow_id" "architecture-review" $TOKENS_USED "80%"
 
 # Store architecture findings
-db_store_knowledge "code-review" "architecture" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Architecture review for $SCOPE" \
   "$(head -n 50 architecture-review-report.md)"
 ```
@@ -707,7 +682,6 @@ REPORT_FILE=$(ls -t review-report-*.md 2>/dev/null | head -1)
 
 if [ -z "$REPORT_FILE" ]; then
   echo "❌ Master review report not generated"
-  db_log_error "$workflow_id" "ReportError" "Master report missing" "review-code" "stage-6" "0"
   exit 1
 fi
 
@@ -716,7 +690,6 @@ REQUIRED_SECTIONS=("Executive Summary" "Verdict" "Quality Score" "Critical Issue
 for SECTION in "${REQUIRED_SECTIONS[@]}"; do
   if ! grep -q "$SECTION" "$REPORT_FILE"; then
     echo "❌ Master report missing required section: $SECTION"
-    db_log_error "$workflow_id" "ReportError" "Missing section: $SECTION" "review-code" "stage-6" "0"
     exit 1
   fi
 done
@@ -728,11 +701,9 @@ echo "Master report: $REPORT_FILE"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "synthesis" $TOKENS_USED "95%"
 
 # Store master report
 REPORT_FILE=$(ls -t review-report-*.md | head -1)
-db_store_knowledge "code-review" "master-report" "$(echo $SCOPE | tr -dc '[:alnum:]' | head -c 20)" \
   "Master review report for $SCOPE" \
   "$(head -n 100 \"$REPORT_FILE\")"
 ```
@@ -815,7 +786,6 @@ REPORT_FILE=$(ls -t review-report-*.md | head -1)
 # Validate report exists
 if [ ! -f "$REPORT_FILE" ]; then
   echo "❌ Master report file missing"
-  db_log_error "$workflow_id" "DeliveryError" "Report file not found" "review-code" "phase-8" "0"
   exit 1
 fi
 
@@ -839,7 +809,6 @@ fi
 **Track Progress:**
 ```bash
 TOKENS_USED=2000
-db_track_tokens "$workflow_id" "delivery" $TOKENS_USED "100%"
 ```
 
 ---
@@ -854,7 +823,6 @@ REPORT_FILE=$(ls -t review-report-*.md | head -1)
 VERDICT=$(grep "Verdict:" "$REPORT_FILE" | head -1 | cut -d':' -f2 | tr -d ' *')
 QUALITY_SCORE=$(grep "Quality Score:" "$REPORT_FILE" | head -1 | grep -oE '[0-9]+\.[0-9]+')
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Code review complete. Verdict: $VERDICT, Score: $QUALITY_SCORE/10"
 
 echo "
@@ -915,8 +883,6 @@ Review Report: $REPORT_FILE
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ---

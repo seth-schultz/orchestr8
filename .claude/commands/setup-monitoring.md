@@ -46,16 +46,12 @@ You are orchestrating the complete deployment of a production-grade observabilit
 
 **At workflow start, source the database helpers:**
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Create workflow record
 workflow_id="setup-monitoring-$(date +%s)"
-db_create_workflow "$workflow_id" "setup-monitoring" "$*" 4 "normal"
-db_update_workflow_status "$workflow_id" "in_progress"
 
 # Query similar past workflows for estimation
 echo "=== Learning from past monitoring setups ==="
-db_find_similar_workflows "setup-monitoring" 5
 ```
 
 ---
@@ -131,21 +127,18 @@ Expected outputs:
 # Validate architecture document exists
 if [ ! -f "observability-architecture.md" ]; then
   echo "❌ Architecture document not created"
-  db_log_error "$workflow_id" "ValidationError" "Architecture document missing" "setup-monitoring" "phase-1" "0"
   exit 1
 fi
 
 # Validate SLO definitions exist
 if [ ! -f "slo-definitions.md" ]; then
   echo "❌ SLO definitions not created"
-  db_log_error "$workflow_id" "ValidationError" "SLO definitions missing" "setup-monitoring" "phase-1" "0"
   exit 1
 fi
 
 # Validate deployment plan exists
 if [ ! -f "deployment-plan.md" ]; then
   echo "❌ Deployment plan not created"
-  db_log_error "$workflow_id" "ValidationError" "Deployment plan missing" "setup-monitoring" "phase-1" "0"
   exit 1
 fi
 
@@ -155,10 +148,8 @@ echo "✅ Architecture designed and SLOs defined"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "architecture-design" $TOKENS_USED "15%"
 
 # Store architecture knowledge
-db_store_knowledge "observability" "architecture" "$(echo $* | tr -dc '[:alnum:]' | head -c 20)" \
   "Observability architecture and SLO definitions" \
   "$(head -n 50 observability-architecture.md)"
 ```
@@ -194,7 +185,6 @@ Tasks:
    - Custom application exporters (/metrics endpoints)
    - Database exporters:
      - postgres_exporter for PostgreSQL
-     - mongodb_exporter for MongoDB
      - redis_exporter for Redis
 
 3. **Deploy Grafana**
@@ -236,19 +226,16 @@ Expected outputs:
 **Quality Gate: Metrics Infrastructure**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "metrics_infrastructure" "running"
 
 # Check if Prometheus is deployed
 if ! kubectl get pods -n monitoring | grep -q prometheus; then
   echo "❌ Prometheus not deployed"
-  db_log_quality_gate "$workflow_id" "metrics_infrastructure" "failed" 0 1
   exit 1
 fi
 
 # Check if Grafana is deployed
 if ! kubectl get pods -n monitoring | grep -q grafana; then
   echo "❌ Grafana not deployed"
-  db_log_quality_gate "$workflow_id" "metrics_infrastructure" "failed" 0 1
   exit 1
 fi
 
@@ -261,13 +248,10 @@ fi
 TARGETS_UP=$(curl -s http://prometheus:9090/api/v1/targets | jq '.data.activeTargets | map(select(.health=="up")) | length')
 if [ "$TARGETS_UP" -lt 1 ]; then
   echo "❌ No targets being scraped by Prometheus"
-  db_log_quality_gate "$workflow_id" "metrics_infrastructure" "failed" 0 1
   exit 1
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "metrics_infrastructure" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Metrics Infrastructure Deployed" "Prometheus and Grafana operational, scraping ${TARGETS_UP} targets"
 
 echo "✅ Metrics infrastructure deployed (${TARGETS_UP} targets)"
 ```
@@ -275,7 +259,6 @@ echo "✅ Metrics infrastructure deployed (${TARGETS_UP} targets)"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "metrics-infrastructure" $TOKENS_USED "30%"
 ```
 
 ---
@@ -373,7 +356,6 @@ Expected outputs:
 **Quality Gate: Application Instrumentation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "instrumentation" "running"
 
 # Check if /metrics endpoints exist
 SERVICES=$(kubectl get services -n production -o name | wc -l)
@@ -387,7 +369,6 @@ done
 
 if [ "$INSTRUMENTED" -eq 0 ]; then
   echo "❌ No services instrumented with metrics"
-  db_log_quality_gate "$workflow_id" "instrumentation" "failed" 0 1
   exit 1
 fi
 
@@ -401,8 +382,6 @@ done
 
 # Log success
 COVERAGE=$((INSTRUMENTED * 100 / SERVICES))
-db_log_quality_gate "$workflow_id" "instrumentation" "passed" $COVERAGE 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Applications Instrumented" "${INSTRUMENTED}/${SERVICES} services instrumented (${COVERAGE}%)"
 
 echo "✅ Applications instrumented (${INSTRUMENTED}/${SERVICES} services, ${COVERAGE}%)"
 ```
@@ -410,7 +389,6 @@ echo "✅ Applications instrumented (${INSTRUMENTED}/${SERVICES} services, ${COV
 **Track Progress:**
 ```bash
 TOKENS_USED=9000
-db_track_tokens "$workflow_id" "application-instrumentation" $TOKENS_USED "45%"
 ```
 
 ---
@@ -497,19 +475,16 @@ Expected outputs:
 **Quality Gate: Logging Infrastructure**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "logging_infrastructure" "running"
 
 # Check if Loki or Elasticsearch is deployed
 if ! kubectl get pods -n monitoring | grep -qE "loki|elasticsearch"; then
   echo "❌ Log aggregation platform not deployed"
-  db_log_quality_gate "$workflow_id" "logging_infrastructure" "failed" 0 1
   exit 1
 fi
 
 # Check if log collectors are running
 if ! kubectl get pods -n monitoring | grep -qE "promtail|filebeat|fluentd"; then
   echo "❌ Log collectors not deployed"
-  db_log_quality_gate "$workflow_id" "logging_infrastructure" "failed" 0 1
   exit 1
 fi
 
@@ -517,8 +492,6 @@ fi
 echo "Testing log queries..."
 
 # Log success
-db_log_quality_gate "$workflow_id" "logging_infrastructure" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Logging Infrastructure Deployed" "Logs aggregated and searchable"
 
 echo "✅ Logging infrastructure operational"
 ```
@@ -526,7 +499,6 @@ echo "✅ Logging infrastructure operational"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "logging-infrastructure" $TOKENS_USED "60%"
 ```
 
 ---
@@ -617,19 +589,16 @@ Expected outputs:
 **Quality Gate: Distributed Tracing**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "distributed_tracing" "running"
 
 # Check if tracing backend is deployed
 if ! kubectl get pods -n monitoring | grep -qE "tempo|jaeger|zipkin"; then
   echo "❌ Tracing backend not deployed"
-  db_log_quality_gate "$workflow_id" "distributed_tracing" "failed" 0 1
   exit 1
 fi
 
 # Check if OTel Collector is deployed
 if ! kubectl get pods -n monitoring | grep -q "otel-collector"; then
   echo "❌ OpenTelemetry Collector not deployed"
-  db_log_quality_gate "$workflow_id" "distributed_tracing" "failed" 0 1
   exit 1
 fi
 
@@ -637,8 +606,6 @@ fi
 echo "Verifying traces are being received..."
 
 # Log success
-db_log_quality_gate "$workflow_id" "distributed_tracing" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Tracing Infrastructure Ready" "Distributed tracing operational"
 
 echo "✅ Distributed tracing operational"
 ```
@@ -646,7 +613,6 @@ echo "✅ Distributed tracing operational"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "distributed-tracing" $TOKENS_USED "75%"
 ```
 
 ---
@@ -775,12 +741,10 @@ Expected outputs:
 **Quality Gate: Dashboards**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "dashboards" "running"
 
 # Check if dashboards directory exists
 if [ ! -d "grafana-dashboards" ]; then
   echo "❌ Dashboards directory not created"
-  db_log_quality_gate "$workflow_id" "dashboards" "failed" 0 1
   exit 1
 fi
 
@@ -788,7 +752,6 @@ fi
 DASHBOARD_COUNT=$(find grafana-dashboards -name "*.json" | wc -l)
 if [ "$DASHBOARD_COUNT" -lt 3 ]; then
   echo "❌ Insufficient dashboards created (found $DASHBOARD_COUNT, expected at least 3)"
-  db_log_quality_gate "$workflow_id" "dashboards" "failed" $DASHBOARD_COUNT 1
   exit 1
 fi
 
@@ -796,14 +759,11 @@ fi
 for dashboard in grafana-dashboards/*.json; do
   if ! jq empty "$dashboard" 2>/dev/null; then
     echo "❌ Invalid JSON in $dashboard"
-    db_log_quality_gate "$workflow_id" "dashboards" "failed" 0 1
     exit 1
   fi
 done
 
 # Log success
-db_log_quality_gate "$workflow_id" "dashboards" "passed" $DASHBOARD_COUNT 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Dashboards Created" "${DASHBOARD_COUNT} dashboards created and imported"
 
 echo "✅ Dashboards created (${DASHBOARD_COUNT} dashboards)"
 ```
@@ -811,7 +771,6 @@ echo "✅ Dashboards created (${DASHBOARD_COUNT} dashboards)"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "dashboards-visualization" $TOKENS_USED "85%"
 ```
 
 ---
@@ -944,12 +903,10 @@ Expected outputs:
 **Quality Gate: Alerting**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "alerting" "running"
 
 # Check if alert rules exist
 if [ ! -d "prometheus-alerts" ] || [ -z "$(ls -A prometheus-alerts)" ]; then
   echo "❌ Alert rules not created"
-  db_log_quality_gate "$workflow_id" "alerting" "failed" 0 1
   exit 1
 fi
 
@@ -957,14 +914,12 @@ fi
 ALERT_COUNT=$(grep -r "alert:" prometheus-alerts/ | wc -l)
 if [ "$ALERT_COUNT" -lt 5 ]; then
   echo "❌ Insufficient alert rules (found $ALERT_COUNT, expected at least 5)"
-  db_log_quality_gate "$workflow_id" "alerting" "failed" $ALERT_COUNT 1
   exit 1
 fi
 
 # Check if Alertmanager is deployed
 if ! kubectl get pods -n monitoring | grep -q alertmanager; then
   echo "❌ Alertmanager not deployed"
-  db_log_quality_gate "$workflow_id" "alerting" "failed" 0 1
   exit 1
 fi
 
@@ -974,8 +929,6 @@ if [ ! -d "runbooks" ] || [ -z "$(ls -A runbooks)" ]; then
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "alerting" "passed" $ALERT_COUNT 0
-db_send_notification "$workflow_id" "quality_gate" "high" "Alerting Configured" "${ALERT_COUNT} alert rules deployed, notifications configured"
 
 echo "✅ Alerting configured (${ALERT_COUNT} alert rules)"
 ```
@@ -983,7 +936,6 @@ echo "✅ Alerting configured (${ALERT_COUNT} alert rules)"
 **Track Progress:**
 ```bash
 TOKENS_USED=9000
-db_track_tokens "$workflow_id" "alerting-incident-response" $TOKENS_USED "95%"
 ```
 
 ---
@@ -1125,7 +1077,6 @@ Expected outputs:
 **Quality Gate: Optimization & HA**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "optimization_ha" "running"
 
 # Check if HA configurations exist
 if [ ! -d "ha-config" ]; then
@@ -1149,8 +1100,6 @@ if ! kubectl get pods -n monitoring | grep -qE "thanos|cortex|victoria"; then
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "optimization_ha" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "high" "Monitoring Stack Optimized" "HA configured, backups in place, optimizations complete"
 
 echo "✅ Monitoring stack optimized and hardened"
 ```
@@ -1158,7 +1107,6 @@ echo "✅ Monitoring stack optimized and hardened"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "optimization-ha" $TOKENS_USED "100%"
 ```
 
 ---
@@ -1169,29 +1117,23 @@ db_track_tokens "$workflow_id" "optimization-ha" $TOKENS_USED "100%"
 ```bash
 # Calculate token usage across all agents
 TOTAL_TOKENS=$(sum_agent_token_usage)
-db_track_tokens "$workflow_id" "completion" $TOTAL_TOKENS "workflow-complete"
 
 # Update workflow status
-db_update_workflow_status "$workflow_id" "completed"
 
 # Store lessons learned
-db_store_knowledge "observability" "best_practice" "monitoring-setup" \
   "Key learnings from monitoring setup: [summarize what worked well, challenges faced, optimization opportunities]" \
   "# Monitoring stack configuration patterns"
 
 # Get final metrics
 echo "=== Workflow Metrics ==="
-db_workflow_metrics "$workflow_id"
 
 # Send completion notification
 DURATION=$(calculate_workflow_duration)
-db_send_notification "$workflow_id" "workflow_complete" "high" \
   "Monitoring Stack Deployed Successfully" \
   "Complete observability stack deployed in ${DURATION} minutes. All quality gates passed. Token usage: ${TOTAL_TOKENS}."
 
 # Display token savings
 echo "=== Token Usage Report ==="
-db_token_savings "$workflow_id"
 
 echo "
 ✅ SETUP MONITORING WORKFLOW COMPLETE

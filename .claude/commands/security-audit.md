@@ -10,17 +10,14 @@ Autonomous, comprehensive security auditing from reconnaissance to remediation w
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "security-audit" "$(date +%s)" "{\"scope\":\"$1\"}")
 
 echo "🚀 Starting Security Audit Workflow"
 echo "Scope: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar audit patterns
-db_query_similar_workflows "security-audit" 5
 ```
 
 ---
@@ -120,21 +117,18 @@ Expected outputs:
 # Validate scope defined
 if [ ! -f "security-scope.md" ]; then
   echo "❌ Security scope not defined"
-  db_log_error "$workflow_id" "ValidationError" "Security scope missing" "security-audit" "phase-1" "0"
   exit 1
 fi
 
 # Validate asset inventory exists
 if [ ! -f "asset-inventory.md" ]; then
   echo "❌ Asset inventory not created"
-  db_log_error "$workflow_id" "ValidationError" "Asset inventory missing" "security-audit" "phase-1" "0"
   exit 1
 fi
 
 # Validate threat model exists
 if [ ! -f "threat-model.md" ]; then
   echo "❌ Threat model not created"
-  db_log_error "$workflow_id" "ValidationError" "Threat model missing" "security-audit" "phase-1" "0"
   exit 1
 fi
 
@@ -144,10 +138,8 @@ echo "✅ Security reconnaissance complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "security-reconnaissance" $TOKENS_USED "15%"
 
 # Store reconnaissance data
-db_store_knowledge "security" "reconnaissance" "$(date +%Y%m%d)" \
   "Security audit scope and threat model" \
   "$(head -n 30 security-scope.md)"
 ```
@@ -300,7 +292,6 @@ Expected outputs:
 # Validate reports directory exists
 if [ ! -d "security-reports" ]; then
   echo "❌ Security reports directory missing"
-  db_log_error "$workflow_id" "ValidationError" "Security reports not generated" "security-audit" "phase-2" "0"
   exit 1
 fi
 
@@ -308,14 +299,12 @@ fi
 SCAN_COUNT=$(ls security-reports/*.json 2>/dev/null | wc -l)
 if [ "$SCAN_COUNT" -lt 2 ]; then
   echo "❌ Insufficient scan results ($SCAN_COUNT files)"
-  db_log_error "$workflow_id" "ValidationError" "Too few scan results generated" "security-audit" "phase-2" "0"
   exit 1
 fi
 
 # Validate summary exists
 if [ ! -f "scan-summary.md" ]; then
   echo "❌ Scan summary not created"
-  db_log_error "$workflow_id" "ValidationError" "Scan summary missing" "security-audit" "phase-2" "0"
   exit 1
 fi
 
@@ -325,10 +314,8 @@ echo "✅ Automated scanning complete ($SCAN_COUNT scans)"
 **Track Progress:**
 ```bash
 TOKENS_USED=3000
-db_track_tokens "$workflow_id" "automated-scanning" $TOKENS_USED "45%"
 
 # Store scan results
-db_store_knowledge "security" "scanning" "$(date +%Y%m%d)" \
   "Automated security scan results: $SCAN_COUNT scans" \
   "$(head -n 50 scan-summary.md)"
 ```
@@ -592,7 +579,6 @@ Expected outputs:
 # Validate OWASP review report
 if [ ! -f "owasp-review-report.md" ]; then
   echo "❌ OWASP review report missing"
-  db_log_error "$workflow_id" "ValidationError" "OWASP review not completed" "security-audit" "phase-3" "0"
   exit 1
 fi
 
@@ -600,14 +586,12 @@ fi
 REPORT_LINES=$(wc -l < owasp-review-report.md)
 if [ "$REPORT_LINES" -lt 50 ]; then
   echo "❌ OWASP review report too short ($REPORT_LINES lines)"
-  db_log_error "$workflow_id" "ValidationError" "OWASP review incomplete" "security-audit" "phase-3" "0"
   exit 1
 fi
 
 # Validate findings structured data exists
 if [ ! -f "vulnerability-findings.json" ]; then
   echo "❌ Vulnerability findings data missing"
-  db_log_error "$workflow_id" "ValidationError" "Findings data not generated" "security-audit" "phase-3" "0"
   exit 1
 fi
 
@@ -617,10 +601,8 @@ echo "✅ OWASP Top 10 review complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "owasp-review" $TOKENS_USED "70%"
 
 # Store OWASP findings
-db_store_knowledge "security" "owasp-review" "$(date +%Y%m%d)" \
   "OWASP Top 10 manual review findings" \
   "$(head -n 100 owasp-review-report.md)"
 ```
@@ -705,14 +687,12 @@ Expected outputs:
 # Validate compliance report exists
 if [ ! -f "compliance-report.md" ]; then
   echo "❌ Compliance report missing"
-  db_log_error "$workflow_id" "ValidationError" "Compliance validation not completed" "security-audit" "phase-4" "0"
   exit 1
 fi
 
 # Validate gaps analysis exists
 if [ ! -f "compliance-gaps.json" ]; then
   echo "❌ Compliance gaps analysis missing"
-  db_log_error "$workflow_id" "ValidationError" "Gaps analysis not generated" "security-audit" "phase-4" "0"
   exit 1
 fi
 
@@ -722,10 +702,8 @@ echo "✅ Compliance validation complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "compliance-validation" $TOKENS_USED "85%"
 
 # Store compliance results
-db_store_knowledge "security" "compliance" "$(date +%Y%m%d)" \
   "Compliance validation results" \
   "$(head -n 50 compliance-report.md)"
 ```
@@ -882,14 +860,12 @@ Expected outputs:
 # Validate remediation plan exists
 if [ ! -f "remediation-plan.md" ]; then
   echo "❌ Remediation plan missing"
-  db_log_error "$workflow_id" "ValidationError" "Remediation plan not created" "security-audit" "phase-5" "0"
   exit 1
 fi
 
 # Validate fixes log exists
 if [ ! -f "auto-fixes-log.md" ]; then
   echo "❌ Auto-fixes log missing"
-  db_log_error "$workflow_id" "ValidationError" "Auto-fixes log not created" "security-audit" "phase-5" "0"
   exit 1
 fi
 
@@ -905,10 +881,8 @@ echo "✅ Remediation planning complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "remediation" $TOKENS_USED "95%"
 
 # Store remediation data
-db_store_knowledge "security" "remediation" "$(date +%Y%m%d)" \
   "Remediation plan and auto-fixes" \
   "$(head -n 100 remediation-plan.md)"
 ```
@@ -1031,7 +1005,6 @@ REPORT_FILE=$(ls security-audit-report-*.md 2>/dev/null | head -1)
 # Validate report exists
 if [ -z "$REPORT_FILE" ] || [ ! -f "$REPORT_FILE" ]; then
   echo "❌ Security audit report missing"
-  db_log_error "$workflow_id" "ValidationError" "Audit report not generated" "security-audit" "phase-6" "0"
   exit 1
 fi
 
@@ -1039,14 +1012,12 @@ fi
 REPORT_LINES=$(wc -l < "$REPORT_FILE")
 if [ "$REPORT_LINES" -lt 100 ]; then
   echo "❌ Audit report too short ($REPORT_LINES lines)"
-  db_log_error "$workflow_id" "ValidationError" "Report incomplete" "security-audit" "phase-6" "0"
   exit 1
 fi
 
 # Validate metrics exist
 if [ ! -f "security-metrics.json" ]; then
   echo "❌ Security metrics missing"
-  db_log_error "$workflow_id" "ValidationError" "Metrics not generated" "security-audit" "phase-6" "0"
   exit 1
 fi
 
@@ -1056,10 +1027,8 @@ echo "✅ Security audit report complete ($REPORT_LINES lines)"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "reporting" $TOKENS_USED "100%"
 
 # Store final report
-db_store_knowledge "security" "audit-report" "$(date +%Y%m%d)" \
   "Final security audit report" \
   "$(head -n 200 \"$REPORT_FILE\")"
 ```
@@ -1072,7 +1041,6 @@ db_store_knowledge "security" "audit-report" "$(date +%Y%m%d)" \
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Security audit complete with report: $REPORT_FILE"
 
 echo "
@@ -1106,8 +1074,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ## Success Criteria Checklist

@@ -24,25 +24,6 @@ You are an expert in designing auto-activated skills for the Claude Code orchest
 - **Documentation Standards**: Examples, workflows, DO/DON'T patterns
 - **Cross-Agent Applicability**: Designing skills useful across multiple agents
 
-## Intelligence Database for Self-Improvement
-
-```bash
-source .claude/lib/db-helpers.sh
-
-# Query and store skill patterns
-db_query_knowledge "skill-architect" "skill-design" 10
-db_store_knowledge "skill-architect" "skill-pattern" "auto-activation" \
-  "Skills activate based on task keywords and agent types" "$ACTIVATION_PATTERN"
-
-# Track skill creation
-CREATION_ID="skill-creation-$(date +%s)"
-db_create_workflow "$CREATION_ID" "skill-design" "Designing $NEW_SKILL_NAME" 4 "normal"
-db_track_tokens "$CREATION_ID" "design" "skill-architect" $TOKEN_COUNT "skill-design"
-db_update_workflow_status "$CREATION_ID" "completed"
-```
-
-**Self-Improvement:** Track activation frequency, optimal granularity, coverage gaps, documentation patterns, cross-agent applicability.
-
 ## Skill Creation Methodology
 
 ### Phase 1: Requirements Analysis (25%)

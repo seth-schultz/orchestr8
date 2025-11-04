@@ -21,18 +21,14 @@ This workflow provides deep architectural analysis focusing on:
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "review-architecture" "$(date +%s)" "{\"scope\":\"$1\"}")
 
 echo "🚀 Starting Architecture Review Workflow"
 echo "Scope: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar architecture patterns
-db_query_similar_code "architecture" 10
-db_query_similar_workflows "review-architecture" 5
 ```
 
 ---
@@ -60,9 +56,6 @@ Tasks:
    Use database queries to understand project structure:
    ```bash
    # Query for architectural patterns
-   db_query_code 'architecture pattern' 10
-   db_query_code 'main entry points' 10
-   db_query_code 'service configuration' 10
    ```
 
    Determine if:
@@ -120,7 +113,6 @@ Expected outputs:
 # Validate architecture map exists
 if [ ! -f "architecture-map.md" ]; then
   echo "❌ Architecture map not created"
-  db_log_error "$workflow_id" "ValidationError" "Architecture map missing" "review-architecture" "phase-1" "0"
   exit 1
 fi
 
@@ -128,7 +120,6 @@ fi
 LINE_COUNT=$(wc -l < "architecture-map.md")
 if [ "$LINE_COUNT" -lt 20 ]; then
   echo "❌ Architecture map incomplete: $LINE_COUNT lines"
-  db_log_error "$workflow_id" "ValidationError" "Architecture map too short" "review-architecture" "phase-1" "0"
   exit 1
 fi
 
@@ -138,10 +129,8 @@ echo "✅ Architecture discovery complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "architecture-discovery" $TOKENS_USED "15%"
 
 # Store architecture map
-db_store_knowledge "architecture" "system-map" "$(basename $(pwd))" \
   "Architecture map for codebase" \
   "$(head -n 50 architecture-map.md)"
 ```
@@ -200,9 +189,6 @@ Based on architecture-map.md, analyze:
 
    Use database queries:
    ```bash
-   db_query_code 'layer violation' 20
-   db_query_code 'circular dependency' 20
-   db_query_code 'tight coupling' 20
    ```
 
 4. **Generate Pattern Analysis**
@@ -244,14 +230,12 @@ Expected outputs:
 # Validate pattern analysis exists
 if [ ! -f "pattern-analysis.md" ]; then
   echo "❌ Pattern analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "Pattern analysis missing" "review-architecture" "phase-2" "0"
   exit 1
 fi
 
 # Validate contains assessment
 if ! grep -q "Assessment:" "pattern-analysis.md"; then
   echo "❌ Pattern analysis incomplete"
-  db_log_error "$workflow_id" "ValidationError" "Pattern assessment missing" "review-architecture" "phase-2" "0"
   exit 1
 fi
 
@@ -261,10 +245,8 @@ echo "✅ Pattern analysis validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "pattern-analysis" $TOKENS_USED "30%"
 
 # Store pattern analysis
-db_store_knowledge "architecture" "pattern-analysis" "$(basename $(pwd))" \
   "Architecture pattern evaluation" \
   "$(head -n 50 pattern-analysis.md)"
 ```
@@ -298,8 +280,6 @@ Search for:
 
 Query examples:
 ```bash
-db_query_code 'class with many responsibilities' 20
-db_query_code 'God class' 10
 ```
 
 Check for:
@@ -315,8 +295,6 @@ Search for:
 
 Look for if/else chains for type checking:
 ```bash
-db_query_code 'if type equals' 20
-db_query_code 'switch on type' 20
 ```
 
 **Liskov Substitution Principle (LSP):**
@@ -346,10 +324,6 @@ Search for:
 
 Query for patterns:
 ```bash
-db_query_code 'design pattern implementation' 30
-db_query_code 'factory pattern' 10
-db_query_code 'singleton' 10
-db_query_code 'repository pattern' 10
 ```
 
 ## Generate Report
@@ -400,14 +374,12 @@ Expected outputs:
 # Validate SOLID analysis exists
 if [ ! -f "solid-analysis.md" ]; then
   echo "❌ SOLID analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "SOLID analysis missing" "review-architecture" "phase-3" "0"
   exit 1
 fi
 
 # Validate contains SOLID score
 if ! grep -q "SOLID Compliance:" "solid-analysis.md"; then
   echo "❌ SOLID compliance score missing"
-  db_log_error "$workflow_id" "ValidationError" "SOLID score not provided" "review-architecture" "phase-3" "0"
   exit 1
 fi
 
@@ -417,10 +389,8 @@ echo "✅ SOLID analysis validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "solid-analysis" $TOKENS_USED "45%"
 
 # Store SOLID analysis
-db_store_knowledge "architecture" "solid-principles" "$(basename $(pwd))" \
   "SOLID principles compliance analysis" \
   "$(head -n 50 solid-analysis.md)"
 ```
@@ -457,9 +427,6 @@ Check for:
 
 Query for issues:
 ```bash
-db_query_code 'session storage' 10
-db_query_code 'in-memory state' 10
-db_query_code 'local file storage' 10
 ```
 
 **2. Vertical Scalability (Add more resources)**
@@ -479,9 +446,6 @@ Check for:
 
 Query database patterns:
 ```bash
-db_query_code 'database query' 20
-db_query_code 'index definition' 10
-db_query_code 'connection pool' 10
 ```
 
 **4. Caching Strategy**
@@ -493,9 +457,6 @@ Evaluate:
 
 Search for caching:
 ```bash
-db_query_code 'cache implementation' 20
-db_query_code 'redis' 10
-db_query_code 'memcached' 10
 ```
 
 **5. Async Processing**
@@ -570,14 +531,12 @@ Expected outputs:
 # Validate scalability analysis exists
 if [ ! -f "scalability-analysis.md" ]; then
   echo "❌ Scalability analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "Scalability analysis missing" "review-architecture" "phase-4" "0"
   exit 1
 fi
 
 # Validate contains assessments for key dimensions
 if ! grep -q "Horizontal Scalability:" "scalability-analysis.md"; then
   echo "❌ Scalability analysis incomplete"
-  db_log_error "$workflow_id" "ValidationError" "Missing scalability dimensions" "review-architecture" "phase-4" "0"
   exit 1
 fi
 
@@ -587,10 +546,8 @@ echo "✅ Scalability analysis validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "scalability-analysis" $TOKENS_USED "60%"
 
 # Store scalability analysis
-db_store_knowledge "architecture" "scalability" "$(basename $(pwd))" \
   "Scalability architecture analysis" \
   "$(head -n 50 scalability-analysis.md)"
 ```
@@ -636,10 +593,6 @@ Check for:
 
 Query for security patterns:
 ```bash
-db_query_code 'input validation' 20
-db_query_code 'authentication' 20
-db_query_code 'authorization' 20
-db_query_code 'CSRF protection' 10
 ```
 
 **3. Data Security:**
@@ -652,9 +605,6 @@ Check for:
 
 Query for encryption:
 ```bash
-db_query_code 'encryption' 20
-db_query_code 'secrets management' 10
-db_query_code 'TLS configuration' 10
 ```
 
 ## Authentication & Authorization Architecture
@@ -669,9 +619,6 @@ Evaluate:
 
 Query auth patterns:
 ```bash
-db_query_code 'JWT' 10
-db_query_code 'session management' 10
-db_query_code 'role-based access' 10
 ```
 
 ## Generate Report
@@ -741,14 +688,12 @@ Expected outputs:
 # Validate security architecture analysis exists
 if [ ! -f "security-architecture.md" ]; then
   echo "❌ Security architecture analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "Security analysis missing" "review-architecture" "phase-5" "0"
   exit 1
 fi
 
 # Validate contains defense in depth analysis
 if ! grep -q "Defense in Depth:" "security-architecture.md"; then
   echo "❌ Security analysis incomplete"
-  db_log_error "$workflow_id" "ValidationError" "Missing defense in depth analysis" "review-architecture" "phase-5" "0"
   exit 1
 fi
 
@@ -758,10 +703,8 @@ echo "✅ Security architecture analysis validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "security-architecture" $TOKENS_USED "75%"
 
 # Store security analysis
-db_store_knowledge "architecture" "security" "$(basename $(pwd))" \
   "Security architecture analysis" \
   "$(head -n 50 security-architecture.md)"
 ```
@@ -798,10 +741,6 @@ Focus on these areas:
 
 Use queries:
 ```bash
-db_query_code 'large class' 20
-db_query_code 'long method' 20
-db_query_code 'duplicate code' 20
-db_query_code 'magic number' 10
 ```
 
 Use file analysis:
@@ -821,8 +760,6 @@ find . -name '*.ts' -o -name '*.js' -o -name '*.py' -o -name '*.java' | \
 - Inappropriate intimacy
 
 ```bash
-db_query_code 'circular dependency' 10
-db_query_code 'tight coupling' 10
 ```
 
 ## Documentation Debt
@@ -909,14 +846,12 @@ Expected outputs:
 # Validate technical debt analysis exists
 if [ ! -f "technical-debt.md" ]; then
   echo "❌ Technical debt analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "Technical debt analysis missing" "review-architecture" "phase-6" "0"
   exit 1
 fi
 
 # Validate contains debt score
 if ! grep -q "Debt Score:" "technical-debt.md"; then
   echo "❌ Technical debt score missing"
-  db_log_error "$workflow_id" "ValidationError" "Debt score not provided" "review-architecture" "phase-6" "0"
   exit 1
 fi
 
@@ -926,10 +861,8 @@ echo "✅ Technical debt analysis validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "technical-debt" $TOKENS_USED "85%"
 
 # Store technical debt analysis
-db_store_knowledge "architecture" "technical-debt" "$(basename $(pwd))" \
   "Technical debt analysis and prioritization" \
   "$(head -n 50 technical-debt.md)"
 ```
@@ -965,9 +898,6 @@ Check for:
 
 Query for API patterns:
 ```bash
-db_query_code 'API endpoint' 30
-db_query_code 'REST controller' 20
-db_query_code 'HTTP method' 20
 ```
 
 **For GraphQL APIs:**
@@ -994,9 +924,6 @@ Check for:
 - [ ] API documentation (OpenAPI/Swagger)
 
 ```bash
-db_query_code 'API versioning' 10
-db_query_code 'pagination' 10
-db_query_code 'rate limiting' 10
 ```
 
 ## Integration Patterns
@@ -1010,9 +937,6 @@ Evaluate:
 - Graceful degradation
 
 ```bash
-db_query_code 'circuit breaker' 10
-db_query_code 'retry logic' 10
-db_query_code 'timeout configuration' 10
 ```
 
 ## Generate Report
@@ -1075,14 +999,12 @@ Expected outputs:
 # Validate API architecture analysis exists
 if [ ! -f "api-architecture.md" ]; then
   echo "❌ API architecture analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "API analysis missing" "review-architecture" "phase-7" "0"
   exit 1
 fi
 
 # Validate contains API assessment
 if ! grep -q "API" "api-architecture.md"; then
   echo "❌ API architecture analysis incomplete"
-  db_log_error "$workflow_id" "ValidationError" "Missing API assessment" "review-architecture" "phase-7" "0"
   exit 1
 fi
 
@@ -1092,10 +1014,8 @@ echo "✅ API architecture analysis validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "api-architecture" $TOKENS_USED "95%"
 
 # Store API architecture analysis
-db_store_knowledge "architecture" "api-design" "$(basename $(pwd))" \
   "API and integration architecture analysis" \
   "$(head -n 50 api-architecture.md)"
 ```
@@ -1310,20 +1230,17 @@ Expected outputs:
 # Validate final report exists
 if [ ! -f "architecture-review-report.md" ]; then
   echo "❌ Architecture review report not created"
-  db_log_error "$workflow_id" "ValidationError" "Final report missing" "review-architecture" "phase-8" "0"
   exit 1
 fi
 
 # Check report has minimum sections
 if ! grep -q "Architecture Scorecard" "architecture-review-report.md"; then
   echo "❌ Report missing scorecard"
-  db_log_error "$workflow_id" "ValidationError" "Report missing scorecard" "review-architecture" "phase-8" "0"
   exit 1
 fi
 
 if ! grep -q "Improvement Roadmap" "architecture-review-report.md"; then
   echo "❌ Report missing roadmap"
-  db_log_error "$workflow_id" "ValidationError" "Report missing roadmap" "review-architecture" "phase-8" "0"
   exit 1
 fi
 
@@ -1331,7 +1248,6 @@ fi
 LINE_COUNT=$(wc -l < "architecture-review-report.md")
 if [ "$LINE_COUNT" -lt 100 ]; then
   echo "❌ Report too short: $LINE_COUNT lines"
-  db_log_error "$workflow_id" "ValidationError" "Report only $LINE_COUNT lines" "review-architecture" "phase-8" "0"
   exit 1
 fi
 
@@ -1341,10 +1257,8 @@ echo "✅ Architecture review report validated ($LINE_COUNT lines)"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "final-report" $TOKENS_USED "100%"
 
 # Store final report
-db_store_knowledge "architecture" "final-report" "$(basename $(pwd))" \
   "Complete architecture review report" \
   "$(head -n 100 architecture-review-report.md)"
 ```
@@ -1357,7 +1271,6 @@ db_store_knowledge "architecture" "final-report" "$(basename $(pwd))" \
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Architecture review completed for: $1"
 
 echo "
@@ -1391,8 +1304,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ---

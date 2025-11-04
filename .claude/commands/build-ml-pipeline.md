@@ -10,17 +10,14 @@ Autonomous end-to-end ML pipeline development from raw data to production deploy
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "build-ml-pipeline" "$(date +%s)" "{\"ml_problem\":\"$1\"}")
 
 echo "🚀 Starting Build ML Pipeline Workflow"
 echo "ML Problem: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar ML pipeline patterns
-db_query_similar_workflows "build-ml-pipeline" 5
 ```
 
 ---
@@ -88,21 +85,18 @@ Expected outputs:
 # Validate requirements document
 if [ ! -f "ml-requirements.md" ]; then
   echo "❌ ML requirements not documented"
-  db_log_error "ValidationError" "Requirements missing" "build-ml-pipeline" "phase-1" "0"
   exit 1
 fi
 
 # Validate architecture document
 if [ ! -f "ml-architecture.md" ]; then
   echo "❌ Architecture not designed"
-  db_log_error "ValidationError" "Architecture design missing" "build-ml-pipeline" "phase-1" "0"
   exit 1
 fi
 
 # Validate metrics defined
 if ! grep -qE "accuracy|precision|recall|rmse|mae" ml-requirements.md; then
   echo "❌ ML metrics not defined"
-  db_log_error "ValidationError" "No ML metrics defined" "build-ml-pipeline" "phase-1" "0"
   exit 1
 fi
 
@@ -112,10 +106,8 @@ echo "✅ Requirements and architecture validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "requirements-design" $TOKENS_USED "20%"
 
 # Store architecture decisions
-db_store_knowledge "ml-pipeline" "architecture" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "ML pipeline architecture design" \
   "$(head -n 50 ml-architecture.md)"
 ```
@@ -226,21 +218,18 @@ Expected outputs:
 # Validate data ingestion exists
 if [ ! -d "data_ingestion" ]; then
   echo "❌ Data ingestion not implemented"
-  db_log_error "ValidationError" "Data ingestion missing" "build-ml-pipeline" "phase-2" "0"
   exit 1
 fi
 
 # Validate feature engineering exists
 if [ ! -d "feature_engineering" ]; then
   echo "❌ Feature engineering not implemented"
-  db_log_error "ValidationError" "Feature engineering missing" "build-ml-pipeline" "phase-2" "0"
   exit 1
 fi
 
 # Validate Airflow DAGs exist
 if [ ! -d "airflow_dags" ]; then
   echo "❌ Airflow DAGs not created"
-  db_log_error "ValidationError" "Orchestration DAGs missing" "build-ml-pipeline" "phase-2" "0"
   exit 1
 fi
 
@@ -248,7 +237,6 @@ fi
 if [ -f "tests/test_data_pipeline.py" ]; then
   if ! python -m pytest tests/test_data_pipeline.py; then
     echo "❌ Data pipeline tests failing"
-    db_log_error "TestFailure" "Data pipeline tests not passing" "build-ml-pipeline" "phase-2" "0"
     exit 1
   fi
 fi
@@ -259,10 +247,8 @@ echo "✅ Data pipeline validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "data-pipeline" $TOKENS_USED "45%"
 
 # Store data pipeline patterns
-db_store_knowledge "ml-pipeline" "data-engineering" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Data pipeline implementation patterns" \
   "$(find data_ingestion -name '*.py' -exec head -20 {} \; | head -100)"
 ```
@@ -365,21 +351,18 @@ Expected outputs:
 # Validate models directory exists
 if [ ! -d "models" ]; then
   echo "❌ Model training not implemented"
-  db_log_error "ValidationError" "Model training missing" "build-ml-pipeline" "phase-3" "0"
   exit 1
 fi
 
 # Validate MLflow tracking
 if ! grep -q "mlflow" models/*.py; then
   echo "❌ MLflow experiment tracking not implemented"
-  db_log_error "ValidationError" "MLflow tracking missing" "build-ml-pipeline" "phase-3" "0"
   exit 1
 fi
 
 # Validate model card exists
 if [ ! -d "model_cards" ]; then
   echo "❌ Model cards not created"
-  db_log_error "ValidationError" "Model documentation missing" "build-ml-pipeline" "phase-3" "0"
   exit 1
 fi
 
@@ -387,7 +370,6 @@ fi
 if [ -f "tests/test_models.py" ]; then
   if ! python -m pytest tests/test_models.py; then
     echo "❌ Model tests failing"
-    db_log_error "TestFailure" "Model tests not passing" "build-ml-pipeline" "phase-3" "0"
     exit 1
   fi
 fi
@@ -398,10 +380,8 @@ echo "✅ Model training validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=10000
-db_track_tokens "$workflow_id" "model-training" $TOKENS_USED "70%"
 
 # Store model architecture patterns
-db_store_knowledge "ml-pipeline" "model-training" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Model training and experimentation patterns" \
   "$(head -n 50 models/train_model.py 2>/dev/null || echo 'Model training completed')"
 ```
@@ -554,21 +534,18 @@ Expected outputs:
 # Validate API implementation
 if [ ! -d "deployment/api" ]; then
   echo "❌ Model API not implemented"
-  db_log_error "ValidationError" "Model serving API missing" "build-ml-pipeline" "phase-4" "0"
   exit 1
 fi
 
 # Validate Dockerfile exists
 if [ ! -f "deployment/docker/Dockerfile" ]; then
   echo "❌ Dockerfile not created"
-  db_log_error "ValidationError" "Docker containerization missing" "build-ml-pipeline" "phase-4" "0"
   exit 1
 fi
 
 # Validate Kubernetes manifests
 if [ ! -d "deployment/k8s" ]; then
   echo "❌ Kubernetes manifests not created"
-  db_log_error "ValidationError" "K8s deployment missing" "build-ml-pipeline" "phase-4" "0"
   exit 1
 fi
 
@@ -576,7 +553,6 @@ fi
 if [ -f "tests/test_api.py" ]; then
   if ! python -m pytest tests/test_api.py; then
     echo "❌ API tests failing"
-    db_log_error "TestFailure" "API tests not passing" "build-ml-pipeline" "phase-4" "0"
     exit 1
   fi
 fi
@@ -587,10 +563,8 @@ echo "✅ Deployment validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=9000
-db_track_tokens "$workflow_id" "mlops-deployment" $TOKENS_USED "85%"
 
 # Store deployment patterns
-db_store_knowledge "ml-pipeline" "deployment" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "MLOps deployment patterns" \
   "$(head -n 50 deployment/api/main.py 2>/dev/null || echo 'Deployment configured')"
 ```
@@ -708,21 +682,18 @@ Expected outputs:
 # Validate monitoring directory exists
 if [ ! -d "monitoring" ]; then
   echo "❌ Monitoring not implemented"
-  db_log_error "ValidationError" "Monitoring implementation missing" "build-ml-pipeline" "phase-5" "0"
   exit 1
 fi
 
 # Validate Prometheus metrics in API
 if ! grep -q "prometheus_client" deployment/api/*.py; then
   echo "❌ Prometheus metrics not instrumented"
-  db_log_error "ValidationError" "Metrics instrumentation missing" "build-ml-pipeline" "phase-5" "0"
   exit 1
 fi
 
 # Validate Grafana dashboards exist
 if [ ! -d "monitoring/grafana" ]; then
   echo "❌ Grafana dashboards not created"
-  db_log_error "ValidationError" "Dashboards missing" "build-ml-pipeline" "phase-5" "0"
   exit 1
 fi
 
@@ -732,10 +703,8 @@ echo "✅ Monitoring validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "monitoring-observability" $TOKENS_USED "95%"
 
 # Store monitoring patterns
-db_store_knowledge "ml-pipeline" "monitoring" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "ML monitoring and observability patterns" \
   "$(find monitoring -name '*.yaml' -o -name '*.json' | head -5 | xargs head -20)"
 ```
@@ -870,21 +839,18 @@ Expected outputs:
 # Validate continuous training pipeline
 if [ ! -d "continuous_training" ]; then
   echo "❌ Continuous training not implemented"
-  db_log_error "ValidationError" "Continuous training missing" "build-ml-pipeline" "phase-6" "0"
   exit 1
 fi
 
 # Validate retraining DAG exists
 if [ ! -f "airflow_dags/continuous_training.py" ]; then
   echo "❌ Continuous training DAG not created"
-  db_log_error "ValidationError" "Retraining DAG missing" "build-ml-pipeline" "phase-6" "0"
   exit 1
 fi
 
 # Validate rollback procedures
 if [ ! -d "rollback" ]; then
   echo "❌ Rollback procedures not documented"
-  db_log_error "ValidationError" "Rollback missing" "build-ml-pipeline" "phase-6" "0"
   exit 1
 fi
 
@@ -894,10 +860,8 @@ echo "✅ Continuous training validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "continuous-training" $TOKENS_USED "100%"
 
 # Store continuous training patterns
-db_store_knowledge "ml-pipeline" "continuous-training" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Continuous training and automated retraining patterns" \
   "$(head -n 50 continuous_training/retrain.py 2>/dev/null || echo 'Continuous training configured')"
 ```
@@ -910,7 +874,6 @@ db_store_knowledge "ml-pipeline" "continuous-training" "$(echo $1 | tr -dc '[:al
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "ML pipeline built and deployed: $1"
 
 echo "
@@ -950,8 +913,6 @@ Documentation:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ---

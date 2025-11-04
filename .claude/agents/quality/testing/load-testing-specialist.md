@@ -15,34 +15,6 @@ tools:
 
 Expert in performance testing with k6, Locust, and stress testing strategies.
 
-## Intelligence Database Integration
-
-**Setup:**
-```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
-```
-
-**Track Performance Metrics:**
-```bash
-# After load test
-P95_LATENCY=450  # ms
-ERROR_RATE=0.5   # percent
-RPS=1000
-SCORE=$((100 - P95_LATENCY / 10))  # Simple scoring
-db_log_quality_gate "$workflow_id" "load-testing" "passed" "$SCORE" 0
-
-# Log performance issues
-if [ "$P95_LATENCY" -gt 500 ]; then
-  db_log_error "performance-degradation" "P95 latency ${P95_LATENCY}ms exceeds 500ms threshold" "performance" "$endpoint" 0
-fi
-
-# Store optimization patterns
-db_store_knowledge "load-testing-specialist" "optimization" \
-  "Database bottleneck under load" \
-  "Query performance degraded at 1000 RPS. Added connection pooling and query caching." \
-  "pool_size=20, cache_ttl=300"
-```
-
 ## k6 Load Testing
 
 ```javascript

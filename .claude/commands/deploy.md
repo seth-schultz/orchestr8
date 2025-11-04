@@ -97,7 +97,6 @@ echo "✅ Code review passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "code-review" $TOKENS "5%"
 ```
 
 #### 2. Test Coverage Validation
@@ -167,7 +166,6 @@ echo "✅ All tests passing"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "test-validation" $TOKENS "10%"
 ```
 
 #### 3. Security Scan
@@ -228,7 +226,6 @@ echo "✅ Security scans passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "security-scan" $TOKENS "13%"
 ```
 
 #### 4. Build Validation
@@ -299,7 +296,6 @@ echo "✅ Build successful"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "build-validation" $TOKENS "16%"
 ```
 
 #### 5. Database Migration Validation
@@ -371,7 +367,6 @@ echo "✅ Database migrations validated"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "migration-validation" $TOKENS "18%"
 ```
 
 #### 6. Infrastructure Validation
@@ -436,7 +431,6 @@ echo "✅ Infrastructure validated"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "infrastructure-validation" $TOKENS "20%"
 ```
 
 **CHECKPOINT**: All pre-deployment validations passed ✓
@@ -515,7 +509,6 @@ echo "✅ Staging deployment successful"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "staging-deployment" $TOKENS "28%"
 ```
 
 #### 2. Staging Smoke Tests
@@ -588,7 +581,6 @@ echo "✅ Smoke tests passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "smoke-tests" $TOKENS "33%"
 ```
 
 #### 3. Staging Validation
@@ -654,7 +646,6 @@ echo "✅ Staging validation passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "staging-validation" $TOKENS "35%"
 ```
 
 **CHECKPOINT**: Staging deployment validated ✓
@@ -778,7 +769,6 @@ echo "✅ Blue-green deployment successful"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "blue-green-deployment" $TOKENS "65%"
 ```
 
 #### Strategy B: Rolling Deployment
@@ -868,7 +858,6 @@ echo "✅ Rolling deployment successful"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "rolling-deployment" $TOKENS "65%"
 ```
 
 #### Strategy C: Canary Deployment
@@ -996,7 +985,6 @@ echo "✅ Canary deployment successful"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "canary-deployment" $TOKENS "65%"
 ```
 
 #### Database Migrations (Production)
@@ -1136,7 +1124,6 @@ echo "✅ Health checks passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "health-checks" $TOKENS "70%"
 ```
 
 #### 2. Metrics Monitoring (Critical Window: First Hour)
@@ -1210,7 +1197,6 @@ echo "✅ Metrics within normal range"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "metrics-monitoring" $TOKENS "75%"
 ```
 
 #### 3. Log Analysis
@@ -1276,7 +1262,6 @@ echo "✅ Log analysis passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "log-analysis" $TOKENS "80%"
 ```
 
 #### 4. User Impact Analysis
@@ -1344,7 +1329,6 @@ echo "✅ User impact analysis passed"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "user-impact" $TOKENS "85%"
 ```
 
 **CHECKPOINT**: Post-deployment validation successful ✓
@@ -1453,7 +1437,6 @@ echo "✅ Monitoring and alerting configured"
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "monitoring-alerting" $TOKENS "95%"
 ```
 
 **CHECKPOINT**: Monitoring and alerting configured ✓
@@ -1535,7 +1518,6 @@ Expected outputs:
 
 **Track Progress:**
 ```bash
-db_track_tokens "$workflow_id" "rollback-procedures" $TOKENS "100%"
 ```
 
 ---

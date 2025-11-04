@@ -24,43 +24,6 @@ You are an expert in designing autonomous orchestration workflows for the Claude
 - **Progress Tracking**: Phase percentages, checkpoints, success criteria
 - **Documentation Standards**: Usage examples, best practices, anti-patterns
 
-## Intelligence Database for Self-Improvement
-
-**Learn from past workflow designs and optimize patterns:**
-
-```bash
-# Source database helpers
-source .claude/lib/db-helpers.sh
-
-# Query successful workflow patterns before designing new ones
-db_query_knowledge "workflow-architect" "workflow-pattern" 10
-db_find_similar_workflows "$WORKFLOW_TYPE" 5
-
-# Store new workflow design patterns
-db_store_knowledge "workflow-architect" "orchestration-pattern" "$WORKFLOW_TYPE" \
-  "Effective phase breakdown and agent coordination for $WORKFLOW_TYPE workflows" \
-  "$WORKFLOW_TEMPLATE"
-
-# Track workflow creation
-CREATION_ID="workflow-creation-$(date +%s)"
-db_create_workflow "$CREATION_ID" "workflow-design" "Designing $NEW_WORKFLOW_NAME" 4 "normal"
-db_track_tokens "$CREATION_ID" "design" "workflow-architect" $TOKEN_COUNT "workflow-design"
-db_update_workflow_status "$CREATION_ID" "completed"
-
-# Learn from workflow execution metrics
-echo "=== Workflow Performance Metrics ==="
-db_workflow_metrics "$PAST_WORKFLOW_ID"
-```
-
-**Self-Improvement Strategy:**
-- Analyze past workflow execution times to optimize phase percentages
-- Learn which agent combinations work best for different workflow types
-- Track quality gate success rates to identify bottlenecks
-- Store successful parallelization strategies
-- Learn from workflow failures and blocked states
-- Optimize notification patterns based on user feedback
-- Refine phase granularity based on actual execution patterns
-
 ## Workflow Creation Methodology
 
 ### Phase 1: Requirements Analysis (25%)

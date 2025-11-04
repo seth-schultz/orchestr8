@@ -10,12 +10,9 @@ Autonomous CI/CD pipeline creation from build to deployment with comprehensive q
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
 workflow_id="setup-cicd-$(date +%s)"
-db_create_workflow "$workflow_id" "setup-cicd" "$*" 4 "high"
-db_update_workflow_status "$workflow_id" "in_progress"
 
 echo "🚀 Starting Setup CI/CD Workflow"
 echo "Project: $1"
@@ -24,7 +21,6 @@ echo "Workflow ID: $workflow_id"
 
 # Query similar CI/CD setups
 echo "=== Learning from past CI/CD implementations ==="
-db_find_similar_workflows "setup-cicd" 5
 ```
 
 ---
@@ -108,14 +104,12 @@ Expected outputs:
 # Validate project analysis exists
 if [ ! -f "project-analysis.md" ]; then
   echo "❌ Project analysis not created"
-  db_log_error "$workflow_id" "ValidationError" "Project analysis missing" "setup-cicd" "phase-1" "0"
   exit 1
 fi
 
 # Validate strategy document exists
 if [ ! -f "cicd-strategy.md" ]; then
   echo "❌ CI/CD strategy not created"
-  db_log_error "$workflow_id" "ValidationError" "CI/CD strategy missing" "setup-cicd" "phase-1" "0"
   exit 1
 fi
 
@@ -132,10 +126,8 @@ echo "✅ Project analyzed and CI/CD strategy defined"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "analysis-strategy" $TOKENS_USED "20%"
 
 # Store project analysis
-db_store_knowledge "cicd-setup" "project-analysis" "$(basename $1)" \
   "Project analysis for CI/CD setup" \
   "$(head -n 50 project-analysis.md)"
 ```
@@ -253,7 +245,6 @@ Expected outputs:
 **Quality Gate: Build Pipeline Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "build_pipeline" "running"
 
 # Validate pipeline file exists
 if [ "$CI_PLATFORM" = "github-actions" ]; then
@@ -266,14 +257,12 @@ fi
 
 if [ ! -f "$PIPELINE_FILE" ]; then
   echo "❌ Pipeline configuration file not created"
-  db_log_quality_gate "$workflow_id" "build_pipeline" "failed" 0 1
   exit 1
 fi
 
 # Validate required jobs present
 if ! grep -qE "(build|test)" "$PIPELINE_FILE"; then
   echo "❌ Build/test jobs not configured"
-  db_log_quality_gate "$workflow_id" "build_pipeline" "failed" 0 1
   exit 1
 fi
 
@@ -283,8 +272,6 @@ if ! grep -qE "(cache|caching)" "$PIPELINE_FILE"; then
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "build_pipeline" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "normal" "Build Pipeline Created" "CI/CD build pipeline configured for $CI_PLATFORM"
 
 echo "✅ Build pipeline implemented and validated"
 ```
@@ -292,10 +279,8 @@ echo "✅ Build pipeline implemented and validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "build-pipeline" $TOKENS_USED "50%"
 
 # Store pipeline configuration
-db_store_knowledge "cicd-setup" "pipeline" "$(basename $1)" \
   "CI/CD pipeline configuration for $CI_PLATFORM" \
   "$(head -n 100 $PIPELINE_FILE)"
 ```
@@ -430,7 +415,6 @@ Expected outputs:
 **Quality Gate: Security Integration Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "security_scanning" "running"
 
 # Validate security jobs added
 SECURITY_JOBS=0
@@ -449,7 +433,6 @@ fi
 
 if [ "$SECURITY_JOBS" -lt 2 ]; then
   echo "❌ Insufficient security scanning configured (found $SECURITY_JOBS jobs, need 2+)"
-  db_log_quality_gate "$workflow_id" "security_scanning" "failed" $SECURITY_JOBS 1
   exit 1
 fi
 
@@ -459,8 +442,6 @@ if [ ! -f "security-requirements.md" ]; then
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "security_scanning" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "high" "Security Scanning Added" "$SECURITY_JOBS security jobs configured"
 
 echo "✅ Security scanning integrated ($SECURITY_JOBS jobs configured)"
 ```
@@ -468,10 +449,8 @@ echo "✅ Security scanning integrated ($SECURITY_JOBS jobs configured)"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "security-scanning" $TOKENS_USED "75%"
 
 # Store security configuration
-db_store_knowledge "cicd-setup" "security" "$(basename $1)" \
   "Security scanning configuration" \
   "Jobs configured: $SECURITY_JOBS"
 ```
@@ -645,7 +624,6 @@ Expected outputs:
 **Quality Gate: Deployment Validation**
 ```bash
 # Log quality gate
-db_log_quality_gate "$workflow_id" "deployment" "running"
 
 # Validate deployment jobs added
 DEPLOYMENT_CONFIGURED=0
@@ -670,19 +648,15 @@ fi
 # Validate documentation created
 if [ ! -f "deployment-guide.md" ]; then
   echo "❌ Deployment guide not created"
-  db_log_quality_gate "$workflow_id" "deployment" "failed" 0 1
   exit 1
 fi
 
 if [ ! -f "rollback-guide.md" ]; then
   echo "❌ Rollback guide not created"
-  db_log_quality_gate "$workflow_id" "deployment" "failed" 0 1
   exit 1
 fi
 
 # Log success
-db_log_quality_gate "$workflow_id" "deployment" "passed" 100 0
-db_send_notification "$workflow_id" "quality_gate" "high" "Deployment Configured" "Full CI/CD pipeline ready"
 
 echo "✅ Deployment and monitoring configured"
 ```
@@ -690,10 +664,8 @@ echo "✅ Deployment and monitoring configured"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "deployment-monitoring" $TOKENS_USED "100%"
 
 # Store deployment configuration
-db_store_knowledge "cicd-setup" "deployment" "$(basename $1)" \
   "Deployment configuration for CI/CD" \
   "$(head -n 50 deployment-guide.md)"
 ```
@@ -706,29 +678,23 @@ db_store_knowledge "cicd-setup" "deployment" "$(basename $1)" \
 ```bash
 # Calculate total token usage
 TOTAL_TOKENS=$(($TOKENS_USED + 4000 + 6000 + 5000))
-db_track_tokens "$workflow_id" "completion" $TOTAL_TOKENS "workflow-complete"
 
 # Update workflow status
-db_update_workflow_status "$workflow_id" "completed"
 
 # Store lessons learned
-db_store_knowledge "cicd-setup" "best_practice" "setup-cicd" \
   "CI/CD setup patterns for $CI_PLATFORM: Build with caching, comprehensive security scanning, automated deployment with health checks" \
   "Platform: $CI_PLATFORM, Security Jobs: $SECURITY_JOBS"
 
 # Get final metrics
 echo "=== Workflow Metrics ==="
-db_workflow_metrics "$workflow_id"
 
 # Send completion notification
 DURATION=$(calculate_workflow_duration 2>/dev/null || echo "N/A")
-db_send_notification "$workflow_id" "workflow_complete" "high" \
   "CI/CD Pipeline Setup Complete" \
   "CI/CD pipeline for $CI_PLATFORM configured. Token usage: ${TOTAL_TOKENS}."
 
 # Display token savings
 echo "=== Token Usage Report ==="
-db_token_savings "$workflow_id" 2>/dev/null || echo "Token savings not available"
 
 echo "
 ✅ SETUP CI/CD WORKFLOW COMPLETE

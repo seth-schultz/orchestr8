@@ -10,17 +10,14 @@ Autonomous workflow for creating new orchestration workflows with comprehensive 
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "create-workflow" "$(date +%s)" "{\"requirements\":\"$1\"}")
 
 echo "🚀 Starting Create Workflow Workflow"
 echo "Requirements: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar workflow patterns
-db_query_similar_workflows "create-workflow" 5
 ```
 
 ---
@@ -87,7 +84,6 @@ Expected outputs:
 # Validate requirements provided
 if [ -z "$1" ]; then
   echo "❌ Workflow requirements not provided"
-  db_log_error "ValidationError" "Requirements missing" "create-workflow" "phase-1" "0"
   exit 1
 fi
 
@@ -97,10 +93,8 @@ echo "✅ Requirements analyzed"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "requirements-analysis" $TOKENS_USED "20%"
 
 # Store requirements
-db_store_knowledge "workflow-creation" "requirements" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Requirements for new workflow" \
   "Type: [identified], Complexity: [assessed], Agents: [list]"
 ```
@@ -181,7 +175,6 @@ Expected outputs:
 # Validate design document exists
 if [ ! -f "workflow-design.md" ]; then
   echo "❌ Workflow design document missing"
-  db_log_error "ValidationError" "Design document not created" "create-workflow" "phase-2" "0"
   exit 1
 fi
 
@@ -194,10 +187,8 @@ echo "✅ Workflow design validated"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "workflow-design" $TOKENS_USED "45%"
 
 # Store design patterns
-db_store_knowledge "workflow-creation" "design" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Workflow design architecture" \
   "$(head -n 50 workflow-design.md)"
 ```
@@ -237,9 +228,6 @@ Based on workflow-design.md, create:
 
 3. **Intelligence Database Integration**:
    \`\`\`bash
-   source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
-   workflow_id=\$(db_start_workflow \"workflow-name\" \"\$(date +%s)\" \"{\\\"param\\\":\\\"\$1\\\"}\")
-   db_query_similar_workflows \"workflow-name\" 5
    \`\`\`
 
 4. **Each Phase Structure**:
@@ -270,7 +258,6 @@ Based on workflow-design.md, create:
    \`\`\`bash
    if [ ! -f \"required-file\" ]; then
      echo \"❌ Phase failed\"
-     db_log_error \"ErrorType\" \"Message\" \"workflow\" \"file\" \"0\"
      exit 1
    fi
    echo \"✅ Phase validated\"
@@ -279,16 +266,11 @@ Based on workflow-design.md, create:
    **Track Progress:**
    \`\`\`bash
    TOKENS_USED=3000
-   db_track_tokens \"\$workflow_id\" \"phase-name\" \$TOKENS_USED \"20%\"
-   db_store_knowledge \"category\" \"subcategory\" \"key\" \"summary\" \"code\"
    \`\`\`
    \`\`\`
 
 5. **Workflow Completion Section**:
    \`\`\`bash
-   db_complete_workflow \"\$workflow_id\" \"\$(date +%s)\" \"success\" \"Summary\"
-   db_workflow_metrics \"\$workflow_id\"
-   db_token_savings_report \"\$workflow_id\"
    \`\`\`
 
 6. **Success Criteria Checklist** (from design, 8-12 items)
@@ -314,28 +296,23 @@ WORKFLOW_FILE="/Users/seth/Projects/orchestr8/.claude/commands/${WORKFLOW_NAME}.
 # Validate workflow file exists
 if [ ! -f "$WORKFLOW_FILE" ]; then
   echo "❌ Workflow file not created at $WORKFLOW_FILE"
-  db_log_error "ValidationError" "Workflow file missing" "create-workflow" "phase-3" "0"
   exit 1
 fi
 
 # Validate frontmatter
 if ! grep -q "^---$" "$WORKFLOW_FILE"; then
   echo "❌ Invalid frontmatter structure"
-  db_log_error "ValidationError" "Missing YAML frontmatter" "create-workflow" "phase-3" "0"
   exit 1
 fi
 
 # Validate database integration
-if ! grep -q "db_start_workflow" "$WORKFLOW_FILE"; then
   echo "❌ Missing database integration"
-  db_log_error "ValidationError" "No database integration" "create-workflow" "phase-3" "0"
   exit 1
 fi
 
 # Validate Task tool patterns
 if ! grep -q "⚡ EXECUTE TASK TOOL" "$WORKFLOW_FILE"; then
   echo "❌ Missing explicit Task tool patterns"
-  db_log_error "ValidationError" "No explicit Task patterns" "create-workflow" "phase-3" "0"
   exit 1
 fi
 
@@ -343,7 +320,6 @@ fi
 LINE_COUNT=$(wc -l < "$WORKFLOW_FILE")
 if [ "$LINE_COUNT" -lt 100 ]; then
   echo "❌ Workflow file too short: $LINE_COUNT lines"
-  db_log_error "ValidationError" "Workflow only $LINE_COUNT lines" "create-workflow" "phase-3" "0"
   exit 1
 fi
 
@@ -353,10 +329,8 @@ echo "✅ Workflow implementation validated ($LINE_COUNT lines)"
 **Track Progress:**
 ```bash
 TOKENS_USED=8000
-db_track_tokens "$workflow_id" "implementation" $TOKENS_USED "75%"
 
 # Store implementation
-db_store_knowledge "workflow-creation" "implementation" "$(basename \"$WORKFLOW_FILE\" .md)" \
   "Implementation of workflow with $(wc -l < \"$WORKFLOW_FILE\") lines" \
   "$(head -n 100 \"$WORKFLOW_FILE\")"
 ```
@@ -438,14 +412,12 @@ NEW_VERSION=$(cat /Users/seth/Projects/orchestr8/.claude/VERSION)
 # Validate plugin.json updated
 if ! grep -q "\"workflows\": [0-9]" /Users/seth/Projects/orchestr8/.claude/plugin.json; then
   echo "❌ plugin.json not updated"
-  db_log_error "ValidationError" "plugin.json workflow count not updated" "create-workflow" "phase-4" "0"
   exit 1
 fi
 
 # Validate VERSION file
 if [ -z "$NEW_VERSION" ]; then
   echo "❌ VERSION file not updated"
-  db_log_error "ValidationError" "VERSION file empty or missing" "create-workflow" "phase-4" "0"
   exit 1
 fi
 
@@ -453,7 +425,6 @@ fi
 WORKFLOW_BASENAME=$(basename "$WORKFLOW_FILE" .md)
 if ! grep -q "$WORKFLOW_BASENAME" /Users/seth/Projects/orchestr8/.claude/CHANGELOG.md; then
   echo "❌ CHANGELOG not updated"
-  db_log_error "ValidationError" "Workflow not added to CHANGELOG" "create-workflow" "phase-4" "0"
   exit 1
 fi
 
@@ -463,10 +434,8 @@ echo "✅ Integration validated (version: $NEW_VERSION)"
 **Track Progress:**
 ```bash
 TOKENS_USED=3000
-db_track_tokens "$workflow_id" "integration" $TOKENS_USED "90%"
 
 # Store integration info
-db_store_knowledge "workflow-creation" "integration" "$(basename \"$WORKFLOW_FILE\" .md)" \
   "Integration at version $NEW_VERSION" \
   "Version: $NEW_VERSION, Workflow: /$WORKFLOW_BASENAME"
 ```
@@ -504,10 +473,6 @@ Testing requirements:
    - Verify exit codes
 
 3. **Database Integration Tests**
-   - Test db_start_workflow() initializes correctly
-   - Verify db_track_tokens() tracking
-   - Test db_store_knowledge() storage
-   - Check db_complete_workflow() finalization
 
 4. **Documentation**
    - Create usage guide: workflow-usage-$WORKFLOW_BASENAME.md
@@ -530,14 +495,12 @@ Expected outputs:
 # Validate test report exists
 if [ ! -f "test-report-$WORKFLOW_BASENAME.md" ]; then
   echo "❌ Test report missing"
-  db_log_error "ValidationError" "Test report not created" "create-workflow" "phase-5" "0"
   exit 1
 fi
 
 # Validate usage documentation
 if [ ! -f "workflow-usage-$WORKFLOW_BASENAME.md" ]; then
   echo "❌ Usage documentation missing"
-  db_log_error "ValidationError" "Usage guide not created" "create-workflow" "phase-5" "0"
   exit 1
 fi
 
@@ -547,10 +510,8 @@ echo "✅ Testing and documentation complete"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "testing-documentation" $TOKENS_USED "100%"
 
 # Store test results
-db_store_knowledge "workflow-creation" "testing" "$(basename \"$WORKFLOW_FILE\" .md)" \
   "Test results for workflow" \
   "$(head -n 50 \"test-report-$WORKFLOW_BASENAME.md\")"
 ```
@@ -563,7 +524,6 @@ db_store_knowledge "workflow-creation" "testing" "$(basename \"$WORKFLOW_FILE\" 
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Workflow created: /$WORKFLOW_BASENAME at version $NEW_VERSION"
 
 echo "
@@ -593,8 +553,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ## Success Criteria Checklist

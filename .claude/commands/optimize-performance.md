@@ -43,17 +43,14 @@ Autonomous, comprehensive performance optimization from profiling to production 
 ## Intelligence Database Integration
 
 ```bash
-source /Users/seth/Projects/orchestr8/.claude/lib/db-helpers.sh
 
 # Initialize workflow
-workflow_id=$(db_start_workflow "optimize-performance" "$(date +%s)" "{\"target\":\"$1\"}")
 
 echo "🚀 Starting Performance Optimization Workflow"
 echo "Target: $1"
 echo "Workflow ID: $workflow_id"
 
 # Query similar optimization patterns
-db_query_similar_workflows "optimize-performance" 5
 ```
 
 ## Performance Targets
@@ -182,14 +179,12 @@ Expected outputs:
 # Validate scope document exists
 if [ ! -f "SCOPE.md" ]; then
   echo "❌ Performance scope not defined"
-  db_log_error "$workflow_id" "ValidationError" "SCOPE.md missing" "optimize-performance" "phase-1" "0"
   exit 1
 fi
 
 # Validate at least one baseline captured
 if [ ! -f "frontend-baseline.json" ] && [ ! -f "backend-baseline.json" ] && [ ! -f "database-baseline.json" ]; then
   echo "❌ No baseline metrics captured"
-  db_log_error "$workflow_id" "ValidationError" "No baseline metrics files found" "optimize-performance" "phase-1" "0"
   exit 1
 fi
 
@@ -199,10 +194,8 @@ echo "✅ Baseline established, bottlenecks identified"
 **Track Progress:**
 ```bash
 TOKENS_USED=6000
-db_track_tokens "$workflow_id" "profiling" $TOKENS_USED "20%"
 
 # Store baseline metrics
-db_store_knowledge "performance-optimization" "baseline" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Baseline metrics captured" \
   "$(cat frontend-baseline.json backend-baseline.json database-baseline.json 2>/dev/null | head -c 500)"
 ```
@@ -289,13 +282,11 @@ Expected outputs:
 # Validate strategy documents exist
 if [ ! -f "OPTIMIZATION-STRATEGY.md" ]; then
   echo "❌ Optimization strategy not created"
-  db_log_error "$workflow_id" "ValidationError" "OPTIMIZATION-STRATEGY.md missing" "optimize-performance" "phase-2" "0"
   exit 1
 fi
 
 if [ ! -f "PERFORMANCE-BUDGET.md" ]; then
   echo "❌ Performance budget not defined"
-  db_log_error "$workflow_id" "ValidationError" "PERFORMANCE-BUDGET.md missing" "optimize-performance" "phase-2" "0"
   exit 1
 fi
 
@@ -305,10 +296,8 @@ echo "✅ Strategy approved, priorities clear"
 **Track Progress:**
 ```bash
 TOKENS_USED=4000
-db_track_tokens "$workflow_id" "strategy" $TOKENS_USED "35%"
 
 # Store strategy
-db_store_knowledge "performance-optimization" "strategy" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Optimization strategy with priorities" \
   "$(head -n 50 OPTIMIZATION-STRATEGY.md)"
 ```
@@ -394,7 +383,6 @@ if [ -f "package.json" ]; then
   npm run build 2>&1 | tee build.log
   if [ $? -ne 0 ]; then
     echo "❌ Frontend build failed"
-    db_log_error "$workflow_id" "BuildError" "Frontend build failed" "optimize-performance" "phase-3" "0"
     exit 1
   fi
 fi
@@ -405,10 +393,8 @@ echo "✅ Frontend optimized"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "frontend-optimization" $TOKENS_USED "55%"
 
 # Store frontend changes
-db_store_knowledge "performance-optimization" "frontend" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Frontend optimizations implemented" \
   "$(head -n 50 FRONTEND-OPTIMIZATIONS.md 2>/dev/null || echo 'No frontend changes')"
 ```
@@ -508,7 +494,6 @@ if [ -f "package.json" ] && grep -q "\"test\"" package.json; then
   npm test 2>&1 | tee test.log
   if [ $? -ne 0 ]; then
     echo "❌ Backend tests failed"
-    db_log_error "$workflow_id" "TestError" "Backend tests failed" "optimize-performance" "phase-4" "0"
     exit 1
   fi
 fi
@@ -519,10 +504,8 @@ echo "✅ Backend optimized"
 **Track Progress:**
 ```bash
 TOKENS_USED=7000
-db_track_tokens "$workflow_id" "backend-optimization" $TOKENS_USED "75%"
 
 # Store backend changes
-db_store_knowledge "performance-optimization" "backend" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Backend optimizations implemented" \
   "$(head -n 50 BACKEND-OPTIMIZATIONS.md 2>/dev/null || echo 'No backend changes')"
 ```
@@ -629,10 +612,8 @@ echo "✅ Database optimized"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "database-optimization" $TOKENS_USED "90%"
 
 # Store database changes
-db_store_knowledge "performance-optimization" "database" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Database optimizations implemented" \
   "$(head -n 50 DATABASE-OPTIMIZATIONS.md 2>/dev/null || echo 'No database changes')"
 ```
@@ -741,14 +722,12 @@ Expected outputs:
 # Validate after metrics captured
 if [ ! -f "PERFORMANCE-REPORT.md" ]; then
   echo "❌ Performance report not created"
-  db_log_error "$workflow_id" "ValidationError" "PERFORMANCE-REPORT.md missing" "optimize-performance" "phase-6" "0"
   exit 1
 fi
 
 # Validate at least one after metric exists
 if [ ! -f "frontend-after.json" ] && [ ! -f "backend-after.json" ] && [ ! -f "database-after.json" ]; then
   echo "❌ No after metrics captured"
-  db_log_error "$workflow_id" "ValidationError" "No after metrics files found" "optimize-performance" "phase-6" "0"
   exit 1
 fi
 
@@ -760,10 +739,8 @@ echo "✅ Improvements validated, targets met"
 **Track Progress:**
 ```bash
 TOKENS_USED=5000
-db_track_tokens "$workflow_id" "benchmarking" $TOKENS_USED "100%"
 
 # Store final report
-db_store_knowledge "performance-optimization" "results" "$(echo $1 | tr -dc '[:alnum:]' | head -c 20)" \
   "Performance optimization completed" \
   "$(head -n 100 PERFORMANCE-REPORT.md)"
 ```
@@ -776,7 +753,6 @@ db_store_knowledge "performance-optimization" "results" "$(echo $1 | tr -dc '[:a
 # Complete workflow tracking
 WORKFLOW_END=$(date +%s)
 
-db_complete_workflow "$workflow_id" "$WORKFLOW_END" "success" \
   "Performance optimization completed for $1"
 
 echo "
@@ -816,8 +792,6 @@ Next Steps:
 "
 
 # Display metrics
-db_workflow_metrics "$workflow_id"
-db_token_savings_report "$workflow_id"
 ```
 
 ## Success Criteria
