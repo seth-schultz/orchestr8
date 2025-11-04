@@ -1,0 +1,72 @@
+# Agent Registry
+# Maps logical roles to specialized agents with fallback options
+# Version: 2.4.0
+
+roles:
+  # Architecture & Design
+  system_architect:
+    primary: architect
+    fallbacks: [fullstack-developer, project-orchestrator]
+    capabilities: [architecture, system-design, scalability]
+    model: claude-opus-4
+    use_when: "designing system architecture, making architectural decisions"
+    
+  # Frontend Development
+  frontend_developer:
+    primary: frontend-developer
+    fallbacks: [fullstack-developer, react-specialist]
+    capabilities: [react, vue, angular, ui-components]
+    model: claude-sonnet-4-5
+    use_when: "building UI components, client-side logic"
+    
+  react_specialist:
+    primary: react-specialist
+    fallbacks: [frontend-developer, nextjs-specialist]
+    capabilities: [react, hooks, context, performance]
+    model: claude-sonnet-4-5
+    use_when: "complex React implementations, performance optimization"
+    
+  # Backend Development  
+  backend_developer:
+    primary: backend-developer
+    fallbacks: [fullstack-developer, python-developer]
+    capabilities: [apis, business-logic, databases]
+    model: claude-sonnet-4-5
+    use_when: "building APIs, business logic, backend services"
+    
+  # Quality Assurance
+  code_reviewer:
+    primary: code-reviewer
+    fallbacks: [architect, fullstack-developer]
+    capabilities: [code-review, best-practices, patterns]
+    model: claude-sonnet-4-5
+    use_when: "code review, quality validation"
+    
+  test_engineer:
+    primary: test-engineer
+    fallbacks: [fullstack-developer, qa-engineer]
+    capabilities: [testing, test-automation, coverage]
+    model: claude-sonnet-4-5
+    use_when: "writing tests, test automation"
+    
+  security_auditor:
+    primary: security-auditor
+    fallbacks: [fullstack-developer, compliance-officer]
+    capabilities: [security, vulnerabilities, compliance]
+    model: claude-sonnet-4-5
+    use_when: "security audits, vulnerability scanning"
+    
+  # Orchestration
+  project_orchestrator:
+    primary: project-orchestrator
+    fallbacks: [architect, feature-orchestrator]
+    capabilities: [orchestration, coordination, planning]
+    model: claude-opus-4
+    use_when: "end-to-end project coordination"
+    
+  feature_orchestrator:
+    primary: feature-orchestrator
+    fallbacks: [project-orchestrator, fullstack-developer]
+    capabilities: [feature-delivery, coordination, integration]
+    model: claude-opus-4
+    use_when: "complete feature development"
