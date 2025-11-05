@@ -74,9 +74,9 @@ jobs:
         with:
           filters: |
             agents:
-              - 'plugins/*/agents/**/*.md'
+              - 'agent-definitions/**/*.md'
             workflows:
-              - 'plugins/*/commands/**/*.md'
+              - 'commands/**/*.md'
             docs:
               - 'README.md'
               - 'ARCHITECTURE.md'
@@ -108,7 +108,7 @@ jobs:
         id: changed-files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | \
-            grep 'plugins/.*/agents/.*\.md$' > changed-agents.txt || true
+            grep 'agent-definitions/.*\.md$' > changed-agents.txt || true
 
           if [ -s changed-agents.txt ]; then
             echo "Changed agents:"
@@ -198,7 +198,7 @@ jobs:
       - name: Get changed workflow files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | \
-            grep 'plugins/.*/commands/.*\.md$' > changed-workflows.txt || true
+            grep 'commands/.*\.md$' > changed-workflows.txt || true
 
           if [ -s changed-workflows.txt ]; then
             echo "Changed workflows:"

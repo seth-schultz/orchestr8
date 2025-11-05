@@ -133,30 +133,27 @@ jobs:
         run: |
           echo "Running comprehensive validation..."
 
-          # Validate new plugin structure
-          if [ ! -d "plugins" ]; then
-            echo "ERROR: Missing plugins directory"
+          # Validate MCP plugin structure
+          if [ ! -d "agent-definitions" ]; then
+            echo "ERROR: Missing agent-definitions directory"
             exit 1
           fi
 
-          # Count plugins
-          PLUGIN_COUNT=$(find plugins -mindepth 1 -maxdepth 1 -type d | wc -l)
-          echo "Plugins: $PLUGIN_COUNT"
+          if [ ! -d "commands" ]; then
+            echo "ERROR: Missing commands directory"
+            exit 1
+          fi
 
-          # Count components across all plugins
-          AGENT_COUNT=$(find plugins -name "*.md" -path "*/agents/*" | wc -l)
-          WORKFLOW_COUNT=$(find plugins -name "*.md" -path "*/commands/*" | wc -l)
+          # Count components in root-level structure
+          AGENT_COUNT=$(find agent-definitions -name "*.md" | wc -l)
+          WORKFLOW_COUNT=$(find commands -name "*.md" | wc -l)
 
           echo "Agents: $AGENT_COUNT"
           echo "Workflows: $WORKFLOW_COUNT"
 
           # Validate expected counts
-          if [ "$PLUGIN_COUNT" -ne 18 ]; then
-            echo "WARNING: Expected 18 plugins, found $PLUGIN_COUNT"
-          fi
-
-          if [ "$AGENT_COUNT" -ne 75 ]; then
-            echo "WARNING: Expected 75 agents, found $AGENT_COUNT"
+          if [ "$AGENT_COUNT" -ne 74 ]; then
+            echo "WARNING: Expected 74 agents, found $AGENT_COUNT"
           fi
 
           if [ "$WORKFLOW_COUNT" -ne 20 ]; then
@@ -164,7 +161,7 @@ jobs:
           fi
 
           echo "Validating agent file format..."
-          find plugins/*/agents -name "*.md" 2>/dev/null | while read -r file; do
+          find agent-definitions -name "*.md" 2>/dev/null | while read -r file; do
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "ERROR: Agent $file missing YAML frontmatter"
               exit 1

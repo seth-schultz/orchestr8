@@ -32,7 +32,7 @@ jobs:
       - name: Validate agent and workflow metadata
         run: |
           echo "Validating agent frontmatter format..."
-          find agents -name "*.md" 2>/dev/null | while read -r file; do
+          find agent-definitions -name "*.md" 2>/dev/null | while read -r file; do
             # Check for YAML frontmatter delimiters
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "ERROR: $file missing YAML frontmatter"
@@ -68,7 +68,7 @@ jobs:
           # Required directories for JIT architecture
           required_dirs=(
             ".claude"
-            "agents"
+            "agent-definitions"
             "commands"
             ".claude-plugin"
           )
@@ -81,11 +81,11 @@ jobs:
           done
 
           # Check that agents and commands exist
-          agent_count=$(find agents -name "*.md" | wc -l | tr -d ' ')
+          agent_count=$(find agent-definitions -name "*.md" | wc -l | tr -d ' ')
           command_count=$(find commands -name "*.md" | wc -l | tr -d ' ')
 
           if [ "$agent_count" -eq 0 ]; then
-            echo "ERROR: No agents found in agents/ directory"
+            echo "ERROR: No agents found in agent-definitions/ directory"
             exit 1
           fi
 
@@ -248,8 +248,8 @@ jobs:
         run: |
           echo "Validating agent and workflow counts..."
 
-          # Count actual agents in root agents directory
-          AGENT_COUNT=$(find agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          # Count actual agents in root agent-definitions directory
+          AGENT_COUNT=$(find agent-definitions -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
           # Count actual workflows in root commands directory
           WORKFLOW_COUNT=$(find commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
