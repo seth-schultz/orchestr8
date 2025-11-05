@@ -5,6 +5,20 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.7.1] - 2025-11-05
+
+### 🔧 Fix: Marketplace Plugin Configuration
+
+**Bug Fix:**
+- Fixed marketplace.json attempting to load 18 non-existent sub-plugins
+- Marketplace now references single MCP server plugin (`orchestr8`) as sole entry point
+- Agents and workflows are discovered and loaded dynamically via MCP JIT loading
+
+**Result:**
+- Eliminated 18 plugin loading errors
+- Plugin system now correctly uses MCP for all agent discovery
+- Zero port conflicts maintained (stdio-based MCP server)
+
 ## [5.7.0] - 2025-11-05
 
 ### 🚀 Major: MCP-Centric Just-In-Time Agent Loading Architecture
