@@ -5,6 +5,31 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2025-11-04
+
+### 🎯 Model Strategy Optimization
+
+**Default Model Changes:**
+- **Haiku:** Default for 70 agents (94.6%) - all tactical execution and development tasks
+- **Sonnet:** Now used for 4 strategic orchestration agents only
+  - project-orchestrator
+  - feature-orchestrator
+  - architect
+  - security-auditor
+- **Opus:** Reserved for future ultra-complex reasoning tasks
+
+**Benefits:**
+- 75% cost reduction ($270/1M → $68/1M tokens)
+- Improved agent quality through faster feedback loops
+- Optimized reasoning allocation for strategic vs tactical tasks
+- Haiku's excellent performance on well-defined tasks
+
+**Updated Documentation:**
+- `.claude/agent-registry.yml` - role-based model mappings
+- `.claude/docs/MODEL_SELECTION.md` - optimization framework
+- `.claude/docs/MODEL_ASSIGNMENTS.md` - complete distribution analysis
+- System instructions updated across CLAUDE.md files
+
 ## [4.0.0] - 2025-11-04
 
 ### 🔄 BREAKING CHANGES - Claude Code Compatibility

@@ -6,116 +6,116 @@
   },
   "metadata": {
     "description": "Enterprise-grade hierarchical multi-agent orchestration system with 74 specialized agents across 18 modular plugins, 20 autonomous workflows, and opt-in plugin loading",
-    "version": "4.0.0"
+    "version": "4.1.0"
   },
   "plugins": [
     {
       "name": "database-specialists",
       "source": "./plugins/database-specialists",
       "description": "Database specialists for PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Cassandra, DynamoDB, Neo4j, and Redis (9 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "language-developers",
       "source": "./plugins/language-developers",
       "description": "Expert developers for Python, TypeScript, Java, Go, Rust, C#, Swift, Kotlin, Ruby, PHP, and C++ (11 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "frontend-frameworks",
       "source": "./plugins/frontend-frameworks",
       "description": "Frontend framework specialists for React, Next.js, Vue, and Angular (4 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "mobile-development",
       "source": "./plugins/mobile-development",
       "description": "Mobile development specialists for SwiftUI (iOS/macOS) and Jetpack Compose (Android) (2 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "game-development",
       "source": "./plugins/game-development",
       "description": "Game engine specialists for Unity, Unreal Engine, and Godot (3 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "ai-ml-engineering",
       "source": "./plugins/ai-ml-engineering",
       "description": "AI/ML specialists for LangChain, LlamaIndex, ML engineering, MLOps, and data engineering (5 agents + ML pipeline workflow)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "blockchain-web3",
       "source": "./plugins/blockchain-web3",
       "description": "Blockchain and Web3 specialists for Solidity smart contracts and dApp development (2 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "api-design",
       "source": "./plugins/api-design",
       "description": "API design specialists for GraphQL, gRPC, and OpenAPI/REST (3 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "quality-assurance",
       "source": "./plugins/quality-assurance",
       "description": "Quality assurance specialists for code review, testing, debugging, security audits, contract testing, mutation testing, load testing, and E2E testing with Playwright (8 agents + 5 QA workflows)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "devops-cloud",
       "source": "./plugins/devops-cloud",
       "description": "DevOps and cloud infrastructure specialists for AWS, Azure, GCP, and Terraform (4 agents + 3 DevOps workflows including CI/CD, deployment, and monitoring)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "infrastructure-messaging",
       "source": "./plugins/infrastructure-messaging",
       "description": "Message queue specialists for Apache Kafka and RabbitMQ (2 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "infrastructure-search",
       "source": "./plugins/infrastructure-search",
       "description": "Search infrastructure specialists for Elasticsearch and Algolia (2 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "infrastructure-caching",
       "source": "./plugins/infrastructure-caching",
       "description": "Caching specialists for Redis and CDN strategies (2 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "infrastructure-monitoring",
       "source": "./plugins/infrastructure-monitoring",
       "description": "Monitoring and observability specialists for Prometheus/Grafana, ELK Stack, OpenTelemetry, and SRE practices (4 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "compliance",
       "source": "./plugins/compliance",
       "description": "Enterprise compliance specialists for FedRAMP, ISO 27001, SOC 2, PCI DSS, and GDPR (5 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "orchestration",
       "source": "./plugins/orchestration",
       "description": "High-level orchestrators for project and feature coordination (2 opus-powered agents + 7 orchestration workflows including new projects, features, refactoring, bug fixes, legacy modernization, architecture review, and cost optimization)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "meta-development",
       "source": "./plugins/meta-development",
       "description": "Meta-system agents for creating new agents, workflows, and skills (4 agents + 3 meta workflows)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     },
     {
       "name": "development-core",
       "source": "./plugins/development-core",
       "description": "Core development agents including system architect and full-stack developer (2 agents)",
-      "version": "4.0.0"
+      "version": "4.1.0"
     }
   ]
 }
