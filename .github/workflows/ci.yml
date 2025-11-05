@@ -32,7 +32,7 @@ jobs:
       - name: Validate agent and workflow metadata
         run: |
           echo "Validating agent frontmatter format..."
-          find plugins/*/agents -name "*.md" 2>/dev/null | while read -r file; do
+          find agents -name "*.md" 2>/dev/null | while read -r file; do
             # Check for YAML frontmatter delimiters
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "ERROR: $file missing YAML frontmatter"
@@ -58,17 +58,18 @@ jobs:
           echo "✓ All agents have valid YAML frontmatter"
 
           # Workflow files are plain markdown, no specific format required
-          workflow_count=$(find plugins/*/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          workflow_count=$(find commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
           echo "✓ Found $workflow_count workflow files"
 
       - name: Validate directory structure
         run: |
           echo "Validating plugin directory structure..."
 
-          # Required directories
+          # Required directories for JIT architecture
           required_dirs=(
             ".claude"
-            "plugins"
+            "agents"
+            "commands"
             ".claude-plugin"
           )
 
@@ -79,14 +80,16 @@ jobs:
             fi
           done
 
-          # Check that at least one plugin exists with agents/commands structure
-          plugin_count=$(find plugins -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
-          if [ "$plugin_count" -eq 0 ]; then
-            echo "ERROR: No plugins found in plugins/ directory"
+          # Check that agents and commands exist
+          agent_count=$(find agents -name "*.md" | wc -l | tr -d ' ')
+          command_count=$(find commands -name "*.md" | wc -l | tr -d ' ')
+
+          if [ "$agent_count" -eq 0 ]; then
+            echo "ERROR: No agents found in agents/ directory"
             exit 1
           fi
 
-          echo "✓ Directory structure is valid ($plugin_count plugins found)"
+          echo "✓ Directory structure is valid ($agent_count agents, $command_count workflows found)"
 
       - name: Validate required files
         run: |
@@ -110,24 +113,19 @@ jobs:
             fi
           done
 
-          # Check that each plugin has required structure
-          echo "Validating plugin structure..."
-          for plugin_dir in plugins/*/; do
-            plugin_name=$(basename "$plugin_dir")
-            plugin_json="$plugin_dir/.claude-plugin/plugin.json"
+          # Validate main MCP server plugin.json exists
+          echo "Validating MCP server plugin structure..."
+          if [ ! -f ".claude/plugin.json" ]; then
+            echo "ERROR: MCP server plugin.json missing"
+            exit 1
+          fi
 
-            if [ ! -f "$plugin_json" ]; then
-              echo "ERROR: Plugin $plugin_name missing .claude-plugin/plugin.json"
-              exit 1
-            fi
-
-            # Validate plugin.json has required fields
-            if ! jq -e '.name' "$plugin_json" > /dev/null 2>&1; then
-              echo "ERROR: Plugin $plugin_name plugin.json missing 'name' field"
-              exit 1
-            fi
-          done
-          echo "✓ All plugins have valid structure"
+          # Validate plugin.json has required fields
+          if ! jq -e '.name' ".claude/plugin.json" > /dev/null 2>&1; then
+            echo "ERROR: plugin.json missing 'name' field"
+            exit 1
+          fi
+          echo "✓ MCP server plugin structure valid"
 
           echo "✓ All required files present"
 
@@ -250,25 +248,20 @@ jobs:
         run: |
           echo "Validating agent and workflow counts..."
 
-          # Count actual agents across all plugins
-          AGENT_COUNT=$(find plugins/*/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          # Count actual agents in root agents directory
+          AGENT_COUNT=$(find agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
-          # Count actual workflows across all plugins
-          WORKFLOW_COUNT=$(find plugins/*/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
-
-          # Count actual plugins
-          PLUGIN_COUNT=$(find plugins -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
+          # Count actual workflows in root commands directory
+          WORKFLOW_COUNT=$(find commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
           echo "Detected agents: $AGENT_COUNT"
           echo "Detected workflows: $WORKFLOW_COUNT"
-          echo "Detected plugins: $PLUGIN_COUNT"
 
           # Get counts from plugin.json
           PLUGIN_AGENT_COUNT=$(jq -r '.features.agents' .claude/plugin.json)
           PLUGIN_WORKFLOW_COUNT=$(jq -r '.features.workflows' .claude/plugin.json)
-          PLUGIN_PLUGIN_COUNT=$(jq -r '.features.plugins' .claude/plugin.json)
 
-          echo "plugin.json reports: $PLUGIN_AGENT_COUNT agents, $PLUGIN_WORKFLOW_COUNT workflows, $PLUGIN_PLUGIN_COUNT plugins"
+          echo "plugin.json reports: $PLUGIN_AGENT_COUNT agents, $PLUGIN_WORKFLOW_COUNT workflows"
 
           # Validate counts match
           if [ "$AGENT_COUNT" != "$PLUGIN_AGENT_COUNT" ]; then
@@ -277,10 +270,6 @@ jobs:
 
           if [ "$WORKFLOW_COUNT" != "$PLUGIN_WORKFLOW_COUNT" ]; then
             echo "WARNING: Workflow count mismatch (found: $WORKFLOW_COUNT, plugin.json: $PLUGIN_WORKFLOW_COUNT)"
-          fi
-
-          if [ "$PLUGIN_COUNT" != "$PLUGIN_PLUGIN_COUNT" ]; then
-            echo "WARNING: Plugin count mismatch (found: $PLUGIN_COUNT, plugin.json: $PLUGIN_PLUGIN_COUNT)"
           fi
 
           echo "✓ Component counts validated"
