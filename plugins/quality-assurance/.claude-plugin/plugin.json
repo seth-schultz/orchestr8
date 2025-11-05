@@ -1,6 +1,6 @@
 {
   "name": "quality-assurance",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Quality assurance specialists for code review, testing, debugging, security audits, contract testing, mutation testing, load testing, and E2E testing with Playwright (8 agents + 5 QA workflows)",
   "author": {
     "name": "Seth Schultz",

@@ -1,6 +1,6 @@
 {
   "name": "devops-cloud",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "DevOps and cloud infrastructure specialists for AWS, Azure, GCP, and Terraform (4 agents + 3 DevOps workflows including CI/CD, deployment, and monitoring)",
   "author": {
     "name": "Seth Schultz",

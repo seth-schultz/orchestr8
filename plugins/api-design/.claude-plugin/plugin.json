@@ -1,6 +1,6 @@
 {
   "name": "api-design",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "API design specialists for GraphQL, gRPC, and OpenAPI/REST (3 agents)",
   "author": {
     "name": "Seth Schultz",

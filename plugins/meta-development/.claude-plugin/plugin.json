@@ -1,6 +1,6 @@
 {
   "name": "meta-development",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Meta-system agents for creating new agents, workflows, and skills (4 agents + 3 meta workflows)",
   "author": {
     "name": "Seth Schultz",

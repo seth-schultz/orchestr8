@@ -1,6 +1,6 @@
 {
   "name": "orchestration",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "High-level orchestrators for project and feature coordination (2 opus-powered agents + 7 orchestration workflows including new projects, features, refactoring, bug fixes, legacy modernization, architecture review, and cost optimization)",
   "author": {
     "name": "Seth Schultz",
