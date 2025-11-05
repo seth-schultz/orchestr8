@@ -5,6 +5,16 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.6.1] - 2025-11-05
+
+### 🔧 Fixes: Release Workflow Bash Compatibility
+
+**Bug Fixes:**
+- Fixed macOS bash compatibility issue in archive creation
+  - Replaced bash parameter expansion `${var,,}` with `tr` command
+  - Now works on macOS runners with older bash versions
+  - All platform builds complete successfully
+
 ## [5.6.0] - 2025-11-05
 
 ### 🚀 Release: Complete Automated Release Workflow

@@ -1,6 +1,6 @@
 {
   "name": "orchestr8",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "description": "Enterprise-grade hierarchical multi-agent orchestration with ultra-fast Rust MCP stdio server (74 agents, <1ms queries, zero port conflicts, project-scoped, precompiled binaries)",
   "author": {
     "name": "Seth Schultz",

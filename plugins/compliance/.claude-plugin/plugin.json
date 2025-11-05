@@ -1,6 +1,6 @@
 {
   "name": "compliance",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "description": "Enterprise compliance specialists for FedRAMP, ISO 27001, SOC 2, PCI DSS, and GDPR (5 agents)",
   "author": {
     "name": "Seth Schultz",
