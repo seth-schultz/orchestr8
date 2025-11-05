@@ -102,9 +102,23 @@ jobs:
 
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-gnu,aarch64-unknown-linux-gnu
 
       - name: Install cross-compilation tools
         run: cargo install cross --git https://github.com/cross-rs/cross
+
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('.claude/mcp-server/orchestr8-bin/Cargo.lock') }}
+
+      - name: Cache cargo build
+        uses: actions/cache@v4
+        with:
+          path: .claude/mcp-server/orchestr8-bin/target
+          key: ${{ runner.os }}-cargo-build-${{ hashFiles('.claude/mcp-server/orchestr8-bin/Cargo.lock') }}
 
       - name: Build binaries for all platforms
         working-directory: .claude/mcp-server/orchestr8-bin
@@ -115,42 +129,33 @@ jobs:
           # Create output directory
           mkdir -p ../../binaries
 
-          # macOS x86_64
-          echo "Building macOS x86_64..."
-          cargo build --release --target x86_64-apple-darwin
-          tar -czf ../../binaries/orchestr8-bin-darwin-x86_64-$VERSION.tar.gz -C target/x86_64-apple-darwin/release orchestr8-bin
+          # Note: Building for macOS requires macOS runners. On Linux runners, we build for Linux targets only.
+          # For a complete cross-platform build, this should run on macOS, Windows, and Linux runners separately.
 
-          # macOS ARM64
-          echo "Building macOS ARM64..."
-          cargo build --release --target aarch64-apple-darwin
-          tar -czf ../../binaries/orchestr8-bin-darwin-arm64-$VERSION.tar.gz -C target/aarch64-apple-darwin/release orchestr8-bin
-
-          # Linux x86_64
+          # Linux x86_64 (native on Ubuntu)
           echo "Building Linux x86_64..."
           cargo build --release --target x86_64-unknown-linux-gnu
           tar -czf ../../binaries/orchestr8-bin-linux-x86_64-$VERSION.tar.gz -C target/x86_64-unknown-linux-gnu/release orchestr8-bin
+          sha256sum ../../binaries/orchestr8-bin-linux-x86_64-$VERSION.tar.gz > ../../binaries/orchestr8-bin-linux-x86_64-$VERSION.tar.gz.sha256
 
-          # Linux ARM64
+          # Linux ARM64 (cross-compiled)
           echo "Building Linux ARM64..."
           cross build --release --target aarch64-unknown-linux-gnu
           tar -czf ../../binaries/orchestr8-bin-linux-arm64-$VERSION.tar.gz -C target/aarch64-unknown-linux-gnu/release orchestr8-bin
+          sha256sum ../../binaries/orchestr8-bin-linux-arm64-$VERSION.tar.gz > ../../binaries/orchestr8-bin-linux-arm64-$VERSION.tar.gz.sha256
 
-          # Windows x86_64
-          echo "Building Windows x86_64..."
-          cargo build --release --target x86_64-pc-windows-msvc
-          cd ../../binaries && 7z a orchestr8-bin-windows-x86_64-$VERSION.zip ../../../target/x86_64-pc-windows-msvc/release/orchestr8-bin.exe && cd -
-
-          echo "✓ All binaries built successfully"
+          echo "✓ Linux binaries built successfully (macOS and Windows builds require native runners)"
           ls -lh ../../binaries/
 
-      - name: Generate checksums
+      - name: Verify binaries and checksums
         working-directory: .claude/mcp-server/orchestr8-bin/../../binaries
         run: |
-          for file in orchestr8-bin-*; do
-            sha256sum "$file" > "$file.sha256"
-          done
-          echo "✓ Checksums generated"
+          echo "Verifying binaries and checksums..."
           ls -lh
+          echo ""
+          echo "Checksum verification:"
+          sha256sum -c *.sha256
+          echo "✓ All checksums verified"
 
       - name: Upload binaries as artifacts
         uses: actions/upload-artifact@v4
