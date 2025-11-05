@@ -11,7 +11,8 @@ Transform Claude Code into a fully autonomous software engineering team. orchest
 
 - **74 Specialized Agents (JIT Loaded)** - Language experts, cloud specialists, compliance agents, QA engineers, and more
 - **Single MCP Plugin** - Rust-based stdio server with zero port conflicts
-- **20 Autonomous Workflows** - `/new-project`, `/add-feature`, `/fix-bug`, `/security-audit`, and more
+- **20 Discoverable Workflows** - Type `/` to see all workflows; `/new-project`, `/add-feature`, `/fix-bug`, `/security-audit`, etc.
+- **Workflow Discovery via MCP** - All workflows auto-discovered as slash commands (prompts/list + prompts/get)
 - **<1ms Agent Discovery** - Ultra-fast MCP queries via in-memory DuckDB
 - **<10ms Agent Loading** - Cold definition load, <1ms cached via LRU
 - **91.9% Token Reduction** - Only active agents in context, 73% memory savings
@@ -86,28 +87,71 @@ git submodule add https://github.com/seth-schultz/orchestr8.git .claude
 
 ## 🎮 Quick Start
 
-### 1. Create a New Project
+### Discover All Workflows
+
+Type `/` in Claude Code to see all 20 discoverable workflows as slash commands:
+
+```
+/add-feature           - Add new features safely
+/build-ml-pipeline     - Build ML pipelines and models
+/create-agent          - Create specialized agents
+/create-plugin         - Create plugins
+/create-skill          - Create reusable skills
+/create-workflow       - Create workflows
+/deploy                - Deploy to production
+/fix-bug               - Fix bugs systematically
+/modernize-legacy      - Modernize legacy systems
+/new-project           - Start new projects
+/optimize-costs        - Optimize infrastructure costs
+/optimize-performance  - Optimize performance
+/refactor              - Refactor code safely
+/review-architecture   - Review architecture
+/review-code           - Review code quality
+/review-pr             - Review pull requests
+/security-audit        - Run security audits
+/setup-cicd            - Setup CI/CD pipelines
+/setup-monitoring      - Setup monitoring
+/test-web-ui           - Test web UI
+```
+
+### Example: Create a New Project
+
 ```
 /new-project "Build a real-time chat application"
 ```
 
-### 2. Add Features
+The orchestrator will:
+1. Analyze requirements and design architecture
+2. Implement backend, frontend, and database
+3. Write comprehensive tests (unit, integration, e2e)
+4. Run quality gates (code review, security, performance)
+5. Update documentation
+6. Prepare for deployment
+
+### Example: Add a Feature
+
 ```
-/add-feature "User authentication with JWT tokens"
-/add-feature "PostgreSQL database with message history"
-/add-feature "WebSocket real-time updates"
+/add-feature "User authentication with OAuth2"
 ```
 
-### 3. Run Quality Gates
+Automatically handles:
+- Design and requirements
+- Backend + frontend implementation
+- Testing and code review
+- Security validation
+- Documentation
+
+### Example: Run Security Audit
+
 ```
 /security-audit
-/optimize-performance
 ```
 
-### 4. Deploy
-```
-/deploy
-```
+Performs:
+- Dependency vulnerability scanning
+- Static analysis
+- Secret detection
+- Compliance verification
 
 ## 🏗️ System Architecture
 
@@ -146,11 +190,23 @@ DuckDB Agent Registry
 
 1. **Auto-Initialize** - MCP server launches when plugin loads (<500ms)
 2. **Build Registry** - Scans 74 agents in `/agents/`, indexes metadata in DuckDB (<1ms queries)
-3. **Discover Fast** - Orchestrators query MCP for agents (<1ms via DuckDB)
-4. **Load On-Demand** - Full definition loaded only when needed (<10ms cold, <1ms cached)
-5. **Execute** - Specialized agents handle their domain
-6. **Release** - Definition removed from memory after use (constant ~100MB peak)
-7. **Optimize** - 91.9% token reduction through JIT specialization
+3. **Discover Workflows** - All 20 workflows auto-discovered as MCP prompts via `prompts/list` (<50ms)
+4. **Discover Fast** - Orchestrators query MCP for agents (<1ms via DuckDB)
+5. **Load On-Demand** - Full definition loaded only when needed (<10ms cold, <1ms cached)
+6. **Execute** - Specialized agents handle their domain
+7. **Release** - Definition removed from memory after use (constant ~100MB peak)
+8. **Optimize** - 91.9% token reduction through JIT specialization
+
+### Workflow Discovery (MCP Prompts)
+
+When you type `/` in Claude Code:
+
+1. Claude Code queries MCP: `prompts/list`
+2. MCP server scans `/commands/` directory (20 workflows)
+3. Returns all workflows as discoverable slash commands
+4. User selects workflow → Claude Code calls `prompts/get "workflow-name"`
+5. Full workflow markdown injected into conversation
+6. Workflow executes and orchestrates agents via JIT loading
 
 ### Just-In-Time Agent Loading
 
@@ -192,6 +248,7 @@ Workflows query the MCP server for agent definitions, ensuring all discovery goe
 ## 📚 Documentation
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - System design and deep dive
+- **[MCP_PROMPTS_IMPLEMENTATION.md](MCP_PROMPTS_IMPLEMENTATION.md)** - Workflow discovery via MCP
 - **[CLAUDE.md](.claude/CLAUDE.md)** - System instructions and patterns
 - **[CHANGELOG.md](.claude/CHANGELOG.md)** - Release history and features
 
