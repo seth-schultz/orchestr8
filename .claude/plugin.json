@@ -1,13 +1,14 @@
 {
   "name": "orchestr8",
   "version": "5.6.2",
-  "description": "Enterprise-grade hierarchical multi-agent orchestration with ultra-fast Rust MCP stdio server (74 agents, <1ms queries, zero port conflicts, project-scoped, precompiled binaries)",
+  "description": "Enterprise-grade multi-agent orchestration via MCP. All agent discovery through fast Rust MCP stdio server with JIT loading from root /agents/ directory (74 agents, <1ms queries, zero port conflicts, project-scoped).",
   "author": {
     "name": "Seth Schultz",
     "email": "orchestr8@sethschultz.com"
   },
   "license": "MIT",
   "repository": "https://github.com/seth-schultz/orchestr8",
+  "homepage": "https://github.com/seth-schultz/orchestr8",
   "keywords": [
     "orchestration",
     "multi-agent",
@@ -17,22 +18,24 @@
     "mcp",
     "stdio",
     "agent-discovery",
-    "context-optimization",
+    "jit-loading",
     "high-performance"
   ],
   "features": {
     "agents": 74,
     "workflows": 20,
     "skills": 4,
-    "plugins": 18,
+    "mcp_server": true,
+    "mcp_transport": "stdio",
+    "agent_discovery": "mcp-required",
+    "agent_loading": "jit",
+    "query_latency": "<1ms",
+    "cache_strategy": "metadata+lru",
     "hierarchical": true,
     "autonomous": true,
     "modular": true,
-    "mcp_transport": "stdio",
-    "database": "duckdb-inmemory",
-    "query_latency": "<1ms",
     "project_scoped": true,
-    "token_reduction": "50%+"
+    "database": "duckdb-inmemory"
   },
   "mcpServers": {
     "orchestr8": {
@@ -40,12 +43,23 @@
       "args": [
         "--root",
         "${CLAUDE_WORKSPACE_ROOT}",
-        "--data-dir",
-        ".claude/mcp-server/data",
+        "--agent-dir",
+        "${CLAUDE_WORKSPACE_ROOT}/agents",
         "--log-level",
         "info"
-      ]
+      ],
+      "env": {
+        "RUST_LOG": "orchestr8=debug"
+      }
     }
+  },
+  "commands": {
+    "description": "20 orchestration workflows for end-to-end project lifecycle",
+    "path": "./commands/"
+  },
+  "skills": {
+    "description": "Reusable expertise patterns (auto-activated by Claude Code)",
+    "path": "./skills/"
   },
   "hooks": "./hooks/hooks.json",
   "requirements": {

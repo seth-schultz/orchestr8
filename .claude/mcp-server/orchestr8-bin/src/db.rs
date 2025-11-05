@@ -341,6 +341,17 @@ impl Database {
 
         Ok(patterns)
     }
+
+    /// Get agent file path by name (for JIT definition loading)
+    pub fn get_agent_file_path(&self, agent_name: &str) -> Result<std::path::PathBuf> {
+        let conn = self.conn.lock().unwrap();
+
+        let mut stmt = conn.prepare("SELECT file_path FROM agents WHERE name = ?")?;
+
+        let file_path: String = stmt.query_row(params![agent_name], |row| row.get(0))?;
+
+        Ok(std::path::PathBuf::from(file_path))
+    }
 }
 
 #[cfg(test)]

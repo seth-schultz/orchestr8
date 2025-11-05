@@ -25,13 +25,18 @@ use db::Database;
 use loader::AgentLoader;
 use mcp::{JsonRpcRequest, JsonRpcResponse, McpHandler};
 
-/// Orchestr8 MCP Server - Agent discovery via stdio
+/// Orchestr8 MCP Server - Agent discovery via stdio with JIT loading
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// Project root directory (default: auto-detect from .claude directory)
     #[arg(short, long)]
     root: Option<PathBuf>,
+
+    /// Agent directory for JIT loading (default: {root}/agents)
+    /// Override with ORCHESTR8_AGENT_DIR environment variable
+    #[arg(short, long, env = "ORCHESTR8_AGENT_DIR")]
+    agent_dir: Option<PathBuf>,
 
     /// Data directory for DuckDB database
     #[arg(short, long, default_value = ".claude/mcp-server/data")]
@@ -49,9 +54,13 @@ struct Args {
     #[arg(long, default_value = "300")]
     cache_ttl: u64,
 
-    /// Maximum cache entries
+    /// Maximum cache entries for metadata and definitions
     #[arg(long, default_value = "1000")]
     cache_size: usize,
+
+    /// Maximum cached agent definitions (LRU, separate from query cache)
+    #[arg(long, default_value = "20")]
+    definition_cache_size: usize,
 }
 
 #[tokio::main]
@@ -62,7 +71,7 @@ async fn main() -> Result<()> {
     init_logging(&args)?;
 
     info!(
-        "Starting Orchestr8 MCP Server v{}",
+        "Starting Orchestr8 MCP Server v{} with JIT agent loading",
         env!("CARGO_PKG_VERSION")
     );
 
@@ -74,6 +83,31 @@ async fn main() -> Result<()> {
 
     info!("Project root: {}", root_dir.display());
 
+    // Determine agent directory with fallback chain
+    let agent_dir = match args.agent_dir {
+        Some(path) => {
+            // Explicit argument takes precedence
+            if path.is_absolute() {
+                path
+            } else {
+                root_dir.join(&path)
+            }
+        }
+        None => {
+            // Default to root/agents
+            root_dir.join("agents")
+        }
+    };
+
+    if !agent_dir.exists() {
+        anyhow::bail!(
+            "Agent directory not found: {}. Use --agent-dir or set ORCHESTR8_AGENT_DIR",
+            agent_dir.display()
+        );
+    }
+
+    info!("Agent directory: {}", agent_dir.display());
+
     // Initialize database
     let data_dir = root_dir.join(&args.data_dir);
     std::fs::create_dir_all(&data_dir)?;
@@ -84,23 +118,35 @@ async fn main() -> Result<()> {
     let db = Database::new(&db_path)?;
     db.initialize_schema()?;
 
-    // Load agent registry
-    info!("Loading agent registry...");
-    let mut loader = AgentLoader::new(&root_dir);
-    let agents = loader.load_all_agents()?;
-    info!("Loaded {} agents from {} plugins", agents.len(), loader.plugin_count());
+    // Load agent metadata (JIT - fast startup)
+    let startup_start = std::time::Instant::now();
+    info!("Loading agent metadata for JIT discovery...");
+    let mut loader = AgentLoader::new(&root_dir, &agent_dir);
+    let agents = loader.load_agent_metadata()?;
+    let startup_duration = startup_start.elapsed();
+    info!(
+        "Loaded metadata for {} agents in {:.2}ms (JIT enabled)",
+        agents.len(),
+        startup_duration.as_secs_f64() * 1000.0
+    );
 
-    // Index agents in database
+    // Index agents in database (metadata only)
     db.index_agents(&agents)?;
-    info!("Indexed agents in DuckDB");
+    info!("Indexed agent metadata in DuckDB");
 
     // Initialize cache
     let cache = QueryCache::new(args.cache_size, args.cache_ttl);
 
-    // Create handler
-    let handler = Arc::new(McpHandler::new(db, cache, agents));
+    // Create handler with JIT support
+    let handler = Arc::new(McpHandler::new(
+        db,
+        cache,
+        agents,
+        agent_dir.clone(),
+        args.definition_cache_size,
+    ));
 
-    info!("MCP Server ready - listening on stdio");
+    info!("MCP Server ready - listening on stdio (definition cache size: {})", args.definition_cache_size);
 
     // Stdio protocol loop
     run_stdio_loop(handler).await?;

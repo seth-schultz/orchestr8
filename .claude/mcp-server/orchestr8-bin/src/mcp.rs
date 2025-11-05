@@ -9,7 +9,10 @@ use tracing::{debug, error, info};
 
 use crate::cache::QueryCache;
 use crate::db::Database;
-use crate::loader::AgentMetadata;
+use crate::loader::{AgentDefinition, AgentLoader, AgentMetadata};
+use std::num::NonZeroUsize;
+use lru::LruCache;
+use std::sync::Mutex;
 
 /// JSON-RPC 2.0 Request
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -117,20 +120,40 @@ pub struct IndexStats {
     pub plugins: usize,
 }
 
-/// MCP Handler - processes JSON-RPC requests
+/// MCP Handler - processes JSON-RPC requests with JIT agent loading support
 pub struct McpHandler {
     db: Database,
     cache: QueryCache,
     agents: Vec<AgentMetadata>,
+    agent_dir: std::path::PathBuf,
+    loader: AgentLoader,
+    /// LRU cache for full agent definitions (loaded on-demand)
+    definition_cache: std::sync::Arc<Mutex<LruCache<String, AgentDefinition>>>,
     start_time: std::time::Instant,
 }
 
 impl McpHandler {
-    pub fn new(db: Database, cache: QueryCache, agents: Vec<AgentMetadata>) -> Self {
+    /// Create new handler with JIT agent loading support
+    pub fn new(
+        db: Database,
+        cache: QueryCache,
+        agents: Vec<AgentMetadata>,
+        agent_dir: std::path::PathBuf,
+        definition_cache_size: usize,
+    ) -> Self {
+        let cache_size = NonZeroUsize::new(definition_cache_size).unwrap_or(NonZeroUsize::new(20).unwrap());
+
+        // Create loader for JIT definition fetching
+        let root_dir = agent_dir.parent().unwrap_or_else(|| std::path::Path::new("/")).to_path_buf();
+        let loader = AgentLoader::new(&root_dir, &agent_dir);
+
         Self {
             db,
             cache,
             agents,
+            agent_dir,
+            loader,
+            definition_cache: std::sync::Arc::new(Mutex::new(LruCache::new(cache_size))),
             start_time: std::time::Instant::now(),
         }
     }
@@ -145,6 +168,10 @@ impl McpHandler {
             "agents/query" => self.handle_agent_query(request.params).await,
             "agents/list" => self.handle_agent_list(request.params).await,
             "agents/get" => self.handle_agent_get(request.params).await,
+            "agents/get_definition" => self.handle_agent_get_definition(request.params).await,
+            "agents/discover_by_capability" => self.handle_discover_by_capability(request.params).await,
+            "agents/discover_by_role" => self.handle_discover_by_role(request.params).await,
+            "agents/discover" => self.handle_discover_agents(request.params).await,
             "health" => self.handle_health(request.params).await,
             "cache/stats" => self.handle_cache_stats(request.params).await,
             "cache/clear" => self.handle_cache_clear(request.params).await,
@@ -338,6 +365,129 @@ impl McpHandler {
         self.cache.clear();
         info!("Cache cleared");
         Ok(serde_json::json!({ "cleared": true }))
+    }
+
+    /// Get full agent definition (JIT loaded with LRU caching)
+    async fn handle_agent_get_definition(&self, params: Option<Value>) -> Result<Value> {
+        #[derive(Deserialize)]
+        struct DefParams {
+            name: String,
+        }
+
+        let def_params: DefParams = serde_json::from_value(params.unwrap_or(Value::Null))?;
+
+        // Check definition cache first
+        {
+            let mut cache = self.definition_cache.lock().unwrap();
+            if let Some(def) = cache.get(&def_params.name) {
+                debug!("Definition cache hit for: {}", def_params.name);
+                return Ok(serde_json::to_value(def)?);
+            }
+        }
+
+        // Get file path from database
+        let file_path = self.db.get_agent_file_path(&def_params.name)?;
+
+        // Load full definition via JIT
+        let start = std::time::Instant::now();
+        let definition = self.loader.get_agent_definition_jit(&file_path)?;
+        let load_time = start.elapsed().as_secs_f64() * 1000.0;
+
+        debug!("Loaded agent definition in {:.2}ms", load_time);
+
+        // Cache the definition
+        {
+            let mut cache = self.definition_cache.lock().unwrap();
+            cache.put(def_params.name.clone(), definition.clone());
+        }
+
+        Ok(serde_json::to_value(definition)?)
+    }
+
+    /// Discover agents by capability
+    async fn handle_discover_by_capability(&self, params: Option<Value>) -> Result<Value> {
+        #[derive(Deserialize)]
+        struct CapabilityParams {
+            capability: String,
+            #[serde(default)]
+            limit: Option<usize>,
+        }
+
+        let cap_params: CapabilityParams = serde_json::from_value(params.unwrap_or(Value::Null))?;
+
+        let query_params = AgentQueryParams {
+            context: None,
+            role: None,
+            capability: Some(cap_params.capability),
+            limit: cap_params.limit.or(Some(10)),
+        };
+
+        let agents = self.db.query_agents(&query_params)?;
+
+        Ok(serde_json::json!({
+            "agents": agents,
+            "total": agents.len(),
+            "discovery_method": "capability",
+        }))
+    }
+
+    /// Discover agents by role
+    async fn handle_discover_by_role(&self, params: Option<Value>) -> Result<Value> {
+        #[derive(Deserialize)]
+        struct RoleParams {
+            role: String,
+            #[serde(default)]
+            limit: Option<usize>,
+        }
+
+        let role_params: RoleParams = serde_json::from_value(params.unwrap_or(Value::Null))?;
+
+        let query_params = AgentQueryParams {
+            context: None,
+            role: Some(role_params.role),
+            capability: None,
+            limit: role_params.limit.or(Some(10)),
+        };
+
+        let agents = self.db.query_agents(&query_params)?;
+
+        Ok(serde_json::json!({
+            "agents": agents,
+            "total": agents.len(),
+            "discovery_method": "role",
+        }))
+    }
+
+    /// Discover agents with multiple criteria
+    async fn handle_discover_agents(&self, params: Option<Value>) -> Result<Value> {
+        #[derive(Deserialize)]
+        struct DiscoverParams {
+            #[serde(default)]
+            query: Option<String>,
+            #[serde(default)]
+            capability: Option<String>,
+            #[serde(default)]
+            role: Option<String>,
+            #[serde(default)]
+            limit: Option<usize>,
+        }
+
+        let discover_params: DiscoverParams = serde_json::from_value(params.unwrap_or(Value::Null))?;
+
+        let query_params = AgentQueryParams {
+            context: discover_params.query,
+            role: discover_params.role,
+            capability: discover_params.capability,
+            limit: discover_params.limit.or(Some(10)),
+        };
+
+        let agents = self.db.query_agents(&query_params)?;
+
+        Ok(serde_json::json!({
+            "agents": agents,
+            "total": agents.len(),
+            "discovery_method": "multi-criteria",
+        }))
     }
 
     fn generate_reasoning(&self, params: &AgentQueryParams) -> String {

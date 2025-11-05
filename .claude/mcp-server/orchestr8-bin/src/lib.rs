@@ -13,6 +13,6 @@ pub mod queries;
 // Re-export commonly used types
 pub use cache::QueryCache;
 pub use db::Database;
-pub use loader::{AgentLoader, AgentMetadata};
+pub use loader::{AgentDefinition, AgentLoader, AgentMetadata};
 pub use mcp::{AgentQueryParams, AgentQueryResult, McpHandler};
 pub use queries::{QueryBuilder, QueryTemplates};

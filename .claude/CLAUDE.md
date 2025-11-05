@@ -4,35 +4,58 @@ This is an enterprise-grade orchestration system that enables autonomous end-to-
 
 ## System Architecture
 
-You have access to a hierarchical orchestration system with:
+You have access to a hierarchical orchestration system powered by a fast Rust MCP server that uses just-in-time (JIT) agent loading:
+
+```
+Claude Code Session
+    ↓
+MCP Server (Rust) - Stdio-based, zero port conflicts
+    ↓
+DuckDB Agent Registry - In-memory, <1ms queries
+    ↓
+/agents/ Directory - 74 agent definitions, lazy-loaded on demand
+    ↓
+Meta-Orchestrators (Layer 1) → Specialized Agents (Layer 2) → Workflows (Layer 4)
+```
 
 ### Layer 1: Meta-Orchestrators
 - Use `project-orchestrator` for end-to-end project coordination
 - Use `feature-orchestrator` for complete feature development lifecycle
 - Use `workflow-coordinator` for cross-agent workflow management
 
-### Layer 2: Specialized Agents
+**Agent Discovery:** Meta-orchestrators query the MCP server to discover and load agents dynamically. All agent selection happens through MCP, never direct file access.
+
+### Layer 2: Specialized Agents (JIT Loaded via MCP)
+
+All 74 agents are stored in `/agents/` and loaded on-demand when workflows need them:
+
 **Development:** architect, frontend-developer, backend-developer, fullstack-developer, api-designer, database-specialist
 **Quality:** code-reviewer, test-engineer, security-auditor, performance-analyzer, accessibility-expert
 **DevOps:** ci-cd-engineer, docker-specialist, kubernetes-expert, infrastructure-engineer
 **Documentation:** technical-writer, api-documenter, architecture-documenter
 **Analysis:** requirements-analyzer, dependency-analyzer, code-archaeologist
+**And 49 additional language, framework, and domain specialists**
 
-**Agent Selection via Registry:**
-The system includes a comprehensive **agent-registry.yml** (`.claude/agent-registry.yml`) that provides intelligent agent selection:
-- **Role-based mapping**: Logical roles (system_architect, frontend_developer, etc.) mapped to specific agents
-- **Primary + fallback agents**: Automatic fallback if primary agent unavailable
-- **Capability tags**: Each agent tagged with expertise areas for smart matching
-- **Model recommendations**: Sonnet for strategic orchestration, Haiku for tactical execution
-- **Use case guidance**: When to use each agent with specific examples
+**JIT Loading Process:**
+1. Metadata loaded at startup (<1ms per query via DuckDB)
+2. Agent discovered by role/capability (<1ms query)
+3. Definition loaded from disk on-demand (<10ms cold, <1ms cached)
+4. Cached in LRU (20 agents max in memory simultaneously)
+5. Released after use to optimize memory
 
-Reference the agent registry when selecting agents to ensure optimal task assignment with built-in resilience.
+**Agent Discovery Tools (via MCP):**
+- `discover_agents(query)` - Search agents by keyword
+- `get_agent_definition(name)` - Get full agent definition JIT
+- `discover_agents_by_capability(capability)` - Capability-based search
+- `discover_agents_by_role(role)` - Role-based with fallback chain
 
 ### Layer 3: Skills
 Skills are automatically activated based on context. Available categories: languages, frameworks, tools, practices, domains.
 
 ### Layer 4: Workflows
 Use slash commands for end-to-end automation: `/new-project`, `/add-feature`, `/refactor`, `/fix-bug`, `/security-audit`, `/optimize-performance`, `/deploy`
+
+Workflows query the MCP server for agents instead of using hardcoded references, ensuring all discovery is dynamic and scalable.
 
 ## Core Operating Principles
 
@@ -159,15 +182,40 @@ Every change must pass through appropriate gates:
 
 ## Orchestration Workflow
 
+### Just-In-Time Agent Loading Flow
+
+All workflows follow this MCP-powered pattern:
+
+```
+User: /add-feature "description"
+    ↓
+Workflow loads: commands/add-feature.md
+    ↓
+Workflow queries MCP: "I need an architect definition"
+    ↓
+MCP discovers and loads: agents/development/architect.md (JIT)
+    ↓
+Workflow invokes @architect with full definition
+    ↓
+After use: Agent definition released, memory freed
+```
+
+This pattern ensures:
+- Only needed agents are loaded in context
+- Memory usage stays constant regardless of total agents
+- Discovery happens in <1ms via DuckDB
+- Full definitions loaded in <10ms (cold) or <1ms (cached)
+
 ### For Large Projects
 ```
 1. Use `project-orchestrator` agent
 2. Provide high-level requirements
-3. Orchestrator will:
-   - Analyze requirements (requirements-analyzer)
-   - Design architecture (architect)
+3. Orchestrator queries MCP to discover needed agents
+4. Orchestrator will:
+   - Analyze requirements (requirements-analyzer via MCP)
+   - Design architecture (architect via MCP)
    - Decompose into features
-   - Coordinate specialized agents
+   - Coordinate specialized agents (JIT loaded as needed)
    - Validate at each gate
    - Generate documentation
    - Deploy to environment
@@ -177,13 +225,14 @@ Every change must pass through appropriate gates:
 ```
 1. Use `feature-orchestrator` agent or `/add-feature` command
 2. Provide feature description
-3. Orchestrator will:
-   - Analyze requirements
-   - Design implementation
-   - Implement (frontend/backend/fullstack)
-   - Write tests (test-engineer)
-   - Review code (code-reviewer)
-   - Check security (security-auditor)
+3. Workflow queries MCP for relevant agents
+4. Orchestrator will:
+   - Analyze requirements (requirements-analyzer via MCP)
+   - Design implementation (architect via MCP)
+   - Implement (frontend/backend/fullstack via MCP)
+   - Write tests (test-engineer via MCP)
+   - Review code (code-reviewer via MCP)
+   - Check security (security-auditor via MCP)
    - Update documentation
 ```
 
@@ -242,19 +291,29 @@ Every change must pass through appropriate gates:
    - Document optimizations
 ```
 
-## Agent Invocation Guidelines
+## Agent Discovery and Invocation
+
+### MCP Agent Discovery (Automatic)
+
+Workflows automatically query the MCP server for agents:
+- Query by role: "Give me a system architect"
+- Query by capability: "Find agents with Kubernetes expertise"
+- Query by keywords: "Search for authentication agents"
+- All queries happen through MCP, never direct access
 
 ### When to Use Orchestrators
 - Complex, multi-step tasks
 - Full project lifecycle
 - Multiple domain areas
 - Requires coordination
+- Let orchestrators query MCP for needed agents
 
 ### When to Use Specialized Agents
 - Single domain task
 - Clear, focused goal
 - Known requirements
 - Parallel execution possible
+- Agents are discovered and loaded JIT by orchestrators
 
 ### When to Use Skills
 - Skills are auto-activated, don't explicitly invoke
@@ -266,6 +325,7 @@ Every change must pass through appropriate gates:
 - End-to-end automation
 - Quality gates required
 - Documentation needed
+- Workflows handle all MCP agent discovery automatically
 
 ## Anti-Patterns to Avoid
 
@@ -338,14 +398,21 @@ If an agent repeatedly fails:
 
 1. **Plan first, code later** - Think before acting
 2. **Use orchestrators** - For complex, multi-domain tasks
-3. **Parallelize** - Execute independent agents concurrently
-4. **Validate constantly** - Quality gates at every step
-5. **Optimize context** - Fork, summarize, reference files
-6. **Test comprehensively** - Unit, integration, e2e, performance
-7. **Secure by default** - Security at every layer
-8. **Document thoroughly** - For humans and agents
-9. **Monitor everything** - Logs, metrics, traces
-10. **Recover gracefully** - Error handling and rollback
+3. **Trust MCP discovery** - Let workflows query MCP for agents, not direct access
+4. **Parallelize** - Execute independent agents concurrently (JIT loaded)
+5. **Validate constantly** - Quality gates at every step
+6. **Optimize context** - Only active agents in memory, definitions lazy-loaded
+7. **Test comprehensively** - Unit, integration, e2e, performance
+8. **Secure by default** - Security at every layer
+9. **Document thoroughly** - For humans and agents
+10. **Monitor everything** - Logs, metrics, traces, agent discovery latency
+
+### JIT Loading Best Practices
+- Workflows query MCP for agents (automatic, no manual invocation needed)
+- Trust the <1ms discovery time (DuckDB-backed)
+- Cold agent definitions load in <10ms, cached loads in <1ms
+- Memory stays constant: only 20 agents max in memory simultaneously
+- Definitions released after use to free memory for other agents
 
 ## Getting Started
 
