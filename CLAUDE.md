@@ -174,9 +174,12 @@ argument-hint: "[argument-description]"  # Optional
 - [ ] All files committed in single "release: v1.2.0" commit
 
 **Automation Features:**
-- **Pre-commit Hook:** `.git/hooks/pre-commit` automatically validates version consistency before commits
+- **Pre-commit Hook:** `.git/hooks/pre-commit` automatically validates:
+  - Version consistency across all files
+  - CHANGELOG.md entry for the current version
+  - Guides you to fix issues before commit
 - **Version Sync Script:** `./.claude/scripts/sync-plugin-versions.sh` synchronizes all 18+ version files automatically
-- If version mismatches are detected, the pre-commit hook will guide you to run the sync script
+- If mismatches are detected, the pre-commit hook will guide you to run the sync script or add CHANGELOG entries
 
 ## Testing
 
