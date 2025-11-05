@@ -1,6 +1,6 @@
 {
   "name": "database-specialists",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Database specialists for PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Cassandra, DynamoDB, Neo4j, and Redis (9 agents)",
   "author": {
     "name": "Seth Schultz",

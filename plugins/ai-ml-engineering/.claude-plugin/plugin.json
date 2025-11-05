@@ -1,6 +1,6 @@
 {
   "name": "ai-ml-engineering",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "AI/ML specialists for LangChain, LlamaIndex, ML engineering, MLOps, and data engineering (5 agents + ML pipeline workflow)",
   "author": {
     "name": "Seth Schultz",

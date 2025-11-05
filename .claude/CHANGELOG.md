@@ -5,6 +5,31 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2025-11-05
+
+### 🔄 Improvements: Binary Distribution & Marketplace Integration
+
+**GitHub Workflow Enhancements:**
+- Platform-specific binary naming for consistency (darwin-x86_64, linux-arm64, etc.)
+- SHA256 checksum generation for all binary archives
+- Checksums included in GitHub release artifacts for integrity verification
+- Improved release notes with platform-specific installation instructions
+- Binary integrity verification guide for all supported platforms
+
+**Init Script Fixes:**
+- Download archived binaries (.tar.gz, .zip) instead of loose files
+- Automatic extraction using platform-appropriate tools
+- Improved error handling for extraction failures
+- Better cross-platform support (macOS, Linux, Windows)
+
+**Marketplace Integration:**
+- Seamless automatic initialization via Claude Code SessionStart hooks
+- Binary naming now consistent across all platforms
+- Version-specific binary downloads with fallback to "latest"
+- Proper binary caching after extraction
+
+These changes ensure the v5.1.0 marketplace plugin works perfectly on any platform without manual configuration.
+
 ## [5.0.0] - 2025-11-05
 
 ### 🚀 Major: Complete Rust + DuckDB MCP Migration
