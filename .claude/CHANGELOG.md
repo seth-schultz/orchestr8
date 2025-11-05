@@ -5,6 +5,39 @@ All notable changes to the Claude Code Orchestration System.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.8.0] - 2025-11-05
+
+### ✨ Enhancement: True JIT Loading via agent-definitions Directory
+
+**Architecture Improvement:**
+- Renamed `/agents/` → `/agent-definitions/` to prevent Claude Code auto-discovery
+- Agents now loaded ONLY via explicit MCP server configuration (not auto-discovered)
+- Guarantees pure JIT loading: agents only in memory when explicitly referenced
+- Eliminates "chicken-and-egg" problem where agents could be auto-loaded by Claude Code
+
+**Key Changes:**
+- Updated plugin.json: MCP server now explicitly points to `/agent-definitions/` via `--agent-dir` argument
+- All 74 agents successfully moved to `/agent-definitions/[category]/`
+- MCP resources endpoints (resources/list, resources/read) working correctly with new directory
+- Verified: agents NOT in Claude Code auto-discovery list (agents, commands, skills, hooks)
+
+**Documentation Updates:**
+- .claude/CLAUDE.md: Updated architecture diagrams and JIT loading explanation
+- README.md: Updated system architecture and MCP loading flow
+- ARCHITECTURE.md: Updated all directory references and clarified auto-discovery prevention
+
+**Performance:**
+- MCP agent discovery: <1ms (unchanged)
+- resources/list: Returns all 74 agents successfully
+- resources/read: Retrieves agent definitions with JIT loading
+- Memory: Only active agents in memory (no change, now guaranteed)
+
+**Result:**
+- ✅ Pure JIT loading architecture now fully enforced
+- ✅ Agents only injected into context via @ mention syntax
+- ✅ Zero context bloat from auto-discovered agents
+- ✅ 91.9% token reduction maintained and guaranteed
+
 ## [5.7.1] - 2025-11-05
 
 ### 🔧 Fix: Marketplace Plugin Configuration
