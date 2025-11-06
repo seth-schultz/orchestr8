@@ -138,8 +138,6 @@ jobs:
           path: |
             ${{ steps.platform.outputs.binary_name }}.tar.gz
             ${{ steps.platform.outputs.binary_name }}.tar.gz.sha256
-            ${{ steps.platform.outputs.binary_name }}.zip
-            ${{ steps.platform.outputs.binary_name }}.zip.sha256
 
   upload-binaries-to-release:
     name: Upload Binaries to Release
@@ -150,21 +148,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Wait for release to be created
+        run: |
+          TAG=${{ github.ref_name }}
+          MAX_ATTEMPTS=30
+          ATTEMPT=0
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            if gh release view "$TAG" > /dev/null 2>&1; then
+              echo "Release $TAG found!"
+              exit 0
+            fi
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "Waiting for release (attempt $ATTEMPT/$MAX_ATTEMPTS)..."
+            sleep 10
+          done
+          echo "Timeout waiting for release $TAG to be created"
+          exit 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
 
-      - name: Display structure
-        run: ls -R artifacts
-
       - name: Upload binaries to release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.ref_name }}
           files: |
             artifacts/**/*.tar.gz
             artifacts/**/*.tar.gz.sha256
-            artifacts/**/*.zip
-            artifacts/**/*.zip.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
