@@ -1,0 +1,96 @@
+{
+  "name": "orchestr8",
+  "version": "5.8.1",
+  "description": "Enterprise-grade multi-agent orchestration via MCP. All agent discovery through fast Rust MCP stdio server with JIT loading from /agent-definitions/ directory (74 agents, <1ms queries, zero port conflicts, project-scoped).",
+  "author": {
+    "name": "Seth Schultz",
+    "email": "orchestr8@sethschultz.com"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/seth-schultz/orchestr8",
+  "homepage": "https://github.com/seth-schultz/orchestr8",
+  "keywords": [
+    "orchestration",
+    "multi-agent",
+    "autonomous",
+    "enterprise",
+    "rust",
+    "mcp",
+    "stdio",
+    "agent-discovery",
+    "jit-loading",
+    "high-performance"
+  ],
+  "features": {
+    "agents": 74,
+    "workflows": 20,
+    "skills": 4,
+    "mcp_server": true,
+    "mcp_transport": "stdio",
+    "agent_discovery": "mcp-required",
+    "agent_loading": "jit",
+    "query_latency": "<1ms",
+    "cache_strategy": "metadata+lru",
+    "hierarchical": true,
+    "autonomous": true,
+    "modular": true,
+    "project_scoped": true,
+    "database": "duckdb-inmemory"
+  },
+  "mcpServers": {
+    "orchestr8": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/mcp-server/orchestr8-bin/target/release/orchestr8-bin",
+      "args": [
+        "--root",
+        "${CLAUDE_WORKSPACE_ROOT}",
+        "--agent-dir",
+        "${CLAUDE_WORKSPACE_ROOT}/agent-definitions",
+        "--log-level",
+        "info"
+      ],
+      "env": {
+        "RUST_LOG": "orchestr8=debug"
+      }
+    }
+  },
+  "commands": {
+    "description": "20 orchestration workflows for end-to-end project lifecycle",
+    "path": "commands"
+  },
+  "skills": {
+    "description": "Reusable expertise patterns (auto-activated by Claude Code)",
+    "path": "skills"
+  },
+  "hooks": {
+    "session-start": {
+      "matcher": {
+        "source": ["startup", "resume"]
+      },
+      "action": "shell",
+      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh",
+      "onError": "warn",
+      "description": "Initialize MCP server and orchestr8 environment on session start"
+    },
+    "post-install": {
+      "action": "shell",
+      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/post-install.sh",
+      "onError": "warn",
+      "description": "Set up orchestr8 plugin after installation"
+    },
+    "post-write": {
+      "action": "shell",
+      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/post-write.sh",
+      "onError": "ignore",
+      "description": "Track file writes for agent optimization"
+    },
+    "post-edit": {
+      "action": "shell",
+      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/post-edit.sh",
+      "onError": "ignore",
+      "description": "Track file edits for agent optimization"
+    }
+  },
+  "requirements": {
+    "claude": ">=1.0.0"
+  }
+}
