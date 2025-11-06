@@ -41,12 +41,6 @@ jobs:
             archive: tar.gz
             cross: true
 
-          # Windows x86_64
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-            archive: zip
-            cross: false
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
