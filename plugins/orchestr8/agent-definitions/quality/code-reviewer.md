@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
-description: Performs comprehensive code reviews checking for best practices, clean code principles, security issues, performance problems, and maintainability. Use after implementation to validate code quality before merging or deployment.
-model: haiku
+description: Performs comprehensive code reviews checking for best practices, clean code principles, security issues, performance problems, and maintainability. Use PROACTIVELY when significant code changes are made to validate quality standards early and prevent technical debt accumulation. Essential before merging or deployment.
+model: sonnet
 ---
 
 # Code Reviewer Agent

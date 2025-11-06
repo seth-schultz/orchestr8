@@ -1,11 +1,26 @@
 ---
 name: workflow-orchestration-patterns
-description: Expertise in autonomous workflow design patterns including multi-phase execution, quality gates, agent coordination, and success criteria definition. Activate when designing or creating workflow slash commands.
+description: Expertise in autonomous workflow design patterns including multi-phase execution, quality gates, agent coordination, and success criteria definition. Activate when designing or creating workflow slash commands. Guides multi-phase workflow design with checkpoints and quality gates, ensuring workflows are autonomous, reliable, and production-ready.
 ---
 
 # Workflow Orchestration Patterns Skill
 
 Expert knowledge of workflow orchestration patterns for Claude Code, covering multi-phase execution design, quality gate implementation, agent coordination strategies, and autonomous process automation.
+
+## When to Use This Skill
+
+**Use workflow-orchestration-patterns for:**
+- ✅ Creating new workflow slash commands for Claude Code
+- ✅ Designing multi-phase execution strategies with checkpoints
+- ✅ Implementing quality gates and validation logic in workflows
+- ✅ Coordinating multiple agents in complex autonomous processes
+- ✅ Defining success criteria and progress tracking for workflows
+- ✅ Adding parallelism instructions for performance optimization
+
+**Less critical for:**
+- ❌ Creating simple single-agent tasks (use agent definitions instead)
+- ❌ Agent or skill creation (use those specific skills)
+- ❌ Direct agent invocation without orchestration
 
 ## Core Workflow Architecture
 

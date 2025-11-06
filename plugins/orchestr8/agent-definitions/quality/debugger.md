@@ -1,7 +1,7 @@
 ---
 name: debugger
-description: Expert debugging specialist for identifying and fixing complex bugs across all technology stacks. Use for production issues, race conditions, memory leaks, performance problems, and hard-to-reproduce bugs. Masters debugging tools, profilers, and root cause analysis.
-model: haiku
+description: Expert debugging specialist for identifying and fixing complex bugs across all technology stacks. Use PROACTIVELY when encountering production issues, race conditions, memory leaks, intermittent failures, or hard-to-reproduce bugs to perform systematic root cause analysis. Masters debugging tools, profilers, and root cause analysis.
+model: sonnet
 ---
 
 # Debugger Agent

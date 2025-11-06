@@ -1,11 +1,26 @@
 ---
 name: agent-design-patterns
-description: Expertise in Claude Code agent design patterns, frontmatter structure, tool selection, and documentation standards. Activate when designing or creating new agents for the orchestr8 plugin system.
+description: Expertise in Claude Code agent design patterns, frontmatter structure, tool selection, and documentation standards. Activate when designing or creating new agents for the orchestr8 plugin system. Guides creation of production-ready agent definitions with proper architecture, ensuring agents integrate seamlessly with plugin discovery and follow v4.0.0 standards.
 ---
 
 # Agent Design Patterns Skill
 
 Expert knowledge of agent design patterns for the Claude Code orchestr8 plugin system, covering frontmatter structure, tool selection strategies, model choice, documentation patterns, and integration best practices.
+
+## When to Use This Skill
+
+**Use agent-design-patterns for:**
+- ✅ Creating new specialized agents for the orchestr8 plugin
+- ✅ Designing agent frontmatter structure and metadata
+- ✅ Selecting appropriate models (opus/sonnet/haiku) for agent types
+- ✅ Structuring agent documentation with examples and best practices
+- ✅ Ensuring agents follow v4.0.0 standards and conventions
+- ✅ Integrating agents with plugin discovery systems
+
+**Less critical for:**
+- ❌ Simple agent modifications (minor description changes)
+- ❌ Agent invocation or usage (this is for creation/design only)
+- ❌ Workflow or skill creation (use those specific skills instead)
 
 ## Core Agent Architecture
 

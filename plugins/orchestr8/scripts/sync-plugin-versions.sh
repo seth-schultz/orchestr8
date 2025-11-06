@@ -1,20 +1,20 @@
 #!/bin/bash
 
 ##############################################################################
-# Sync Plugin Versions (v2.0)
+# Sync Plugin Versions (v3.0)
 #
 # Purpose: Automatically synchronize version across ALL version locations
 #
 # This script ensures ALL version files stay synchronized with the primary
-# version defined in .claude/VERSION. It updates:
-# - .claude/VERSION (source of truth)
-# - .claude/plugin.json (MCP plugin metadata)
-# - .claude-plugin/marketplace.json (both metadata.version and plugins[0].version)
+# version defined in VERSION (root). It updates:
+# - VERSION (root - source of truth)
+# - .claude-plugin/marketplace.json
+# - plugins/orchestr8/.claude-plugin/plugin.json (MCP plugin metadata)
 # - plugins/orchestr8/mcp-server/orchestr8-bin/Cargo.toml (Rust binary version)
 #
 # Usage:
-#   ./sync-plugin-versions.sh              # Use version from .claude/VERSION
-#   ./sync-plugin-versions.sh 4.3.0        # Manually specify version
+#   ./sync-plugin-versions.sh              # Use version from VERSION file
+#   ./sync-plugin-versions.sh 5.9.0        # Manually specify version
 #
 # Returns:
 #   0 - Success (all versions synchronized)
@@ -22,7 +22,7 @@
 #
 # Architecture:
 #   Single MCP plugin with consolidated agent-definitions/ directory
-#   No longer supports distributed plugins/*/
+#   Plugin structure: plugins/orchestr8/
 ##############################################################################
 
 # Don't exit on error - we'll handle errors explicitly
@@ -35,14 +35,14 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Get version from argument or .claude/VERSION file
+# Get version from argument or VERSION file
 if [ -z "$1" ]; then
-  if [ ! -f ".claude/VERSION" ]; then
-    echo -e "${RED}❌ Error: .claude/VERSION file not found${NC}"
+  if [ ! -f "VERSION" ]; then
+    echo -e "${RED}❌ Error: VERSION file not found${NC}"
     echo "Usage: $0 [version]"
     exit 1
   fi
-  VERSION=$(cat .claude/VERSION | tr -d '[:space:]')
+  VERSION=$(cat VERSION | tr -d '[:space:]')
 else
   VERSION="$1"
 fi
@@ -50,11 +50,11 @@ fi
 # Validate version format (semantic versioning)
 if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo -e "${RED}❌ Error: Invalid version format: $VERSION${NC}"
-  echo "Expected format: MAJOR.MINOR.PATCH (e.g., 5.8.0)"
+  echo "Expected format: MAJOR.MINOR.PATCH (e.g., 5.9.0)"
   exit 1
 fi
 
-echo -e "${BLUE}📋 Version Sync Script v2.0${NC}"
+echo -e "${BLUE}📋 Version Sync Script v3.0${NC}"
 echo -e "${YELLOW}🔄 Synchronizing all version locations to $VERSION${NC}"
 echo ""
 
@@ -90,26 +90,26 @@ update_file() {
   fi
 }
 
-# 1. Update .claude/VERSION (source of truth)
-if [ "$VERSION" != "$(cat .claude/VERSION | tr -d '[:space:]')" ]; then
-  echo "Updating .claude/VERSION..."
-  echo "$VERSION" > .claude/VERSION
-  echo -e "${GREEN}✓ Updated: .claude/VERSION${NC}"
+# 1. Update VERSION (source of truth)
+if [ "$VERSION" != "$(cat VERSION | tr -d '[:space:]')" ]; then
+  echo "Updating VERSION..."
+  echo "$VERSION" > VERSION
+  echo -e "${GREEN}✓ Updated: VERSION${NC}"
   ((UPDATED_FILES++))
 else
-  echo -e "${YELLOW}⊘ Already correct: .claude/VERSION${NC}"
+  echo -e "${YELLOW}⊘ Already correct: VERSION${NC}"
 fi
 
 echo ""
 
-# 2. Update .claude/plugin.json
-update_file ".claude/plugin.json" \
-  ".claude/plugin.json" \
-  "s/\"version\": \"[0-9]*\.[0-9]*\.[0-9]*\"/\"version\": \"$VERSION\"/g"
-
-# 3. Update .claude-plugin/marketplace.json (both version fields)
+# 2. Update .claude-plugin/marketplace.json
 update_file ".claude-plugin/marketplace.json" \
   ".claude-plugin/marketplace.json" \
+  "s/\"version\": \"[0-9]*\.[0-9]*\.[0-9]*\"/\"version\": \"$VERSION\"/g"
+
+# 3. Update plugins/orchestr8/.claude-plugin/plugin.json
+update_file "plugins/orchestr8/.claude-plugin/plugin.json" \
+  "plugins/orchestr8/.claude-plugin/plugin.json" \
   "s/\"version\": \"[0-9]*\.[0-9]*\.[0-9]*\"/\"version\": \"$VERSION\"/g"
 
 # 4. Update Rust binary version in Cargo.toml
@@ -129,9 +129,9 @@ if [ $FAILED_FILES -eq 0 ]; then
   echo -e "  Failed files:  ${GREEN}0${NC}"
   echo ""
   echo "Version locations updated:"
-  echo "  ✓ .claude/VERSION"
-  echo "  ✓ .claude/plugin.json"
-  echo "  ✓ .claude-plugin/marketplace.json (both fields)"
+  echo "  ✓ VERSION (root)"
+  echo "  ✓ .claude-plugin/marketplace.json"
+  echo "  ✓ plugins/orchestr8/.claude-plugin/plugin.json"
   echo "  ✓ plugins/orchestr8/mcp-server/orchestr8-bin/Cargo.toml"
   echo ""
   echo "All versions now: ${GREEN}$VERSION${NC}"
@@ -147,7 +147,7 @@ if [ $FAILED_FILES -eq 0 ]; then
   echo "Next steps:"
   echo "  1. Review: git diff"
   echo "  2. Stage:  git add ."
-  echo "  3. Commit: git commit -m 'chore: sync versions to $VERSION'"
+  echo "  3. Commit: git commit -m 'chore: bump version to $VERSION'"
   echo ""
 else
   echo -e "${RED}❌ Version sync failed!${NC}"

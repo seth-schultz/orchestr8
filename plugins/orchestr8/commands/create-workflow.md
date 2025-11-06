@@ -1,3 +1,9 @@
+---
+description: Create new orchestration workflow with phase design, quality gates, and comprehensive documentation
+argument-hint: [workflow-requirements-or-description]
+model: haiku
+---
+
 # Create Workflow
 
 Autonomous workflow for creating new orchestration workflows with comprehensive phase design, quality gates, and plugin integration.

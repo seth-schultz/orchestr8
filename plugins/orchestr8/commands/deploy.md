@@ -1,3 +1,9 @@
+---
+description: Safe production deployment with pre-deployment validation, health checks, and automatic rollback capabilities
+argument-hint: [environment-staging-or-production]
+model: sonnet
+---
+
 # Deploy Workflow
 
 Autonomous, safe production deployment from pre-deployment validation to post-deployment monitoring with automatic rollback capabilities.
@@ -27,7 +33,7 @@ Autonomous, safe production deployment from pre-deployment validation to post-de
 
 ### Phase 1: Pre-Deployment Validation (0-20%)
 
-**Use all quality agents in parallel:**
+**🚀 PARALLEL EXECUTION REQUIRED (3x speedup):** Run all pre-deployment validation gates in parallel (code quality, security scan, performance baseline). Use a single message with 3 Task tool calls to execute quality reviewer, security auditor, and performance analyzer concurrently. Each produces separate validation reports, so no conflicts.
 
 #### 1. Code Quality Gates
 

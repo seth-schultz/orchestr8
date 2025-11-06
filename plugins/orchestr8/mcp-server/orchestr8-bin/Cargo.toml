@@ -1,6 +1,6 @@
 [package]
 name = "orchestr8-bin"
-version = "5.8.3"
+version = "5.9.0"
 edition = "2021"
 authors = ["Seth Schultz <orchestr8@sethschultz.com>"]
 description = "Ultra-fast Rust MCP stdio server for orchestr8 agent discovery using DuckDB"

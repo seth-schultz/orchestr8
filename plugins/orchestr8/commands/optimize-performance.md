@@ -1,3 +1,9 @@
+---
+description: Comprehensive performance optimization with profiling, bottleneck identification, and benchmarking across frontend, backend, and database
+argument-hint: [target-component-or-all]
+model: sonnet
+---
+
 # Optimize Performance Workflow
 
 ## ⚠️ CRITICAL: Autonomous Orchestration Required

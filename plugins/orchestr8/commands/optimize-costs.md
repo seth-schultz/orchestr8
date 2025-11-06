@@ -1,3 +1,9 @@
+---
+description: Comprehensive cloud cost optimization covering right-sizing, storage, reserved capacity, auto-scaling, and FinOps governance
+argument-hint: [infrastructure-description]
+model: sonnet
+---
+
 # Optimize Costs Workflow
 
 ## ⚠️ CRITICAL: Autonomous Orchestration Required
@@ -152,6 +158,10 @@ TOKENS_USED=6000
   "Initial cost analysis and waste identification" \
   "$(head -n 50 cost-analysis-report.md)"
 ```
+
+---
+
+**🚀 PARALLEL EXECUTION OPPORTUNITY (5x speedup):** Phases 2-6 (right-sizing, storage, reserved capacity, auto-scaling, networking) can run in parallel since each optimizes independent cost dimensions. Use a single message with 5 Task tool calls to analyze all optimization areas concurrently. Each produces separate recommendation files (rightsizing-recommendations.md, storage-optimization.md, reserved-capacity-plan.md, autoscaling-config.md, network-optimization.md), so no conflicts. Phase 7 implements all optimizations after analysis complete.
 
 ---
 

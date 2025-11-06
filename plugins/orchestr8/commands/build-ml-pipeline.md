@@ -1,3 +1,9 @@
+---
+description: Build complete ML pipeline from data ingestion, preprocessing, training, evaluation, to production deployment with MLOps
+argument-hint: [ml-problem-description]
+model: opus
+---
+
 # Build ML Pipeline Workflow
 
 Autonomous end-to-end ML pipeline development from raw data to production deployment.

@@ -1,3 +1,9 @@
+---
+description: Create complete projects end-to-end with requirements analysis, architecture design, implementation, testing, and deployment
+argument-hint: [project-description]
+model: opus
+---
+
 # New Project Workflow
 
 Autonomous workflow for creating complete projects from requirements to deployment with multi-phase orchestration and quality gates.
@@ -632,7 +638,7 @@ TOKENS_USED=10000
 
 ## Phase 7: Quality Gates (80-90%)
 
-Run all quality gates in parallel.
+**🚀 PARALLEL EXECUTION REQUIRED:** Run all 3 quality gates in parallel for maximum speed. Use a single message with 3 Task tool calls to execute code-reviewer, security-auditor, and performance-analyzer agents concurrently. Each writes to separate output files, so no conflicts.
 
 ### Gate 7.1: Code Review
 

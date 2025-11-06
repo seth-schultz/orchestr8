@@ -1,3 +1,9 @@
+---
+description: Automated web UI testing with visual testing, functional testing, accessibility validation, and performance analysis
+argument-hint: [app-url-or-path]
+model: haiku
+---
+
 # Test Web UI Workflow
 
 Autonomous web UI testing that views, tests, debugs, and fixes frontend applications using browser automation and visual testing.
@@ -90,6 +96,10 @@ echo "✅ Application launched and structure discovered"
 **Track Progress:** 10% complete
 
 **CHECKPOINT**: Application running and structure mapped ✓
+
+---
+
+**🚀 PARALLEL EXECUTION OPPORTUNITY (4x speedup):** Phases 2-5 (visual, functional, accessibility, performance testing) can run in parallel since each tests different aspects independently. Use a single message with 4 Task tool calls to run all test types concurrently. Each produces separate test reports (visual-test-report.md, functional-test-report.md, a11y-test-report.md, performance-test-report.md), so no conflicts.
 
 ---
 

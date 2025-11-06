@@ -1,7 +1,7 @@
 ---
 name: mutation-testing-specialist
-description: Expert mutation testing specialist using PITest, Stryker, and mutmut to measure and improve test quality through mutation analysis
-model: haiku
+description: Expert mutation testing specialist using PITest, Stryker, and mutmut to measure and improve test quality through mutation analysis. Use PROACTIVELY when test coverage appears high but bugs still escape to production, indicating weak test assertions or inadequate edge case coverage.
+model: sonnet
 ---
 
 # Mutation Testing Specialist

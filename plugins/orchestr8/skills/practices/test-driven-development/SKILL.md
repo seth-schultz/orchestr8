@@ -5,6 +5,24 @@ description: Expertise in Test-Driven Development (TDD) methodology. Activate wh
 
 # Test-Driven Development (TDD) Skill
 
+Expert knowledge of Test-Driven Development methodology, covering red-green-refactor cycles, test-first development, behavior-driven testing, and comprehensive test coverage strategies.
+
+## When to Use This Skill
+
+**Use test-driven-development for:**
+- ✅ Implementing new features with test-first approach
+- ✅ Fixing bugs with regression test creation
+- ✅ Refactoring code while maintaining test coverage
+- ✅ Building business logic and complex algorithms
+- ✅ Creating API endpoints with contract testing
+- ✅ Security-critical code requiring validation
+
+**Less critical for:**
+- ❌ Experimental or throwaway prototype code
+- ❌ Simple UI components with visual testing only
+- ❌ Well-tested CRUD operations using established frameworks
+- ❌ One-time scripts or utilities
+
 ## TDD Cycle: Red-Green-Refactor
 
 ### 1. RED: Write a Failing Test
@@ -215,21 +233,260 @@ it('should timeout after 5 seconds', async () => {
 }, 10000); // Test timeout longer than operation timeout
 ```
 
-## When to Use TDD
+## Multi-Language TDD Examples
 
-**Use TDD for:**
-- ✅ Business logic and algorithms
-- ✅ Data transformations
-- ✅ API endpoints
-- ✅ Bug fixes (write test that fails, then fix)
-- ✅ Complex state management
-- ✅ Security-critical code
+### Python TDD with pytest
 
-**TDD Less Critical for:**
-- UI components (test behavior, not rendering)
-- Experimental/prototype code
-- Simple CRUD with well-tested frameworks
-- Scripts run once
+```python
+# test_calculator.py
+import pytest
+from calculator import Calculator
+
+def test_add_two_numbers():
+    calc = Calculator()
+    result = calc.add(2, 3)
+    assert result == 5
+
+def test_divide_by_zero_raises_error():
+    calc = Calculator()
+    with pytest.raises(ZeroDivisionError):
+        calc.divide(10, 0)
+
+# calculator.py
+class Calculator:
+    def add(self, a, b):
+        return a + b
+
+    def divide(self, a, b):
+        if b == 0:
+            raise ZeroDivisionError("Cannot divide by zero")
+        return a / b
+```
+
+### Java TDD with JUnit 5
+
+```java
+// CalculatorTest.java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CalculatorTest {
+    @Test
+    void shouldAddTwoNumbers() {
+        Calculator calc = new Calculator();
+        int result = calc.add(2, 3);
+        assertEquals(5, result);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenDividingByZero() {
+        Calculator calc = new Calculator();
+        assertThrows(ArithmeticException.class, () -> {
+            calc.divide(10, 0);
+        });
+    }
+}
+
+// Calculator.java
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int divide(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+        return a / b;
+    }
+}
+```
+
+### Go TDD with testing package
+
+```go
+// calculator_test.go
+package calculator
+
+import "testing"
+
+func TestAdd(t *testing.T) {
+    calc := New()
+    result := calc.Add(2, 3)
+    if result != 5 {
+        t.Errorf("Add(2, 3) = %d; want 5", result)
+    }
+}
+
+func TestDivideByZero(t *testing.T) {
+    calc := New()
+    _, err := calc.Divide(10, 0)
+    if err == nil {
+        t.Error("Divide(10, 0) should return error")
+    }
+}
+
+// calculator.go
+package calculator
+
+import "errors"
+
+type Calculator struct{}
+
+func New() *Calculator {
+    return &Calculator{}
+}
+
+func (c *Calculator) Add(a, b int) int {
+    return a + b
+}
+
+func (c *Calculator) Divide(a, b int) (int, error) {
+    if b == 0 {
+        return 0, errors.New("cannot divide by zero")
+    }
+    return a / b, nil
+}
+```
+
+## Mocking and Test Doubles
+
+### Dependency Injection for Testability
+
+```typescript
+// Bad: Hard to test (direct dependency)
+class UserService {
+  async getUser(id: number) {
+    const db = new Database();  // ❌ Hard-coded dependency
+    return db.query(`SELECT * FROM users WHERE id = ${id}`);
+  }
+}
+
+// Good: Easy to test (injected dependency)
+class UserService {
+  constructor(private db: Database) {}  // ✅ Injected
+
+  async getUser(id: number) {
+    return this.db.query('SELECT * FROM users WHERE id = ?', [id]);
+  }
+}
+
+// Test with mock
+it('should fetch user from database', async () => {
+  const mockDb = {
+    query: jest.fn().mockResolvedValue({ id: 1, name: 'Test' })
+  };
+
+  const service = new UserService(mockDb as any);
+  const user = await service.getUser(1);
+
+  expect(mockDb.query).toHaveBeenCalledWith('SELECT * FROM users WHERE id = ?', [1]);
+  expect(user).toEqual({ id: 1, name: 'Test' });
+});
+```
+
+### Test Doubles: Mocks, Stubs, Spies
+
+```typescript
+// Stub: Returns predetermined values
+const stub = {
+  getUser: () => ({ id: 1, name: 'Stub User' })
+};
+
+// Mock: Verifies interactions
+const mock = {
+  getUser: jest.fn().mockReturnValue({ id: 1, name: 'Mock User' })
+};
+// expect(mock.getUser).toHaveBeenCalledWith(1);
+
+// Spy: Wraps real object, tracks calls
+const spy = jest.spyOn(service, 'getUser');
+await service.getUser(1);
+expect(spy).toHaveBeenCalledWith(1);
+```
+
+## TDD Anti-Patterns
+
+### ❌ Anti-Pattern 1: Testing Implementation Details
+
+```typescript
+// Bad: Brittle test coupled to implementation
+it('should call setName and setEmail', () => {
+  const user = new User();
+  const setNameSpy = jest.spyOn(user, 'setName');
+  const setEmailSpy = jest.spyOn(user, 'setEmail');
+
+  user.update({ name: 'John', email: 'john@example.com' });
+
+  expect(setNameSpy).toHaveBeenCalled();  // ❌ Testing HOW
+  expect(setEmailSpy).toHaveBeenCalled();
+});
+
+// Good: Test observable behavior
+it('should update user name and email', () => {
+  const user = new User();
+  user.update({ name: 'John', email: 'john@example.com' });
+
+  expect(user.name).toBe('John');  // ✅ Testing WHAT
+  expect(user.email).toBe('john@example.com');
+});
+```
+
+### ❌ Anti-Pattern 2: Over-Mocking
+
+```typescript
+// Bad: Mocking everything, not testing real integration
+it('should create order', async () => {
+  const mockValidator = { validate: jest.fn().mockReturnValue(true) };
+  const mockInventory = { checkStock: jest.fn().mockReturnValue(true) };
+  const mockPayment = { charge: jest.fn().mockResolvedValue({ id: '123' }) };
+  const mockDb = { save: jest.fn().mockResolvedValue({ id: 1 }) };
+  // ... testing nothing real
+});
+
+// Good: Integration test with real dependencies (or fewer mocks)
+it('should create order with real validation and inventory check', async () => {
+  const validator = new OrderValidator();
+  const inventory = new InventoryService(testDb);
+  const mockPayment = { charge: jest.fn().mockResolvedValue({ id: '123' }) };
+
+  const service = new OrderService(validator, inventory, mockPayment);
+  const order = await service.createOrder(validOrderData);
+
+  expect(order.status).toBe('confirmed');
+});
+```
+
+### ❌ Anti-Pattern 3: Slow Tests
+
+```typescript
+// Bad: Tests take too long to run
+it('should process order', async () => {
+  await sleep(5000);  // ❌ Artificial delays
+  await realDatabaseCall();  // ❌ Slow I/O in unit tests
+  // ... more slow operations
+});
+
+// Good: Fast, focused unit tests
+it('should process order', async () => {
+  const mockDb = createMockDb();
+  const result = await orderService.process(order);
+  expect(result.status).toBe('processed');
+});
+// Run slow integration tests separately
+```
+
+### ❌ Anti-Pattern 4: Write Tests After Code
+
+```typescript
+// ❌ Anti-pattern: Write code first, tests later
+// Result: Tests conform to existing code, miss edge cases
+
+// ✅ Correct: TDD Cycle
+// 1. Write failing test (RED)
+// 2. Write minimal code to pass (GREEN)
+// 3. Refactor (keep GREEN)
+```
 
 ## Remember
 

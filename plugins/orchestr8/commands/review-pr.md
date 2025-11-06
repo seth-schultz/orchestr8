@@ -1,3 +1,9 @@
+---
+description: Comprehensive PR review with multi-stage analysis (style, logic, security, performance, architecture) and automated GitHub feedback
+argument-hint: [pr-number]
+model: sonnet
+---
+
 # Pull Request Review Workflow
 
 You are orchestrating a comprehensive pull request review with multi-stage code analysis, GitHub integration, and automated feedback delivery.
@@ -206,7 +212,7 @@ TOKENS_USED=2000
 
 ## Phase 3: Multi-Stage Code Review (15-85%)
 
-This phase executes 5 parallel review stages for comprehensive analysis.
+**🚀 PARALLEL EXECUTION REQUIRED (5x speedup):** Execute all 5 review stages in parallel for maximum speed. Use a single message with 5 Task tool calls to run style, logic, security, performance, and architecture reviews concurrently. Each writes to separate output files (style-review-<PR#>.json, logic-review-<PR#>.json, security-review-<PR#>.json, performance-review-<PR#>.json, architecture-review-<PR#>.json), so no conflicts.
 
 ### Stage 1: Style & Readability (15-30%)
 

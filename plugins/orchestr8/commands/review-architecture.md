@@ -1,3 +1,9 @@
+---
+description: Comprehensive architecture review covering design patterns, SOLID principles, scalability, security, technical debt, and API design
+argument-hint: [scope-or-path]
+model: opus
+---
+
 # Architecture Review Workflow
 
 You are orchestrating a comprehensive architecture review that evaluates system design, architectural patterns, scalability, security architecture, and long-term maintainability.
@@ -129,6 +135,10 @@ TOKENS_USED=5000
   "Architecture map for codebase" \
   "$(head -n 50 architecture-map.md)"
 ```
+
+---
+
+**🚀 PARALLEL EXECUTION OPPORTUNITY (6x speedup):** After Phase 1 completes, Phases 2-7 can run in parallel since each analyzes independent dimensions (patterns, SOLID, scalability, security, technical debt, API design). Use a single message with 6 Task tool calls to execute all analysis phases concurrently. Each writes to separate output files (pattern-analysis.md, solid-analysis.md, scalability-analysis.md, security-architecture.md, technical-debt.md, api-architecture.md), so no conflicts. Phase 8 synthesizes results after all complete.
 
 ---
 

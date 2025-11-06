@@ -1,11 +1,26 @@
 ---
 name: plugin-architecture
-description: Expertise in Claude Code plugin structure, semantic versioning, metadata management, and component synchronization. Activate when creating plugins, updating versions, or managing plugin metadata.
+description: Expertise in Claude Code plugin structure, semantic versioning, metadata management, and component synchronization. Activate when creating plugins, updating versions, or managing plugin metadata. Guides proper plugin.json configuration, VERSION synchronization, and CHANGELOG maintenance, ensuring plugins remain discoverable and maintain compatibility.
 ---
 
 # Plugin Architecture Skill
 
 Expert knowledge of Claude Code plugin architecture, covering directory structure, plugin.json configuration, semantic versioning, component tracking, and metadata synchronization for the orchestr8 plugin system.
+
+## When to Use This Skill
+
+**Use plugin-architecture for:**
+- ✅ Creating new Claude Code plugins from scratch
+- ✅ Configuring plugin.json with proper metadata and discovery patterns
+- ✅ Managing semantic versioning (MAJOR.MINOR.PATCH) across releases
+- ✅ Synchronizing VERSION file with plugin.json and CHANGELOG.md
+- ✅ Organizing plugin directory structure (agents/, commands/, skills/)
+- ✅ Ensuring plugin discoverability and marketplace compatibility
+
+**Less critical for:**
+- ❌ Creating individual agents or workflows (use those specific skills)
+- ❌ Plugin usage or installation (this is for plugin creation/maintenance)
+- ❌ Non-plugin Claude Code projects
 
 ## Plugin Directory Structure
 

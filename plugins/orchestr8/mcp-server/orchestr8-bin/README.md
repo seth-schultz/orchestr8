@@ -87,7 +87,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Clone repository
 git clone https://github.com/seth-schultz/orchestr8.git
-cd orchestr8/.claude/mcp-server/orchestr8-bin
+cd orchestr8/plugins/orchestr8/mcp-server/orchestr8-bin
 
 # Build release binary
 cargo build --release
@@ -130,7 +130,7 @@ orchestr8-bin [OPTIONS]
 
 OPTIONS:
   -r, --root <ROOT>            Project root directory (auto-detected if omitted)
-  -d, --data-dir <DATA_DIR>    Data directory for DuckDB [default: .claude/mcp-server/data]
+  -d, --data-dir <DATA_DIR>    Data directory for DuckDB [default: plugins/orchestr8/mcp-server/data]
   -l, --log-level <LOG_LEVEL>  Log level: trace, debug, info, warn, error [default: info]
       --json-logs              Enable JSON structured logging
       --cache-ttl <SECONDS>    Cache TTL in seconds [default: 300]
@@ -477,7 +477,7 @@ orchestr8-bin --cache-size 100 --cache-ttl 60
 Check database size and consider rebuilding:
 
 ```bash
-rm -rf .claude/mcp-server/data/orchestr8.duckdb
+rm -rf plugins/orchestr8/mcp-server/data/orchestr8.duckdb
 orchestr8-bin  # Will rebuild on startup
 ```
 

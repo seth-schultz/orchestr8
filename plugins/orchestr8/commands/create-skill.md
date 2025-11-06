@@ -1,3 +1,9 @@
+---
+description: Create new auto-activated skill with reusable expertise, examples, and best practices
+argument-hint: [skill-requirements-or-description]
+model: haiku
+---
+
 # Create Skill
 
 Autonomous workflow for creating new auto-activated skills that augment agent capabilities with reusable expertise.

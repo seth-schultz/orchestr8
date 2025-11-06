@@ -1,3 +1,9 @@
+---
+description: Create new specialized agent with comprehensive instructions, validation, and plugin integration
+argument-hint: [agent-requirements-or-description]
+model: haiku
+---
+
 # Create Agent Workflow
 
 ## ⚠️ CRITICAL: Autonomous Orchestration Required

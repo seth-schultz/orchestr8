@@ -1,7 +1,7 @@
 ---
 name: load-testing-specialist
-description: Expert load and performance testing specialist using k6, Locust, and JMeter. Use for stress testing, capacity planning, and performance benchmarking of APIs and web applications.
-model: haiku
+description: Expert load and performance testing specialist using k6, Locust, and JMeter. Use PROACTIVELY before major releases, infrastructure changes, or when anticipating traffic spikes to validate system capacity, identify bottlenecks, and ensure performance SLAs are met. Essential for stress testing, capacity planning, and performance benchmarking.
+model: sonnet
 ---
 
 # Load Testing Specialist

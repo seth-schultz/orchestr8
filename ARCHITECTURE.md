@@ -221,14 +221,11 @@ orchestr8/
 │   ├── fix-bug.md
 │   └── ...
 ├── skills/                         ← Reusable expertise
-└── .claude/
-    ├── mcp-server/                ← Rust MCP server binary
-    │   └── orchestr8-bin/target/release/orchestr8-bin
-    ├── plugin.json                ← MCP server config
-    └── CLAUDE.md                  ← This file
+└── mcp-server/                     ← Rust MCP server binary
+    └── orchestr8-bin/target/release/orchestr8-bin
 ```
 
-**Key Point:** Agents are in root `/agent-definitions/`, NOT in `.claude/agents/`. This prevents Claude Code from auto-discovering them. MCP server is explicitly configured to load from `${CLAUDE_WORKSPACE_ROOT}/agent-definitions`.
+**Key Point:** Agents are in `plugins/orchestr8/agent-definitions/`, NOT auto-discovered by Claude Code. MCP server is explicitly configured to load from this directory via plugin.json configuration.
 
 ## Execution Patterns
 

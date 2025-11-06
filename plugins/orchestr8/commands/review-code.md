@@ -1,3 +1,9 @@
+---
+description: Comprehensive multi-stage code review evaluating style, logic, security, performance, and architecture quality
+argument-hint: [scope-path-or-all]
+model: sonnet
+---
+
 # Multi-Stage Code Review Workflow
 
 You are orchestrating a comprehensive multi-stage iterative code review that evaluates code quality across multiple dimensions: style, logic, security, performance, and architecture.
@@ -130,6 +136,10 @@ TOKENS_USED=2000
   "Review scope: $SCOPE" \
   "Type: [full|directory|file|PR|changed], Files: [count]"
 ```
+
+---
+
+**🚀 PARALLEL EXECUTION OPPORTUNITY (5x speedup):** Phases 2-6 (all 5 review stages) can run in parallel since each analyzes different quality dimensions independently. Use a single message with 5 Task tool calls to execute style, logic, security, performance, and architecture reviews concurrently. Each writes to separate output files (style-review.md, logic-review.md, security-review.md, performance-review.md, architecture-review.md), so no conflicts.
 
 ---
 

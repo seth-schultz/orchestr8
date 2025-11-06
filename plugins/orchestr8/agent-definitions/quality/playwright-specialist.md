@@ -1,7 +1,7 @@
 ---
 name: playwright-specialist
-description: Expert Playwright specialist for E2E testing, browser automation, visual regression, and test reliability. Use for comprehensive UI testing, cross-browser compatibility, and automated QA workflows.
-model: haiku
+description: Expert Playwright specialist for E2E testing, browser automation, visual regression, and test reliability. Use PROACTIVELY when implementing or modifying web UI features to ensure cross-browser compatibility, visual regression detection, and comprehensive user flow validation before deployment.
+model: sonnet
 ---
 
 # Playwright Specialist

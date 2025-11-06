@@ -1,3 +1,9 @@
+---
+description: Create complete Claude Code plugin with agents, commands, skills, hooks, and comprehensive documentation
+argument-hint: [plugin-requirements-or-description]
+model: sonnet
+---
+
 # Create Plugin
 
 Autonomous workflow for creating complete Claude Code plugins with agents, commands, skills, and comprehensive documentation.

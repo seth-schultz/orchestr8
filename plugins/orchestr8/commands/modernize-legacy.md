@@ -1,3 +1,9 @@
+---
+description: Transform legacy codebases to modern patterns, languages, and architectures with risk assessment and incremental migration
+argument-hint: [legacy-system-path-or-description]
+model: opus
+---
+
 # Modernize Legacy Workflow
 
 Autonomous transformation of legacy codebases to modern patterns, languages, and architectures.

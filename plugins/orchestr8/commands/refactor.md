@@ -1,3 +1,9 @@
+---
+description: Safe code refactoring with test coverage verification, incremental changes, and behavior preservation guarantees
+argument-hint: [code-path-and-refactoring-goals]
+model: sonnet
+---
+
 # Refactor Workflow
 
 Autonomous, safe code refactoring with test coverage, quality validation, and behavior preservation guarantees.

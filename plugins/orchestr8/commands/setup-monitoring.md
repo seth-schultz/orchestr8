@@ -1,3 +1,9 @@
+---
+description: Deploy complete observability stack with metrics, logs, traces, dashboards, and alerting
+argument-hint: [infrastructure-description]
+model: sonnet
+---
+
 # Setup Monitoring Workflow
 
 ## ⚠️ CRITICAL: Autonomous Orchestration Required
@@ -148,6 +154,10 @@ TOKENS_USED=5000
   "Observability architecture and SLO definitions" \
   "$(head -n 50 observability-architecture.md)"
 ```
+
+---
+
+**🚀 PARALLEL EXECUTION OPPORTUNITY (3x speedup):** After Phase 1, Phases 2, 4, and 5 (metrics infrastructure, logging infrastructure, distributed tracing backends) can deploy in parallel as they're independent components. Use a single message with 3 Task tool calls to deploy all three infrastructure stacks concurrently. Phase 3 (application instrumentation) runs after infrastructure is ready. Phase 6-8 run sequentially after all infrastructure and instrumentation complete.
 
 ---
 

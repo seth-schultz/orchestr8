@@ -1,3 +1,9 @@
+---
+description: Add new features safely with automated design, implementation, testing, code review, and security validation
+argument-hint: [feature-description]
+model: sonnet
+---
+
 # Add Feature Workflow
 
 ## ⚠️ CRITICAL: Autonomous Orchestration Required
@@ -324,7 +330,7 @@ TOKENS_USED=8000
 
 ## Phase 3: Quality Gates (70-90%)
 
-Run all quality gates in parallel where possible:
+**🚀 PARALLEL EXECUTION REQUIRED:** Run all 5 quality gates in parallel for maximum speed (5x speedup). Use a single message with 5 Task tool calls to execute code-reviewer, test-engineer, security-auditor, performance-analyzer, and accessibility-expert agents concurrently. Each writes to separate output files (code-review-report.md, test-report.md, security-report.md, performance-report.md, accessibility-report.md), so no conflicts.
 
 ### Quality Gate 1: Code Review
 

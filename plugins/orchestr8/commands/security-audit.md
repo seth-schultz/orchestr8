@@ -1,3 +1,9 @@
+---
+description: Comprehensive security audit covering vulnerability scanning, code analysis, secret detection, dependency auditing, and compliance validation
+argument-hint: [scope-or-all]
+model: sonnet
+---
+
 # Security Audit Workflow
 
 Autonomous, comprehensive security auditing from reconnaissance to remediation with compliance validation.
@@ -142,6 +148,8 @@ TOKENS_USED=5000
 ---
 
 ## Phase 2: Automated Security Scanning (15-45%)
+
+**🚀 PARALLEL EXECUTION REQUIRED (5x speedup):** Run all 5 security scanning types in parallel (dependency scanning, SAST, secret detection, container security, IaC auditing). Each scanner produces separate report files in security-reports/, so no conflicts.
 
 **⚡ EXECUTE TASK TOOL:**
 ```

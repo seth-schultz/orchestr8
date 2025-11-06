@@ -1,3 +1,9 @@
+---
+description: Debug and fix bugs systematically with root cause analysis, regression tests, and validation
+argument-hint: [bug-description-and-reproduction-steps]
+model: haiku
+---
+
 # Fix Bug Workflow
 
 ## ⚠️ CRITICAL: Autonomous Orchestration Required
