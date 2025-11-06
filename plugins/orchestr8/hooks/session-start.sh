@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Session start hook for orchestr8
 # Runs when Claude Code starts a new session or resumes an existing session
-# Ensures MCP binary is downloaded, executable, and functional
+# Ensures MCP binary exists and is ready for Claude Code to start
+#
+# NOTE: This hook does NOT start the MCP server - Claude Code manages that
+# automatically via the mcpServers config in plugin.json. Each Claude Code
+# session gets its own MCP server process that Claude Code starts/stops.
 
 set -euo pipefail
 
@@ -29,46 +33,40 @@ NEEDS_DOWNLOAD=false
 
 if [ ! -f "$MCP_BINARY" ]; then
     NEEDS_DOWNLOAD=true
-    echo "⚠️  orchestr8 MCP binary not found, downloading..."
 elif [ ! -x "$MCP_BINARY" ]; then
-    echo "⚠️  MCP binary exists but is not executable, fixing permissions..."
-    chmod +x "$MCP_BINARY" || {
-        echo "❌ Failed to make binary executable"
-        NEEDS_DOWNLOAD=true
-    }
+    # Try to make it executable
+    chmod +x "$MCP_BINARY" 2>/dev/null || NEEDS_DOWNLOAD=true
 fi
 
 # Download binary if needed
 if [ "$NEEDS_DOWNLOAD" = true ]; then
     if [ -f "$PLUGIN_ROOT/hooks/post-install.sh" ]; then
         bash "$PLUGIN_ROOT/hooks/post-install.sh" || {
-            echo "❌ Failed to download MCP binary"
-            echo "   Please run manually: bash $PLUGIN_ROOT/hooks/post-install.sh"
+            echo "⚠️  orchestr8: Failed to download MCP binary"
+            echo "   Run manually: bash $PLUGIN_ROOT/hooks/post-install.sh"
             exit 1
         }
     else
-        echo "❌ Post-install script not found at: $PLUGIN_ROOT/hooks/post-install.sh"
+        echo "⚠️  orchestr8: Post-install script not found"
         exit 1
     fi
 
-    # Verify binary was downloaded and is executable
+    # Verify binary was downloaded
     if [ ! -f "$MCP_BINARY" ]; then
-        echo "❌ MCP binary not found after download attempt: $MCP_BINARY"
+        echo "⚠️  orchestr8: Binary not found after download"
         exit 1
     fi
 
-    if [ ! -x "$MCP_BINARY" ]; then
-        echo "❌ MCP binary is not executable after download"
+    # Ensure it's executable
+    chmod +x "$MCP_BINARY" 2>/dev/null || {
+        echo "⚠️  orchestr8: Failed to make binary executable"
         exit 1
-    fi
+    }
 fi
 
-# Verify binary is functional (quick test)
-if ! "$MCP_BINARY" --help &>/dev/null; then
-    echo "❌ MCP binary exists but failed to run"
-    echo "   Binary path: $MCP_BINARY"
-    echo "   Try reinstalling: bash $PLUGIN_ROOT/hooks/post-install.sh"
-    exit 1
+# On macOS, remove quarantine attribute if present (prevents Gatekeeper issues)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    xattr -d com.apple.quarantine "$MCP_BINARY" 2>/dev/null || true
 fi
 
 # Store MCP paths in environment for Claude Code's use
@@ -77,5 +75,5 @@ if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
     echo "ORCHESTR8_MCP_DATA_DIR=$MCP_DATA_DIR" >> "$CLAUDE_ENV_FILE"
 fi
 
-# Silent success - MCP server will be started by Claude Code using mcpServers config
+# Success - Claude Code will start the MCP server automatically
 exit 0
