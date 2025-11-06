@@ -32,11 +32,11 @@ jobs:
             target: x86_64-unknown-linux-gnu
             archive_suffix: linux-x86_64
 
-          # Linux ARM64
-          - os: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            archive_suffix: linux-arm64
-            use_cross: true
+          # Linux ARM64 - DISABLED: GCC cross-compile error with DuckDB
+          # - os: ubuntu-latest
+          #   target: aarch64-unknown-linux-gnu
+          #   archive_suffix: linux-arm64
+          #   use_cross: true
 
     steps:
       - name: Checkout code
@@ -149,16 +149,14 @@ jobs:
             "orchestr8-bin-darwin-arm64.tar.gz.sha256"
             "orchestr8-bin-linux-x86_64.tar.gz"
             "orchestr8-bin-linux-x86_64.tar.gz.sha256"
-            "orchestr8-bin-linux-arm64.tar.gz"
-            "orchestr8-bin-linux-arm64.tar.gz.sha256"
           )
 
           ASSET_COUNT=$(gh release view "$TAG" --json assets -q '.assets | length')
-          if [ "$ASSET_COUNT" -ne 8 ]; then
-            echo "ERROR: Expected 8 assets, found $ASSET_COUNT"
+          if [ "$ASSET_COUNT" -ne 6 ]; then
+            echo "ERROR: Expected 6 assets, found $ASSET_COUNT"
             exit 1
           fi
 
-          echo "✅ Release $TAG verified with all 8 assets"
+          echo "✅ Release $TAG verified with all 6 assets"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
