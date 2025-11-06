@@ -11,7 +11,7 @@ Transform Claude Code into a fully autonomous software engineering team. orchest
 
 - **74 Specialized Agents (JIT Loaded)** - Language experts, cloud specialists, compliance agents, QA engineers, and more
 - **Single MCP Plugin** - Rust-based stdio server with zero port conflicts
-- **20 Discoverable Workflows** - Type `/` to see all workflows; `/new-project`, `/add-feature`, `/fix-bug`, `/security-audit`, etc.
+- **20 Discoverable Workflows** - Type `/` to see all workflows; `/orchestr8:new-project`, `/orchestr8:add-feature`, `/orchestr8:fix-bug`, `/orchestr8:security-audit`, etc.
 - **Workflow Discovery via MCP** - All workflows auto-discovered as slash commands (prompts/list + prompts/get)
 - **<1ms Agent Discovery** - Ultra-fast MCP queries via in-memory DuckDB
 - **<10ms Agent Loading** - Cold definition load, <1ms cached via LRU
@@ -40,27 +40,27 @@ Transform Claude Code into a fully autonomous software engineering team. orchest
 
 ### Build New Projects End-to-End
 ```
-/new-project "Build a payment processing microservice"
+/orchestr8:new-project "Build a payment processing microservice"
 → Requirements analysis → Architecture design → Implementation
 → Testing → Security audit → Deployment
 ```
 
 ### Add Features Safely
 ```
-/add-feature "User authentication with OAuth2"
+/orchestr8:add-feature "User authentication with OAuth2"
 → Design → Frontend + Backend implementation → Tests → Code review
 → Security validation → Documentation
 ```
 
 ### Fix Bugs Systematically
 ```
-/fix-bug "Authentication tokens expiring too early"
+/orchestr8:fix-bug "Authentication tokens expiring too early"
 → Reproduce → Root cause analysis → Fix → Tests → Validation
 ```
 
 ### Security Audits
 ```
-/security-audit
+/orchestr8:security-audit
 → Dependency scanning → Static analysis → Secret detection
 → Vulnerability remediation → Compliance check
 ```
@@ -92,32 +92,32 @@ git submodule add https://github.com/seth-schultz/orchestr8.git .claude
 Type `/` in Claude Code to see all 20 discoverable workflows as slash commands:
 
 ```
-/add-feature           - Add new features safely
-/build-ml-pipeline     - Build ML pipelines and models
-/create-agent          - Create specialized agents
-/create-plugin         - Create plugins
-/create-skill          - Create reusable skills
-/create-workflow       - Create workflows
-/deploy                - Deploy to production
-/fix-bug               - Fix bugs systematically
-/modernize-legacy      - Modernize legacy systems
-/new-project           - Start new projects
-/optimize-costs        - Optimize infrastructure costs
-/optimize-performance  - Optimize performance
-/refactor              - Refactor code safely
-/review-architecture   - Review architecture
-/review-code           - Review code quality
-/review-pr             - Review pull requests
-/security-audit        - Run security audits
-/setup-cicd            - Setup CI/CD pipelines
-/setup-monitoring      - Setup monitoring
-/test-web-ui           - Test web UI
+/orchestr8:add-feature           - Add new features safely
+/orchestr8:build-ml-pipeline     - Build ML pipelines and models
+/orchestr8:create-agent          - Create specialized agents
+/orchestr8:create-plugin         - Create plugins
+/orchestr8:create-skill          - Create reusable skills
+/orchestr8:create-workflow       - Create workflows
+/orchestr8:deploy                - Deploy to production
+/orchestr8:fix-bug               - Fix bugs systematically
+/orchestr8:modernize-legacy      - Modernize legacy systems
+/orchestr8:new-project           - Start new projects
+/orchestr8:optimize-costs        - Optimize infrastructure costs
+/orchestr8:optimize-performance  - Optimize performance
+/orchestr8:refactor              - Refactor code safely
+/orchestr8:review-architecture   - Review architecture
+/orchestr8:review-code           - Review code quality
+/orchestr8:review-pr             - Review pull requests
+/orchestr8:security-audit        - Run security audits
+/orchestr8:setup-cicd            - Setup CI/CD pipelines
+/orchestr8:setup-monitoring      - Setup monitoring
+/orchestr8:test-web-ui           - Test web UI
 ```
 
 ### Example: Create a New Project
 
 ```
-/new-project "Build a real-time chat application"
+/orchestr8:new-project "Build a real-time chat application"
 ```
 
 The orchestrator will:
@@ -131,7 +131,7 @@ The orchestrator will:
 ### Example: Add a Feature
 
 ```
-/add-feature "User authentication with OAuth2"
+/orchestr8:add-feature "User authentication with OAuth2"
 ```
 
 Automatically handles:
@@ -144,7 +144,7 @@ Automatically handles:
 ### Example: Run Security Audit
 
 ```
-/security-audit
+/orchestr8:security-audit
 ```
 
 Performs:
