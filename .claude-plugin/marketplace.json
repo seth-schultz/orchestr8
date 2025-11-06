@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Enterprise-grade hierarchical multi-agent orchestration system with 74 specialized agents, 20 autonomous workflows, and MCP-driven JIT agent loading (<1ms discovery, zero port conflicts, project-scoped)",
-    "version": "5.8.1"
+    "version": "5.8.2"
   },
   "plugins": [
     {
       "name": "orchestr8",
       "source": "./",
       "description": "MCP-powered orchestration engine: 74 agents, 20 workflows, JIT loading, fast Rust stdio server with DuckDB agent registry",
-      "version": "5.8.1"
+      "version": "5.8.2"
     }
   ]
 }

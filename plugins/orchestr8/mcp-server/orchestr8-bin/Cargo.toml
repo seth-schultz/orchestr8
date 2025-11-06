@@ -1,0 +1,85 @@
+[package]
+name = "orchestr8-bin"
+version = "5.8.2"
+edition = "2021"
+authors = ["Seth Schultz <orchestr8@sethschultz.com>"]
+description = "Ultra-fast Rust MCP stdio server for orchestr8 agent discovery using DuckDB"
+license = "MIT"
+repository = "https://github.com/seth-schultz/orchestr8"
+keywords = ["mcp", "agent-registry", "orchestration", "duckdb"]
+categories = ["command-line-utilities", "development-tools"]
+
+[lib]
+name = "orchestr8_bin"
+path = "src/lib.rs"
+
+[[bin]]
+name = "orchestr8-bin"
+path = "src/main.rs"
+
+[dependencies]
+# MCP Protocol & JSON-RPC
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database
+duckdb = { version = "1.4", features = ["bundled"] }
+
+# YAML parsing
+serde_yaml = "0.9"
+
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+
+# CLI argument parsing
+clap = { version = "4.4", features = ["derive", "env"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Caching
+lru = "0.12"
+
+# Path globbing
+glob = "0.3"
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# String utilities
+regex = "1.10"
+
+# Performance monitoring
+metrics = "0.21"
+metrics-exporter-prometheus = { version = "0.13", optional = true }
+
+# Cross-platform
+dirs = "5.0"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.4"
+tempfile = "3.8"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[profile.bench]
+inherits = "release"
+
+[[bench]]
+name = "query_benchmark"
+harness = false
+
+[features]
+default = []
+metrics = ["dep:metrics-exporter-prometheus"]
