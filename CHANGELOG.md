@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.0] - 2025-11-07
+
+### Added
+
+- **GitHub Community Standards**:
+  - `CODE_OF_CONDUCT.md` - Contributor Covenant 2.1 with enterprise-specific considerations
+  - `CONTRIBUTING.md` - Comprehensive development guide (19 KB) covering setup, architecture, standards, PR process
+  - `SECURITY.md` - Vulnerability reporting policy with response timelines and scope definitions
+  - `LICENSE` - MIT License with 2024 copyright
+  - GitHub issue templates - Bug, feature request, documentation, and security report templates
+  - GitHub PR template - Comprehensive checklist for code quality, testing, documentation, security
+
+### Improved
+
+- Repository now meets GitHub community standards checklist
+- Enhanced contributor experience with clear development guidelines
+- Formalized security vulnerability reporting process
+- Standardized issue triage and feature request workflow
+
 ## [6.1.0] - 2025-11-07
 
 ### Added
