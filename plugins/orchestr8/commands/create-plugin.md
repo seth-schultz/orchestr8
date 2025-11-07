@@ -1156,7 +1156,7 @@ Use the test-engineer agent to:
 4. Validate documentation quality and completeness
 5. Generate comprehensive validation report
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Validate plugin integration and quality"
 prompt: "Validate the newly created plugin:
 

@@ -38,7 +38,7 @@ Use the debugger agent to:
 4. Create review task list with TodoWrite
 5. Estimate review complexity and duration
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Determine review scope and prepare context"
 prompt: "Analyze and prepare the code review scope:
 
@@ -154,7 +154,7 @@ Use the code-reviewer agent to:
 4. Assess code readability and clarity
 5. Identify style violations and inconsistencies
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Review code style and readability"
 prompt: "Perform Stage 1: Style & Readability Review
 
@@ -238,7 +238,7 @@ Use the appropriate language specialist agent to:
 4. Validate input validation and sanitization
 5. Review algorithm correctness and efficiency
 
-subagent_type: "language-developers:python-developer"  # or language-developers:typescript-developer, language-developers:java-developer, etc. based on detected language
+subagent_type: "orchestr8:languages:python-developer"  # or orchestr8:languages:typescript-developer, language-developers:java-developer, etc. based on detected language
 description: "Review logic and correctness"
 prompt: "Perform Stage 2: Logic & Correctness Review
 
@@ -330,7 +330,7 @@ Use the security-auditor agent to:
 4. Check for injection vulnerabilities
 5. Identify security misconfigurations
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Perform comprehensive security audit"
 prompt: "Perform Stage 3: Security Audit
 
@@ -437,7 +437,7 @@ Use the performance-analyzer agent to:
 4. Identify memory leaks and resource management issues
 5. Suggest optimization opportunities
 
-subagent_type: "infrastructure-monitoring:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Analyze code performance and efficiency"
 prompt: "Perform Stage 4: Performance Analysis
 
@@ -528,7 +528,7 @@ Use the architect agent to:
 4. Assess scalability and maintainability
 5. Identify technical debt and refactoring opportunities
 
-subagent_type: "development-core:architect"
+subagent_type: "orchestr8:development:architect"
 description: "Review architecture and design patterns"
 prompt: "Perform Stage 5: Architecture Review
 
@@ -616,7 +616,7 @@ Use the code-review-orchestrator agent to:
 4. Generate master review report
 5. Create actionable recommendations with priorities
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Synthesize findings and generate master report"
 prompt: "Perform Stage 6: Synthesis & Report Generation
 
@@ -726,7 +726,7 @@ Use the technical-writer agent to:
 4. Document iteration strategy
 5. Generate review metrics summary
 
-subagent_type: "development-core:architect"
+subagent_type: "orchestr8:development:architect"
 description: "Deliver report and plan iterations"
 prompt: "Deliver review results and plan iterations:
 

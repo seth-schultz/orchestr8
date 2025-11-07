@@ -24,7 +24,7 @@ Autonomous, safe code refactoring with test coverage, quality validation, and be
 ```
 Use the code-archaeologist and code-reviewer agents to analyze current code and design refactoring strategy.
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Analyze current code and identify refactoring opportunities"
 prompt: "Analyze code for refactoring: $*
 
@@ -127,7 +127,7 @@ echo "20% - Analysis & planning complete"
 ```
 Use the test-engineer agent to ensure comprehensive test coverage before refactoring.
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Create comprehensive test suite for code being refactored"
 prompt: "Create bulletproof test suite for refactoring: $*
 
@@ -206,7 +206,7 @@ echo "35% - Test suite complete"
 ```
 Use the appropriate development agent to execute refactoring incrementally.
 
-subagent_type: "[language-developers:python-developer|language-developers:typescript-developer|language-developers:java-developer|language-developers:go-developer|language-developers:rust-developer]"
+subagent_type: "[orchestr8:languages:python-developer|orchestr8:languages:typescript-developer|orchestr8:languages:java-developer|orchestr8:languages:go-developer|orchestr8:languages:rust-developer]"
 description: "Execute refactoring incrementally with tests green at each step"
 prompt: "Execute refactoring incrementally: $*
 
@@ -315,7 +315,7 @@ echo "85% - Code refactored incrementally, tests green throughout"
 ```
 Use the code-reviewer agent to validate refactored code quality.
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Review refactored code quality"
 prompt: "Review refactored code: $*
 
@@ -366,7 +366,7 @@ Expected outputs:
 ```
 Use the test-engineer agent to validate all tests still pass.
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Verify all tests pass and coverage maintained"
 prompt: "Validate testing after refactoring: $*
 
@@ -411,7 +411,7 @@ Expected outputs:
 ```
 Use the security-auditor agent to verify no security regressions.
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Verify no security issues introduced"
 prompt: "Security check for refactoring: $*
 
@@ -444,7 +444,7 @@ Expected outputs:
 ```
 Use the performance-analyzer agent to verify performance maintained.
 
-subagent_type: "quality-assurance:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Verify performance maintained or improved"
 prompt: "Performance validation for refactoring: $*
 
@@ -513,7 +513,7 @@ echo "95% - Quality validation complete"
 ```
 Use the technical-writer agent to document refactoring and prepare deployment.
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Document refactoring and prepare for deployment"
 prompt: "Document refactoring and prepare deployment: $*
 

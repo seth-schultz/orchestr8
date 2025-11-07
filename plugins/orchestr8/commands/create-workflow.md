@@ -454,7 +454,7 @@ Use the test-engineer agent to:
 4. Create workflow usage documentation
 5. Generate test report
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Test and document new workflow"
 prompt: "Test the newly created workflow:
 

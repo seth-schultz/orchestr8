@@ -15,7 +15,7 @@ You MUST immediately delegate this entire workflow to the debugger agent using t
 **Delegation Instructions:**
 ```
 Use Task tool with:
-- subagent_type: "quality-assurance:debugger"
+- subagent_type: "orchestr8:quality:debugger"
 - description: "Debug and fix reported bug with regression test"
 - prompt: "Execute the fix-bug workflow for: [user's bug description and reproduction steps].
 
@@ -67,7 +67,7 @@ Use the debugger agent to:
 3. Reproduce bug locally with exact environment
 4. Create failing test that captures the bug
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Reproduce bug and create failing test"
 prompt: "Analyze and reproduce the reported bug:
 
@@ -164,7 +164,7 @@ Use the debugger agent with code-archaeologist if needed to:
 3. Determine affected scope and impact
 4. Document findings and fix strategy
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Identify root cause through debugging"
 prompt: "Perform root cause analysis for the bug:
 
@@ -255,7 +255,7 @@ Use appropriate development agent based on language to:
 3. Verify fix locally with all tests
 4. Ensure minimal changes with no side effects
 
-subagent_type: "[language-developers:python-developer|language-developers:typescript-developer|language-developers:java-developer|language-developers:go-developer|language-developers:rust-developer]"  # e.g., python-developer, typescript-developer
+subagent_type: "[orchestr8:languages:python-developer|orchestr8:languages:typescript-developer|orchestr8:languages:java-developer|orchestr8:languages:go-developer|orchestr8:languages:rust-developer]"  # e.g., python-developer, typescript-developer
 description: "Implement bug fix with defensive code"
 prompt: "Implement the bug fix based on root cause analysis:
 
@@ -352,7 +352,7 @@ Run all quality gates in parallel using multiple agents:
 
 Execute quality gates concurrently for speed.
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Run comprehensive test suite and regression tests"
 prompt: "Execute comprehensive testing for bug fix:
 
@@ -398,7 +398,7 @@ Use the code-reviewer agent to:
 3. Verify error handling
 4. Ensure maintainability
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Review bug fix code quality"
 prompt: "Review the bug fix implementation:
 
@@ -426,7 +426,7 @@ Use the security-auditor agent to:
 2. Check input validation
 3. Ensure no injection risks
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Audit bug fix for security issues"
 prompt: "Security audit of bug fix:
 
@@ -451,7 +451,7 @@ Use the code-archaeologist agent to:
 2. Verify fix covers all cases
 3. Check if bug exists elsewhere
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Check for similar bugs in codebase"
 prompt: "Search for similar bug patterns:
 
@@ -533,7 +533,7 @@ Use the technical-writer agent to:
 2. Create deployment documentation
 3. Prepare post-mortem analysis
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Document bug fix and deployment"
 prompt: "Document the bug fix:
 
@@ -612,7 +612,7 @@ Use the ci-cd-engineer agent to:
 3. Monitor metrics and verify
 4. Prepare rollback plan
 
-subagent_type: "devops-cloud:terraform-specialist"
+subagent_type: "orchestr8:devops:terraform-specialist"
 description: "Deploy bug fix with monitoring"
 prompt: "Deploy the bug fix:
 

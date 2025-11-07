@@ -38,7 +38,7 @@ Use the code-archaeologist agent to:
 6. Create risk assessment
 7. Develop modernization strategy
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Analyze legacy codebase and create modernization roadmap"
 prompt: "Analyze legacy system for modernization: $1
 
@@ -160,7 +160,7 @@ Use the test-engineer agent to:
 4. Implement end-to-end tests for business workflows
 5. Establish performance baselines
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Create comprehensive test suite for legacy code"
 prompt: "Create test coverage for legacy system: $1
 
@@ -292,7 +292,7 @@ Use the appropriate language specialist agent to:
 4. Handle language upgrades, framework migrations, or architecture refactoring
 5. Validate at each increment
 
-subagent_type: "[language-developers:python-developer|language-developers:typescript-developer|language-developers:java-developer|language-developers:go-developer|language-developers:rust-developer|development-core:architect]"
+subagent_type: "[orchestr8:languages:python-developer|orchestr8:languages:typescript-developer|orchestr8:languages:java-developer|orchestr8:languages:go-developer|orchestr8:languages:rust-developer|orchestr8:development:architect]"
 description: "Modernize legacy code incrementally"
 prompt: "Modernize legacy system incrementally: $1
 
@@ -592,7 +592,7 @@ Use the performance-analyzer agent to:
 4. Run load testing
 5. Validate performance improvements
 
-subagent_type: "quality-assurance:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Optimize performance and validate improvements"
 prompt: "Optimize modernized codebase performance: $1
 
@@ -707,7 +707,7 @@ Use the technical-writer agent to:
 4. Document rollback procedures
 5. Create monitoring and alerting guide
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Create documentation and deployment guides"
 prompt: "Document modernization and create deployment guides: $1
 

@@ -114,7 +114,7 @@ Use the architect agent to:
 5. Design data models and API contracts
 6. Present architecture to user for approval
 
-subagent_type: "development-core:architect"
+subagent_type: "orchestr8:development:architect"
 description: "Design system architecture and tech stack"
 prompt: "Design complete system architecture for project:
 
@@ -209,7 +209,7 @@ Use the appropriate language-specific agent to:
 5. Create basic configuration files (.env.example, etc.)
 6. Set up code quality tools (linting, formatting)
 
-subagent_type: "[language-developers:typescript-developer|language-developers:python-developer|language-developers:java-developer|language-developers:go-developer|language-developers:rust-developer]"
+subagent_type: "[orchestr8:languages:typescript-developer|orchestr8:languages:python-developer|orchestr8:languages:java-developer|orchestr8:languages:go-developer|orchestr8:languages:rust-developer]"
 description: "Initialize project structure and dependencies"
 prompt: "Initialize project based on architecture:
 
@@ -312,7 +312,7 @@ Use the backend-developer agent to:
 5. Set up error handling and logging
 6. Implement input validation and sanitization
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Implement backend APIs and business logic"
 prompt: "Implement complete backend based on design:
 
@@ -421,7 +421,7 @@ Use the frontend-developer agent to:
 6. Add form validation and error handling
 7. Ensure responsive design and accessibility
 
-subagent_type: "frontend-frameworks:react-specialist"
+subagent_type: "orchestr8:frontend:react-specialist"
 description: "Implement frontend UI and integration"
 prompt: "Implement complete frontend based on design:
 
@@ -532,7 +532,7 @@ Use the test-engineer agent to:
 5. Add performance tests if applicable
 6. Run all tests and ensure they pass
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Implement comprehensive test suite"
 prompt: "Create complete test suite for project:
 
@@ -652,7 +652,7 @@ Use the code-reviewer agent to:
 5. Check documentation and comments
 6. Generate code review report
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Comprehensive code quality review"
 prompt: "Review all project code for quality:
 
@@ -706,7 +706,7 @@ Use the security-auditor agent to:
 5. Verify OWASP Top 10 compliance
 6. Generate security audit report
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Security audit and vulnerability scan"
 prompt: "Perform comprehensive security audit:
 
@@ -757,7 +757,7 @@ Use the performance-analyzer agent to:
 5. Test API response times
 6. Generate performance report
 
-subagent_type: "quality-assurance:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Performance profiling and optimization"
 prompt: "Analyze project performance:
 
@@ -847,7 +847,7 @@ Use the ci-cd-engineer agent to:
 5. Configure deployment automation
 6. Add environment-specific configurations
 
-subagent_type: "devops-cloud:terraform-specialist"
+subagent_type: "orchestr8:devops:terraform-specialist"
 description: "Set up CI/CD pipeline"
 prompt: "Set up complete CI/CD pipeline:
 
@@ -896,7 +896,7 @@ Use appropriate infrastructure agent to:
 5. Set up monitoring and logging
 6. Configure backups
 
-subagent_type: "[devops-cloud:terraform-specialist|devops-cloud:aws-specialist|devops-cloud:docker-specialist]"
+subagent_type: "[orchestr8:devops:terraform-specialist|orchestr8:devops:aws-specialist|orchestr8:devops:terraform-specialist]"
 description: "Set up infrastructure and hosting"
 prompt: "Set up complete infrastructure:
 
@@ -952,7 +952,7 @@ Use the technical-writer agent to:
 5. Write deployment guide
 6. Add troubleshooting guide
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Create complete project documentation"
 prompt: "Create comprehensive documentation:
 
@@ -1016,7 +1016,7 @@ Use the devops-engineer agent to:
 5. Verify deployment health
 6. Set up rollback plan
 
-subagent_type: "devops-cloud:terraform-specialist"
+subagent_type: "orchestr8:devops:terraform-specialist"
 description: "Deploy application to environments"
 prompt: "Deploy application to production:
 

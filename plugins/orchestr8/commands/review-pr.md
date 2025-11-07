@@ -43,7 +43,7 @@ Use the debugger agent to:
 4. Analyze PR context (size, change type, risk level, related issues)
 5. Create review plan with TodoWrite
 
-subagent_type: "quality-assurance:debugger"
+subagent_type: "orchestr8:quality:debugger"
 description: "Gather PR context and metadata"
 prompt: "Fetch and analyze Pull Request #$1:
 
@@ -144,7 +144,7 @@ Use the code-reviewer agent to:
 4. Check for screenshots if UI changes
 5. Validate metadata (labels, reviewers, milestone)
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Validate PR metadata quality"
 prompt: "Validate metadata for PR #$PR_NUMBER:
 
@@ -225,7 +225,7 @@ Use the code-reviewer agent to:
 4. Identify complex functions (cyclomatic complexity)
 5. Generate line-level style feedback
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Review code style and readability"
 prompt: "Review style and readability for PR #$PR_NUMBER:
 
@@ -284,7 +284,7 @@ Use the appropriate language specialist agent to:
 4. Verify error handling
 5. Validate correctness of implementation
 
-subagent_type: "language-developers:typescript-developer"
+subagent_type: "orchestr8:languages:typescript-developer"
 description: "Review logic and correctness"
 prompt: "Review logic and correctness for PR #$PR_NUMBER:
 
@@ -329,7 +329,7 @@ Use the security-auditor agent to:
 4. Review authentication/authorization changes
 5. Analyze new dependency security
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Security audit of PR changes"
 prompt: "Perform security audit for PR #$PR_NUMBER:
 
@@ -397,7 +397,7 @@ Use the performance-analyzer agent to:
 4. Identify potential memory leaks
 5. Check database query optimization
 
-subagent_type: "infrastructure-monitoring:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Analyze performance impact"
 prompt: "Analyze performance impact for PR #$PR_NUMBER:
 
@@ -450,7 +450,7 @@ Use the architect agent to:
 4. Assess scalability impact
 5. Verify design pattern usage
 
-subagent_type: "development-core:architect"
+subagent_type: "orchestr8:development:architect"
 description: "Review architectural impact"
 prompt: "Review architecture for PR #$PR_NUMBER:
 
@@ -505,7 +505,7 @@ Use the technical-writer agent to:
 4. Format for GitHub markdown
 5. Include positive findings and recommendations
 
-subagent_type: "development-core:architect"
+subagent_type: "orchestr8:development:architect"
 description: "Generate PR review summary"
 prompt: "Generate comprehensive review summary for PR #$PR_NUMBER:
 
@@ -609,7 +609,7 @@ Use the code-reviewer agent to:
 4. Apply appropriate labels
 5. Update PR metadata if needed
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Post review to GitHub"
 prompt: "Post review feedback to PR #$PR_NUMBER:
 

@@ -1,0 +1,309 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'VERSION'
+      - 'CHANGELOG.md'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (leave empty to use VERSION file)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  # Detect version change and validate before release
+  detect-version-change:
+    name: Detect Version Change
+    runs-on: ubuntu-latest
+    outputs:
+      current_version: ${{ steps.current.outputs.version }}
+      previous_version: ${{ steps.previous.outputs.version }}
+      version_changed: ${{ steps.compare.outputs.changed }}
+      release_needed: ${{ steps.validate.outputs.needed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get current VERSION
+        id: current
+        run: |
+          VERSION=$(cat VERSION | tr -d '[:space:]')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $VERSION"
+
+      - name: Get previous VERSION from last tag
+        id: previous
+        run: |
+          # Try to get version from latest tag, fallback to VERSION file
+          PREVIOUS_VERSION=$(git describe --tags --abbrev=0 2>/dev/null | sed 's/v//' || echo "0.0.0")
+          echo "version=$PREVIOUS_VERSION" >> $GITHUB_OUTPUT
+          echo "Previous version: $PREVIOUS_VERSION"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          CURRENT=${{ steps.current.outputs.version }}
+          PREVIOUS=${{ steps.previous.outputs.version }}
+
+          if [ "$CURRENT" != "$PREVIOUS" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Version changed from $PREVIOUS to $CURRENT"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "Version unchanged: $CURRENT"
+          fi
+
+      - name: Validate version change
+        id: validate
+        run: |
+          CURRENT=${{ steps.current.outputs.version }}
+          PREVIOUS=${{ steps.previous.outputs.version }}
+          CHANGELOG=$(cat CHANGELOG.md)
+
+          # Check if version follows semantic versioning
+          if ! echo "$CURRENT" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "❌ Invalid version format: $CURRENT"
+            exit 1
+          fi
+
+          # Check CHANGELOG has entry for current version
+          if ! echo "$CHANGELOG" | grep -q "## \[$CURRENT\]"; then
+            echo "❌ CHANGELOG.md missing entry for version $CURRENT"
+            exit 1
+          fi
+
+          # Only proceed with release if version actually changed
+          if [ "$CURRENT" != "$PREVIOUS" ]; then
+            echo "needed=true" >> $GITHUB_OUTPUT
+            echo "✓ Release validation passed"
+          else
+            echo "needed=false" >> $GITHUB_OUTPUT
+            echo "⊘ Version unchanged, release not needed"
+          fi
+
+  # Run all CI checks before release
+  pre-release-checks:
+    name: Pre-Release Validation
+    runs-on: ubuntu-latest
+    needs: detect-version-change
+    if: needs.detect-version-change.outputs.release_needed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install -g markdownlint-cli jq
+
+      - name: Validate plugin structure
+        run: |
+          echo "🔍 Validating plugin structure..."
+
+          # Check required directories exist
+          for dir in plugins/orchestr8/agents plugins/orchestr8/commands plugins/orchestr8/.claude-plugin .claude-plugin; do
+            if [ ! -d "$dir" ]; then
+              echo "❌ Missing required directory: $dir"
+              exit 1
+            fi
+          done
+
+          # Check required files exist
+          for file in VERSION CHANGELOG.md README.md plugins/orchestr8/.claude-plugin/plugin.json .claude-plugin/marketplace.json; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Missing required file: $file"
+              exit 1
+            fi
+          done
+
+          echo "✓ Plugin structure is valid"
+
+      - name: Validate version consistency
+        run: |
+          echo "🔍 Validating version consistency..."
+
+          VERSION_FILE=$(cat VERSION | tr -d '\n')
+          PLUGIN_VERSION=$(jq -r '.version' plugins/orchestr8/.claude-plugin/plugin.json)
+          MARKETPLACE_META=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
+          MARKETPLACE_PLUGIN=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
+
+          if [ "$VERSION_FILE" != "$PLUGIN_VERSION" ] || \
+             [ "$VERSION_FILE" != "$MARKETPLACE_META" ] || \
+             [ "$VERSION_FILE" != "$MARKETPLACE_PLUGIN" ]; then
+            echo "❌ Version mismatch detected"
+            echo "  VERSION: $VERSION_FILE"
+            echo "  plugin.json: $PLUGIN_VERSION"
+            echo "  marketplace.json (metadata): $MARKETPLACE_META"
+            echo "  marketplace.json (plugins[0]): $MARKETPLACE_PLUGIN"
+            exit 1
+          fi
+
+          echo "✓ All versions consistent: $VERSION_FILE"
+
+      - name: Validate markdown syntax
+        run: |
+          echo "🔍 Validating markdown syntax..."
+          markdownlint README.md CHANGELOG.md ARCHITECTURE.md plugins/orchestr8/CLAUDE.md \
+            --ignore node_modules --config .markdownlint.json || true
+          echo "✓ Markdown validation complete"
+
+      - name: Validate agents and workflows
+        run: |
+          echo "🔍 Validating agents and workflows..."
+
+          AGENT_COUNT=$(find plugins/orchestr8/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          WORKFLOW_COUNT=$(find plugins/orchestr8/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+
+          if [ "$AGENT_COUNT" -eq 0 ]; then
+            echo "❌ No agents found"
+            exit 1
+          fi
+
+          if [ "$WORKFLOW_COUNT" -eq 0 ]; then
+            echo "❌ No workflows found"
+            exit 1
+          fi
+
+          echo "✓ Found $AGENT_COUNT agents and $WORKFLOW_COUNT workflows"
+
+  # Create release with generated notes
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [detect-version-change, pre-release-checks]
+    if: needs.detect-version-change.outputs.release_needed == 'true'
+    outputs:
+      release_url: ${{ steps.create_release.outputs.html_url }}
+      release_id: ${{ steps.create_release.outputs.id }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Extract changelog for this version
+        id: changelog
+        run: |
+          VERSION=${{ needs.detect-version-change.outputs.current_version }}
+
+          # Extract changelog section for this version
+          CHANGELOG=$(awk "/^## \[$VERSION\]/,/^## \[/" CHANGELOG.md | head -n -1)
+
+          # Escape for JSON
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+
+          echo "body=$CHANGELOG" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ needs.detect-version-change.outputs.current_version }}
+          release_name: Release v${{ needs.detect-version-change.outputs.current_version }}
+          body: ${{ steps.changelog.outputs.body }}
+          draft: false
+          prerelease: false
+
+      - name: Upload plugin.json as artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./plugins/orchestr8/.claude-plugin/plugin.json
+          asset_name: plugin.json
+          asset_content_type: application/json
+
+      - name: Upload marketplace.json as artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./.claude-plugin/marketplace.json
+          asset_name: marketplace.json
+          asset_content_type: application/json
+
+  # Post-release validation and notifications
+  post-release:
+    name: Post-Release Validation
+    runs-on: ubuntu-latest
+    needs: [detect-version-change, create-release]
+    if: needs.create-release.result == 'success'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify release assets
+        run: |
+          echo "✓ Release created: ${{ needs.create-release.outputs.release_url }}"
+          echo "Release ID: ${{ needs.create-release.outputs.release_id }}"
+          echo "Version: ${{ needs.detect-version-change.outputs.current_version }}"
+
+      - name: Create deployment summary
+        run: |
+          cat > release-summary.md << 'EOF'
+          # Release v${{ needs.detect-version-change.outputs.current_version }}
+
+          ## Release Information
+          - **Version**: ${{ needs.detect-version-change.outputs.current_version }}
+          - **Previous Version**: ${{ needs.detect-version-change.outputs.previous_version }}
+          - **Release URL**: ${{ needs.create-release.outputs.release_url }}
+          - **Timestamp**: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+          ## What's Changed
+          See the [release page](${{ needs.create-release.outputs.release_url }}) for detailed changelog.
+
+          ## Assets
+          - `plugin.json` - Plugin metadata
+          - `marketplace.json` - Marketplace configuration
+
+          ---
+          _Generated by GitHub Actions release workflow_
+          EOF
+          cat release-summary.md
+
+      - name: Comment on related commits
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const version = '${{ needs.detect-version-change.outputs.current_version }}';
+            const releaseUrl = '${{ needs.create-release.outputs.release_url }}';
+
+            console.log(`✅ Release v${version} created successfully!`);
+            console.log(`Release URL: ${releaseUrl}`);
+
+  # Optional: Notify on failure
+  release-failed:
+    name: Release Failed Notification
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Report failure
+        run: |
+          echo "❌ Release workflow failed"
+          echo "Check the workflow logs for details"
+          exit 1

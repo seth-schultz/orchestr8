@@ -15,7 +15,7 @@ You MUST immediately delegate this entire workflow to the feature-orchestrator a
 **Delegation Instructions:**
 ```
 Use Task tool with:
-- subagent_type: "orchestration:feature-orchestrator"
+- subagent_type: "orchestr8:orchestration:feature-orchestrator"
 - description: "Implement complete feature from analysis to deployment"
 - prompt: "Execute the add-feature workflow for: [user's feature description].
 
@@ -151,7 +151,7 @@ Use the appropriate backend agent to:
 4. Write unit tests for backend
 5. Write integration tests for API
 
-subagent_type: "[development-core:fullstack-developer|language-developers:python-developer|language-developers:typescript-developer|language-developers:java-developer|language-developers:go-developer|language-developers:rust-developer]"
+subagent_type: "[orchestr8:development:fullstack-developer|orchestr8:languages:python-developer|orchestr8:languages:typescript-developer|orchestr8:languages:java-developer|orchestr8:languages:go-developer|orchestr8:languages:rust-developer]"
 description: "Implement backend components for feature"
 prompt: "Implement backend for feature: $*
 
@@ -238,7 +238,7 @@ Use the frontend-developer agent to:
 4. Write component tests
 5. Write E2E tests
 
-subagent_type: "frontend-frameworks:react-specialist"
+subagent_type: "orchestr8:frontend:react-specialist"
 description: "Implement frontend components for feature"
 prompt: "Implement frontend for feature: $*
 
@@ -343,7 +343,7 @@ Use the code-reviewer agent to:
 4. Validate SOLID principles
 5. Identify code smells
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Review feature code quality"
 prompt: "Review code quality for feature: $*
 
@@ -421,7 +421,7 @@ Use the test-engineer agent to:
 4. Check test quality
 5. Generate coverage report
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Validate comprehensive testing"
 prompt: "Validate testing for feature: $*
 
@@ -501,7 +501,7 @@ Use the security-auditor agent to:
 4. Verify OWASP compliance
 5. Generate security report
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Audit feature security"
 prompt: "Security audit for feature: $*
 
@@ -577,14 +577,14 @@ echo "✅ Security audit passed"
 
 **⚡ EXECUTE TASK TOOL:**
 ```
-Use the infrastructure-monitoring:prometheus-grafana-specialist to:
+Use the orchestr8:infrastructure:prometheus-grafana-specialist to:
 1. Check for N+1 queries
 2. Verify response times
 3. Analyze bundle size (frontend)
 4. Check memory usage
 5. Generate performance report
 
-subagent_type: "infrastructure-monitoring:prometheus-grafana-specialist"
+subagent_type: "orchestr8:infrastructure:prometheus-grafana-specialist"
 description: "Analyze feature performance"
 prompt: "Performance analysis for feature: $*
 
@@ -735,7 +735,7 @@ Use the technical-writer agent to:
 4. Update architecture docs if design changed
 5. Create deployment documentation
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Document feature and prepare deployment"
 prompt: "Document feature and prepare for deployment: $*
 

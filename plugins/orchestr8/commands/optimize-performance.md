@@ -15,7 +15,7 @@ You MUST immediately delegate this entire workflow to the fullstack-developer or
 **Delegation Instructions:**
 ```
 Use Task tool with:
-- subagent_type: "development-core:fullstack-developer"
+- subagent_type: "orchestr8:development:fullstack-developer"
 - description: "Optimize application performance end-to-end"
 - prompt: "Execute the optimize-performance workflow for: [user's target/requirements].
 
@@ -92,7 +92,7 @@ Use the performance-analyzer agent to:
 5. Run infrastructure profiling (CloudWatch, container metrics)
 6. Capture baseline metrics in JSON format
 
-subagent_type: "infrastructure-monitoring:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Profile and establish performance baseline"
 prompt: "Establish comprehensive performance baseline for: $1
 
@@ -214,7 +214,7 @@ Use the architect agent to:
 4. Identify trade-offs and risks
 5. Define performance budget
 
-subagent_type: "development-core:architect"
+subagent_type: "orchestr8:development:architect"
 description: "Design comprehensive optimization strategy"
 prompt: "Design optimization strategy based on baseline metrics:
 
@@ -316,7 +316,7 @@ Use the frontend-developer agent to:
 4. Add service worker for caching
 5. Optimize bundle with tree shaking and minification
 
-subagent_type: "frontend-frameworks:react-specialist"
+subagent_type: "orchestr8:frontend:react-specialist"
 description: "Implement frontend performance optimizations"
 prompt: "Implement frontend optimizations from OPTIMIZATION-STRATEGY.md:
 
@@ -413,7 +413,7 @@ Use the backend-developer agent to:
 4. Optimize database connection pooling
 5. Add response compression
 
-subagent_type: "development-core:fullstack-developer"
+subagent_type: "orchestr8:development:fullstack-developer"
 description: "Implement backend performance optimizations"
 prompt: "Implement backend optimizations from OPTIMIZATION-STRATEGY.md:
 
@@ -633,7 +633,7 @@ Use the performance-analyzer agent to:
 5. Validate all performance targets met
 6. Generate comprehensive performance report
 
-subagent_type: "infrastructure-monitoring:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Benchmark improvements and validate targets"
 prompt: "Benchmark performance improvements and validate all targets met:
 

@@ -578,7 +578,7 @@ TOKENS_USED=9000
 
 **⚡ EXECUTE TASK TOOL:**
 ```
-subagent_type: "infrastructure-monitoring:observability-specialist"
+subagent_type: "orchestr8:infrastructure:observability-specialist"
 description: "Set up ML model monitoring and observability"
 prompt: "Implement comprehensive monitoring for ML model in production:
 

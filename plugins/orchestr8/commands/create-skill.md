@@ -527,7 +527,7 @@ Use the test-engineer agent to:
 4. Check for overlaps with existing skills
 5. Ensure cross-agent applicability
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Test skill content and validate quality"
 prompt: "Test and validate the newly created skill:
 

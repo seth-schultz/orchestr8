@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.1] - 2025-11-06
+
+### Fixed
+
+- Fixed incorrect agent name references in all workflow commands
+  - Corrected `orchestration:` → `orchestr8:orchestration:`
+  - Corrected `development-core:` → `orchestr8:development:`
+  - Corrected `devops-cloud:` → `orchestr8:devops:`
+  - Corrected `language-developers:` → `orchestr8:languages:`
+  - Corrected `quality-assurance:` → `orchestr8:quality:`
+  - Corrected `frontend-frameworks:` → `orchestr8:frontend:`
+  - Corrected `infrastructure-monitoring:` → `orchestr8:infrastructure:`
+  - Replaced non-existent agent references with proper equivalents
+
+### Changed
+
+- Redesigned GitHub Actions release workflow with best practices
+  - Automatic release creation when VERSION file changes
+  - Pre-release validation checks (structure, versions, content)
+  - Conditional execution to avoid unnecessary releases
+  - CHANGELOG.md integration for release notes
+  - Asset upload (plugin.json, marketplace.json)
+  - Improved job dependencies and output passing
+
+### Added
+
+- New `.github/workflows/release.yml` for automated releases
+- New `.github/RELEASE_WORKFLOW.md` documentation with comprehensive guide
+
 ## [6.0.0] - 2025-11-06
 
 ### 🚀 Major Feature: Research-Driven Development

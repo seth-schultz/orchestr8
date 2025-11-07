@@ -49,7 +49,7 @@ Use the code-reviewer agent to:
 7. Check for hardcoded values
 8. Validate security best practices
 
-subagent_type: "quality-assurance:code-reviewer"
+subagent_type: "orchestr8:quality:code-reviewer"
 description: "Pre-deployment code review validation"
 prompt: "Perform pre-deployment code review:
 
@@ -114,7 +114,7 @@ Use the test-engineer agent to:
 7. Ensure no flaky tests
 8. Verify performance within baseline
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Pre-deployment test validation"
 prompt: "Execute comprehensive test suite:
 
@@ -181,7 +181,7 @@ Use the security-auditor agent to:
 5. Validate no critical/high vulnerabilities
 6. Ensure no secrets in code
 
-subagent_type: "quality-assurance:security-auditor"
+subagent_type: "orchestr8:quality:security-auditor"
 description: "Pre-deployment security scanning"
 prompt: "Execute security scans:
 
@@ -311,7 +311,7 @@ Use the database-specialist agent to:
 5. Re-apply migrations
 6. Validate data integrity
 
-subagent_type: "infrastructure-monitoring:database-specialist"
+subagent_type: "orchestr8:database:postgresql-specialist"
 description: "Validate database migrations"
 prompt: "Test database migrations:
 
@@ -381,7 +381,7 @@ Use the infrastructure-engineer or cloud specialist agent to:
 4. Validate scaling configuration
 5. Check resource limits
 
-subagent_type: "[infrastructure-monitoring:infrastructure-engineer|devops-cloud:aws-specialist|devops-cloud:azure-specialist|devops-cloud:gcp-specialist]"
+subagent_type: "[orchestr8:devops:aws-specialist|orchestr8:devops:aws-specialist|orchestr8:devops:azure-specialist|orchestr8:devops:gcp-specialist]"
 description: "Validate infrastructure configuration"
 prompt: "Validate infrastructure:
 
@@ -453,7 +453,7 @@ Use the ci-cd-engineer agent to:
 4. Wait for rollout completion
 5. Validate deployment status
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Deploy to staging environment"
 prompt: "Deploy application to staging:
 
@@ -523,7 +523,7 @@ Use the test-engineer agent to:
 4. Run performance smoke test
 5. Validate all systems operational
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Execute staging smoke tests"
 prompt: "Run staging smoke tests:
 
@@ -596,7 +596,7 @@ Use the performance-analyzer agent to:
 5. Review logs
 6. Validate no issues
 
-subagent_type: "quality-assurance:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Monitor staging environment"
 prompt: "Monitor staging for 15 minutes:
 
@@ -670,7 +670,7 @@ Use the ci-cd-engineer agent to:
 6. Monitor green environment
 7. Validate or rollback
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Execute blue-green deployment"
 prompt: "Perform blue-green deployment to production:
 
@@ -783,7 +783,7 @@ Use the ci-cd-engineer agent to:
 4. Monitor during rollout
 5. Validate complete rollout
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Execute rolling deployment"
 prompt: "Perform rolling deployment to production:
 
@@ -872,7 +872,7 @@ Use the ci-cd-engineer agent to:
 4. Make canary the new stable
 5. Decommission old stable
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Execute canary deployment"
 prompt: "Perform canary deployment to production:
 
@@ -999,7 +999,7 @@ Use the database-specialist agent to:
 4. Backfill data (if needed)
 5. Run cleanup migrations (after 24 hours)
 
-subagent_type: "infrastructure-monitoring:database-specialist"
+subagent_type: "orchestr8:database:postgresql-specialist"
 description: "Execute production database migrations"
 prompt: "Execute zero-downtime database migrations:
 
@@ -1078,7 +1078,7 @@ Use the test-engineer agent to:
 4. Run production smoke tests
 5. Validate all systems operational
 
-subagent_type: "quality-assurance:test-engineer"
+subagent_type: "orchestr8:quality:test-engineer"
 description: "Post-deployment health checks"
 prompt: "Execute post-deployment health checks:
 
@@ -1139,7 +1139,7 @@ Use the performance-analyzer agent to:
 5. Monitor business metrics
 6. Compare to baseline
 
-subagent_type: "quality-assurance:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Monitor production metrics"
 prompt: "Monitor production metrics for 1 hour:
 
@@ -1211,7 +1211,7 @@ Use the devops-engineer agent to:
 4. Analyze error rates
 5. Validate log health
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Analyze production logs"
 prompt: "Analyze production logs post-deployment:
 
@@ -1276,7 +1276,7 @@ Use the performance-analyzer agent to:
 4. Check A/B test results (if canary)
 5. Validate user satisfaction
 
-subagent_type: "quality-assurance:performance-analyzer"
+subagent_type: "orchestr8:quality:load-testing-specialist"
 description: "Analyze user impact"
 prompt: "Analyze user impact post-deployment:
 
@@ -1349,7 +1349,7 @@ Use the devops-engineer agent to:
 4. Validate alert thresholds
 5. Test alerting
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Configure production monitoring and alerting"
 prompt: "Set up production monitoring and alerting:
 
@@ -1457,7 +1457,7 @@ Use the ci-cd-engineer agent to:
 4. Restore database if needed
 5. Verify system health post-rollback
 
-subagent_type: "devops-cloud:devops-engineer"
+subagent_type: "orchestr8:devops:aws-specialist"
 description: "Execute rollback if needed"
 prompt: "Monitor and execute rollback if needed:
 
