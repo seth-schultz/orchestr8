@@ -90,7 +90,7 @@ Tasks:
    - Estimate timeline and effort
 
 Expected outputs:
-- code-analysis-report.md with:
+- .orchestr8/docs/analysis/code-analysis.md with:
   - Technology inventory
   - Code metrics dashboard
   - Complexity hotspots
@@ -98,20 +98,20 @@ Expected outputs:
   - Deprecated API list
   - Security vulnerabilities
 - dependency-graph.png (visualization)
-- migration-strategy.md with:
+- .orchestr8/docs/analysis/migration-strategy.md with:
   - Chosen approach and rationale
   - Target stack
   - Phase prioritization
   - Timeline (weeks/months)
-- risk-matrix.md (risks with mitigation plans)
+- .orchestr8/docs/analysis/risk-matrix.md (risks with mitigation plans)
 "
 ```
 
 **Expected Outputs:**
-- `code-analysis-report.md` - Complete analysis with metrics
+- `.orchestr8/docs/analysis/code-analysis.md` - Complete analysis with metrics
 - `dependency-graph.png` - Dependency visualization
-- `migration-strategy.md` - Detailed modernization strategy
-- `risk-matrix.md` - Risk assessment with mitigations
+- `.orchestr8/docs/analysis/migration-strategy.md` - Detailed modernization strategy
+- `.orchestr8/docs/analysis/risk-matrix.md` - Risk assessment with mitigations
 
 **Quality Gate: Assessment Validation**
 ```bash
@@ -536,7 +536,7 @@ Based on code-analysis-report.md and migration-strategy.md:
 Expected outputs:
 - migration-scripts/ - Database migration files
 - data-transformation.py - ETL pipeline
-- validation-report.md - Data consistency validation
+- .orchestr8/docs/quality/validation-report.md - Data consistency validation
 - cutover-plan.md - Step-by-step cutover procedure
 - rollback-plan.md - Emergency rollback procedure
 "
@@ -545,7 +545,7 @@ Expected outputs:
 **Expected Outputs:**
 - `migration-scripts/` - Database migration files
 - `data-transformation.py` - ETL pipeline
-- `validation-report.md` - Data consistency checks
+- `.orchestr8/docs/quality/validation-report.md` - Data consistency checks
 - `cutover-plan.md` - Cutover procedure
 - `rollback-plan.md` - Rollback procedure
 
@@ -650,7 +650,7 @@ Based on performance-baselines.json:
    - Optimize resource cleanup
 
 Expected outputs:
-- performance-report.md with:
+- .orchestr8/docs/performance/analysis.md with:
   - Benchmark comparisons (legacy vs modern)
   - Identified bottlenecks
   - Optimization strategies implemented
@@ -661,7 +661,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `performance-report.md` - Performance analysis
+- `.orchestr8/docs/performance/analysis.md` - Performance analysis
 - `profile-analysis/` - Profiling data
 - `optimization-log.md` - Optimization changes
 - `load-test-results/` - Load testing data
@@ -859,12 +859,12 @@ Quality Gates Passed:
 - ✅ Documentation complete
 
 Files Created:
-- code-analysis-report.md
-- migration-strategy.md
-- risk-matrix.md
+- .orchestr8/docs/analysis/code-analysis.md
+- .orchestr8/docs/analysis/migration-strategy.md
+- .orchestr8/docs/analysis/risk-matrix.md
 - tests/ (characterization, integration, e2e)
 - migration-log.md
-- performance-report.md
+- .orchestr8/docs/performance/analysis.md
 - docs/ (architecture, migration guide, runbooks)
 
 Next Steps:

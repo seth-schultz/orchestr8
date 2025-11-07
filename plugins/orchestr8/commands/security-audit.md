@@ -100,17 +100,17 @@ Tasks:
    - Identify critical controls
 
 Expected outputs:
-- security-scope.md - Complete audit scope definition
-- asset-inventory.md - All assets catalogued
-- threat-model.md - Threat analysis and attack surfaces
+- .orchestr8/docs/security/scope.md - Complete audit scope definition
+- .orchestr8/docs/security/asset-inventory.md - All assets catalogued
+- .orchestr8/docs/security/threat-model.md - Threat analysis and attack surfaces
 - compliance-requirements.md - Applicable frameworks
 "
 ```
 
 **Expected Outputs:**
-- `security-scope.md` - Audit scope definition
-- `asset-inventory.md` - Asset inventory
-- `threat-model.md` - Threat modeling analysis
+- `.orchestr8/docs/security/scope.md` - Audit scope definition
+- `.orchestr8/docs/security/asset-inventory.md` - Asset inventory
+- `.orchestr8/docs/security/threat-model.md` - Threat modeling analysis
 - `compliance-requirements.md` - Compliance frameworks
 
 **Quality Gate: Scope Validation**
@@ -568,14 +568,14 @@ CODE REVIEW:
 ```
 
 Expected outputs:
-- owasp-review-report.md - Comprehensive OWASP Top 10 findings
-- vulnerability-findings.json - Structured findings data
+- .orchestr8/docs/security/owasp-review.md - Comprehensive OWASP Top 10 findings
+- .orchestr8/docs/security/findings.json - Structured findings data
 "
 ```
 
 **Expected Outputs:**
-- `owasp-review-report.md` - OWASP Top 10 findings
-- `vulnerability-findings.json` - Structured findings
+- `.orchestr8/docs/security/owasp-review.md` - OWASP Top 10 findings
+- `.orchestr8/docs/security/findings.json` - Structured findings
 
 **Quality Gate: OWASP Review Validation**
 ```bash
@@ -676,14 +676,14 @@ REQUIREMENTS:
 ```
 
 Expected outputs:
-- compliance-report.md - Compliance validation results
-- compliance-gaps.json - Non-compliant items
+- .orchestr8/docs/security/compliance.md - Compliance validation results
+- .orchestr8/docs/security/compliance-gaps.json - Non-compliant items
 "
 ```
 
 **Expected Outputs:**
-- `compliance-report.md` - Compliance validation results
-- `compliance-gaps.json` - Gaps and non-compliant items
+- `.orchestr8/docs/security/compliance.md` - Compliance validation results
+- `.orchestr8/docs/security/compliance-gaps.json` - Gaps and non-compliant items
 
 **Quality Gate: Compliance Validation**
 ```bash
@@ -847,16 +847,16 @@ For each remediation:
 ```
 
 Expected outputs:
-- remediation-plan.md - Complete remediation plan
-- auto-fixes-log.md - Log of automatic fixes applied
-- manual-fixes-required.md - Fixes needing approval
+- .orchestr8/docs/security/remediation-plan.md - Complete remediation plan
+- .orchestr8/docs/security/auto-fixes-log.md - Log of automatic fixes applied
+- .orchestr8/docs/security/manual-fixes-required.md - Fixes needing approval
 "
 ```
 
 **Expected Outputs:**
-- `remediation-plan.md` - Comprehensive remediation plan
-- `auto-fixes-log.md` - Automatic fixes applied
-- `manual-fixes-required.md` - Fixes requiring approval
+- `.orchestr8/docs/security/remediation-plan.md` - Comprehensive remediation plan
+- `.orchestr8/docs/security/auto-fixes-log.md` - Automatic fixes applied
+- `.orchestr8/docs/security/manual-fixes-required.md` - Fixes requiring approval
 
 **Quality Gate: Remediation Validation**
 ```bash
@@ -992,13 +992,13 @@ Recommended: [date, typically 90 days]
 
 Expected outputs:
 - security-audit-report-$(date +%Y%m%d).md
-- security-metrics.json
+- .orchestr8/docs/security/metrics.json
 "
 ```
 
 **Expected Outputs:**
 - `security-audit-report-[date].md` - Comprehensive audit report
-- `security-metrics.json` - Security metrics data
+- `.orchestr8/docs/security/metrics.json` - Security metrics data
 
 **Quality Gate: Report Validation**
 ```bash
@@ -1059,14 +1059,14 @@ Key Metrics:
 
 Files Generated:
 - $REPORT_FILE
-- security-scope.md
-- asset-inventory.md
-- threat-model.md
+- .orchestr8/docs/security/scope.md
+- .orchestr8/docs/security/asset-inventory.md
+- .orchestr8/docs/security/threat-model.md
 - scan-summary.md
-- owasp-review-report.md
-- compliance-report.md
-- remediation-plan.md
-- auto-fixes-log.md
+- .orchestr8/docs/security/owasp-review.md
+- .orchestr8/docs/security/compliance.md
+- .orchestr8/docs/security/remediation-plan.md
+- .orchestr8/docs/security/auto-fixes-log.md
 
 Next Steps:
 1. Review critical findings in remediation-plan.md

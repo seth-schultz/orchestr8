@@ -68,17 +68,17 @@ Tasks:
    - Monitoring: Prometheus, Grafana, Evidently AI
 
 Expected outputs:
-- ml-requirements.md with problem analysis
-- ml-architecture.md with architecture diagram
-- tech-stack.md with technology selections
+- .orchestr8/docs/requirements/ml-requirements.md with problem analysis
+- .orchestr8/docs/design/ml-architecture.md with architecture diagram
+- .orchestr8/docs/design/tech-stack.md with technology selections
 - project-plan.md with milestones
 "
 ```
 
 **Expected Outputs:**
-- `ml-requirements.md` - Problem type, metrics, data sources, requirements
-- `ml-architecture.md` - End-to-end architecture design
-- `tech-stack.md` - Technology stack selections
+- `.orchestr8/docs/requirements/ml-requirements.md` - Problem type, metrics, data sources, requirements
+- `.orchestr8/docs/design/ml-architecture.md` - End-to-end architecture design
+- `.orchestr8/docs/design/tech-stack.md` - Technology stack selections
 - `project-plan.md` - Implementation milestones
 
 **Quality Gate: Requirements Validation**
@@ -518,7 +518,7 @@ Expected outputs:
 - deployment/k8s/ directory with Kubernetes manifests
 - .github/workflows/ or .gitlab-ci.yml with CI/CD
 - ab_testing/ directory with A/B testing framework
-- deployment-guide.md
+- .orchestr8/docs/deployment/guide.md
 "
 ```
 
@@ -528,7 +528,7 @@ Expected outputs:
 - `deployment/k8s/` - Kubernetes manifests
 - `.github/workflows/` or `.gitlab-ci.yml` - CI/CD pipeline
 - `ab_testing/` - A/B testing framework
-- `deployment-guide.md` - Deployment documentation
+- `.orchestr8/docs/deployment/guide.md` - Deployment documentation
 
 **Quality Gate: Deployment Validation**
 ```bash
@@ -906,9 +906,9 @@ Next Steps:
 7. Trigger manual retraining: airflow trigger_dag continuous_ml_training
 
 Documentation:
-- ml-requirements.md
-- ml-architecture.md
-- deployment-guide.md
+- .orchestr8/docs/requirements/ml-requirements.md
+- .orchestr8/docs/design/ml-architecture.md
+- .orchestr8/docs/deployment/guide.md
 - monitoring-guide.md
 - continuous-training-guide.md
 "

@@ -72,11 +72,11 @@ Tasks:
    - If insufficient, plan test creation first
 
 Expected outputs:
-- code-analysis.md with:
+- .orchestr8/docs/analysis/code-analysis.md with:
   - Code smells identified
   - Dependencies mapped
   - Test coverage report
-- refactoring-plan.md with:
+- .orchestr8/docs/analysis/refactoring-plan.md with:
   - Clear goal and strategy
   - Step-by-step refactoring plan
   - Risk mitigation strategies
@@ -84,8 +84,8 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `code-analysis.md` - Complete code smell analysis
-- `refactoring-plan.md` - Detailed refactoring strategy
+- `.orchestr8/docs/analysis/code-analysis.md` - Complete code smell analysis
+- `.orchestr8/docs/analysis/refactoring-plan.md` - Detailed refactoring strategy
 - Test coverage report
 
 **Quality Gate: Planning Validation**
@@ -261,7 +261,7 @@ RULES:
 
 Expected outputs:
 - Refactored code files
-- refactoring-log.md documenting each step
+- .orchestr8/docs/analysis/refactoring-log.md documenting each step
 - All tests passing after EVERY step
 - Reduced code complexity
 - Eliminated code smells
@@ -271,7 +271,7 @@ Expected outputs:
 
 **Expected Outputs:**
 - Refactored code files
-- `refactoring-log.md` - Step-by-step change log
+- `.orchestr8/docs/analysis/refactoring-log.md` - Step-by-step change log
 - All tests passing continuously
 - Reduced complexity metrics
 - Code smells eliminated
@@ -349,7 +349,7 @@ Review all refactored files:
    - Performance maintained
 
 Expected outputs:
-- code-review-report.md with:
+- .orchestr8/docs/quality/code-review.md with:
   - Improvements quantified
   - Remaining issues (if any)
   - Code quality score
@@ -358,7 +358,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `code-review-report.md` - Code quality validation
+- `.orchestr8/docs/quality/code-review.md` - Code quality validation
 
 #### Quality Gate 2: Test Verification
 
@@ -556,15 +556,15 @@ Documentation tasks:
 
 Expected outputs:
 - Updated documentation files (if applicable)
-- refactoring-summary.md
-- commit-message.txt
+- .orchestr8/docs/analysis/refactoring-summary.md
+- .orchestr8/docs/deployment/commit-message.txt
 "
 ```
 
 **Expected Outputs:**
 - Updated documentation files
-- `refactoring-summary.md` - Refactoring summary
-- `commit-message.txt` - Prepared commit message
+- `.orchestr8/docs/analysis/refactoring-summary.md` - Refactoring summary
+- `.orchestr8/docs/deployment/commit-message.txt` - Prepared commit message
 
 **Quality Gate: Documentation Validation**
 ```bash

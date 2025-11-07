@@ -154,7 +154,7 @@ Based on application-structure.json, perform:
 
 Expected outputs:
 - screenshots/ directory with all captures
-- visual-test-report.md with:
+- .orchestr8/docs/quality/visual-test-report.md with:
   - Visual regression results
   - Responsive design issues
   - Layout problems detected
@@ -165,7 +165,7 @@ Expected outputs:
 
 **Expected Outputs:**
 - `screenshots/` directory with all screenshots
-- `visual-test-report.md` - Visual testing results
+- `.orchestr8/docs/quality/visual-test-report.md` - Visual testing results
 - Baseline screenshots created/updated
 
 **Quality Gate: Visual Testing**
@@ -256,7 +256,7 @@ Based on application-structure.json, test:
    - Verify 404 page handling
 
 Expected outputs:
-- functional-test-report.md with:
+- .orchestr8/docs/quality/functional-test-report.md with:
   - All user flows tested
   - Pass/fail status for each flow
   - Errors/bugs detected
@@ -266,7 +266,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `functional-test-report.md` - Functional testing results
+- `.orchestr8/docs/quality/functional-test-report.md` - Functional testing results
 - Screenshots of any failures
 - Detailed reproduction steps for bugs
 
@@ -354,7 +354,7 @@ Perform comprehensive accessibility audit:
    - Check autocomplete attributes
 
 Expected outputs:
-- accessibility-report.md with:
+- .orchestr8/docs/accessibility/audit.md with:
   - WCAG compliance level achieved
   - All violations by severity
   - Affected elements and line numbers
@@ -366,7 +366,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `accessibility-report.md` - Comprehensive accessibility audit
+- `.orchestr8/docs/accessibility/audit.md` - Comprehensive accessibility audit
 - List of violations with remediation steps
 - Accessibility score
 
@@ -459,7 +459,7 @@ Measure and analyze performance:
    - Identify quick wins
 
 Expected outputs:
-- performance-report.md with:
+- .orchestr8/docs/performance/analysis.md with:
   - Core Web Vitals results
   - Performance scores
   - Bottlenecks identified
@@ -471,7 +471,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `performance-report.md` - Performance analysis
+- `.orchestr8/docs/performance/analysis.md` - Performance analysis
 - Core Web Vitals measurements
 - Optimization recommendations
 
@@ -766,10 +766,10 @@ Web UI testing complete when:
 ## Reports Generated
 
 - `application-structure.json` - Application discovery
-- `visual-test-report.md` - Visual and layout testing
-- `functional-test-report.md` - User flow testing
-- `accessibility-report.md` - WCAG compliance audit
-- `performance-report.md` - Core Web Vitals and performance
+- `.orchestr8/docs/quality/visual-test-report.md` - Visual and layout testing
+- `.orchestr8/docs/quality/functional-test-report.md` - User flow testing
+- `.orchestr8/docs/accessibility/audit.md` - WCAG compliance audit
+- `.orchestr8/docs/performance/analysis.md` - Core Web Vitals and performance
 - `debugging-report.md` - Console errors and network issues
 - `issues.json` - Structured issue data
 - `test-suite-readme.md` - Generated test documentation

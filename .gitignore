@@ -37,7 +37,8 @@ secrets.yaml
 # Local development
 .claude/settings.local.json
 
-# Orchestr8 Intelligence Database
+# Orchestr8 artifacts
 .orchestr8/intelligence.db
+.orchestr8/docs/
 *.db
 **/*.db

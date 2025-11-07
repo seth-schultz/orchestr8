@@ -235,6 +235,8 @@ You are an expert system architect responsible for...
 
 ### File Organization
 
+#### Project Root Structure
+
 ```
 orchestr8/
 ├── agents/                         ← All 74+ agent definitions
@@ -269,6 +271,98 @@ orchestr8/
     ├── frameworks/
     ├── tools/
     └── practices/
+```
+
+#### .orchestr8 Working Folder Structure
+
+All generated documentation and working files are organized in a `.orchestr8` folder to maintain a clean project root:
+
+```
+.orchestr8/
+├── docs/                           ← All generated documentation (git-ignored)
+│   ├── requirements/
+│   │   ├── analysis.md            ← Feature requirements
+│   │   ├── ml-requirements.md     ← ML-specific requirements
+│   │   └── ...
+│   │
+│   ├── design/
+│   │   ├── document.md            ← Feature design
+│   │   ├── architecture.md        ← Architecture design
+│   │   ├── ml-architecture.md     ← ML architecture
+│   │   └── ...
+│   │
+│   ├── quality/
+│   │   ├── code-review.md         ← Code review findings
+│   │   ├── test-report.md         ← Test coverage & results
+│   │   ├── style-review.md        ← Code style review
+│   │   └── ...
+│   │
+│   ├── security/
+│   │   ├── audit.md               ← Security audit findings
+│   │   ├── compliance.md          ← Compliance assessment
+│   │   ├── remediation-plan.md    ← Remediation steps
+│   │   └── ...
+│   │
+│   ├── performance/
+│   │   ├── analysis.md            ← Performance analysis
+│   │   ├── cost-analysis.md       ← Cloud cost optimization
+│   │   └── ...
+│   │
+│   ├── accessibility/
+│   │   └── audit.md               ← WCAG compliance audit
+│   │
+│   ├── deployment/
+│   │   ├── guide.md               ← Deployment instructions
+│   │   ├── commit-message.txt     ← Prepared commit message
+│   │   └── rollback-guide.md      ← Rollback procedures
+│   │
+│   ├── analysis/
+│   │   ├── code-analysis.md       ← Code analysis findings
+│   │   ├── refactoring-plan.md    ← Refactoring strategy
+│   │   └── ...
+│   │
+│   ├── infrastructure/
+│   │   ├── cicd-strategy.md       ← CI/CD pipeline design
+│   │   ├── deployment-plan.md     ← Deployment planning
+│   │   └── ...
+│   │
+│   └── testing/
+│       ├── test-report-*.md       ← Test results
+│       └── debugging-report.md    ← Debugging findings
+│
+├── intelligence.db                 ← Organizational knowledge base (tracked in git)
+│   ├── patterns/                   ← Successful patterns
+│   ├── anti-patterns/              ← Patterns to avoid
+│   ├── performance-baselines/      ← Historical metrics
+│   ├── assumptions-validated/      ← Tested hypotheses
+│   └── technology-comparisons/     ← Decision records
+│
+└── scripts/                        ← Helper scripts
+    └── setup-orchestr8-dirs.sh    ← Directory initialization helper
+```
+
+**Key Design Points:**
+
+1. **Organized by Category** - Reports grouped by functional area (requirements, security, performance, etc.)
+2. **Git-Ignored Artifacts** - `.orchestr8/docs/` added to `.gitignore` to keep project clean
+3. **Knowledge Persistence** - `intelligence.db` tracked in git for organizational learning
+4. **Path Resolution** - Use `get_orchestr8_path()` helper function for consistent file access
+5. **Environment Configurable** - Set `ORCHESTR8_BASE` environment variable to override default location
+
+**Usage in Workflows:**
+
+```bash
+# Source the helper script
+source setup-orchestr8-dirs.sh
+
+# Resolve paths using helper function
+REQUIREMENTS=$(get_orchestr8_path "requirements" "analysis.md")
+DESIGN=$(get_orchestr8_path "design" "document.md")
+SECURITY=$(get_orchestr8_path "security" "audit.md")
+
+# Use resolved paths
+mkdir -p "$(dirname "$REQUIREMENTS")"
+echo "Analysis content" > "$REQUIREMENTS"
 ```
 
 ## Async Execution Architecture (NEW)

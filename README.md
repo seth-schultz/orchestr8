@@ -243,6 +243,37 @@ Workflow Commands (/orchestr8:*)
   └─────────────────────┘
 ```
 
+### .orchestr8 Folder Structure
+
+orchestr8 organizes all generated documentation and artifacts in a `.orchestr8` folder to keep your project root clean:
+
+```
+.orchestr8/
+├── docs/
+│   ├── requirements/        # Requirements analysis (analysis.md, ml-requirements.md, etc.)
+│   ├── design/             # Architecture and design documents
+│   ├── quality/            # Code review, test reports, validation results
+│   ├── security/           # Security audits, vulnerability findings, compliance reports
+│   ├── performance/        # Performance analyses, cost optimizations, benchmarks
+│   ├── accessibility/      # Accessibility audits, WCAG compliance reports
+│   ├── deployment/         # Deployment guides, rollback procedures, commit messages
+│   ├── analysis/           # Code analysis, refactoring plans, bug fixes
+│   ├── infrastructure/     # CI/CD strategy, monitoring architecture, SLOs
+│   └── testing/            # Test reports, debugging results, test coverage
+├── intelligence.db         # SQLite database for organizational knowledge (tracked in git)
+└── scripts/               # Helper scripts for directory setup
+```
+
+**Key Benefits:**
+- **Clean Project Root** - Documentation kept in dedicated folder
+- **Organized by Category** - Easy to find specific types of reports
+- **Git-Friendly** - `.orchestr8/docs/` added to `.gitignore` by default
+- **Knowledge Persistence** - `intelligence.db` tracked in git for organizational learning
+- **Path Resolution** - Use `get_orchestr8_path()` function in scripts for consistent access
+
+**Environment Variable:**
+- `ORCHESTR8_BASE` - Override default `.orchestr8` location if needed (default: `.orchestr8`)
+
 ### How Orchestration Works
 
 1. **Workflow Selection** - User invokes a workflow command (e.g., `/orchestr8:new-project`)

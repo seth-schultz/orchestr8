@@ -1225,7 +1225,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `architecture-review-report.md` - Comprehensive final report
+- `.orchestr8/docs/quality/architecture-review.md` - Comprehensive final report
 - ADRs for key recommendations
 - Prioritized roadmap
 - Next steps
@@ -1291,7 +1291,7 @@ Reports Generated:
 - security-architecture.md
 - technical-debt.md
 - api-architecture.md
-- architecture-review-report.md (MAIN REPORT)
+- .orchestr8/docs/quality/architecture-review.md (MAIN REPORT)
 
 Key Deliverables:
 - Architecture scorecard with ratings

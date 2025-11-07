@@ -89,15 +89,15 @@ Tasks:
    - Rollback strategy
 
 Expected outputs:
-- project-analysis.md with complete project assessment
-- cicd-strategy.md with pipeline design
+- .orchestr8/docs/requirements/project-analysis.md with complete project assessment
+- .orchestr8/docs/design/cicd-strategy.md with pipeline design
 - List of required secrets/environment variables
 "
 ```
 
 **Expected Outputs:**
-- `project-analysis.md` - Project tech stack and requirements
-- `cicd-strategy.md` - Complete pipeline strategy
+- `.orchestr8/docs/requirements/project-analysis.md` - Project tech stack and requirements
+- `.orchestr8/docs/design/cicd-strategy.md` - Complete pipeline strategy
 - `secrets-required.md` - Required secrets list
 
 **Quality Gate: Analysis Validation**
@@ -402,7 +402,7 @@ Expected outputs:
 - SAST tools integrated
 - Secret detection enabled
 - Container scanning (if applicable)
-- security-requirements.md with needed secrets
+- .orchestr8/docs/requirements/security-requirements.md with needed secrets
 "
 ```
 
@@ -411,7 +411,7 @@ Expected outputs:
 - Vulnerability scanning configured
 - SAST integration
 - Secret detection
-- `security-requirements.md` - Required security tool tokens
+- `.orchestr8/docs/requirements/security-requirements.md` - Required security tool tokens
 
 **Quality Gate: Security Integration Validation**
 ```bash
@@ -609,8 +609,8 @@ Expected outputs:
 - Production deployment with approvals
 - Health checks implemented
 - Monitoring/alerting configured
-- rollback-guide.md
-- deployment-guide.md
+- .orchestr8/docs/deployment/rollback-guide.md
+- .orchestr8/docs/deployment/guide.md
 "
 ```
 
@@ -619,8 +619,8 @@ Expected outputs:
 - Staging and production deployment configured
 - Health checks implemented
 - Monitoring and alerting configured
-- `rollback-guide.md` - Rollback procedures
-- `deployment-guide.md` - Deployment documentation
+- `.orchestr8/docs/deployment/rollback-guide.md` - Rollback procedures
+- `.orchestr8/docs/deployment/guide.md` - Deployment documentation
 
 **Quality Gate: Deployment Validation**
 ```bash
@@ -706,11 +706,11 @@ Pipeline File: $PIPELINE_FILE
 
 Files Created:
 - $PIPELINE_FILE (CI/CD configuration)
-- project-analysis.md
-- cicd-strategy.md
-- security-requirements.md
-- deployment-guide.md
-- rollback-guide.md
+- .orchestr8/docs/requirements/project-analysis.md
+- .orchestr8/docs/design/cicd-strategy.md
+- .orchestr8/docs/requirements/security-requirements.md
+- .orchestr8/docs/deployment/guide.md
+- .orchestr8/docs/deployment/rollback-guide.md
 
 Pipeline Features:
 ✅ Build with dependency caching
@@ -744,9 +744,9 @@ Next Steps:
 8. Configure deployment notifications
 
 Documentation:
-- deployment-guide.md - How to deploy manually and via CI/CD
-- rollback-guide.md - Rollback procedures for emergencies
-- security-requirements.md - Required API tokens and secrets
+- .orchestr8/docs/deployment/guide.md - How to deploy manually and via CI/CD
+- .orchestr8/docs/deployment/rollback-guide.md - Rollback procedures for emergencies
+- .orchestr8/docs/requirements/security-requirements.md - Required API tokens and secrets
 
 Token Usage: ${TOTAL_TOKENS} tokens
 "

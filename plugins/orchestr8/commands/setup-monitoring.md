@@ -103,15 +103,15 @@ Tasks:
    - Phased rollout plan
 
 Expected outputs:
-- observability-architecture.md with:
+- .orchestr8/docs/design/observability-architecture.md with:
   - System architecture diagram
   - Service topology
   - Monitoring stack design
-- slo-definitions.md with:
+- .orchestr8/docs/infrastructure/slo-definitions.md with:
   - SLIs for all services
   - SLOs with error budgets
   - Burn rate calculations
-- deployment-plan.md with:
+- .orchestr8/docs/infrastructure/deployment-plan.md with:
   - Infrastructure requirements
   - Deployment phases
   - Rollback procedures
@@ -119,9 +119,9 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `observability-architecture.md` - Complete architecture design
-- `slo-definitions.md` - SLI/SLO definitions
-- `deployment-plan.md` - Deployment strategy
+- `.orchestr8/docs/design/observability-architecture.md` - Complete architecture design
+- `.orchestr8/docs/infrastructure/slo-definitions.md` - SLI/SLO definitions
+- `.orchestr8/docs/infrastructure/deployment-plan.md` - Deployment strategy
 
 **Quality Gate: Architecture Validation**
 ```bash
@@ -1197,9 +1197,9 @@ Observability Stack Deployed:
 6. Schedule monitoring review cadence
 
 **Documentation Generated:**
-- observability-architecture.md
-- slo-definitions.md
-- deployment-plan.md
+- .orchestr8/docs/design/observability-architecture.md
+- .orchestr8/docs/infrastructure/slo-definitions.md
+- .orchestr8/docs/infrastructure/deployment-plan.md
 - instrumentation-guide.md
 - logging-architecture.md
 - tracing-guide.md

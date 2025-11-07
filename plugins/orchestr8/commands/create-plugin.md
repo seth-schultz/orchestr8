@@ -90,7 +90,7 @@ Tasks:
    - Reusability across agents
 
 Expected outputs:
-- plugin-specs.md with complete specifications
+- .orchestr8/docs/design/plugin-specs.md with complete specifications
 - Component requirements (agents, commands, skills)
 - Complexity assessment
 - Similar plugins identified
@@ -99,7 +99,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `plugin-specs.md` - Complete plugin specifications
+- `.orchestr8/docs/design/plugin-specs.md` - Complete plugin specifications
 - Component requirements list (agents, commands, skills)
 - Complexity assessment
 - Domain and category identified
@@ -269,7 +269,7 @@ Based on plugin-specs.md, create plugin design:
    - License
 
 Expected outputs:
-- plugin-design.md with complete structure
+- .orchestr8/docs/design/plugin-design.md with complete structure
 - plugin.json manifest design
 - marketplace.json design (if distributing)
 - Component organization plan
@@ -278,7 +278,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `plugin-design.md` - Complete plugin architecture
+- `.orchestr8/docs/design/plugin-design.md` - Complete plugin architecture
 - `plugin.json` design specification
 - `marketplace.json` design (if applicable)
 - Component organization plan
@@ -1417,7 +1417,7 @@ Validation Tasks:
    \`\`\`
 
 Expected outputs:
-- validation-report.md with comprehensive results
+- .orchestr8/docs/quality/validation-report.md with comprehensive results
 - Component discovery test results
 - Documentation quality assessment
 - Integration validation confirmation
@@ -1425,7 +1425,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `validation-report.md` - Comprehensive validation results
+- `.orchestr8/docs/quality/validation-report.md` - Comprehensive validation results
 - Component discovery test results
 - Documentation quality metrics
 - Integration validation confirmation

@@ -98,26 +98,34 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `requirements-analysis.md` - Complete requirements breakdown
-- `design-document.md` - Technical design specifications
+- `.orchestr8/docs/requirements/analysis.md` - Complete requirements breakdown
+- `.orchestr8/docs/design/document.md` - Technical design specifications
 - TodoWrite task list initialized
 
 **Quality Gate: Requirements Validation**
 ```bash
+# Setup orchestr8 directory structure
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || \
+  source "plugins/orchestr8/scripts/setup-orchestr8-dirs.sh" 2>/dev/null || \
+  . "./setup-orchestr8-dirs.sh"
+
+REQUIREMENTS=$(get_orchestr8_path "requirements" "analysis.md")
+DESIGN=$(get_orchestr8_path "design" "document.md")
+
 # Validate requirements analysis exists
-if [ ! -f "requirements-analysis.md" ]; then
-  echo "❌ Requirements analysis not created"
+if [ ! -f "$REQUIREMENTS" ]; then
+  echo "❌ Requirements analysis not created: $REQUIREMENTS"
   exit 1
 fi
 
 # Validate design document exists
-if [ ! -f "design-document.md" ]; then
-  echo "❌ Design document not created"
+if [ ! -f "$DESIGN" ]; then
+  echo "❌ Design document not created: $DESIGN"
   exit 1
 fi
 
 # Validate acceptance criteria defined
-if ! grep -q "acceptance criteria" requirements-analysis.md; then
+if ! grep -q "acceptance criteria" "$REQUIREMENTS"; then
   echo "❌ Acceptance criteria not defined"
   exit 1
 fi
@@ -212,6 +220,10 @@ Expected outputs:
 
 **Quality Gate: Backend Implementation**
 ```bash
+# Setup orchestr8 directory
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || \
+  . "./setup-orchestr8-dirs.sh"
+
 # Run backend tests
 if ! npm test 2>/dev/null && ! python -m pytest 2>/dev/null && ! cargo test 2>/dev/null; then
   echo "❌ Backend tests failing"
@@ -386,20 +398,22 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `code-review-report.md` - Comprehensive code review
+- `.orchestr8/docs/quality/code-review.md` - Comprehensive code review
 
 **Validation:**
 ```bash
-# Log quality gate
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+CODE_REVIEW=$(get_orchestr8_path "quality" "code-review.md")
 
 # Validate code review completed
-if [ ! -f "code-review-report.md" ]; then
+if [ ! -f "$CODE_REVIEW" ]; then
   echo "❌ Code review not completed"
   exit 1
 fi
 
 # Check if critical issues found
-if grep -q "CRITICAL" code-review-report.md; then
+if grep -q "CRITICAL" "$CODE_REVIEW"; then
   echo "❌ Critical issues found in code review"
   exit 1
 fi
@@ -462,20 +476,22 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `test-report.md` - Comprehensive test validation
+- `.orchestr8/docs/quality/test-report.md` - Comprehensive test validation
 
 **Validation:**
 ```bash
-# Log quality gate
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+TEST_REPORT=$(get_orchestr8_path "quality" "test-report.md")
 
 # Validate test report
-if [ ! -f "test-report.md" ]; then
+if [ ! -f "$TEST_REPORT" ]; then
   echo "❌ Test report not generated"
   exit 1
 fi
 
 # Check coverage (simplified)
-COVERAGE=$(grep -oP 'coverage.*?(\d+)%' test-report.md | grep -oP '\d+' | head -1)
+COVERAGE=$(grep -oP 'coverage.*?(\d+)%' "$TEST_REPORT" | grep -oP '\d+' | head -1)
 if [ -z "$COVERAGE" ]; then
   COVERAGE=85  # Default assumption
 fi
@@ -548,22 +564,24 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `security-report.md` - Security audit results
+- `.orchestr8/docs/security/audit.md` - Security audit results
 
 **Validation:**
 ```bash
-# Log quality gate
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+SECURITY_REPORT=$(get_orchestr8_path "security" "audit.md")
 
 # Validate security report
-if [ ! -f "security-report.md" ]; then
+if [ ! -f "$SECURITY_REPORT" ]; then
   echo "❌ Security report not generated"
   exit 1
 fi
 
 # Check for critical/high vulnerabilities
 ISSUES_FOUND=0
-if grep -qE "CRITICAL|HIGH" security-report.md; then
-  ISSUES_FOUND=$(grep -cE "CRITICAL|HIGH" security-report.md)
+if grep -qE "CRITICAL|HIGH" "$SECURITY_REPORT"; then
+  ISSUES_FOUND=$(grep -cE "CRITICAL|HIGH" "$SECURITY_REPORT")
   echo "❌ Critical/high security issues found: $ISSUES_FOUND"
   exit 1
 fi
@@ -623,14 +641,16 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `performance-report.md` - Performance analysis
+- `.orchestr8/docs/performance/analysis.md` - Performance analysis
 
 **Validation:**
 ```bash
-# Log quality gate
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+PERF_REPORT=$(get_orchestr8_path "performance" "analysis.md")
 
 # Validate performance report
-if [ ! -f "performance-report.md" ]; then
+if [ ! -f "$PERF_REPORT" ]; then
   echo "❌ Performance report not generated"
   exit 1
 fi
@@ -691,20 +711,22 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `accessibility-report.md` - Accessibility audit results
+- `.orchestr8/docs/accessibility/audit.md` - Accessibility audit results
 
 **Validation:**
 ```bash
-# Log quality gate
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+A11Y_REPORT=$(get_orchestr8_path "accessibility" "audit.md")
 
 # Validate accessibility report
-if [ ! -f "accessibility-report.md" ]; then
+if [ ! -f "$A11Y_REPORT" ]; then
   echo "❌ Accessibility report not generated"
   exit 1
 fi
 
 # Check for critical accessibility issues
-if grep -qE "CRITICAL|BLOCKER" accessibility-report.md; then
+if grep -qE "CRITICAL|BLOCKER" "$A11Y_REPORT"; then
   echo "❌ Critical accessibility issues found"
   exit 1
 fi
@@ -788,19 +810,24 @@ Expected outputs:
 
 **Expected Outputs:**
 - Updated documentation files
-- `deployment-guide.md` - Deployment instructions
-- `commit-message.txt` - Prepared commit message
+- `.orchestr8/docs/deployment/guide.md` - Deployment instructions
+- `.orchestr8/docs/deployment/commit-message.txt` - Prepared commit message
 
 **Quality Gate: Documentation Validation**
 ```bash
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+DEPLOY_GUIDE=$(get_orchestr8_path "deployment" "guide.md")
+COMMIT_MSG_FILE=$(get_orchestr8_path "deployment" "commit-message.txt")
+
 # Validate deployment guide exists
-if [ ! -f "deployment-guide.md" ]; then
+if [ ! -f "$DEPLOY_GUIDE" ]; then
   echo "❌ Deployment guide not created"
   exit 1
 fi
 
 # Validate commit message exists
-if [ ! -f "commit-message.txt" ]; then
+if [ ! -f "$COMMIT_MSG_FILE" ]; then
   echo "❌ Commit message not prepared"
   exit 1
 fi
@@ -810,8 +837,11 @@ echo "✅ Documentation complete"
 
 **Create PR/Commit:**
 ```bash
+# Setup orchestr8
+source "$(dirname "${BASH_SOURCE[0]}")/../scripts/setup-orchestr8-dirs.sh" 2>/dev/null || . "./setup-orchestr8-dirs.sh"
+
 # Read commit message
-COMMIT_MSG=$(cat commit-message.txt)
+COMMIT_MSG=$(cat "$(get_orchestr8_path "deployment" "commit-message.txt")")
 
 # Create commit
 git add .
@@ -882,14 +912,14 @@ Next Steps:
 5. Monitor production after deployment
 
 Reports Generated:
-- requirements-analysis.md
-- design-document.md
-- code-review-report.md
-- test-report.md
-- security-report.md
-- performance-report.md
-- accessibility-report.md
-- deployment-guide.md
+- .orchestr8/docs/requirements/analysis.md
+- .orchestr8/docs/design/document.md
+- .orchestr8/docs/quality/code-review.md
+- .orchestr8/docs/quality/test-report.md
+- .orchestr8/docs/security/audit.md
+- .orchestr8/docs/performance/analysis.md
+- .orchestr8/docs/accessibility/audit.md
+- .orchestr8/docs/deployment/guide.md
 "
 ```
 

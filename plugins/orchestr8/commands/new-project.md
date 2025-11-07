@@ -152,16 +152,16 @@ Tasks:
    - Performance targets
 
 Expected outputs:
-- architecture.md - System architecture document
-- tech-stack.md - Technology stack with rationale
+- .orchestr8/docs/design/architecture.md - System architecture document
+- .orchestr8/docs/design/tech-stack.md - Technology stack with rationale
 - data-model.md - Database schema and relationships
 - adr/ - Architecture decision records directory
 "
 ```
 
 **Expected Outputs:**
-- `architecture.md` - Complete system architecture document
-- `tech-stack.md` - Technology stack with rationale
+- `.orchestr8/docs/design/architecture.md` - Complete system architecture document
+- `.orchestr8/docs/design/tech-stack.md` - Technology stack with rationale
 - `data-model.md` - Database schema and entity relationships
 - `adr/` - Directory with architecture decision records
 
@@ -690,7 +690,7 @@ Tasks:
    - OWASP compliance
 
 Expected outputs:
-- code-review-report.md - Detailed review findings
+- .orchestr8/docs/quality/code-review.md - Detailed review findings
 "
 ```
 
@@ -741,7 +741,7 @@ Tasks:
    - Provide remediation steps
 
 Expected outputs:
-- security-audit-report.md - Security findings
+- .orchestr8/docs/security/audit.md - Security findings
 "
 ```
 
@@ -794,14 +794,14 @@ Tasks:
    - Long-term improvements
 
 Expected outputs:
-- performance-report.md - Performance findings and recommendations
+- .orchestr8/docs/performance/analysis.md - Performance findings and recommendations
 "
 ```
 
 **Expected Outputs (Quality Gates):**
-- `code-review-report.md` - Code quality findings
-- `security-audit-report.md` - Security vulnerabilities and fixes
-- `performance-report.md` - Performance analysis and recommendations
+- `.orchestr8/docs/quality/code-review.md` - Code quality findings
+- `.orchestr8/docs/security/audit.md` - Security vulnerabilities and fixes
+- `.orchestr8/docs/performance/analysis.md` - Performance analysis and recommendations
 
 **Quality Gate: All Gates Must Pass**
 ```bash
@@ -1145,9 +1145,9 @@ Key Files Created:
 - Documentation (README.md, docs/)
 
 Quality Reports:
-- code-review-report.md
-- security-audit-report.md
-- performance-report.md
+- .orchestr8/docs/quality/code-review.md
+- .orchestr8/docs/security/audit.md
+- .orchestr8/docs/performance/analysis.md
 
 Next Steps:
 1. Review all documentation

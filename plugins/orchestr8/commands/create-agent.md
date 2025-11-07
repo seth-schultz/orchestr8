@@ -500,14 +500,14 @@ Validation tasks:
    - File is readable
 
 Expected outputs:
-- validation-report.md with all checks
+- .orchestr8/docs/quality/validation-report.md with all checks
 - List of any issues found
 - Confirmation agent is ready
 "
 ```
 
 **Expected Outputs:**
-- `validation-report.md` - Complete validation results
+- `.orchestr8/docs/quality/validation-report.md` - Complete validation results
 - Issues list (should be empty)
 - Confirmation of readiness
 
@@ -778,7 +778,7 @@ Files Created:
 - $AGENT_FILE
 - agent-specs.md
 - agent-design.md
-- validation-report.md
+- .orchestr8/docs/quality/validation-report.md
 - metadata-update-report.md
 - documentation-report.md
 

@@ -70,7 +70,7 @@ BLOCKER ISSUES:
 - Missing required tests
 
 Expected outputs:
-- pre-deployment-code-review.md with:
+- .orchestr8/docs/deployment/pre-deployment-review.md with:
   - Checklist status
   - Blocker issues (if any)
   - Approval status (PASS/FAIL)
@@ -78,7 +78,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `pre-deployment-code-review.md` - Code review validation results
+- `.orchestr8/docs/deployment/pre-deployment-review.md` - Code review validation results
 
 **Quality Gate: Code Review**
 ```bash
@@ -343,7 +343,7 @@ VALIDATION:
 ✓ Performance impact acceptable
 
 Expected outputs:
-- migration-validation-report.md with:
+- .orchestr8/docs/deployment/migration-validation.md with:
   - Migration execution results
   - Rollback test results
   - Schema validation
@@ -353,7 +353,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `migration-validation-report.md` - Migration validation results
+- `.orchestr8/docs/deployment/migration-validation.md` - Migration validation results
 
 **Quality Gate: Database Migrations**
 ```bash

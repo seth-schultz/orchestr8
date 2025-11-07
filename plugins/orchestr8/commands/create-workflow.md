@@ -165,7 +165,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `workflow-design.md` - Complete workflow design
+- `.orchestr8/docs/design/workflow-design.md` - Complete workflow design
 - Phase breakdown (totaling 100%)
 - Agent coordination strategy
 - Quality gates specification
@@ -536,7 +536,7 @@ File: $WORKFLOW_FILE
 
 Files Created:
 - $WORKFLOW_FILE
-- workflow-design.md
+- .orchestr8/docs/design/workflow-design.md
 - test-report-$WORKFLOW_BASENAME.md
 - workflow-usage-$WORKFLOW_BASENAME.md
 

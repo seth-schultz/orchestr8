@@ -189,14 +189,14 @@ Focus areas:
    - Cognitive complexity
 
 Expected outputs:
-- style-review-report.md with findings
+- .orchestr8/docs/quality/style-review.md with findings
 - Issues categorized by severity (critical/high/medium/low)
 - Specific line numbers and recommendations
 "
 ```
 
 **Expected Outputs:**
-- `style-review-report.md` - Style findings
+- `.orchestr8/docs/quality/style-review.md` - Style findings
 - Issues categorized by severity
 - Line-specific recommendations
 
@@ -279,7 +279,7 @@ Focus areas:
    - Null/undefined handling
 
 Expected outputs:
-- logic-review-report.md with findings
+- .orchestr8/docs/quality/logic-review.md with findings
 - Critical logic errors highlighted
 - Edge cases not handled
 - Recommendations for fixes
@@ -287,7 +287,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `logic-review-report.md` - Logic findings
+- `.orchestr8/docs/quality/logic-review.md` - Logic findings
 - Critical errors identified
 - Edge case analysis
 - Fix recommendations
@@ -377,7 +377,7 @@ Focus areas:
    ```
 
 Expected outputs:
-- security-audit-report.md with findings
+- .orchestr8/docs/security/audit.md with findings
 - Critical vulnerabilities highlighted
 - CVE references where applicable
 - Remediation guidance
@@ -385,7 +385,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `security-audit-report.md` - Security findings
+- `.orchestr8/docs/security/audit.md` - Security findings
 - Critical vulnerabilities identified
 - CVE references
 - Remediation guidance
@@ -477,7 +477,7 @@ Focus areas:
    - Background processing candidates
 
 Expected outputs:
-- performance-analysis-report.md with findings
+- .orchestr8/docs/performance/analysis.md with findings
 - Bottlenecks identified with impact assessment
 - Optimization recommendations with expected gains
 - Profiling suggestions
@@ -485,7 +485,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `performance-analysis-report.md` - Performance findings
+- `.orchestr8/docs/performance/analysis.md` - Performance findings
 - Bottlenecks identified
 - Optimization recommendations
 - Expected performance gains
@@ -571,7 +571,7 @@ Focus areas:
    - Long-term maintenance costs
 
 Expected outputs:
-- architecture-review-report.md with findings
+- .orchestr8/docs/quality/architecture-review.md with findings
 - Design pattern recommendations
 - SOLID principle violations
 - Refactoring suggestions with priorities
@@ -579,7 +579,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `architecture-review-report.md` - Architecture findings
+- `.orchestr8/docs/quality/architecture-review.md` - Architecture findings
 - Design pattern recommendations
 - SOLID violations identified
 - Refactoring priorities
@@ -621,11 +621,11 @@ description: "Synthesize findings and generate master report"
 prompt: "Perform Stage 6: Synthesis & Report Generation
 
 Aggregate findings from:
-- style-review-report.md
-- logic-review-report.md
-- security-audit-report.md
-- performance-analysis-report.md
-- architecture-review-report.md
+- .orchestr8/docs/quality/style-review.md
+- .orchestr8/docs/quality/logic-review.md
+- .orchestr8/docs/security/audit.md
+- .orchestr8/docs/performance/analysis.md
+- .orchestr8/docs/quality/architecture-review.md
 
 Tasks:
 
@@ -839,11 +839,11 @@ Quality Score: $QUALITY_SCORE/10
 
 Reports Generated:
 - $REPORT_FILE (master report)
-- style-review-report.md
-- logic-review-report.md
-- security-audit-report.md
-- performance-analysis-report.md
-- architecture-review-report.md
+- .orchestr8/docs/quality/style-review.md
+- .orchestr8/docs/quality/logic-review.md
+- .orchestr8/docs/security/audit.md
+- .orchestr8/docs/performance/analysis.md
+- .orchestr8/docs/quality/architecture-review.md
 
 Review Stages:
 ✅ Stage 1: Style & Readability
@@ -1074,11 +1074,11 @@ gh pr create
 
 1. **Master Review Report** (`review-report-YYYYMMDD-HHMMSS.md`)
 2. **Stage Reports:**
-   - `style-review-report.md`
-   - `logic-review-report.md`
-   - `security-audit-report.md`
-   - `performance-analysis-report.md`
-   - `architecture-review-report.md`
+   - `.orchestr8/docs/quality/style-review.md`
+   - `.orchestr8/docs/quality/logic-review.md`
+   - `.orchestr8/docs/security/audit.md`
+   - `.orchestr8/docs/performance/analysis.md`
+   - `.orchestr8/docs/quality/architecture-review.md`
 3. **Iteration Plan** (`iteration-plan.md` - if changes needed)
 4. **Review Metrics** (`review-metrics.txt`)
 5. **PR Comments** (if PR review)

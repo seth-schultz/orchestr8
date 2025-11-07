@@ -120,7 +120,7 @@ aws cloudwatch get-metric-statistics \
 ```
 
 Expected outputs:
-- cost-analysis-report.md with:
+- .orchestr8/docs/performance/cost-analysis.md with:
   - Cost breakdown by service
   - Top cost drivers
   - Waste identification (idle, oversized, orphaned resources)
@@ -130,7 +130,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `cost-analysis-report.md` - Complete cost breakdown and waste identification
+- `.orchestr8/docs/performance/cost-analysis.md` - Complete cost breakdown and waste identification
 - Quick wins list for immediate savings
 
 **Quality Gate: Cost Analysis Validation**
@@ -254,7 +254,7 @@ def analyze_ec2_rightsizing(instance_id, days=14):
 ```
 
 Expected outputs:
-- rightsizing-report.md with:
+- .orchestr8/docs/performance/rightsizing.md with:
   - Right-sizing recommendations per resource
   - Savings forecast
   - Implementation priority matrix
@@ -263,7 +263,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `rightsizing-report.md` - Right-sizing recommendations and savings forecast
+- `.orchestr8/docs/performance/rightsizing.md` - Right-sizing recommendations and savings forecast
 - Implementation priority matrix
 
 **Quality Gate: Right-Sizing Validation**
@@ -380,7 +380,7 @@ aws ec2 describe-volumes \
 ```
 
 Expected outputs:
-- storage-optimization-report.md with:
+- .orchestr8/docs/performance/storage-optimization.md with:
   - Lifecycle policies implemented
   - Unattached volumes identified and removed
   - Storage type conversions completed
@@ -390,7 +390,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `storage-optimization-report.md` - Storage optimization results
+- `.orchestr8/docs/performance/storage-optimization.md` - Storage optimization results
 - Lifecycle policy templates
 - Storage savings calculations
 
@@ -487,7 +487,7 @@ def calculate_ri_recommendations(usage_data, commitment_term='1year'):
 ```
 
 Expected outputs:
-- reserved-capacity-report.md with:
+- .orchestr8/docs/performance/reserved-capacity.md with:
   - RI/Savings Plan purchase recommendations
   - Spot instance migration plan
   - Commitment strategy
@@ -497,7 +497,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `reserved-capacity-report.md` - Reserved capacity recommendations
+- `.orchestr8/docs/performance/reserved-capacity.md` - Reserved capacity recommendations
 - Commitment strategy document
 - ROI analysis
 
@@ -626,7 +626,7 @@ Estimated Savings:
 - Lambda optimization: 10-30% reduction
 
 Expected outputs:
-- autoscaling-report.md with:
+- .orchestr8/docs/performance/autoscaling.md with:
   - Auto-scaling configurations implemented
   - Scheduled scaling policies
   - Lambda optimizations
@@ -636,7 +636,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `autoscaling-report.md` - Auto-scaling implementation results
+- `.orchestr8/docs/performance/autoscaling.md` - Auto-scaling implementation results
 - Infrastructure as Code templates
 - Savings calculations
 
@@ -712,7 +712,7 @@ VPC Endpoint: $0.01/hour + $0.01/GB = $7/month + data (78% cheaper)
 ```
 
 Expected outputs:
-- networking-optimization-report.md with:
+- .orchestr8/docs/performance/networking-optimization.md with:
   - Data transfer optimizations implemented
   - Load balancer consolidation results
   - NAT gateway optimizations
@@ -722,7 +722,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `networking-optimization-report.md` - Networking optimization results
+- `.orchestr8/docs/performance/networking-optimization.md` - Networking optimization results
 - Savings calculations
 
 **Quality Gate: Networking Optimization Validation**
@@ -822,7 +822,7 @@ Dashboards:
 - Savings achieved
 
 Expected outputs:
-- finops-monitoring-report.md with:
+- .orchestr8/docs/performance/finops-monitoring.md with:
   - Cost anomaly detection configured
   - Budget alerts set up
   - Tagging policies enforced
@@ -833,7 +833,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `finops-monitoring-report.md` - FinOps monitoring setup
+- `.orchestr8/docs/performance/finops-monitoring.md` - FinOps monitoring setup
 - Dashboard configurations
 - Alert rules
 
@@ -915,13 +915,13 @@ Optimization Summary:
 - Networking: ${NETWORK_SAVINGS}% savings
 
 Reports Generated:
-- cost-analysis-report.md
-- rightsizing-report.md
-- storage-optimization-report.md
-- reserved-capacity-report.md
-- autoscaling-report.md
-- networking-optimization-report.md
-- finops-monitoring-report.md
+- .orchestr8/docs/performance/cost-analysis.md
+- .orchestr8/docs/performance/rightsizing.md
+- .orchestr8/docs/performance/storage-optimization.md
+- .orchestr8/docs/performance/reserved-capacity.md
+- .orchestr8/docs/performance/autoscaling.md
+- .orchestr8/docs/performance/networking-optimization.md
+- .orchestr8/docs/performance/finops-monitoring.md
 
 Implementation Status:
 ✅ Quick wins implemented (orphaned resources removed)

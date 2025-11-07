@@ -609,7 +609,7 @@ Provide comprehensive testing report with validation results and quality scores.
 ```
 
 **Expected Outputs:**
-- `skill-test-report.md` - Complete testing results
+- `.orchestr8/docs/quality/skill-test-report.md` - Complete testing results
 - `quality-metrics.txt` - Quality scores
 - `overlap-analysis.txt` - Comparison with existing skills
 

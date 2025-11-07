@@ -110,7 +110,7 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `bug-reproduction.md` - Reproduction steps and environment details
+- `.orchestr8/docs/analysis/bug-reproduction.md` - Reproduction steps and environment details
 - Failing test in appropriate test suite
 - Error logs and stack traces captured
 
@@ -206,14 +206,14 @@ If needed, use code-archaeologist agent to:
 - Identify related bugs
 
 Expected outputs:
-- root-cause-analysis.md
+- .orchestr8/docs/analysis/root-cause-analysis.md
 - Debug logs and evidence
 - Fix strategy documented
 "
 ```
 
 **Expected Outputs:**
-- `root-cause-analysis.md` - Complete root cause documentation
+- `.orchestr8/docs/analysis/root-cause-analysis.md` - Complete root cause documentation
 - Debug logs and evidence files
 - Fix strategy with approach
 
@@ -384,7 +384,7 @@ Tasks:
    - Verify thread safety
 
 Expected outputs:
-- test-report.md with all results
+- .orchestr8/docs/quality/test-report.md with all results
 - Coverage report
 - Performance benchmarks (if applicable)
 "
@@ -415,7 +415,7 @@ Review for:
 - No unnecessary changes
 
 Expected outputs:
-- code-review-report.md
+- .orchestr8/docs/quality/code-review.md
 "
 ```
 
@@ -440,7 +440,7 @@ Check for:
 - Proper error handling (no info leak)
 
 Expected outputs:
-- security-audit.md
+- .orchestr8/docs/security/audit.md
 "
 ```
 
@@ -471,9 +471,9 @@ Expected outputs:
 ```
 
 **Expected Outputs:**
-- `test-report.md` - Complete test results
-- `code-review-report.md` - Code review findings
-- `security-audit.md` - Security validation
+- `.orchestr8/docs/quality/test-report.md` - Complete test results
+- `.orchestr8/docs/quality/code-review.md` - Code review findings
+- `.orchestr8/docs/security/audit.md` - Security validation
 - `similar-bugs-analysis.md` - Similar pattern analysis
 
 **Quality Gate: All Quality Gates Pass**
@@ -598,8 +598,8 @@ Create documentation:
    - Action items
 
 Expected outputs:
-- bug-fix-docs.md
-- commit-message.txt
+- .orchestr8/docs/analysis/bug-fix-docs.md
+- .orchestr8/docs/deployment/commit-message.txt
 - post-mortem.md
 "
 ```
@@ -644,16 +644,16 @@ Deployment tasks:
    - Monitor for 24 hours
 
 Expected outputs:
-- deployment-report.md
+- .orchestr8/docs/deployment/report.md
 - rollback-plan.md
 "
 ```
 
 **Expected Outputs:**
-- `bug-fix-docs.md` - Complete documentation
-- `commit-message.txt` - Formatted commit message
+- `.orchestr8/docs/analysis/bug-fix-docs.md` - Complete documentation
+- `.orchestr8/docs/deployment/commit-message.txt` - Formatted commit message
 - `post-mortem.md` - Lessons learned
-- `deployment-report.md` - Deployment status
+- `.orchestr8/docs/deployment/report.md` - Deployment status
 - `rollback-plan.md` - Rollback procedures
 
 **Quality Gate: Documentation & Deployment**
@@ -738,16 +738,16 @@ Resolution: $RESOLUTION_SUMMARY
 Confidence: $CONFIDENCE
 
 Deliverables:
-- bug-reproduction.md
-- root-cause-analysis.md
+- .orchestr8/docs/analysis/bug-reproduction.md
+- .orchestr8/docs/analysis/root-cause-analysis.md
 - fix-implementation.md
-- test-report.md
-- code-review-report.md
-- security-audit.md
+- .orchestr8/docs/quality/test-report.md
+- .orchestr8/docs/quality/code-review.md
+- .orchestr8/docs/security/audit.md
 - similar-bugs-analysis.md
-- bug-fix-docs.md
+- .orchestr8/docs/analysis/bug-fix-docs.md
 - post-mortem.md
-- deployment-report.md
+- .orchestr8/docs/deployment/report.md
 
 Next Steps:
 1. Monitor production for 24 hours
