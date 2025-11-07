@@ -74,7 +74,7 @@ jobs:
         with:
           filters: |
             agents:
-              - 'plugins/orchestr8/agent-definitions/**/*.md'
+              - 'plugins/orchestr8/agents/**/*.md'
             workflows:
               - 'plugins/orchestr8/commands/**/*.md'
             docs:
@@ -107,7 +107,7 @@ jobs:
         id: changed-files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | \
-            grep 'agent-definitions/.*\.md$' > changed-agents.txt || true
+            grep 'agents/.*\.md$' > changed-agents.txt || true
 
           if [ -s changed-agents.txt ]; then
             echo "Changed agents:"

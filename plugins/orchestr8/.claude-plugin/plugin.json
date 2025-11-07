@@ -1,7 +1,7 @@
 {
   "name": "orchestr8",
-  "version": "5.9.0",
-  "description": "Enterprise-grade multi-agent orchestration via MCP. All agent discovery through fast Rust MCP stdio server with JIT loading from /agent-definitions/ directory (74 agents, <1ms queries, zero port conflicts, project-scoped).",
+  "version": "6.0.0",
+  "description": "Enterprise-grade multi-agent orchestration with dynamic JIT agent loading. 74+ specialized agents loaded on-demand from /agents/ directory with guaranteed model assignments.",
   "author": {
     "name": "Seth Schultz",
     "email": "orchestr8@sethschultz.com"
@@ -14,31 +14,10 @@
     "multi-agent",
     "autonomous",
     "enterprise",
-    "rust",
-    "mcp",
-    "stdio",
-    "agent-discovery",
     "jit-loading",
-    "high-performance"
+    "dynamic-loading",
+    "agent-workflows"
   ],
-  "mcpServers": {
-    "orchestr8": {
-      "command": "${CLAUDE_PLUGIN_ROOT}/mcp-server/orchestr8-bin/target/release/orchestr8-bin",
-      "args": [
-        "--root",
-        "${CLAUDE_WORKSPACE_ROOT}",
-        "--agent-dir",
-        "${CLAUDE_PLUGIN_ROOT}/agent-definitions",
-        "--data-dir",
-        "${CLAUDE_PLUGIN_ROOT}/mcp-server/data",
-        "--log-level",
-        "info"
-      ],
-      "env": {
-        "RUST_LOG": "orchestr8=debug"
-      }
-    }
-  },
   "commands": "./commands/",
   "skills": "./skills/",
   "hooks": "./hooks/hooks.json"

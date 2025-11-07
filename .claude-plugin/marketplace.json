@@ -5,15 +5,15 @@
     "email": "orchestr8@sethschultz.com"
   },
   "metadata": {
-    "description": "Enterprise-grade hierarchical multi-agent orchestration system with 74 specialized agents, 20 autonomous workflows, and MCP-driven JIT agent loading (<1ms discovery, zero port conflicts, project-scoped)",
-    "version": "5.9.0"
+    "description": "Enterprise-grade hierarchical multi-agent orchestration system with 74+ specialized agents and 20 autonomous workflows for end-to-end project delivery",
+    "version": "6.0.0"
   },
   "plugins": [
     {
       "name": "orchestr8",
       "source": "./plugins/orchestr8",
-      "description": "MCP-powered orchestration engine: 74 agents, 20 workflows, JIT loading, fast Rust stdio server with DuckDB agent registry",
-      "version": "5.9.0"
+      "description": "Enterprise orchestration engine: 74+ specialized agents, 20 automated workflows, parallelism-first architecture for maximum speed",
+      "version": "6.0.0"
     }
   ]
 }

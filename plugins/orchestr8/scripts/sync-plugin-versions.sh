@@ -9,8 +9,7 @@
 # version defined in VERSION (root). It updates:
 # - VERSION (root - source of truth)
 # - .claude-plugin/marketplace.json
-# - plugins/orchestr8/.claude-plugin/plugin.json (MCP plugin metadata)
-# - plugins/orchestr8/mcp-server/orchestr8-bin/Cargo.toml (Rust binary version)
+# - plugins/orchestr8/.claude-plugin/plugin.json (plugin metadata)
 #
 # Usage:
 #   ./sync-plugin-versions.sh              # Use version from VERSION file
@@ -21,7 +20,7 @@
 #   1 - Error (version validation or file update failed)
 #
 # Architecture:
-#   Single MCP plugin with consolidated agent-definitions/ directory
+#   Plugin with agents in /agents/ directory
 #   Plugin structure: plugins/orchestr8/
 ##############################################################################
 
@@ -112,10 +111,7 @@ update_file "plugins/orchestr8/.claude-plugin/plugin.json" \
   "plugins/orchestr8/.claude-plugin/plugin.json" \
   "s/\"version\": \"[0-9]*\.[0-9]*\.[0-9]*\"/\"version\": \"$VERSION\"/g"
 
-# 4. Update Rust binary version in Cargo.toml
-update_file "plugins/orchestr8/mcp-server/orchestr8-bin/Cargo.toml" \
-  "plugins/orchestr8/mcp-server/orchestr8-bin/Cargo.toml" \
-  "s/^version = \"[0-9]*\.[0-9]*\.[0-9]*\"/version = \"$VERSION\"/"
+# No additional files to update (MCP server removed)
 
 echo ""
 
@@ -132,7 +128,6 @@ if [ $FAILED_FILES -eq 0 ]; then
   echo "  ✓ VERSION (root)"
   echo "  ✓ .claude-plugin/marketplace.json"
   echo "  ✓ plugins/orchestr8/.claude-plugin/plugin.json"
-  echo "  ✓ plugins/orchestr8/mcp-server/orchestr8-bin/Cargo.toml"
   echo ""
   echo "All versions now: ${GREEN}$VERSION${NC}"
   echo ""

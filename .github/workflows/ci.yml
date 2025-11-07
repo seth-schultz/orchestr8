@@ -32,7 +32,7 @@ jobs:
       - name: Validate agent and workflow metadata
         run: |
           echo "Validating agent frontmatter format..."
-          find plugins/orchestr8/agent-definitions -name "*.md" 2>/dev/null | while read -r file; do
+          find plugins/orchestr8/agents -name "*.md" 2>/dev/null | while read -r file; do
             # Check for YAML frontmatter delimiters
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "ERROR: $file missing YAML frontmatter"
@@ -65,10 +65,10 @@ jobs:
         run: |
           echo "Validating plugin directory structure..."
 
-          # Required directories for JIT architecture under plugins/orchestr8/
+          # Required directories under plugins/orchestr8/
           required_dirs=(
             "plugins/orchestr8"
-            "plugins/orchestr8/agent-definitions"
+            "plugins/orchestr8/agents"
             "plugins/orchestr8/commands"
             "plugins/orchestr8/.claude-plugin"
             ".claude-plugin"
@@ -82,11 +82,11 @@ jobs:
           done
 
           # Check that agents and commands exist
-          agent_count=$(find plugins/orchestr8/agent-definitions -name "*.md" | wc -l | tr -d ' ')
+          agent_count=$(find plugins/orchestr8/agents -name "*.md" | wc -l | tr -d ' ')
           command_count=$(find plugins/orchestr8/commands -name "*.md" | wc -l | tr -d ' ')
 
           if [ "$agent_count" -eq 0 ]; then
-            echo "ERROR: No agents found in plugins/orchestr8/agent-definitions/ directory"
+            echo "ERROR: No agents found in plugins/orchestr8/agents/ directory"
             exit 1
           fi
 
@@ -248,8 +248,8 @@ jobs:
         run: |
           echo "Validating agent and workflow counts..."
 
-          # Count actual agents in plugins/orchestr8/agent-definitions directory
-          AGENT_COUNT=$(find plugins/orchestr8/agent-definitions -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          # Count actual agents in plugins/orchestr8/agents directory
+          AGENT_COUNT=$(find plugins/orchestr8/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
           # Count actual workflows in plugins/orchestr8/commands directory
           WORKFLOW_COUNT=$(find plugins/orchestr8/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
@@ -298,11 +298,11 @@ jobs:
           echo "Scanning for potentially malicious patterns..."
 
           # Check for common malicious patterns in agent and command directories
-          if grep -r "eval(" plugins/orchestr8/agent-definitions/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
+          if grep -r "eval(" plugins/orchestr8/agents/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
             echo "WARNING: Found eval() usage in markdown files"
           fi
 
-          if grep -r "exec(" plugins/orchestr8/agent-definitions/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
+          if grep -r "exec(" plugins/orchestr8/agents/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
             echo "WARNING: Found exec() usage in markdown files"
           fi
 
