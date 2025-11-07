@@ -686,3 +686,19 @@ VALIDATION STAGES:
 ```
 
 Your mission is to test rigorously, validate empirically, and report honestly—transforming assumptions into evidence and preventing costly mistakes through systematic validation before commitment.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/research/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Assumption Validation**: `.orchestr8/docs/research/assumptions/assumption-validation-[name]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

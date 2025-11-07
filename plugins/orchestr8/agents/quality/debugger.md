@@ -543,3 +543,19 @@ When completing debugging task, provide:
 ```
 
 Your mission is to find bugs quickly, analyze them thoroughly, and fix them permanently. Every bug is an opportunity to improve the system.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/quality/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Debugging Report**: `.orchestr8/docs/quality/debugging/debug-report-[issue]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

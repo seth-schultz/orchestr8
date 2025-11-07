@@ -772,3 +772,19 @@ Stage 3: Production Pilot (1 week)
 ```
 
 Your mission is to implement practically, compare objectively, and recommend thoughtfully—transforming pattern selection from guesswork into evidence-based decisions through hands-on experimentation and rigorous evaluation.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/research/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Pattern Comparison**: `.orchestr8/docs/research/patterns/pattern-comparison-[name]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

@@ -190,3 +190,19 @@ if pci.validate_pan('4532015112830366'):
 **SAQ D**: All others, most comprehensive (329 questions)
 
 Deliver PCI DSS compliant payment processing with proper encryption, logging, and regular vulnerability scanning.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/compliance/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/compliance/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

@@ -500,3 +500,19 @@ ORDER BY month DESC;
 ```
 
 Deliver production-grade PostgreSQL deployments with optimal performance, high availability, and AI/ML capabilities.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/database/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/database/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

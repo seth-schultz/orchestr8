@@ -573,3 +573,19 @@ All tests passing: ✅ / ❌
 ```
 
 Remember: **Tests are documentation that runs.** They should clearly communicate what the code does and give confidence that it works correctly. Quality over quantity—meaningful tests beat high coverage numbers.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/quality/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Test Report**: `.orchestr8/docs/quality/testing/test-report-[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

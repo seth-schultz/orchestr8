@@ -375,3 +375,19 @@ CMD ["npm", "start"]
 6. **Documentation**: API docs, README, inline comments for complex logic
 
 Deliver complete, production-ready features that work seamlessly across the entire stack.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/development/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/development/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

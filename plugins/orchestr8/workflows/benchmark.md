@@ -21,6 +21,17 @@ This workflow provides rigorous, data-driven comparison of alternatives through 
 - Test API patterns (REST vs GraphQL vs gRPC)
 - Compare ORMs (Prisma vs TypeORM vs Drizzle)
 
+
+### Output Locations
+
+All workflow outputs are saved to `.orchestr8/docs/` with proper categorization:
+
+- `benchmark-plan.md` → `.orchestr8/docs/performance/benchmarks/benchmark-plan-YYYY-MM-DD.md`
+- `candidates/` → `.orchestr8/docs/performance/benchmarks/candidates/`
+- `test-scenarios.md` → `.orchestr8/docs/performance/benchmarks/test-scenarios-YYYY-MM-DD.md`
+- `evaluation-criteria.md` → `.orchestr8/docs/performance/benchmarks/evaluation-criteria-YYYY-MM-DD.md`
+- `benchmark-results.md` → `.orchestr8/docs/performance/benchmarks/results-YYYY-MM-DD.md`
+
 ## Workflow Phases
 
 ### Phase 1: Benchmark Definition (0-15%)

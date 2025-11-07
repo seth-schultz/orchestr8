@@ -7,6 +7,21 @@ description: Expertise in Claude Code agent design patterns, frontmatter structu
 
 Expert knowledge of agent design patterns for the Claude Code orchestr8 plugin system, covering frontmatter structure, tool selection strategies, model choice, documentation patterns, and integration best practices.
 
+
+## Documentation Output Locations
+
+This skill generates outputs in the following `.orchestr8/docs/` locations:
+
+- **Agent design documentation**: `.orchestr8/docs/patterns/library/`
+
+### Output Naming Convention
+All outputs follow the pattern: `[type]-[name]-YYYY-MM-DD.md`
+
+Example outputs:
+- `.orchestr8/docs/research/assumptions/validation-microservices-2025-01-15.md`
+- `.orchestr8/docs/research/poc/poc-event-sourcing-2025-01-15.md`
+- `.orchestr8/docs/patterns/library/pattern-factory-2025-01-15.md`
+
 ## When to Use This Skill
 
 **Use agent-design-patterns for:**

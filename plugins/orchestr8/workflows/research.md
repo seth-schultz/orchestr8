@@ -19,6 +19,13 @@ This workflow enables systematic exploration of multiple hypotheses or approache
 - Compare different algorithm implementations
 - Validate design decisions with empirical evidence
 
+
+### Output Locations
+
+All workflow outputs are saved to `.orchestr8/docs/` with proper categorization:
+
+- `research-report.md` → `.orchestr8/docs/research/research-report-YYYY-MM-DD.md`
+
 ## Workflow Phases
 
 ### Phase 1: Hypothesis Formulation (0-15%)

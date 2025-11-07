@@ -7,6 +7,23 @@ description: Expert at comparing libraries and frameworks through parallel imple
 
 Expert knowledge in systematic technology comparison through parallel implementation, rigorous performance benchmarking, code characteristic analysis, and evidence-based decision-making for technology adoption.
 
+
+## Documentation Output Locations
+
+This skill generates outputs in the following `.orchestr8/docs/` locations:
+
+- **Technology comparison reports**: `.orchestr8/docs/research/comparisons/`
+- **Performance benchmarks**: `.orchestr8/docs/performance/benchmarks/`
+- **Architecture recommendations**: `.orchestr8/docs/architecture/design/`
+
+### Output Naming Convention
+All outputs follow the pattern: `[type]-[name]-YYYY-MM-DD.md`
+
+Example outputs:
+- `.orchestr8/docs/research/assumptions/validation-microservices-2025-01-15.md`
+- `.orchestr8/docs/research/poc/poc-event-sourcing-2025-01-15.md`
+- `.orchestr8/docs/patterns/library/pattern-factory-2025-01-15.md`
+
 ## When to Use This Skill
 
 **Use technology-benchmarking for:**

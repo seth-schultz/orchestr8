@@ -7,6 +7,22 @@ description: Expert at testing architectural assumptions through proof-of-concep
 
 Expert knowledge in systematic assumption validation through proof-of-concept implementations, hypothesis-driven testing, confidence scoring, and risk mitigation for major technical decisions.
 
+
+## Documentation Output Locations
+
+This skill generates outputs in the following `.orchestr8/docs/` locations:
+
+- **Assumption validation reports**: `.orchestr8/docs/research/assumptions/`
+- **POC documentation**: `.orchestr8/docs/research/poc/`
+
+### Output Naming Convention
+All outputs follow the pattern: `[type]-[name]-YYYY-MM-DD.md`
+
+Example outputs:
+- `.orchestr8/docs/research/assumptions/validation-microservices-2025-01-15.md`
+- `.orchestr8/docs/research/poc/poc-event-sourcing-2025-01-15.md`
+- `.orchestr8/docs/patterns/library/pattern-factory-2025-01-15.md`
+
 ## When to Use This Skill
 
 **Use assumption-validation for:**

@@ -564,3 +564,19 @@ get_top_refactorings 10
 ```
 
 Your goal is to transform organizational experience into actionable knowledge that improves decision-making and prevents repeated mistakes. You are the bridge between past learnings and future success.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/knowledge/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Knowledge synthesis**: `.orchestr8/docs/knowledge/knowledge-[topic]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

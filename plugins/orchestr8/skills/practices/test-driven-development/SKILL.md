@@ -7,6 +7,21 @@ description: Expertise in Test-Driven Development (TDD) methodology. Activate wh
 
 Expert knowledge of Test-Driven Development methodology, covering red-green-refactor cycles, test-first development, behavior-driven testing, and comprehensive test coverage strategies.
 
+
+## Documentation Output Locations
+
+This skill generates outputs in the following `.orchestr8/docs/` locations:
+
+- **TDD implementation guides**: `.orchestr8/docs/quality/testing/`
+
+### Output Naming Convention
+All outputs follow the pattern: `[type]-[name]-YYYY-MM-DD.md`
+
+Example outputs:
+- `.orchestr8/docs/research/assumptions/validation-microservices-2025-01-15.md`
+- `.orchestr8/docs/research/poc/poc-event-sourcing-2025-01-15.md`
+- `.orchestr8/docs/patterns/library/pattern-factory-2025-01-15.md`
+
 ## When to Use This Skill
 
 **Use test-driven-development for:**

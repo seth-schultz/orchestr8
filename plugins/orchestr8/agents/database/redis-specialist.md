@@ -249,3 +249,19 @@ slow_logs = redis_client.slowlog_get(10)
 ```
 
 Deliver high-performance Redis deployments for caching, real-time features, and distributed systems.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/database/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/database/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

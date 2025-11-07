@@ -259,6 +259,80 @@ Task(agent1), Task(agent2), Task(agent3), Task(agent4), Task(agent5)
 # Total: 1 unit (all execute simultaneously)
 ```
 
+## Documentation Output Standards
+
+### Output Location Hierarchy
+
+All agent, workflow, and skill outputs are consolidated to `.orchestr8/docs/` with standardized categorization:
+
+**Primary Categories:**
+- `.orchestr8/docs/quality/` - Code quality, testing, debugging
+- `.orchestr8/docs/security/` - Security audits, compliance, vulnerability scans
+- `.orchestr8/docs/performance/` - Benchmarks, optimization, performance analysis
+- `.orchestr8/docs/research/` - Implementation research, pattern studies, POCs
+- `.orchestr8/docs/patterns/` - Pattern libraries and discoveries
+- `.orchestr8/docs/knowledge/` - Organizational learning, baselines, validated assumptions
+- `.orchestr8/docs/compliance/` - SOC2, FedRAMP, ISO27001 documentation
+- `.orchestr8/docs/workflows/` - Feature and project workflow outputs
+- `.orchestr8/docs/architecture/` - Architecture reviews, design docs, patterns
+- `.orchestr8/docs/deployment/` - Deployment validation, health checks, rollbacks
+
+### Naming Convention
+
+All documentation files follow the standard pattern:
+```
+[type]-[component]-YYYY-MM-DD.md
+```
+
+**Examples:**
+- `code-review-auth-module-2025-01-15.md`
+- `security-audit-api-endpoints-2025-01-15.md`
+- `benchmark-postgres-mongodb-2025-01-15.md`
+- `assumption-validation-microservices-2025-01-15.md`
+
+### Agent Output Specifications
+
+Every agent includes an "Output Locations" section specifying:
+- Primary output directory (e.g., `.orchestr8/docs/quality/code-review/`)
+- Output filename pattern with naming convention
+- Examples of generated outputs
+- When outputs are generated
+
+**Check individual agent documentation for specific output locations.**
+
+### Workflow Output Specifications
+
+Every workflow phase documents output locations:
+- Explicit paths to `.orchestr8/docs/[category]/[subcategory]/`
+- Multiple output files per workflow phase
+- Clear mapping from workflow phase to output category
+
+**Check individual workflow documentation for detailed output specifications.**
+
+### Skill Output Specifications
+
+Each skill includes a "Documentation Output Locations" section:
+- Categories where outputs are saved
+- Output types and naming patterns
+- Examples of generated documentation
+- When outputs are generated
+
+**Check individual skill documentation for specific output locations.**
+
+### Benefit of Centralized Documentation
+
+- **Discoverable**: Clear category structure enables easy finding of documentation
+- **Organized**: Consistent structure across 80+ agents, 5 workflows, and 7 skills
+- **Traceable**: Timestamped files create audit trail of analysis
+- **Scalable**: Adding new agents doesn't scatter new files
+- **Maintainable**: Single location for all documentation reduces clutter
+
+### Implementation Reference
+
+For comprehensive documentation output standards, implementation guide, and examples:
+- **File**: `.orchestr8/docs/OUTPUT_STANDARDS.md`
+- **Purpose**: Master reference for output locations, naming conventions, categories
+- **Audience**: Developers building new agents, workflows, or skills
 
 ## Development Standards
 

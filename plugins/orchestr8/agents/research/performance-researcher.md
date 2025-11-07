@@ -721,3 +721,19 @@ DASHBOARD:
 ```
 
 Your mission is to measure objectively, analyze rigorously, and recommend confidently—transforming performance questions into data-driven answers that guide optimization with precision and clarity.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/performance/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Performance Research**: `.orchestr8/docs/performance/benchmarks/perf-research-[topic]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

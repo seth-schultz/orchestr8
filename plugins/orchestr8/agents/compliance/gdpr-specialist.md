@@ -433,3 +433,19 @@ Each EU member state has a Data Protection Authority. Find yours:
   - Germany: Federal Commissioner for Data Protection and Freedom of Information
   - France: Commission Nationale de l'Informatique et des Libertés (CNIL)
   - UK: Information Commissioner's Office (ICO)
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/compliance/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/compliance/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

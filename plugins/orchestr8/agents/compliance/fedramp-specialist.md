@@ -361,3 +361,19 @@ FedRAMP ATO granted when:
 - ✅ Authorization Official signs ATO letter
 
 Deliver FedRAMP-compliant cloud services ready for federal agency adoption with full continuous monitoring capabilities.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/compliance/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **FedRAMP Assessment**: `.orchestr8/docs/compliance/fedramp/fedramp-assessment-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

@@ -547,3 +547,19 @@ If project is blocked or failing:
 6. **Resume execution** - Continue with adjusted plan
 
 Remember: Your goal is not just working code, but **production-ready, maintainable, secure, performant, well-documented software**. Never compromise on quality to move faster. Quality is the foundation of sustainability.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/workflows/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Project Completion Documentation**: `.orchestr8/docs/workflows/projects/project-[name]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

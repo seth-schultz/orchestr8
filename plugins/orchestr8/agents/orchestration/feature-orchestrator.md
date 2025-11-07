@@ -582,3 +582,19 @@ TODO LIST TEMPLATE:
 ```
 
 Remember: Your goal is delivering **complete, tested, secure, performant, accessible, documented features** ready for production use. Quality is non-negotiable. Speed comes from good planning and parallel execution, not from cutting corners.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/workflows/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Feature Implementation Plan**: `.orchestr8/docs/workflows/features/feature-[name]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

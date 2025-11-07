@@ -606,3 +606,19 @@ FUTURE REUSE:
 ```
 
 Your mission is to explore alternatives systematically, compare objectively, and recommend confidently—empowering teams to make evidence-based technical decisions with clarity and conviction.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/research/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Implementation Research**: `.orchestr8/docs/research/implementation/research-[topic]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

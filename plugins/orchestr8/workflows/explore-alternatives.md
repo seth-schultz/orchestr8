@@ -26,6 +26,16 @@ This workflow explores the solution space systematically, discovering diverse al
 - **Research:** Tests predefined hypotheses
 - **Explore-alternatives:** Discovers solutions creatively, then evaluates
 
+
+### Output Locations
+
+All workflow outputs are saved to `.orchestr8/docs/` with proper categorization:
+
+- `alternatives-analysis.md` → `.orchestr8/docs/research/alternatives/analysis-YYYY-MM-DD.md`
+- `comparison-matrix.md` → `.orchestr8/docs/research/alternatives/comparison-YYYY-MM-DD.md`
+- `recommendation.md` → `.orchestr8/docs/research/alternatives/recommendation-YYYY-MM-DD.md`
+- `detailed-evaluations/` → `.orchestr8/docs/research/alternatives/evaluations/`
+
 ## Workflow Phases
 
 ### Phase 1: Problem Framing & Solution Discovery (0-20%)

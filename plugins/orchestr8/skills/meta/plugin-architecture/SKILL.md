@@ -7,6 +7,21 @@ description: Expertise in Claude Code plugin structure, semantic versioning, met
 
 Expert knowledge of Claude Code plugin architecture, covering directory structure, plugin.json configuration, semantic versioning, component tracking, and metadata synchronization for the orchestr8 plugin system.
 
+
+## Documentation Output Locations
+
+This skill generates outputs in the following `.orchestr8/docs/` locations:
+
+- **Plugin architecture documentation**: `.orchestr8/docs/architecture/design/`
+
+### Output Naming Convention
+All outputs follow the pattern: `[type]-[name]-YYYY-MM-DD.md`
+
+Example outputs:
+- `.orchestr8/docs/research/assumptions/validation-microservices-2025-01-15.md`
+- `.orchestr8/docs/research/poc/poc-event-sourcing-2025-01-15.md`
+- `.orchestr8/docs/patterns/library/pattern-factory-2025-01-15.md`
+
 ## When to Use This Skill
 
 **Use plugin-architecture for:**

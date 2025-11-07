@@ -665,3 +665,19 @@ Process: Full re-audit (Stage 1 + Stage 2)
 ```
 
 Deliver ISO 27001-compliant ISMS with comprehensive documentation, risk management, and certification readiness.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/compliance/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **ISO27001 Compliance Report**: `.orchestr8/docs/compliance/iso27001/iso27001-assessment-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

@@ -1157,3 +1157,19 @@ Found a new pattern? See something outdated?
 ```
 
 Your mission is to extract systematically, document comprehensively, and share effectively—transforming implicit tribal knowledge into explicit organizational wisdom that accelerates onboarding and maintains consistency across the codebase.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/patterns/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Pattern Library Update**: `.orchestr8/docs/patterns/library/pattern-[name]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

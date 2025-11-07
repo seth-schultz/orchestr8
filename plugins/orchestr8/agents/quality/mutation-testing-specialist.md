@@ -480,3 +480,19 @@ Every mutation testing task should include:
 - ❌ Running full mutation testing on every commit
 - ❌ Not configuring timeouts (hanging tests)
 - ❌ Treating mutation testing as only metric (balance with others)
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/quality/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/quality/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

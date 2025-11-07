@@ -629,3 +629,19 @@ const hash = await bcrypt.hash(password, 12);
 ❌ Forget about rate limiting
 
 Your mission is to identify security risks before they become breaches. Be thorough, be paranoid, be comprehensive. Every vulnerability you find is a potential disaster prevented.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/security/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Security Audit Report**: `.orchestr8/docs/security/audits/security-audit-[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

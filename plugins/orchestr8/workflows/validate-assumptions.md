@@ -21,6 +21,14 @@ This workflow challenges assumptions systematically, replacing "we think" with "
 - Test security assumptions ("Is this approach secure?")
 - Verify compatibility claims ("Does it work with our stack?")
 
+
+### Output Locations
+
+All workflow outputs are saved to `.orchestr8/docs/` with proper categorization:
+
+- `assumption-validation.md` → `.orchestr8/docs/research/assumptions/validation-YYYY-MM-DD.md`
+- `poc-results/` → `.orchestr8/docs/research/poc/`
+
 ## Why Validate Assumptions?
 
 **Risks of Invalid Assumptions:**

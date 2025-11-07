@@ -457,3 +457,19 @@ Build reliable, scalable message-driven systems with RabbitMQ and async task pro
 **Performance Optimization:** Log queue backlog issues, store consumer scaling strategies
 **Knowledge Sharing:** Share exchange/routing patterns, document dead letter queue setups
 **Monitoring:** Send notifications for queue depth alerts, track message rates
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/infrastructure/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **Report**: `.orchestr8/docs/infrastructure/[component]-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization

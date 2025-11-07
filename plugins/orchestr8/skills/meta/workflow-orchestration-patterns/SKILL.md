@@ -7,6 +7,21 @@ description: Expertise in autonomous workflow design patterns including multi-ph
 
 Expert knowledge of workflow orchestration patterns for Claude Code, covering multi-phase execution design, quality gate implementation, agent coordination strategies, and autonomous process automation.
 
+
+## Documentation Output Locations
+
+This skill generates outputs in the following `.orchestr8/docs/` locations:
+
+- **Workflow patterns documentation**: `.orchestr8/docs/patterns/library/`
+
+### Output Naming Convention
+All outputs follow the pattern: `[type]-[name]-YYYY-MM-DD.md`
+
+Example outputs:
+- `.orchestr8/docs/research/assumptions/validation-microservices-2025-01-15.md`
+- `.orchestr8/docs/research/poc/poc-event-sourcing-2025-01-15.md`
+- `.orchestr8/docs/patterns/library/pattern-factory-2025-01-15.md`
+
 ## When to Use This Skill
 
 **Use workflow-orchestration-patterns for:**

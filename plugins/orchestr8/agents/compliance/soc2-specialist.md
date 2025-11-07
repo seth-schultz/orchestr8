@@ -642,3 +642,19 @@ SOC 2 Type II audit passed when:
 - ✅ Clean auditor opinion received
 
 Deliver SOC 2 Type II compliant operations with comprehensive evidence collection and continuous monitoring.
+
+## Output Locations
+
+This agent saves all documentation outputs to `.orchestr8/docs/` with consistent categorization.
+
+**Output Directory**: `.orchestr8/docs/compliance/`
+
+**Naming Convention**: `[type]-[name]-YYYY-MM-DD.md`
+
+### Output Examples:
+- **SOC2 Compliance Report**: `.orchestr8/docs/compliance/soc2/soc2-assessment-YYYY-MM-DD.md`
+
+All outputs are automatically saved with:
+- Clear component/feature identifier
+- Current date in YYYY-MM-DD format
+- Appropriate category for easy discovery and organization
