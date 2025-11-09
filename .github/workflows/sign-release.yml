@@ -1,0 +1,168 @@
+name: Sign Plugin Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to sign (e.g., v1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  sign-and-release:
+    name: Sign orchestr8 Plugin
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up GPG
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnupg
+
+      - name: Import GPG key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          if [ -z "$GPG_PRIVATE_KEY" ]; then
+            echo "ERROR: GPG_PRIVATE_KEY secret not set"
+            echo "Please add your GPG private key as a GitHub secret"
+            echo "Export with: gpg --armor --export-secret-keys security@orchestr8.dev"
+            exit 1
+          fi
+
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+
+          # List imported keys for verification
+          echo "Imported GPG keys:"
+          gpg --list-secret-keys
+
+      - name: Configure Git
+        run: |
+          git config user.name "orchestr8-bot"
+          git config user.email "security@orchestr8.dev"
+
+      - name: Sign plugin
+        working-directory: plugins/orchestr8
+        run: |
+          chmod +x scripts/sign-plugin.sh
+          ./scripts/sign-plugin.sh
+
+      - name: Verify signature
+        working-directory: plugins/orchestr8
+        run: |
+          chmod +x scripts/verify-plugin.sh
+          ./scripts/verify-plugin.sh
+
+      - name: Display signing artifacts
+        working-directory: plugins/orchestr8
+        run: |
+          echo "Generated signing artifacts:"
+          ls -lh CHECKSUMS.txt* ORCHESTR8_PUBLIC_KEY.asc
+          echo ""
+          echo "Checksum file preview (first 10 lines):"
+          head -10 CHECKSUMS.txt
+          echo ""
+          echo "Signature file preview:"
+          cat CHECKSUMS.txt.asc
+
+      - name: Commit signature files
+        run: |
+          git add plugins/orchestr8/CHECKSUMS.txt
+          git add plugins/orchestr8/CHECKSUMS.txt.asc
+          git add plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: add code signatures for ${GITHUB_REF_NAME}"
+            git push origin HEAD:main
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            plugins/orchestr8/CHECKSUMS.txt
+            plugins/orchestr8/CHECKSUMS.txt.asc
+            plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc
+          body: |
+            ## orchestr8 Plugin Release ${{ github.ref_name }}
+
+            ### Code Signing
+
+            This release includes cryptographic signatures to verify authenticity and prevent supply chain attacks.
+
+            **Verification Instructions:**
+
+            1. Download the plugin and signature files
+            2. Import the public key:
+               ```bash
+               gpg --import ORCHESTR8_PUBLIC_KEY.asc
+               ```
+            3. Verify the signature:
+               ```bash
+               cd plugins/orchestr8
+               ./scripts/verify-plugin.sh
+               ```
+
+            **Expected Key Fingerprint:**
+            ```
+            $(cd plugins/orchestr8 && gpg --show-keys ORCHESTR8_PUBLIC_KEY.asc | grep -A 1 "Key fingerprint")
+            ```
+
+            ### Files Included
+
+            - `CHECKSUMS.txt` - SHA256 checksums of all plugin files
+            - `CHECKSUMS.txt.asc` - GPG signature of checksums
+            - `ORCHESTR8_PUBLIC_KEY.asc` - Public key for verification
+
+            ### Security
+
+            All files have been signed with the orchestr8 security key. Always verify signatures before using this plugin in production environments.
+
+            For more information, see [CODE_SIGNING.md](plugins/orchestr8/docs/CODE_SIGNING.md)
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload signature artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-signatures-${{ github.ref_name }}
+          path: |
+            plugins/orchestr8/CHECKSUMS.txt
+            plugins/orchestr8/CHECKSUMS.txt.asc
+            plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc
+          retention-days: 90
+
+      - name: Security summary
+        run: |
+          echo "## Code Signing Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Plugin signed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Signature verified" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Files attached to release" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Signed Files" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cd plugins/orchestr8 && wc -l CHECKSUMS.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### GPG Key Info" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cd plugins/orchestr8 && gpg --show-keys ORCHESTR8_PUBLIC_KEY.asc >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

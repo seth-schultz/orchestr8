@@ -34,6 +34,12 @@ Thumbs.db
 credentials.json
 secrets.yaml
 
+# Code signing - track public artifacts, exclude private keys
+!ORCHESTR8_PUBLIC_KEY.asc
+!CHECKSUMS.txt
+!CHECKSUMS.txt.asc
+*-private-key.asc
+
 # Local development
 .claude/settings.local.json
 

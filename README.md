@@ -4,6 +4,9 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-green.svg)](https://claude.ai)
+[![Security Scan](https://github.com/seth-skocelas/orchestr8/workflows/Security%20Scan/badge.svg)](https://github.com/seth-skocelas/orchestr8/actions/workflows/security.yml)
+[![License Check](https://github.com/seth-skocelas/orchestr8/workflows/License%20Compliance/badge.svg)](https://github.com/seth-skocelas/orchestr8/actions/workflows/license-check.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/seth-skocelas/orchestr8/badge)](https://api.securityscorecards.dev/projects/github.com/seth-skocelas/orchestr8)
 
 Transform Claude Code into a fully autonomous software engineering team with research capabilities. orchestr8 provides 80+ specialized agents (including 5 research agents) coordinated through intelligent workflows, achieving 3-6x speedups through parallel execution, evidence-based decision making, and enterprise-scale project delivery.
 
@@ -124,9 +127,99 @@ Or browse available plugins interactively:
 
 Then select `orchestr8` from the available plugins.
 
+### Security: Verify Plugin Authenticity
+
+orchestr8 is cryptographically signed to prevent supply chain attacks. Always verify the plugin before use:
+
+```bash
+cd plugins/orchestr8
+./scripts/verify-plugin.sh
+```
+
+This verifies:
+- GPG signature authenticity
+- File integrity via SHA256 checksums
+- No unauthorized modifications
+
+For detailed verification instructions, see [CODE_SIGNING.md](plugins/orchestr8/docs/CODE_SIGNING.md).
+
 ### Verification
 
 After installation, verify orchestr8 is loaded by typing `/` in Claude Code. You should see all 20 workflows listed (e.g., `/orchestr8:new-project`, `/orchestr8:add-feature`, etc.).
+
+## Security & Supply Chain
+
+orchestr8 implements enterprise-grade security with comprehensive automated scanning:
+
+### Automated Security Monitoring
+
+**Continuous Scanning** (on every PR and weekly):
+- ✅ **npm audit** - Fails build on high/critical vulnerabilities
+- ✅ **CodeQL** - Static analysis for security issues
+- ✅ **Secret scanning** - Detects accidentally committed credentials
+- ✅ **Dependabot** - Automatic security updates
+- ✅ **License compliance** - Only permissive licenses allowed
+- ✅ **SBOM generation** - Software Bill of Materials for every release
+
+**View Security Status:**
+- [Security Workflow Results](https://github.com/seth-skocelas/orchestr8/actions/workflows/security.yml)
+- [License Compliance](https://github.com/seth-skocelas/orchestr8/actions/workflows/license-check.yml)
+- [Security Policy](SECURITY.md)
+
+### For Contributors: Pre-commit Security Checks
+
+Install local security checks to catch issues before committing:
+
+```bash
+./plugins/orchestr8/scripts/install-git-hooks.sh
+```
+
+This automatically runs before each commit:
+- Secret detection (API keys, passwords, tokens)
+- npm audit (high/critical vulnerabilities)
+- Sensitive file detection (.pem, .key files)
+- package-lock.json sync verification
+
+**Bypass if needed** (not recommended):
+```bash
+git commit --no-verify
+```
+
+### Dependency Management
+
+**Keep dependencies secure:**
+```bash
+cd plugins/orchestr8
+npm audit                    # Check for vulnerabilities
+npm audit fix                # Auto-fix compatible updates
+npm outdated                 # Check for outdated packages
+```
+
+**Automated updates via Dependabot:**
+- Security updates: Merged immediately
+- Minor/patch updates: Grouped weekly
+- Major updates: Reviewed individually
+
+See [SECURITY.md](SECURITY.md) for complete dependency management process.
+
+### Security Features
+
+- **Sandboxed Execution** - All agents run in isolated environment
+- **Command Validation** - Input sanitization prevents injection attacks
+- **Audit Logging** - All operations logged for security review
+- **Tiered Security** - 3 security levels (Read-Only, Development, Infrastructure)
+- **Code Signing** - Official plugins cryptographically signed
+- **Supply Chain Security** - SBOM generated for every release
+
+### Reporting Security Issues
+
+**DO NOT** open public GitHub issues for security vulnerabilities.
+
+Report via:
+- Email: security@orchestr8.dev
+- [GitHub Security Advisories](https://github.com/seth-skocelas/orchestr8/security/advisories/new)
+
+See [SECURITY.md](SECURITY.md) for our vulnerability response process.
 
 ## Quick Start
 
@@ -371,12 +464,26 @@ Agents are organized by domain expertise in the `/agents/` directory:
 
 ## Security & Compliance
 
+- **Code Signing** - All releases cryptographically signed to prevent supply chain attacks
+- **Signature Verification** - Verify plugin authenticity with GPG signatures
 - **No Secrets Stored** - Credentials via environment variables
 - **No External Dependencies** - Works completely offline
 - **Compliance Built-In** - FedRAMP, ISO 27001, SOC2, GDPR, PCI-DSS agents
 - **Context Isolation** - Each agent operates in separate context
 - **File-Based Security** - Simple markdown files, no complex infrastructure
 - **Audit Trail** - Complete execution logs for compliance reporting
+
+### Supply Chain Security
+
+orchestr8 implements comprehensive supply chain security:
+
+1. **Cryptographic Signing** - Every release is signed with GPG
+2. **Checksum Verification** - SHA256 checksums for all files
+3. **Public Key Distribution** - Transparent key management
+4. **Automated CI/CD Signing** - GitHub Actions workflow
+5. **Verification Tools** - One-command verification script
+
+See [CODE_SIGNING.md](plugins/orchestr8/docs/CODE_SIGNING.md) for complete documentation.
 
 ## Documentation
 

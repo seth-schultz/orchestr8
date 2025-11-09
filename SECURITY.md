@@ -102,6 +102,167 @@ We use the following severity classification:
 - Low-impact information leaks
 - Theoretical vulnerabilities requiring unusual conditions
 
+## Dependency Management & Supply Chain Security
+
+### Automated Dependency Scanning
+
+Orchestr8 employs comprehensive automated dependency scanning:
+
+#### Continuous Monitoring
+- **npm audit**: Runs on every PR and push to main
+- **Weekly Scans**: Automated security scans every Monday at 9am UTC
+- **Dependabot**: Automatic dependency updates and security patches
+- **CodeQL**: Static analysis for security vulnerabilities
+- **Secret Scanning**: Detects accidentally committed credentials
+
+#### Build Failure Policy
+Builds automatically fail on:
+- High or critical severity vulnerabilities in dependencies
+- Detected secrets or credentials in code
+- Copyleft licenses (GPL/AGPL) in production dependencies
+- Missing package-lock.json when package.json changes
+
+### Dependency Update Process
+
+#### For Users
+
+**Keeping Dependencies Secure:**
+
+1. **Monitor Security Advisories**: Watch for security advisories via:
+   - GitHub Security tab
+   - npm audit output
+   - Dependabot alerts
+
+2. **Update Regularly**:
+   ```bash
+   cd plugins/orchestr8
+   npm audit                    # Check for vulnerabilities
+   npm audit fix                # Auto-fix compatible updates
+   npm audit fix --force        # Fix breaking changes (review carefully)
+   npm outdated                 # Check for outdated packages
+   ```
+
+3. **Review Before Updating**:
+   - Read release notes for major version updates
+   - Check for breaking changes
+   - Test thoroughly in development environment
+
+4. **Install Pre-commit Hooks** (recommended):
+   ```bash
+   ./plugins/orchestr8/scripts/install-git-hooks.sh
+   ```
+   This prevents commits with known vulnerabilities.
+
+#### For Contributors
+
+**Contributing Dependency Updates:**
+
+1. **Automated Updates**: Dependabot creates PRs automatically:
+   - Security updates: Immediately reviewed and merged
+   - Minor/patch updates: Grouped weekly
+   - Major updates: Reviewed individually
+
+2. **Manual Updates**: If updating dependencies manually:
+   ```bash
+   # Update a specific package
+   npm update <package-name>
+   
+   # Update all packages (respecting semver)
+   npm update
+   
+   # Update to latest (including major versions)
+   npm install <package-name>@latest
+   ```
+
+3. **Before Submitting PR**:
+   - Run `npm audit` - must pass for high/critical
+   - Run `npm test` - all tests must pass
+   - Run `npm run build` - build must succeed
+   - Update `package-lock.json` - always commit lock file
+   - Document breaking changes in PR description
+
+4. **Pre-commit Checks**: Run locally before committing:
+   ```bash
+   ./plugins/orchestr8/scripts/pre-commit-security.sh
+   ```
+
+#### For Maintainers
+
+**Reviewing Dependency Updates:**
+
+1. **Security Updates** (high priority):
+   - Review Dependabot PR
+   - Check changelog for breaking changes
+   - Run CI/CD pipeline
+   - Merge immediately if tests pass
+   - Release patch version
+
+2. **Regular Updates**:
+   - Review grouped dependency PRs weekly
+   - Check for breaking changes
+   - Test locally if significant updates
+   - Merge when CI passes
+
+3. **Major Version Updates**:
+   - Schedule dedicated time for review
+   - Read migration guides thoroughly
+   - Update code for breaking changes
+   - Add tests for new functionality
+   - Update documentation
+   - Release minor/major version
+
+### Supply Chain Verification
+
+**SBOM (Software Bill of Materials):**
+- Generated automatically on every release
+- Available in GitHub Actions artifacts
+- CycloneDX format for compatibility
+- Attached to release assets
+
+**License Compliance:**
+- Automated weekly license scanning
+- Only permissive licenses allowed in production:
+  - MIT, Apache-2.0, ISC
+  - BSD-2-Clause, BSD-3-Clause
+  - CC0-1.0, Unlicense
+- Copyleft licenses (GPL/AGPL) blocked
+
+**Dependency Audit Trail:**
+- All dependency changes tracked in git
+- Security scan results archived (90 days)
+- Audit reports available in CI/CD artifacts
+
+### Vulnerability Response Timeline
+
+When vulnerabilities are discovered in dependencies:
+
+1. **Detection** (automated):
+   - Dependabot alert created
+   - Security workflow runs
+   - Team notified immediately
+
+2. **Assessment** (within 24 hours):
+   - Review vulnerability details
+   - Assess impact on Orchestr8
+   - Determine severity level
+   - Check for available patches
+
+3. **Remediation**:
+   - **Critical**: Patch within 24-48 hours
+   - **High**: Patch within 7 days
+   - **Medium**: Patch within 14 days
+   - **Low**: Include in next regular update
+
+4. **Release**:
+   - Release patch version for critical/high
+   - Update security advisory
+   - Notify users via release notes
+
+5. **Verification**:
+   - Re-run security scans
+   - Verify vulnerability resolved
+   - Update documentation
+
 ## Security Update Process
 
 When we release security fixes:
@@ -180,7 +341,7 @@ Our planned security enhancements:
 
 ### Short Term (Next 3 Months)
 - [ ] Bug bounty program launch
-- [ ] Automated security scanning in CI/CD
+- [x] Automated security scanning in CI/CD
 - [ ] Enhanced anomaly detection in audit logs
 - [ ] Security dashboard for real-time monitoring
 

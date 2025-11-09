@@ -1,0 +1,151 @@
+name: License Compliance
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly on Sunday at 10am UTC
+    - cron: '0 10 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  license-compliance:
+    name: Check License Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'plugins/orchestr8/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd plugins/orchestr8
+          npm ci
+
+      - name: Install license-checker
+        run: npm install -g license-checker
+
+      - name: Check production licenses
+        run: |
+          cd plugins/orchestr8
+          echo "Checking production dependency licenses..."
+          license-checker --production \
+            --onlyAllow "MIT;Apache-2.0;ISC;BSD-2-Clause;BSD-3-Clause;0BSD;CC0-1.0;Unlicense;Python-2.0" \
+            --summary
+
+      - name: Generate detailed license report
+        if: always()
+        run: |
+          cd plugins/orchestr8
+          echo "Generating detailed license report..."
+          license-checker --production --json > license-report.json || true
+          license-checker --production --csv > license-report.csv || true
+
+      - name: Check for GPL/AGPL licenses
+        run: |
+          cd plugins/orchestr8
+          echo "Checking for copyleft licenses..."
+          if license-checker --production --json | grep -E "(GPL|AGPL|LGPL)"; then
+            echo "❌ Found copyleft licenses which may have compliance implications"
+            echo "Please review and ensure compliance with license terms"
+            exit 1
+          else
+            echo "✅ No copyleft licenses found in production dependencies"
+          fi
+
+      - name: Upload license reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-reports-${{ github.sha }}
+          path: |
+            plugins/orchestr8/license-report.json
+            plugins/orchestr8/license-report.csv
+          retention-days: 90
+
+  sbom-generation:
+    name: Generate SBOM (Software Bill of Materials)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'plugins/orchestr8/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd plugins/orchestr8
+          npm ci
+
+      - name: Generate CycloneDX SBOM
+        run: |
+          cd plugins/orchestr8
+          npx @cyclonedx/cyclonedx-npm --output-file sbom.json
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ github.sha }}
+          path: plugins/orchestr8/sbom.json
+          retention-days: 90
+
+      - name: Attach SBOM to release
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: plugins/orchestr8/sbom.json
+          asset_name: sbom.json
+          asset_content_type: application/json
+        continue-on-error: true
+
+  license-summary:
+    name: License Summary
+    runs-on: ubuntu-latest
+    needs: [license-compliance, sbom-generation]
+    if: always()
+    steps:
+      - name: Download license reports
+        uses: actions/download-artifact@v4
+        with:
+          name: license-reports-${{ github.sha }}
+          path: ./reports
+        continue-on-error: true
+
+      - name: Generate license summary
+        run: |
+          echo "## License Compliance Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **License Check**: ${{ needs.license-compliance.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **SBOM Generation**: ${{ needs.sbom-generation.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "./reports/license-report.csv" ]; then
+            echo "### License Distribution" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`csv" >> $GITHUB_STEP_SUMMARY
+            head -n 20 ./reports/license-report.csv >> $GITHUB_STEP_SUMMARY || true
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 Full license reports and SBOM available in workflow artifacts" >> $GITHUB_STEP_SUMMARY
