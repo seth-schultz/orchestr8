@@ -24,29 +24,10 @@ regexes = [
   '''(example|sample|mock|test|dummy)[-_]?(api|key|token|secret|password)''',
   '''your[-_]?(api|key|token|secret)[-_]?here''',
   '''replace[-_]?with[-_]?your''',
+  '''REDACTED''',
 ]
 
 # Exclude commits with specific keywords in the message
 commits = [
   '''(?i)(test|mock|example|documentation|docs|sample)''',
-]
-
-# Custom rules to reduce false positives
-[[rules]]
-description = "Generic API Key - Exclude test values"
-id = "generic-api-key"
-regex = '''(?i)(api_key|apikey|api-key)\s*[:=]\s*['"][a-z0-9_-]{8,}['"]'''
-entropy = 3.5
-secretGroup = 0
-
-[[rules.allowlist]]
-description = "Exclude common test values"
-regexes = [
-  '''test''',
-  '''example''',
-  '''mock''',
-  '''sample''',
-  '''dummy''',
-  '''fake''',
-  '''REDACTED''',
 ]
