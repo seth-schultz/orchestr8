@@ -10,8 +10,8 @@
  * @module input-validator
  */
 
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
 class InputValidator {
   /**
@@ -20,36 +20,36 @@ class InputValidator {
    */
   static DANGEROUS_PATTERNS = [
     // Command substitution
-    /`/g,                    // Backticks
-    /\$\(/g,                 // $() substitution
-    /<\(/g,                  // <() process substitution
+    /`/g, // Backticks
+    /\$\(/g, // $() substitution
+    /<\(/g, // <() process substitution
 
     // Command chaining
-    /;/g,                    // Semicolon separator
-    /\|\|/g,                 // OR operator
-    /&&/g,                   // AND operator
-    /\|(?!\|)/g,             // Pipe (but not ||)
+    /;/g, // Semicolon separator
+    /\|\|/g, // OR operator
+    /&&/g, // AND operator
+    /\|(?!\|)/g, // Pipe (but not ||)
 
     // Redirection tricks
-    />\s*&/g,                // Output redirection to descriptor
-    /&>\s*/g,                // Combined stdout/stderr redirection
+    />\s*&/g, // Output redirection to descriptor
+    /&>\s*/g, // Combined stdout/stderr redirection
 
     // Variable expansion tricks
-    /\$\{[^}]*\}/g,          // ${var} expansion
-    /\$[A-Z_][A-Z0-9_]*/gi,  // $VAR expansion (allow in strings, validate usage)
+    /\$\{[^}]*\}/g, // ${var} expansion
+    /\$[A-Z_][A-Z0-9_]*/gi, // $VAR expansion (allow in strings, validate usage)
 
     // Null byte injection
-    /\x00/g,                 // Null byte
-    /\\x00/g,                // Escaped null byte
-    /\\0/g,                  // Octal null byte
+    /\x00/g, // Null byte
+    /\\x00/g, // Escaped null byte
+    /\\0/g, // Octal null byte
 
     // Encoding tricks (base64, hex) in command context
-    /\|\s*base64\s+-d/gi,    // Pipe to base64 decode
-    /\|\s*xxd\s+-r/gi,       // Pipe to hex decode
-    /eval\s*\(/gi,           // eval() calls
+    /\|\s*base64\s+-d/gi, // Pipe to base64 decode
+    /\|\s*xxd\s+-r/gi, // Pipe to hex decode
+    /eval\s*\(/gi, // eval() calls
 
     // Dangerous environment variables
-    /LD_PRELOAD\s*=/gi,      // Library preload
+    /LD_PRELOAD\s*=/gi, // Library preload
     /LD_LIBRARY_PATH\s*=/gi, // Library path manipulation
   ];
 
@@ -57,10 +57,10 @@ class InputValidator {
    * Path traversal patterns to block
    */
   static PATH_TRAVERSAL_PATTERNS = [
-    /\.\.\//g,               // Parent directory
-    /\.\.\\/g,               // Parent directory (Windows)
-    /\.\.%2[fF]/g,           // URL-encoded ../
-    /\.\.%5[cC]/g,           // URL-encoded ..\
+    /\.\.\//g, // Parent directory
+    /\.\.\\/g, // Parent directory (Windows)
+    /\.\.%2[fF]/g, // URL-encoded ../
+    /\.\.%5[cC]/g, // URL-encoded ..\
   ];
 
   /**
@@ -83,7 +83,7 @@ class InputValidator {
    * @throws {Error} - If validation fails
    */
   static validateString(input, maxLength, allowVariables = false) {
-    if (typeof input !== 'string') {
+    if (typeof input !== "string") {
       throw new Error(`Input must be a string, got ${typeof input}`);
     }
 
@@ -96,7 +96,7 @@ class InputValidator {
     // Check for dangerous patterns
     for (const pattern of this.DANGEROUS_PATTERNS) {
       // Skip variable patterns if allowed
-      if (allowVariables && pattern.toString().includes('$')) {
+      if (allowVariables && pattern.toString().includes("$")) {
         continue;
       }
 
@@ -118,54 +118,74 @@ class InputValidator {
    * @throws {Error} - If validation fails
    */
   static validatePath(inputPath, workspaceRoot, mustExist = false) {
-    if (typeof inputPath !== 'string') {
+    if (typeof inputPath !== "string") {
       throw new Error(`Path must be a string, got ${typeof inputPath}`);
     }
 
-    if (typeof workspaceRoot !== 'string') {
-      throw new Error(`Workspace root must be a string, got ${typeof workspaceRoot}`);
+    if (typeof workspaceRoot !== "string") {
+      throw new Error(
+        `Workspace root must be a string, got ${typeof workspaceRoot}`,
+      );
     }
 
     if (inputPath.length > this.MAX_PATH_LENGTH) {
-      throw new Error(`Path exceeds maximum length of ${this.MAX_PATH_LENGTH} characters`);
+      throw new Error(
+        `Path exceeds maximum length of ${this.MAX_PATH_LENGTH} characters`,
+      );
     }
 
-    // Check for path traversal patterns
+    // Check for path traversal patterns in the input
     for (const pattern of this.PATH_TRAVERSAL_PATTERNS) {
       if (pattern.test(inputPath)) {
         throw new Error(`Path traversal pattern detected: ${pattern.source}`);
       }
     }
 
-    // Resolve to absolute path
-    const absolutePath = path.resolve(workspaceRoot, inputPath);
+    // Resolve symlinks in workspace root first (fixes macOS /tmp -> /private/tmp issue)
+    let resolvedWorkspaceRoot;
+    try {
+      resolvedWorkspaceRoot = fs.realpathSync(workspaceRoot);
+    } catch (err) {
+      // If workspace doesn't exist yet, use absolute path
+      resolvedWorkspaceRoot = path.resolve(workspaceRoot);
+    }
 
-    // Verify it's within workspace
-    if (!absolutePath.startsWith(workspaceRoot)) {
+    // Resolve the input path against the resolved workspace root
+    const absolutePath = path.resolve(resolvedWorkspaceRoot, inputPath);
+
+    // Resolve symlinks in the result path (if it exists)
+    let resolvedPath;
+    try {
+      resolvedPath = fs.realpathSync(absolutePath);
+    } catch (err) {
+      // Path doesn't exist yet (e.g., creating new file)
+      // Try to resolve parent directory instead
+      const parentDir = path.dirname(absolutePath);
+      try {
+        const resolvedParent = fs.realpathSync(parentDir);
+        resolvedPath = path.join(resolvedParent, path.basename(absolutePath));
+      } catch (err2) {
+        // Parent doesn't exist either, use absolute path
+        resolvedPath = absolutePath;
+      }
+    }
+
+    // Verify resolved path is within resolved workspace root
+    if (
+      !resolvedPath.startsWith(resolvedWorkspaceRoot + path.sep) &&
+      resolvedPath !== resolvedWorkspaceRoot
+    ) {
       throw new Error(
-        `Path traversal detected: ${inputPath} resolves outside workspace (${absolutePath} not in ${workspaceRoot})`
+        `Path traversal detected: ${inputPath} resolves outside workspace (${resolvedPath} not in ${resolvedWorkspaceRoot})`,
       );
     }
 
-    // Check for symlink escape if path exists
-    if (fs.existsSync(absolutePath)) {
-      try {
-        const realPath = fs.realpathSync(absolutePath);
-        if (!realPath.startsWith(workspaceRoot)) {
-          throw new Error(
-            `Symlink escape detected: ${inputPath} points to ${realPath} outside workspace`
-          );
-        }
-      } catch (err) {
-        if (err.code !== 'ENOENT') {
-          throw err;
-        }
-      }
-    } else if (mustExist) {
+    // If path must exist, verify it
+    if (mustExist && !fs.existsSync(resolvedPath)) {
       throw new Error(`Path does not exist: ${inputPath}`);
     }
 
-    return absolutePath;
+    return resolvedPath;
   }
 
   /**
@@ -176,8 +196,8 @@ class InputValidator {
    * @returns {string} - The validated URL
    * @throws {Error} - If validation fails
    */
-  static validateURL(input, allowedProtocols = ['https', 'http']) {
-    if (typeof input !== 'string') {
+  static validateURL(input, allowedProtocols = ["https", "http"]) {
+    if (typeof input !== "string") {
       throw new Error(`URL must be a string, got ${typeof input}`);
     }
 
@@ -190,16 +210,16 @@ class InputValidator {
     }
 
     // Check protocol
-    const protocol = url.protocol.replace(':', '');
+    const protocol = url.protocol.replace(":", "");
     if (!allowedProtocols.includes(protocol)) {
       throw new Error(
-        `Protocol ${protocol} not allowed. Allowed protocols: ${allowedProtocols.join(', ')}`
+        `Protocol ${protocol} not allowed. Allowed protocols: ${allowedProtocols.join(", ")}`,
       );
     }
 
     // Check for data exfiltration attempts
     if (url.username || url.password) {
-      throw new Error('URLs with credentials are not allowed');
+      throw new Error("URLs with credentials are not allowed");
     }
 
     return input;
@@ -219,7 +239,7 @@ class InputValidator {
    * @throws {Error} - If validation fails
    */
   static validateCommand(command, allowedCommands, options = {}) {
-    if (typeof command !== 'string') {
+    if (typeof command !== "string") {
       throw new Error(`Command must be a string, got ${typeof command}`);
     }
 
@@ -227,7 +247,7 @@ class InputValidator {
       allowedSubcommands = {},
       deniedPatterns = [],
       pathValidationRequired = false,
-      workspaceRoot = process.cwd()
+      workspaceRoot = process.cwd(),
     } = options;
 
     // Basic string validation
@@ -237,7 +257,7 @@ class InputValidator {
     const parts = this.parseCommand(command);
 
     if (parts.length === 0) {
-      throw new Error('Empty command');
+      throw new Error("Empty command");
     }
 
     const commandName = parts[0];
@@ -246,7 +266,7 @@ class InputValidator {
     // Check if command is in allowlist
     if (!allowedCommands.includes(commandName)) {
       throw new Error(
-        `Command '${commandName}' not in allowlist. Allowed commands: ${allowedCommands.join(', ')}`
+        `Command '${commandName}' not in allowlist. Allowed commands: ${allowedCommands.join(", ")}`,
       );
     }
 
@@ -254,13 +274,13 @@ class InputValidator {
     if (allowedSubcommands[commandName]) {
       if (!subcommand) {
         throw new Error(
-          `Command '${commandName}' requires a subcommand. Allowed: ${allowedSubcommands[commandName].join(', ')}`
+          `Command '${commandName}' requires a subcommand. Allowed: ${allowedSubcommands[commandName].join(", ")}`,
         );
       }
 
       if (!allowedSubcommands[commandName].includes(subcommand)) {
         throw new Error(
-          `Subcommand '${subcommand}' not allowed for '${commandName}'. Allowed: ${allowedSubcommands[commandName].join(', ')}`
+          `Subcommand '${subcommand}' not allowed for '${commandName}'. Allowed: ${allowedSubcommands[commandName].join(", ")}`,
         );
       }
     }
@@ -295,14 +315,14 @@ class InputValidator {
    */
   static parseCommand(command) {
     const parts = [];
-    let current = '';
+    let current = "";
     let inQuote = false;
     let quoteChar = null;
 
     for (let i = 0; i < command.length; i++) {
       const char = command[i];
 
-      if ((char === '"' || char === "'") && command[i - 1] !== '\\') {
+      if ((char === '"' || char === "'") && command[i - 1] !== "\\") {
         if (!inQuote) {
           inQuote = true;
           quoteChar = char;
@@ -312,10 +332,10 @@ class InputValidator {
         } else {
           current += char;
         }
-      } else if (char === ' ' && !inQuote) {
+      } else if (char === " " && !inQuote) {
         if (current) {
           parts.push(current);
-          current = '';
+          current = "";
         }
       } else {
         current += char;
@@ -341,12 +361,12 @@ class InputValidator {
 
     for (const part of parts) {
       // Skip flags
-      if (part.startsWith('-')) {
+      if (part.startsWith("-")) {
         continue;
       }
 
       // Check if it looks like a path
-      if (part.includes('/') || part.includes('\\') || part.includes('.')) {
+      if (part.includes("/") || part.includes("\\") || part.includes(".")) {
         paths.push(part);
       }
     }
@@ -362,7 +382,7 @@ class InputValidator {
    * @throws {Error} - If validation fails
    */
   static validateAgentName(agentName) {
-    if (typeof agentName !== 'string') {
+    if (typeof agentName !== "string") {
       throw new Error(`Agent name must be a string, got ${typeof agentName}`);
     }
 
@@ -371,12 +391,12 @@ class InputValidator {
 
     if (!validPattern.test(agentName)) {
       throw new Error(
-        `Invalid agent name: ${agentName}. Only alphanumeric characters, dashes, and underscores allowed.`
+        `Invalid agent name: ${agentName}. Only alphanumeric characters, dashes, and underscores allowed.`,
       );
     }
 
     if (agentName.length > 100) {
-      throw new Error('Agent name too long (max 100 characters)');
+      throw new Error("Agent name too long (max 100 characters)");
     }
 
     return agentName;
@@ -392,18 +412,31 @@ class InputValidator {
    * @returns {any} - The validated parameter value
    * @throws {Error} - If validation fails
    */
-  static validateWorkflowParameter(paramName, paramValue, paramType, options = {}) {
+  static validateWorkflowParameter(
+    paramName,
+    paramValue,
+    paramType,
+    options = {},
+  ) {
     switch (paramType) {
-      case 'string':
-        return this.validateString(paramValue, options.maxLength, options.allowVariables);
+      case "string":
+        return this.validateString(
+          paramValue,
+          options.maxLength,
+          options.allowVariables,
+        );
 
-      case 'path':
-        return this.validatePath(paramValue, options.workspaceRoot || process.cwd(), options.mustExist);
+      case "path":
+        return this.validatePath(
+          paramValue,
+          options.workspaceRoot || process.cwd(),
+          options.mustExist,
+        );
 
-      case 'url':
+      case "url":
         return this.validateURL(paramValue, options.allowedProtocols);
 
-      case 'number':
+      case "number":
         const num = Number(paramValue);
         if (isNaN(num)) {
           throw new Error(`Parameter ${paramName} must be a number`);
@@ -416,25 +449,25 @@ class InputValidator {
         }
         return num;
 
-      case 'boolean':
-        if (typeof paramValue === 'boolean') {
+      case "boolean":
+        if (typeof paramValue === "boolean") {
           return paramValue;
         }
-        if (paramValue === 'true' || paramValue === '1') {
+        if (paramValue === "true" || paramValue === "1") {
           return true;
         }
-        if (paramValue === 'false' || paramValue === '0') {
+        if (paramValue === "false" || paramValue === "0") {
           return false;
         }
         throw new Error(`Parameter ${paramName} must be a boolean`);
 
-      case 'enum':
+      case "enum":
         if (!options.allowedValues) {
-          throw new Error('Enum validation requires allowedValues option');
+          throw new Error("Enum validation requires allowedValues option");
         }
         if (!options.allowedValues.includes(paramValue)) {
           throw new Error(
-            `Parameter ${paramName} must be one of: ${options.allowedValues.join(', ')}`
+            `Parameter ${paramName} must be one of: ${options.allowedValues.join(", ")}`,
           );
         }
         return paramValue;

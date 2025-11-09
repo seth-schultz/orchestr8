@@ -66,13 +66,13 @@ class RateLimiter {
       if (this.minuteTokens < this.maxPerMinute) {
         this.minuteTokens = Math.min(
           this.minuteTokens + Math.ceil(this.maxPerMinute / 60),
-          this.maxPerMinute
+          this.maxPerMinute,
         );
       }
       if (this.hourTokens < this.maxPerHour) {
         this.hourTokens = Math.min(
           this.hourTokens + Math.ceil(this.maxPerHour / 3600),
-          this.maxPerHour
+          this.maxPerHour,
         );
       }
       this.processQueue();
@@ -96,13 +96,15 @@ class RateLimiter {
    * @param {number} [options.priority=0] - Priority (higher = more important)
    * @param {string} [options.id] - Operation ID for tracking
    * @param {number} [options.timeout] - Max wait time in ms
+   * @param {number} [options.maxRetries=3] - Max retries for rate limit errors
    * @returns {Promise<any>} - Operation result
    */
   async execute(operation, options = {}) {
     const {
       priority = 0,
       id = this.generateId(),
-      timeout = 300000 // 5 minutes default
+      timeout = 300000, // 5 minutes default
+      maxRetries = 3,
     } = options;
 
     return new Promise((resolve, reject) => {
@@ -113,7 +115,9 @@ class RateLimiter {
         resolve,
         reject,
         addedAt: Date.now(),
-        timeout
+        timeout,
+        retryCount: 0,
+        maxRetries,
       };
 
       // Add to priority queue
@@ -151,9 +155,11 @@ class RateLimiter {
   async processQueue() {
     // Remove timed-out items
     const now = Date.now();
-    this.queue = this.queue.filter(item => {
+    this.queue = this.queue.filter((item) => {
       if (now - item.addedAt > item.timeout) {
-        item.reject(new Error(`Operation ${item.id} timed out after ${item.timeout}ms`));
+        item.reject(
+          new Error(`Operation ${item.id} timed out after ${item.timeout}ms`),
+        );
         return false;
       }
       return true;
@@ -187,7 +193,9 @@ class RateLimiter {
 
     // Clean old timestamps (keep last hour)
     const oneHourAgo = Date.now() - 3600000;
-    this.requestTimestamps = this.requestTimestamps.filter(ts => ts > oneHourAgo);
+    this.requestTimestamps = this.requestTimestamps.filter(
+      (ts) => ts > oneHourAgo,
+    );
 
     try {
       // Apply backoff delay if needed
@@ -210,12 +218,26 @@ class RateLimiter {
       if (this.isRateLimitError(error)) {
         // Increase backoff
         if (this.enableBackoff) {
-          this.backoffLevel = Math.min(this.maxBackoffLevel, this.backoffLevel + 1);
+          this.backoffLevel = Math.min(
+            this.maxBackoffLevel,
+            this.backoffLevel + 1,
+          );
         }
 
-        // Re-queue with higher priority
-        item.priority += 10;
-        this.enqueue(item);
+        // Check if we can retry
+        item.retryCount++;
+        if (item.retryCount < item.maxRetries) {
+          // Re-queue with higher priority
+          item.priority += 10;
+          this.enqueue(item);
+        } else {
+          // Max retries exceeded - reject
+          item.reject(
+            new Error(
+              `Rate limit retry limit exceeded after ${item.retryCount} attempts: ${error.message}`,
+            ),
+          );
+        }
       } else {
         // Other error - reject
         item.reject(error);
@@ -237,14 +259,14 @@ class RateLimiter {
   isRateLimitError(error) {
     if (!error) return false;
 
-    const message = error.message || '';
+    const message = error.message || "";
     const status = error.status || error.statusCode;
 
     return (
       status === 429 ||
-      message.includes('rate limit') ||
-      message.includes('too many requests') ||
-      message.includes('quota exceeded')
+      message.includes("rate limit") ||
+      message.includes("too many requests") ||
+      message.includes("quota exceeded")
     );
   }
 
@@ -255,12 +277,15 @@ class RateLimiter {
    */
   getBackoffDelay() {
     // Exponential backoff: 2^level * 1000ms
-    // Level 0: 0ms
+    // Level 0: 0ms (no delay)
     // Level 1: 2s
     // Level 2: 4s
     // Level 3: 8s
     // Level 4: 16s
     // Level 5: 32s
+    if (this.backoffLevel === 0) {
+      return 0;
+    }
     return Math.pow(2, this.backoffLevel) * 1000;
   }
 
@@ -271,7 +296,7 @@ class RateLimiter {
    * @returns {Promise<void>}
    */
   sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   /**
@@ -297,7 +322,7 @@ class RateLimiter {
       backoffLevel: this.backoffLevel,
       backoffDelay: this.getBackoffDelay(),
       requestsLastMinute: this.getRequestsInWindow(60000),
-      requestsLastHour: this.requestTimestamps.length
+      requestsLastHour: this.requestTimestamps.length,
     };
   }
 
@@ -309,7 +334,7 @@ class RateLimiter {
    */
   getRequestsInWindow(windowMs) {
     const cutoff = Date.now() - windowMs;
-    return this.requestTimestamps.filter(ts => ts > cutoff).length;
+    return this.requestTimestamps.filter((ts) => ts > cutoff).length;
   }
 
   /**
@@ -323,17 +348,19 @@ class RateLimiter {
 
     while (
       (this.activeOperations >= this.maxConcurrent ||
-       this.minuteTokens <= 0 ||
-       this.hourTokens <= 0) &&
+        this.minuteTokens <= 0 ||
+        this.hourTokens <= 0) &&
       Date.now() - start < timeoutMs
     ) {
       await this.sleep(100);
     }
 
-    if (this.activeOperations >= this.maxConcurrent ||
-        this.minuteTokens <= 0 ||
-        this.hourTokens <= 0) {
-      throw new Error('Timeout waiting for rate limiter capacity');
+    if (
+      this.activeOperations >= this.maxConcurrent ||
+      this.minuteTokens <= 0 ||
+      this.hourTokens <= 0
+    ) {
+      throw new Error("Timeout waiting for rate limiter capacity");
     }
   }
 
@@ -367,6 +394,16 @@ function getGlobalRateLimiter(options) {
 }
 
 /**
+ * Reset the global rate limiter (primarily for testing)
+ */
+function resetGlobalRateLimiter() {
+  if (globalRateLimiter) {
+    globalRateLimiter.stop();
+    globalRateLimiter = null;
+  }
+}
+
+/**
  * Execute an operation with global rate limiting
  *
  * @param {Function} operation - Async function to execute
@@ -381,5 +418,6 @@ async function executeRateLimited(operation, options = {}) {
 module.exports = {
   RateLimiter,
   getGlobalRateLimiter,
-  executeRateLimited
+  resetGlobalRateLimiter,
+  executeRateLimited,
 };

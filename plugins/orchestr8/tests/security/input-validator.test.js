@@ -278,7 +278,7 @@ describe("InputValidator", () => {
 
         expect(() =>
           InputValidator.validatePath("symlink", workspaceRoot),
-        ).toThrow(/symlink escape/i);
+        ).toThrow(/path traversal detected/i);
       });
     });
 
@@ -298,11 +298,19 @@ describe("InputValidator", () => {
       });
 
       test("returns normalized absolute path", () => {
+        // Create the directory structure first
+        const srcDir = path.join(workspaceRoot, "src");
+        fs.mkdirSync(srcDir, { recursive: true });
+
         const result = InputValidator.validatePath(
           "src/./index.js",
           workspaceRoot,
         );
-        expect(result).toBe(path.join(workspaceRoot, "src", "index.js"));
+
+        // After fix, paths are resolved through symlinks
+        // The result should normalize the ./ and resolve through any symlinks
+        const expectedPath = path.join(fs.realpathSync(srcDir), "index.js");
+        expect(result).toBe(expectedPath);
       });
 
       test("allows non-existent paths by default", () => {
@@ -329,6 +337,137 @@ describe("InputValidator", () => {
             true,
           ),
         ).toThrow(/does not exist/i);
+      });
+    });
+
+    describe("Symlink Handling (macOS /tmp fix)", () => {
+      test("handles workspace root that is a symlink (macOS /tmp)", () => {
+        // On macOS, /tmp is a symlink to /private/tmp
+        // This test verifies the fix for H1: macOS Symlink Validation Bug
+
+        // Create a symlinked directory structure similar to macOS /tmp
+        const realDir = path.join(workspaceRoot, "real");
+        const symlinkDir = path.join(workspaceRoot, "link");
+
+        fs.mkdirSync(realDir);
+        fs.symlinkSync(realDir, symlinkDir);
+
+        // Create a test file in the real directory
+        const testFile = path.join(realDir, "test.txt");
+        fs.writeFileSync(testFile, "test content");
+
+        // Should NOT throw when validating paths through the symlink
+        expect(() =>
+          InputValidator.validatePath("test.txt", symlinkDir),
+        ).not.toThrow();
+
+        // Should return the resolved real path
+        const result = InputValidator.validatePath("test.txt", symlinkDir);
+        // Resolve expected path through symlinks for comparison
+        const expectedPath = fs.realpathSync(testFile);
+        expect(result).toBe(expectedPath);
+      });
+
+      test("handles non-existent paths in symlinked workspace", () => {
+        // Create a symlinked directory
+        const realDir = path.join(workspaceRoot, "real");
+        const symlinkDir = path.join(workspaceRoot, "link");
+
+        fs.mkdirSync(realDir);
+        fs.symlinkSync(realDir, symlinkDir);
+
+        // Should allow non-existent paths in symlinked workspace
+        expect(() =>
+          InputValidator.validatePath("nonexistent.txt", symlinkDir),
+        ).not.toThrow();
+
+        const result = InputValidator.validatePath(
+          "nonexistent.txt",
+          symlinkDir,
+        );
+        // Resolve expected path through symlinks for comparison
+        const expectedPath = path.join(
+          fs.realpathSync(realDir),
+          "nonexistent.txt",
+        );
+        expect(result).toBe(expectedPath);
+      });
+
+      test("still blocks path traversal in symlinked workspace", () => {
+        // Create a symlinked directory
+        const realDir = path.join(workspaceRoot, "real");
+        const symlinkDir = path.join(workspaceRoot, "link");
+
+        fs.mkdirSync(realDir);
+        fs.symlinkSync(realDir, symlinkDir);
+
+        // Should still block path traversal attempts
+        expect(() =>
+          InputValidator.validatePath("../etc/passwd", symlinkDir),
+        ).toThrow(/path traversal/i);
+      });
+
+      test("detects symlink escape even in symlinked workspace", () => {
+        // Create a symlinked workspace
+        const realDir = path.join(workspaceRoot, "real");
+        const symlinkDir = path.join(workspaceRoot, "link");
+
+        fs.mkdirSync(realDir);
+        fs.symlinkSync(realDir, symlinkDir);
+
+        // Create a symlink inside that points outside
+        const escapeLink = path.join(realDir, "escape");
+        fs.symlinkSync("/etc/passwd", escapeLink);
+
+        // Should detect the escape
+        expect(() => InputValidator.validatePath("escape", symlinkDir)).toThrow(
+          /path traversal detected/i,
+        );
+      });
+
+      test("handles deeply nested symlinks", () => {
+        // Create nested symlinked structure
+        const real1 = path.join(workspaceRoot, "real1");
+        const link1 = path.join(workspaceRoot, "link1");
+
+        fs.mkdirSync(real1);
+        fs.symlinkSync(real1, link1);
+
+        const real2 = path.join(real1, "real2");
+        const link2 = path.join(real1, "link2");
+
+        fs.mkdirSync(real2);
+        fs.symlinkSync(real2, link2);
+
+        // Create test file in deeply nested location
+        const testFile = path.join(real2, "test.txt");
+        fs.writeFileSync(testFile, "nested");
+
+        // Should handle validation through multiple symlink levels
+        expect(() =>
+          InputValidator.validatePath("link2/test.txt", link1),
+        ).not.toThrow();
+
+        const result = InputValidator.validatePath("link2/test.txt", link1);
+        // Resolve expected path through symlinks for comparison
+        const expectedPath = fs.realpathSync(testFile);
+        expect(result).toBe(expectedPath);
+      });
+
+      test("workspace root equals resolved path edge case", () => {
+        // Test the edge case where resolvedPath === resolvedWorkspaceRoot
+        const realDir = path.join(workspaceRoot, "real");
+        const symlinkDir = path.join(workspaceRoot, "link");
+
+        fs.mkdirSync(realDir);
+        fs.symlinkSync(realDir, symlinkDir);
+
+        // Validating the workspace root itself should work
+        expect(() =>
+          InputValidator.validatePath(".", symlinkDir),
+        ).not.toThrow();
+
+        expect(() => InputValidator.validatePath("", symlinkDir)).not.toThrow();
       });
     });
 
@@ -689,7 +828,12 @@ describe("InputValidator", () => {
         "path",
         options,
       );
-      expect(result).toBe(path.join(workspaceRoot, "test.txt"));
+      // Resolve expected path through symlinks for comparison
+      const expectedPath = path.join(
+        fs.realpathSync(workspaceRoot),
+        "test.txt",
+      );
+      expect(result).toBe(expectedPath);
     });
 
     test("validates URL parameters", () => {
