@@ -43,15 +43,15 @@ Per [OpenSSF Scorecard](https://github.com/ossf/scorecard) security best practic
 | Action | Version Tag | SHA Commit | Last Verified |
 |--------|-------------|------------|---------------|
 | `trufflesecurity/trufflehog` | main | `4cb8c4af581d5ba1e430699832c1e2d34b1fc8bb` | 2025-11-09 |
-| `gitleaks/gitleaks-action` | v2.3.6 | `12138b7fbaa7b8e1e1e661e6e8d3e4e23bc5a0c0` | 2025-11-09 |
+| `gitleaks/gitleaks-action` | v2.3.6 | `44c470ffc35caa8b1eb3e8012ca53c2f9bea4eb5` | 2025-11-09 |
 
 ### CodeQL Actions
 
 | Action | Version Tag | SHA Commit | Last Verified |
 |--------|-------------|------------|---------------|
-| `github/codeql-action/init` | v3.27.9 | `f779452ac5af1c261dce0346a8b332175ce3de9a` | 2025-11-09 |
-| `github/codeql-action/analyze` | v3.27.9 | `f779452ac5af1c261dce0346a8b332175ce3de9a` | 2025-11-09 |
-| `github/codeql-action/upload-sarif` | v3.27.9 | `f779452ac5af1c261dce0346a8b332175ce3de9a` | 2025-11-09 |
+| `github/codeql-action/init` | v3.27.9 | `df409f7d9260372bd5f19e5b04e83cb3c43714ae` | 2025-11-09 |
+| `github/codeql-action/analyze` | v3.27.9 | `df409f7d9260372bd5f19e5b04e83cb3c43714ae` | 2025-11-09 |
+| `github/codeql-action/upload-sarif` | v3.27.9 | `df409f7d9260372bd5f19e5b04e83cb3c43714ae` | 2025-11-09 |
 
 ### Dependency Security
 
