@@ -2,12 +2,12 @@ name: Security Scan
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     # Run weekly on Monday at 9am UTC
-    - cron: '0 9 * * 1'
+    - cron: "0 9 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -26,14 +26,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'plugins/orchestr8/package-lock.json'
+          node-version: "18"
 
       - name: Install dependencies
         run: |
           cd plugins/orchestr8
-          npm ci
+          npm install
 
       - name: Run npm audit (fail on high/critical)
         run: |
@@ -147,7 +145,7 @@ jobs:
           persist-credentials: false
 
       - name: Run OpenSSF Scorecard
-        uses: ossf/scorecard-action@v2
+        uses: ossf/scorecard-action@v2.4.0
         with:
           results_file: results.sarif
           results_format: sarif
@@ -168,12 +166,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: |
           cd plugins/orchestr8
-          npm ci
+          npm install
 
       - name: Scan for malicious packages
         run: |

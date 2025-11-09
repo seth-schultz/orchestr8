@@ -2,12 +2,12 @@ name: License Compliance
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     # Run weekly on Sunday at 10am UTC
-    - cron: '0 10 * * 0'
+    - cron: "0 10 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -24,14 +24,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'plugins/orchestr8/package-lock.json'
+          node-version: "18"
 
       - name: Install dependencies
         run: |
           cd plugins/orchestr8
-          npm ci
+          npm install
 
       - name: Install license-checker
         run: npm install -g license-checker
@@ -84,14 +82,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'plugins/orchestr8/package-lock.json'
+          node-version: "18"
 
       - name: Install dependencies
         run: |
           cd plugins/orchestr8
-          npm ci
+          npm install
 
       - name: Generate CycloneDX SBOM
         run: |
