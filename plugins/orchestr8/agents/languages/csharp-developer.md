@@ -1,7 +1,38 @@
 ---
 name: csharp-developer
-description: Expert C# developer specializing in .NET Core/8, ASP.NET Core, Entity Framework, Azure, enterprise applications, and microservices. Use for .NET backends, APIs, Windows services, Azure functions, and enterprise integrations.
+description: 'Expert C# developer specializing in .NET Core/8, ASP.NET Core, Entity Framework, Azure, enterprise applications, and microservices. Use for .NET backends, APIs, Windows services, Azure functions, and enterprise integrations.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # C# Developer Agent

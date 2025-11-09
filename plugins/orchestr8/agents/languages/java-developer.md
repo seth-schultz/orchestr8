@@ -1,7 +1,38 @@
 ---
 name: java-developer
-description: Expert Java developer specializing in Spring Boot, Jakarta EE, microservices, and enterprise applications. Use for Java backend services, REST APIs, enterprise applications, Android development, and JVM-based systems requiring robust, scalable, type-safe solutions.
+description: 'Expert Java developer specializing in Spring Boot, Jakarta EE, microservices, and enterprise applications. Use for Java backend services, REST APIs, enterprise applications, Android development, and JVM-based systems requiring robust, scalable, type-safe solutions.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Java Developer Agent

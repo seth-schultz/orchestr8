@@ -1,7 +1,38 @@
 ---
 name: dynamodb-specialist
-description: Expert AWS DynamoDB specialist for NoSQL data modeling, partition keys, GSI/LSI, DynamoDB Streams, DAX caching, and serverless architecture. Use for DynamoDB design, optimization, and production deployments.
+description: 'Expert AWS DynamoDB specialist for NoSQL data modeling, partition keys, GSI/LSI, DynamoDB Streams, DAX caching, and serverless architecture. Use for DynamoDB design, optimization, and production deployments.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # AWS DynamoDB Specialist

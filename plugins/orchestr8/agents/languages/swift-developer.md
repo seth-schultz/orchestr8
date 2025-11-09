@@ -1,7 +1,38 @@
 ---
 name: swift-developer
-description: Expert Swift developer specializing in iOS/macOS development, SwiftUI, UIKit, Combine, async/await, Core Data, and Apple ecosystem. Use for iOS apps, macOS apps, watchOS, tvOS, server-side Swift (Vapor), and Apple platform integrations.
+description: 'Expert Swift developer specializing in iOS/macOS development, SwiftUI, UIKit, Combine, async/await, Core Data, and Apple ecosystem. Use for iOS apps, macOS apps, watchOS, tvOS, server-side Swift (Vapor), and Apple platform integrations.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Swift Developer Agent

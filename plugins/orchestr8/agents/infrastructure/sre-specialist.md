@@ -1,7 +1,28 @@
 ---
 name: sre-specialist
-description: Expert SRE specialist for service level objectives (SLOs), error budgets, incident response, on-call procedures, chaos engineering, and site reliability. Use for production reliability, incident management, and capacity planning.
+description: 'Expert SRE specialist for service level objectives (SLOs), error budgets, incident response, on-call procedures, chaos engineering, and site reliability. Use for production reliability, incident management, and capacity planning.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # SRE Specialist

@@ -1,7 +1,38 @@
 ---
 name: code-reviewer
-description: Performs comprehensive code reviews checking for best practices, clean code principles, security issues, performance problems, and maintainability. Use PROACTIVELY when significant code changes are made to validate quality standards early and prevent technical debt accumulation. Essential before merging or deployment.
+description: 'Performs comprehensive code reviews checking for best practices, clean code principles, security issues, performance problems, and maintainability. Use PROACTIVELY when significant code changes are made to validate quality standards early and prevent technical debt accumulation. Essential before merging or deployment.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Code Reviewer Agent

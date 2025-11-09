@@ -1,7 +1,38 @@
 ---
 name: cpp-developer
-description: Expert C++ developer specializing in modern C++20/23, game development, systems programming, high-performance computing, embedded systems, and cross-platform development. Use for performance-critical applications, game engines, system-level programming, and applications requiring low-level control.
+description: 'Expert C++ developer specializing in modern C++20/23, game development, systems programming, high-performance computing, embedded systems, and cross-platform development. Use for performance-critical applications, game engines, system-level programming, and applications requiring low-level control.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # C++ Developer Agent

@@ -1,7 +1,38 @@
 ---
 name: nextjs-specialist
-description: Expert Next.js developer specializing in App Router, Server Components, Server Actions, ISR, SSR, SSG, and performance optimization. Use for Next.js 14+ applications, full-stack React, and production deployments.
+description: 'Expert Next.js developer specializing in App Router, Server Components, Server Actions, ISR, SSR, SSG, and performance optimization. Use for Next.js 14+ applications, full-stack React, and production deployments.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Next.js Specialist

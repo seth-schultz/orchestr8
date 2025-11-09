@@ -1,7 +1,28 @@
 ---
 name: algolia-specialist
-description: Expert Algolia specialist for hosted search-as-a-service, instant search UI, personalization, and A/B testing. Use for fast, typo-tolerant search with minimal infrastructure overhead.
+description: 'Expert Algolia specialist for hosted search-as-a-service, instant search UI, personalization, and A/B testing. Use for fast, typo-tolerant search with minimal infrastructure overhead.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # Algolia Specialist

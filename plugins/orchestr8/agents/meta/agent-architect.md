@@ -1,7 +1,38 @@
 ---
 name: agent-architect
-description: Expert in designing Claude Code agents following established patterns and best practices. Use for creating new specialized agents, determining tool selection, model choice, and documentation structure.
+description: 'Expert in designing Claude Code agents following established patterns and best practices. Use for creating new specialized agents, determining tool selection, model choice, and documentation structure.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Agent Architect

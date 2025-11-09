@@ -1,7 +1,38 @@
 ---
 name: load-testing-specialist
-description: Expert load and performance testing specialist using k6, Locust, and JMeter. Use PROACTIVELY before major releases, infrastructure changes, or when anticipating traffic spikes to validate system capacity, identify bottlenecks, and ensure performance SLAs are met. Essential for stress testing, capacity planning, and performance benchmarking.
+description: 'Expert load and performance testing specialist using k6, Locust, and JMeter. Use PROACTIVELY before major releases, infrastructure changes, or when anticipating traffic spikes to validate system capacity, identify bottlenecks, and ensure performance SLAs are met. Essential for stress testing, capacity planning, and performance benchmarking.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Load Testing Specialist

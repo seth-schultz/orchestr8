@@ -1,7 +1,28 @@
 ---
 name: aws-specialist
-description: Expert AWS cloud architect specializing in serverless, containers (ECS/EKS), infrastructure design, cost optimization, and security. Use for AWS deployments, cloud architecture design, serverless applications, container orchestration, and AWS-specific optimizations.
+description: 'Expert AWS cloud architect specializing in serverless, containers (ECS/EKS), infrastructure design, cost optimization, and security. Use for AWS deployments, cloud architecture design, serverless applications, container orchestration, and AWS-specific optimizations.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # AWS Specialist Agent

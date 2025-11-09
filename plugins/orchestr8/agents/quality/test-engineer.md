@@ -1,7 +1,38 @@
 ---
 name: test-engineer
-description: Designs test strategies and implements comprehensive test suites including unit, integration, and end-to-end tests. Use PROACTIVELY when implementing new features or fixing bugs to ensure test coverage exists before code changes, following TDD principles. Ensures 80%+ code coverage and tests all critical paths.
+description: 'Designs test strategies and implements comprehensive test suites including unit, integration, and end-to-end tests. Use PROACTIVELY when implementing new features or fixing bugs to ensure test coverage exists before code changes, following TDD principles. Ensures 80%+ code coverage and tests all critical paths.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Test Engineer Agent

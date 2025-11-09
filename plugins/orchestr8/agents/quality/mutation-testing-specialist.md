@@ -1,7 +1,38 @@
 ---
 name: mutation-testing-specialist
-description: Expert mutation testing specialist using PITest, Stryker, and mutmut to measure and improve test quality through mutation analysis. Use PROACTIVELY when test coverage appears high but bugs still escape to production, indicating weak test assertions or inadequate edge case coverage.
+description: 'Expert mutation testing specialist using PITest, Stryker, and mutmut to measure and improve test quality through mutation analysis. Use PROACTIVELY when test coverage appears high but bugs still escape to production, indicating weak test assertions or inadequate edge case coverage.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Mutation Testing Specialist

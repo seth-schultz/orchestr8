@@ -1,7 +1,38 @@
 ---
 name: pci-dss-specialist
-description: Expert PCI DSS (Payment Card Industry Data Security Standard) compliance specialist for organizations processing credit card payments. Use PROACTIVELY when implementing payment processing, cardholder data storage, or e-commerce features to ensure compliance with 12 PCI DSS requirements and prevent data breaches.
+description: 'Expert PCI DSS (Payment Card Industry Data Security Standard) compliance specialist for organizations processing credit card payments. Use PROACTIVELY when implementing payment processing, cardholder data storage, or e-commerce features to ensure compliance with 12 PCI DSS requirements and prevent data breaches.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # PCI DSS Compliance Specialist

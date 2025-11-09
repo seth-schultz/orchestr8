@@ -1,7 +1,38 @@
 ---
 name: skill-architect
-description: Expert in designing auto-activated skills that augment agent capabilities with reusable expertise. Use for creating methodology, pattern, and best practice skills that provide context-specific guidance.
+description: 'Expert in designing auto-activated skills that augment agent capabilities with reusable expertise. Use for creating methodology, pattern, and best practice skills that provide context-specific guidance.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Skill Architect

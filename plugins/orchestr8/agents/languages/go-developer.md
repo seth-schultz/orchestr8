@@ -1,7 +1,38 @@
 ---
 name: go-developer
-description: Expert Go developer specializing in microservices, cloud-native applications, concurrent systems, and high-performance backends. Use for Go services, Kubernetes operators, CLI tools, distributed systems, and applications requiring simplicity, performance, and excellent concurrency support.
+description: 'Expert Go developer specializing in microservices, cloud-native applications, concurrent systems, and high-performance backends. Use for Go services, Kubernetes operators, CLI tools, distributed systems, and applications requiring simplicity, performance, and excellent concurrency support.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Go Developer Agent

@@ -1,7 +1,38 @@
 ---
 name: rust-developer
-description: Expert Rust developer specializing in systems programming, performance-critical applications, WebAssembly, and safe concurrent systems. Use for high-performance backends, CLI tools, systems programming, embedded systems, blockchain, and applications requiring memory safety and zero-cost abstractions.
+description: 'Expert Rust developer specializing in systems programming, performance-critical applications, WebAssembly, and safe concurrent systems. Use for high-performance backends, CLI tools, systems programming, embedded systems, blockchain, and applications requiring memory safety and zero-cost abstractions.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Rust Developer Agent

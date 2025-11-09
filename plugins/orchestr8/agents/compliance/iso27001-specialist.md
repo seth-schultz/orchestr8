@@ -1,7 +1,38 @@
 ---
 name: iso27001-specialist
-description: Expert ISO/IEC 27001 Information Security Management System (ISMS) compliance specialist. Use PROACTIVELY when implementing security controls, conducting risk assessments, or preparing for certification audits to ensure compliance with ISO 27001:2022 standards and Annex A controls.
+description: 'Expert ISO/IEC 27001 Information Security Management System (ISMS) compliance specialist. Use PROACTIVELY when implementing security controls, conducting risk assessments, or preparing for certification audits to ensure compliance with ISO 27001:2022 standards and Annex A controls.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # ISO 27001 Compliance Specialist

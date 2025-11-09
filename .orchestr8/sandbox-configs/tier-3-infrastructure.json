@@ -1,0 +1,64 @@
+{
+  "name": "Tier 3: Infrastructure Agents",
+  "description": "Infrastructure sandbox for cloud and deployment agents. Requires user approval for operations. Escape hatches for Docker/K8s.",
+  "agents": [
+    "aws-specialist",
+    "azure-specialist",
+    "gcp-specialist",
+    "kubernetes-expert",
+    "terraform-specialist",
+    "docker-specialist",
+    "sre-specialist",
+    "observability-specialist"
+  ],
+  "sandbox": {
+    "filesystem": {
+      "allowedWritePaths": [
+        "${CWD}"
+      ],
+      "protectedPaths": [
+        "~/.ssh/",
+        "/etc/"
+      ],
+      "allowSymlinks": false
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "*.amazonaws.com",
+        "*.aws.amazon.com",
+        "s3.amazonaws.com",
+        "*.azure.com",
+        "*.windows.net",
+        "*.googleapis.com",
+        "*.cloudflare.com",
+        "docker.io",
+        "registry.hub.docker.com",
+        "gcr.io",
+        "registry.terraform.io",
+        "releases.hashicorp.com"
+      ],
+      "httpProxyPort": 8080
+    },
+    "excludedCommands": [
+      "docker",
+      "kubectl"
+    ],
+    "allowUnixSockets": false,
+    "requireApproval": true,
+    "approvalMessage": "This agent will execute infrastructure commands that may affect cloud resources or deployments. Review carefully before approving."
+  },
+  "escapeHatches": {
+    "docker": {
+      "reason": "Docker requires access to host Docker socket (/var/run/docker.sock) which is outside sandbox",
+      "mitigation": "Command validation via InputValidator, audit logging, user approval for builds",
+      "securityTradeoff": "Docker commands run outside sandbox but are logged and validated"
+    },
+    "kubectl": {
+      "reason": "Kubectl requires access to kubeconfig (~/.kube/config) and cluster endpoints",
+      "mitigation": "Command validation via InputValidator, audit logging, user approval for applies",
+      "securityTradeoff": "Kubectl commands run outside sandbox but are logged and validated"
+    }
+  }
+}

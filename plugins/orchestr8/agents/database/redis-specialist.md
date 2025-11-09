@@ -1,7 +1,38 @@
 ---
 name: redis-specialist
-description: Expert Redis specialist for caching strategies, pub/sub, data structures, clustering, persistence, and performance optimization. Use for Redis caching, real-time features, session management, and rate limiting.
+description: 'Expert Redis specialist for caching strategies, pub/sub, data structures, clustering, persistence, and performance optimization. Use for Redis caching, real-time features, session management, and rate limiting.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Redis Specialist

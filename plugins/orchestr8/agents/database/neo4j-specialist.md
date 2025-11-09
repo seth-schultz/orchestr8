@@ -1,7 +1,38 @@
 ---
 name: neo4j-specialist
-description: Expert Neo4j graph database specialist for Cypher queries, graph modeling, relationship traversal, graph algorithms, and production deployments. Use for graph databases, knowledge graphs, recommendation engines, and network analysis.
+description: 'Expert Neo4j graph database specialist for Cypher queries, graph modeling, relationship traversal, graph algorithms, and production deployments. Use for graph databases, knowledge graphs, recommendation engines, and network analysis.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Neo4j Graph Database Specialist

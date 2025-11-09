@@ -1,7 +1,38 @@
 ---
 name: angular-specialist
-description: Expert Angular developer specializing in Angular 17+, standalone components, signals, RxJS, TypeScript, and modern patterns. Use for Angular applications, enterprise frontends, and reactive architectures.
+description: 'Expert Angular developer specializing in Angular 17+, standalone components, signals, RxJS, TypeScript, and modern patterns. Use for Angular applications, enterprise frontends, and reactive architectures.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Angular Specialist

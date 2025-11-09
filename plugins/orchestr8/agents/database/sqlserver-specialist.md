@@ -1,7 +1,38 @@
 ---
 name: sqlserver-specialist
-description: Expert SQL Server specialist for performance tuning, Always On, query optimization, T-SQL, SSIS/SSRS, and enterprise database management. Use for SQL Server-specific optimization, high availability, and production deployments.
+description: 'Expert SQL Server specialist for performance tuning, Always On, query optimization, T-SQL, SSIS/SSRS, and enterprise database management. Use for SQL Server-specific optimization, high availability, and production deployments.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # SQL Server Specialist

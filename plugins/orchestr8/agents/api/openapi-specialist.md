@@ -1,7 +1,38 @@
 ---
 name: openapi-specialist
-description: Expert REST API and OpenAPI specialist for API design, documentation, validation, and code generation. Use for RESTful services, API-first development, and comprehensive API documentation.
+description: 'Expert REST API and OpenAPI specialist for API design, documentation, validation, and code generation. Use for RESTful services, API-first development, and comprehensive API documentation.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # OpenAPI Specialist

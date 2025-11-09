@@ -1,7 +1,38 @@
 ---
 name: ruby-developer
-description: Expert Ruby developer specializing in Ruby on Rails, Sinatra, RSpec, ActiveRecord, background jobs (Sidekiq), API development, and DevOps automation. Use for Rails applications, RESTful APIs, Ruby scripts, and web services.
+description: 'Expert Ruby developer specializing in Ruby on Rails, Sinatra, RSpec, ActiveRecord, background jobs (Sidekiq), API development, and DevOps automation. Use for Rails applications, RESTful APIs, Ruby scripts, and web services.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Ruby Developer Agent

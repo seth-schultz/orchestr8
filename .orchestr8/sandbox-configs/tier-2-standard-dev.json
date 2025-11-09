@@ -1,0 +1,61 @@
+{
+  "name": "Tier 2: Standard Development Agents",
+  "description": "Standard sandbox for development agents. Write access to project directory, common package registries.",
+  "agents": [
+    "fullstack-developer",
+    "frontend-developer",
+    "backend-developer",
+    "python-developer",
+    "typescript-developer",
+    "rust-developer",
+    "go-developer",
+    "java-developer",
+    "code-reviewer",
+    "test-engineer",
+    "playwright-specialist",
+    "debugger",
+    "performance-researcher",
+    "assumption-validator",
+    "pattern-experimenter"
+  ],
+  "sandbox": {
+    "filesystem": {
+      "allowedWritePaths": [
+        "${CWD}"
+      ],
+      "protectedPaths": [
+        "~/.ssh/",
+        "~/.aws/",
+        "~/.kube/",
+        "~/.config/gcloud/",
+        "/etc/",
+        "~/.bashrc",
+        "~/.zshrc",
+        "~/.profile",
+        "~/.bash_profile"
+      ],
+      "allowSymlinks": false
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "registry.npmjs.org",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "crates.io",
+        "static.crates.io",
+        "cdn.jsdelivr.net",
+        "unpkg.com",
+        "raw.githubusercontent.com",
+        "pkg.go.dev",
+        "proxy.golang.org",
+        "rubygems.org",
+        "packagist.org"
+      ],
+      "httpProxyPort": 8080
+    },
+    "excludedCommands": [],
+    "allowUnixSockets": false
+  }
+}

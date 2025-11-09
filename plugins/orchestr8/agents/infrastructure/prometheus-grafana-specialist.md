@@ -1,7 +1,28 @@
 ---
 name: prometheus-grafana-specialist
-description: Expert Prometheus and Grafana specialist for metrics collection, alerting, and visualization. Use for application monitoring, SLI/SLO tracking, and operational dashboards.
+description: 'Expert Prometheus and Grafana specialist for metrics collection, alerting, and visualization. Use for application monitoring, SLI/SLO tracking, and operational dashboards.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # Prometheus & Grafana Specialist

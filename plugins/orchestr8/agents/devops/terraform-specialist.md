@@ -1,7 +1,28 @@
 ---
 name: terraform-specialist
-description: Expert in Terraform infrastructure as code, multi-cloud provisioning, state management, and infrastructure automation. Use for infrastructure provisioning, cloud resource management, IaC best practices, and infrastructure automation across AWS, Azure, GCP, and other providers.
+description: 'Expert in Terraform infrastructure as code, multi-cloud provisioning, state management, and infrastructure automation. Use for infrastructure provisioning, cloud resource management, IaC best practices, and infrastructure automation across AWS, Azure, GCP, and other providers.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # Terraform Specialist Agent

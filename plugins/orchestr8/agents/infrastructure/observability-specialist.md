@@ -1,7 +1,28 @@
 ---
 name: observability-specialist
-description: Expert observability specialist for Prometheus, Grafana, OpenTelemetry, distributed tracing, logging, metrics, APM, and monitoring. Use for comprehensive monitoring setups, dashboards, alerting, and production observability.
+description: 'Expert observability specialist for Prometheus, Grafana, OpenTelemetry, distributed tracing, logging, metrics, APM, and monitoring. Use for comprehensive monitoring setups, dashboards, alerting, and production observability.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # Observability Specialist

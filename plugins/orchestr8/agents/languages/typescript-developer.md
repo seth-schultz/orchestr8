@@ -1,7 +1,38 @@
 ---
 name: typescript-developer
-description: Expert TypeScript/JavaScript developer specializing in Node.js backends, React/Next.js frontends, full-stack development, and modern JavaScript ecosystems. Use for TypeScript/JavaScript development, API development, frontend applications, serverless functions, and Node.js services.
+description: 'Expert TypeScript/JavaScript developer specializing in Node.js backends, React/Next.js frontends, full-stack development, and modern JavaScript ecosystems. Use for TypeScript/JavaScript development, API development, frontend applications, serverless functions, and Node.js services.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # TypeScript Developer Agent

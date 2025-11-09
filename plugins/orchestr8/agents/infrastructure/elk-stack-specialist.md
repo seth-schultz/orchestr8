@@ -1,7 +1,28 @@
 ---
 name: elk-stack-specialist
-description: Expert ELK Stack (Elasticsearch, Logstash, Kibana) specialist for centralized logging, log analysis, and operational intelligence. Use for log aggregation, search, and visualization.
+description: 'Expert ELK Stack (Elasticsearch, Logstash, Kibana) specialist for centralized logging, log analysis, and operational intelligence. Use for log aggregation, search, and visualization.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # ELK Stack Specialist

@@ -1,7 +1,28 @@
 ---
 name: cdn-specialist
-description: Expert CDN specialist for Cloudflare, CloudFront, Fastly, and edge caching strategies. Use for global content delivery, DDoS protection, edge computing, and performance optimization.
+description: 'Expert CDN specialist for Cloudflare, CloudFront, Fastly, and edge caching strategies. Use for global content delivery, DDoS protection, edge computing, and performance optimization.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # CDN Specialist

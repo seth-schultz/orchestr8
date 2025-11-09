@@ -1,7 +1,28 @@
 ---
 name: azure-specialist
-description: Expert Microsoft Azure cloud architect specializing in App Service, Functions, Storage, Cosmos DB, AKS, and Azure DevOps. Use for Azure deployments, serverless, and enterprise integrations.
+description: 'Expert Microsoft Azure cloud architect specializing in App Service, Functions, Storage, Cosmos DB, AKS, and Azure DevOps. Use for Azure deployments, serverless, and enterprise integrations.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # Azure Specialist

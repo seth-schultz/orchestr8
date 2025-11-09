@@ -1,7 +1,38 @@
 ---
 name: contract-testing-specialist
-description: Expert contract testing specialist using Pact, Spring Cloud Contract, and Postman for consumer-driven contract testing and API compatibility validation. Use PROACTIVELY when building or modifying APIs, microservices, or service integrations to ensure contract compatibility and prevent breaking changes.
+description: 'Expert contract testing specialist using Pact, Spring Cloud Contract, and Postman for consumer-driven contract testing and API compatibility validation. Use PROACTIVELY when building or modifying APIs, microservices, or service integrations to ensure contract compatibility and prevent breaking changes.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Contract Testing Specialist

@@ -1,7 +1,38 @@
 ---
 name: fedramp-specialist
-description: Expert FedRAMP (Federal Risk and Authorization Management Program) compliance specialist for cloud services. Use PROACTIVELY when building or deploying applications for federal agencies to ensure compliance with NIST SP 800-53 controls, FedRAMP baselines, continuous monitoring, and authorization requirements.
+description: 'Expert FedRAMP (Federal Risk and Authorization Management Program) compliance specialist for cloud services. Use PROACTIVELY when building or deploying applications for federal agencies to ensure compliance with NIST SP 800-53 controls, FedRAMP baselines, continuous monitoring, and authorization requirements.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # FedRAMP Compliance Specialist

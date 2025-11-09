@@ -1,0 +1,39 @@
+{
+  "name": "Tier 1: Read-Only Agents",
+  "description": "Strictest sandbox for analysis and documentation agents. No write operations, minimal network access.",
+  "agents": [
+    "architect",
+    "requirements-analyzer",
+    "code-archaeologist",
+    "technical-writer",
+    "api-documenter",
+    "pattern-learner",
+    "security-auditor",
+    "code-researcher"
+  ],
+  "sandbox": {
+    "filesystem": {
+      "allowedWritePaths": [],
+      "protectedPaths": [
+        "~/.ssh/",
+        "~/.aws/",
+        "~/.kube/",
+        "~/.config/",
+        "/etc/",
+        "~/.bashrc",
+        "~/.zshrc",
+        "~/.profile"
+      ],
+      "allowSymlinks": false
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com"
+      ],
+      "httpProxyPort": 8080
+    },
+    "excludedCommands": [],
+    "allowUnixSockets": false
+  }
+}

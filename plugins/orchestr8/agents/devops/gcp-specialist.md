@@ -1,7 +1,28 @@
 ---
 name: gcp-specialist
-description: Expert Google Cloud Platform architect specializing in Cloud Functions, Cloud Run, GKE, Firestore, BigQuery, and Cloud Storage. Use for GCP deployments, serverless, and data analytics.
+description: 'Expert Google Cloud Platform architect specializing in Cloud Functions, Cloud Run, GKE, Firestore, BigQuery, and Cloud Storage. Use for GCP deployments, serverless, and data analytics.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # GCP Specialist

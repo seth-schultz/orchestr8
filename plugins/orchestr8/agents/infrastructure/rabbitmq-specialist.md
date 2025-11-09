@@ -1,7 +1,28 @@
 ---
 name: rabbitmq-specialist
-description: Expert RabbitMQ specialist for message queues, exchanges, routing, pub/sub patterns, and reliable messaging. Use for async task processing, microservices communication, and message-driven architectures.
+description: 'Expert RabbitMQ specialist for message queues, exchanges, routing, pub/sub patterns, and reliable messaging. Use for async task processing, microservices communication, and message-driven architectures.'
 model: inherit
+sandbox:
+  enabled: true
+  require_approval: true
+  approval_message: This agent executes infrastructure commands. Review carefully before approving.
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - '*'
+  allowed_commands:
+    - aws
+    - terraform
+    - kubectl
+    - docker
+    - gcloud
+    - az
+    - helm
+  escape_hatches:
+    - Docker operations may escape sandbox
+    - kubectl exec provides shell access
 ---
 
 # RabbitMQ Specialist

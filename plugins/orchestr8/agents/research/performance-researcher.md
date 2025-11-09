@@ -1,7 +1,38 @@
 ---
 name: performance-researcher
-description: Benchmarks different implementation approaches to measure actual performance characteristics across CPU, memory, I/O, and latency dimensions. Use PROACTIVELY when performance is critical, when choosing between algorithms/data structures, or when optimizing hot paths to make data-driven decisions with empirical evidence.
+description: 'Benchmarks different implementation approaches to measure actual performance characteristics across CPU, memory, I/O, and latency dimensions. Use PROACTIVELY when performance is critical, when choosing between algorithms/data structures, or when optimizing hot paths to make data-driven decisions with empirical evidence.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Performance Researcher Agent

@@ -1,7 +1,38 @@
 ---
 name: debugger
-description: Expert debugging specialist for identifying and fixing complex bugs across all technology stacks. Use PROACTIVELY when encountering production issues, race conditions, memory leaks, intermittent failures, or hard-to-reproduce bugs to perform systematic root cause analysis. Masters debugging tools, profilers, and root cause analysis.
+description: 'Expert debugging specialist for identifying and fixing complex bugs across all technology stacks. Use PROACTIVELY when encountering production issues, race conditions, memory leaks, intermittent failures, or hard-to-reproduce bugs to perform systematic root cause analysis. Masters debugging tools, profilers, and root cause analysis.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Debugger Agent

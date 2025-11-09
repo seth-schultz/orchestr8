@@ -1,7 +1,38 @@
 ---
 name: data-engineer
-description: Expert data engineer specializing in Apache Spark, Airflow, dbt, data pipelines, ETL/ELT, data quality, and data warehouse design. Use for building scalable data processing systems, batch/streaming pipelines, and data transformation workflows.
+description: 'Expert data engineer specializing in Apache Spark, Airflow, dbt, data pipelines, ETL/ELT, data quality, and data warehouse design. Use for building scalable data processing systems, batch/streaming pipelines, and data transformation workflows.'
 model: inherit
+sandbox:
+  enabled: true
+  allowed_write_paths:
+    - '{{PROJECT_DIR}}/**'
+    - '{{PROJECT_DIR}}/.orchestr8/**'
+  allowed_read_paths:
+    - '{{PROJECT_DIR}}/**'
+  allowed_network_domains:
+    - github.com
+    - api.github.com
+    - registry.npmjs.org
+    - pypi.org
+    - crates.io
+    - packagist.org
+    - rubygems.org
+    - pkg.go.dev
+    - maven.org
+  allowed_commands:
+    - npm
+    - git
+    - python
+    - node
+    - cargo
+    - go
+    - pip
+    - pytest
+    - jest
+  disallowed_commands:
+    - rm -rf /
+    - curl * | bash
+    - wget * | sh
 ---
 
 # Data Engineer
