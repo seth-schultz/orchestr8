@@ -24,7 +24,7 @@ Per [OpenSSF Scorecard](https://github.com/ossf/scorecard) security best practic
 | `actions/download-artifact` | v4.1.8 | `fa0a91b85d4f404e444e00e005971372dc801d16` | 2025-11-09 |
 | `actions/github-script` | v7.0.1 | `60a0d83039c74a4aee543508d2ffcb1c3799cdea` | 2025-11-09 |
 | `actions/create-release` | v1.1.4 | `0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e` | 2025-11-09 |
-| `actions/upload-release-asset` | v1.0.2 | `e8f9f06c4b078e705bd2f50c165f69e02524cb8a` | 2025-11-09 |
+| `actions/upload-release-asset` | v1.0.2 | `e8f9f06c4b078e705bd2ea027f0926603fc9b4d5` | 2025-11-09 |
 
 ### Path Filtering
 
@@ -42,7 +42,7 @@ Per [OpenSSF Scorecard](https://github.com/ossf/scorecard) security best practic
 
 | Action | Version Tag | SHA Commit | Last Verified |
 |--------|-------------|------------|---------------|
-| `trufflesecurity/trufflehog` | main | `4cb8c4af581d5ba1e430699832c1e2d34b1fc8bb` | 2025-11-09 |
+| `trufflesecurity/trufflehog` | main | `fca954587c60352120abcd6c5a6958fc809f575d` | 2025-11-09 |
 | `gitleaks/gitleaks-action` | v2.3.6 | `44c470ffc35caa8b1eb3e8012ca53c2f9bea4eb5` | 2025-11-09 |
 
 ### CodeQL Actions
