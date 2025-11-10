@@ -4,9 +4,9 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-green.svg)](https://claude.ai)
-[![Security Scan](https://github.com/seth-skocelas/orchestr8/workflows/Security%20Scan/badge.svg)](https://github.com/seth-skocelas/orchestr8/actions/workflows/security.yml)
-[![License Check](https://github.com/seth-skocelas/orchestr8/workflows/License%20Compliance/badge.svg)](https://github.com/seth-skocelas/orchestr8/actions/workflows/license-check.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/seth-skocelas/orchestr8/badge)](https://api.securityscorecards.dev/projects/github.com/seth-skocelas/orchestr8)
+[![Security Scan](https://github.com/seth-schultz/orchestr8/workflows/Security%20Scan/badge.svg)](https://github.com/seth-schultz/orchestr8/actions/workflows/security.yml)
+[![License Check](https://github.com/seth-schultz/orchestr8/workflows/License%20Compliance/badge.svg)](https://github.com/seth-schultz/orchestr8/actions/workflows/license-check.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/seth-schultz/orchestr8/badge)](https://api.securityscorecards.dev/projects/github.com/seth-schultz/orchestr8)
 
 Transform Claude Code into a fully autonomous software engineering team with research capabilities. orchestr8 provides 80+ specialized agents (including 5 research agents) coordinated through intelligent workflows, achieving 3-6x speedups through parallel execution, evidence-based decision making, and enterprise-scale project delivery.
 
