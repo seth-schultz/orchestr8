@@ -4,18 +4,18 @@ on:
   push:
     branches: [main]
     paths:
-      - 'VERSION'
-      - 'CHANGELOG.md'
+      - "VERSION"
+      - "CHANGELOG.md"
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (leave empty to use VERSION file)'
+        description: "Version to release (leave empty to use VERSION file)"
         required: false
         type: string
 
+# Minimal permissions - jobs override as needed
 permissions:
-  contents: write
-  packages: write
+  contents: read
 
 jobs:
   # Detect version change and validate before release
@@ -29,7 +29,7 @@ jobs:
       release_needed: ${{ steps.validate.outputs.needed }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
@@ -98,12 +98,12 @@ jobs:
     if: needs.detect-version-change.outputs.release_needed == 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: |
@@ -186,66 +186,42 @@ jobs:
     runs-on: ubuntu-latest
     needs: [detect-version-change, pre-release-checks]
     if: needs.detect-version-change.outputs.release_needed == 'true'
+    permissions:
+      contents: write # Required for gh release create to push tags and create releases
     outputs:
-      release_url: ${{ steps.create_release.outputs.html_url }}
-      release_id: ${{ steps.create_release.outputs.id }}
+      release_url: ${{ steps.create_release.outputs.url }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
 
       - name: Extract changelog for this version
         id: changelog
         run: |
           VERSION=${{ needs.detect-version-change.outputs.current_version }}
 
-          # Extract changelog section for this version
-          CHANGELOG=$(awk "/^## \[$VERSION\]/,/^## \[/" CHANGELOG.md | head -n -1)
+          # Extract changelog section for this version and save to file
+          awk "/^## \[$VERSION\]/,/^## \[/" CHANGELOG.md | head -n -1 > /tmp/release-notes.md
 
-          # Escape for JSON
-          CHANGELOG="${CHANGELOG//'%'/'%25'}"
-          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-
-          echo "body=$CHANGELOG" >> $GITHUB_OUTPUT
-
-      - name: Create GitHub Release
+      - name: Create GitHub Release with gh CLI
         id: create_release
-        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ needs.detect-version-change.outputs.current_version }}
-          release_name: Release v${{ needs.detect-version-change.outputs.current_version }}
-          body: ${{ steps.changelog.outputs.body }}
-          draft: false
-          prerelease: false
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${{ needs.detect-version-change.outputs.current_version }}
 
-      - name: Upload plugin.json as artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./plugins/orchestr8/.claude-plugin/plugin.json
-          asset_name: plugin.json
-          asset_content_type: application/json
+          # Create release with assets using gh CLI
+          gh release create "v${VERSION}" \
+            --title "Release v${VERSION}" \
+            --notes-file /tmp/release-notes.md \
+            ./plugins/orchestr8/.claude-plugin/plugin.json#plugin.json \
+            ./.claude-plugin/marketplace.json#marketplace.json
 
-      - name: Upload marketplace.json as artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./.claude-plugin/marketplace.json
-          asset_name: marketplace.json
-          asset_content_type: application/json
+          # Get release URL for output
+          RELEASE_URL=$(gh release view "v${VERSION}" --json url --jq '.url')
+          echo "url=${RELEASE_URL}" >> $GITHUB_OUTPUT
+          echo "Release created: ${RELEASE_URL}"
 
   # Post-release validation and notifications
   post-release:
@@ -255,12 +231,11 @@ jobs:
     if: needs.create-release.result == 'success'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Verify release assets
         run: |
           echo "✓ Release created: ${{ needs.create-release.outputs.release_url }}"
-          echo "Release ID: ${{ needs.create-release.outputs.release_id }}"
           echo "Version: ${{ needs.detect-version-change.outputs.current_version }}"
 
       - name: Create deployment summary
@@ -287,7 +262,7 @@ jobs:
           cat release-summary.md
 
       - name: Comment on related commits
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Enterprise-grade hierarchical multi-agent orchestration system with 74+ specialized agents and 20 autonomous workflows for end-to-end project delivery",
-    "version": "6.4.0"
+    "version": "7.0.0"
   },
   "plugins": [
     {
       "name": "orchestr8",
       "source": "./plugins/orchestr8",
       "description": "Enterprise orchestration engine: 74+ specialized agents, 20 automated workflows, parallelism-first architecture for maximum speed",
-      "version": "6.4.0"
+      "version": "7.0.0"
     }
   ]
 }

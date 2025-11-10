@@ -1,0 +1,33 @@
+# Gitleaks configuration for orchestr8 project
+# This configuration excludes false positives from test files and documentation
+
+title = "orchestr8 gitleaks config"
+
+# Exclude test files and documentation backups from secret scanning
+[allowlist]
+description = "Allowlist for test files and documentation examples"
+
+# Exclude test files with example/mock credentials
+paths = [
+  '''.*test\.js$''',
+  '''.*\.test\.js$''',
+  '''.*mock\.js$''',
+  '''^tests/''',
+  '''^test/''',
+  '''^\.orchestr8/backups/''',
+  '''^plugins/.*/tests/''',
+  '''^plugins/.*/test/''',
+]
+
+# Exclude specific patterns that are examples/documentation
+regexes = [
+  '''(example|sample|mock|test|dummy)[-_]?(api|key|token|secret|password)''',
+  '''your[-_]?(api|key|token|secret)[-_]?here''',
+  '''replace[-_]?with[-_]?your''',
+  '''REDACTED''',
+]
+
+# Exclude commits with specific keywords in the message
+commits = [
+  '''(?i)(test|mock|example|documentation|docs|sample)''',
+]

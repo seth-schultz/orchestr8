@@ -1,0 +1,96 @@
+version: 2
+updates:
+  # Main plugin dependencies
+  - package-ecosystem: "npm"
+    directory: "/plugins/orchestr8"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 10
+
+    # Group updates intelligently
+    groups:
+      # Security updates - highest priority
+      security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
+
+      # Production dependencies - group minor and patch
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Development dependencies - group all updates
+      dev-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+
+    # Versioning strategy
+    versioning-strategy: increase
+
+    # Pull request configuration
+    pull-request-branch-name:
+      separator: "/"
+
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+    # Labels for organization
+    labels:
+      - "dependencies"
+      - "automated"
+
+    # Reviewers
+    reviewers:
+      - "seth-schultz"
+
+    # Allow specific dependencies for auto-merge (via GitHub Actions)
+    # This is just metadata; actual auto-merge configured in GitHub settings
+
+    # Ignore specific versions or packages if needed
+    ignore:
+      # Example: ignore major updates for stable packages
+      # - dependency-name: "package-name"
+      #   update-types: ["version-update:semver-major"]
+
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+    commit-message:
+      prefix: "chore(ci)"
+      include: "scope"
+
+    labels:
+      - "dependencies"
+      - "ci"
+      - "automated"
+
+    reviewers:
+      - "seth-schultz"
+
+  # Docker dependencies (if we add Dockerfile)
+  # - package-ecosystem: "docker"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"

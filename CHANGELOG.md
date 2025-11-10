@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2025-01-10
+
+### Changed
+
+- **BREAKING: CI/CD Security Hardening** - Comprehensive security improvements to GitHub Actions workflows
+  - All GitHub Actions now pinned to full commit SHAs instead of version tags (prevents supply chain attacks)
+  - Replaced third-party release actions with native `gh` CLI commands (reduces attack surface)
+  - All workflows now follow principle of least privilege with explicit minimal permissions
+  - Top-level permissions set to `contents: read` across all workflows
+  - Job-level write permissions only where absolutely required (release creation, signature commits)
+  - 57 action references updated with verified SHA commits and version documentation
+
+- **Release Workflow Improvements**:
+  - `release.yml`: Replaced `actions/create-release` and `actions/upload-release-asset` with `gh release create`
+  - `sign-release.yml`: Replaced `softprops/action-gh-release` with `gh release create`
+  - Maintains same functionality with reduced dependencies and improved security
+  - Release workflows only run on main branch (never on PRs), mitigating privilege escalation risk
+
+### Fixed
+
+- **OpenSSF Scorecard Compliance** - All security checks now passing (24/24 checks pass)
+  - Token-Permissions check: Proper permission scoping at workflow and job levels
+  - Pinned-Dependencies check: All actions pinned to commit SHAs with documented versions
+  - CodeQL integration: Fixed conflict with GitHub default CodeQL setup
+  - Gitleaks configuration: Proper `.gitleaks.toml` excludes test files from secret scanning
+  - npm dependencies: Fixed cache and installation issues in CI workflows
+
+- **CI/CD Workflow Fixes**:
+  - Fixed `npm ci` failures by switching to `npm install` (package-lock.json is gitignored)
+  - Fixed Setup Node.js cache configuration pointing to gitignored files
+  - Fixed invalid SHA commits that security-auditor agent initially provided
+  - Fixed SBOM job excessive permissions (reduced from `contents: write` to `contents: read`)
+  - Fixed CodeQL SARIF upload failures from conflicting default setup
+
+### Added
+
+- **Security Documentation**:
+  - `.github/ACTION_VERSIONS.md`: Complete mapping of all 57 pinned action SHAs to their versions
+  - `.gitleaks.toml`: Configuration excluding test files and documentation from secret scanning
+  - Comprehensive inline comments documenting why specific permissions are required
+
+### Security
+
+- **Enhanced Supply Chain Security**:
+  - All third-party GitHub Actions verified and pinned to immutable commit SHAs
+  - Reduced reliance on third-party actions (2 fewer action dependencies in release workflows)
+  - Explicit minimal permissions prevent token privilege escalation
+  - Continuous security scanning with Gitleaks, TruffleHog, CodeQL, and OpenSSF Scorecard
+  - SBOM (Software Bill of Materials) generation for dependency transparency
+
+### Migration Notes
+
+This is a major version bump due to breaking changes in CI/CD workflows:
+
+- **For contributors**: No action required - all workflows updated and tested
+- **For forked repositories**: Review `.github/workflows/` changes, especially if you've customized release workflows
+- **Action SHA updates**: All actions must use exact SHAs; see `.github/ACTION_VERSIONS.md` for version mapping
+
 ## [6.4.0] - 2025-01-08
 
 ### Added

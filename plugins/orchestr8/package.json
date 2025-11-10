@@ -1,0 +1,53 @@
+{
+  "name": "@orchestr8/plugin",
+  "version": "1.0.0",
+  "description": "Orchestr8 security components and testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:security": "jest tests/security --coverage",
+    "test:verbose": "jest --verbose",
+    "test:single": "jest --testNamePattern"
+  },
+  "keywords": [
+    "orchestr8",
+    "security",
+    "validation",
+    "audit"
+  ],
+  "author": "Orchestr8",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "lib/**/*.js",
+      "!lib/**/index.js",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "text",
+      "text-summary",
+      "html",
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "verbose": true,
+    "testTimeout": 10000
+  }
+}
