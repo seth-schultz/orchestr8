@@ -92,53 +92,64 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v1.0.0
-        with:
-          files: |
-            plugins/orchestr8/CHECKSUMS.txt
-            plugins/orchestr8/CHECKSUMS.txt.asc
-            plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc
-          body: |
-            ## orchestr8 Plugin Release ${{ github.ref_name }}
-
-            ### Code Signing
-
-            This release includes cryptographic signatures to verify authenticity and prevent supply chain attacks.
-
-            **Verification Instructions:**
-
-            1. Download the plugin and signature files
-            2. Import the public key:
-               ```bash
-               gpg --import ORCHESTR8_PUBLIC_KEY.asc
-               ```
-            3. Verify the signature:
-               ```bash
-               cd plugins/orchestr8
-               ./scripts/verify-plugin.sh
-               ```
-
-            **Expected Key Fingerprint:**
-            ```
-            $(cd plugins/orchestr8 && gpg --show-keys ORCHESTR8_PUBLIC_KEY.asc | grep -A 1 "Key fingerprint")
-            ```
-
-            ### Files Included
-
-            - `CHECKSUMS.txt` - SHA256 checksums of all plugin files
-            - `CHECKSUMS.txt.asc` - GPG signature of checksums
-            - `ORCHESTR8_PUBLIC_KEY.asc` - Public key for verification
-
-            ### Security
-
-            All files have been signed with the orchestr8 security key. Always verify signatures before using this plugin in production environments.
-
-            For more information, see [CODE_SIGNING.md](plugins/orchestr8/docs/CODE_SIGNING.md)
-          draft: false
-          prerelease: false
+      - name: Create GitHub Release with gh CLI
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get key fingerprint for release notes
+          KEY_FINGERPRINT=$(cd plugins/orchestr8 && gpg --show-keys ORCHESTR8_PUBLIC_KEY.asc | grep -A 1 "Key fingerprint" || echo "See ORCHESTR8_PUBLIC_KEY.asc")
+
+          # Create release notes file
+          cat > /tmp/release-notes.md << 'EOF'
+          ## orchestr8 Plugin Release ${{ github.ref_name }}
+
+          ### Code Signing
+
+          This release includes cryptographic signatures to verify authenticity and prevent supply chain attacks.
+
+          **Verification Instructions:**
+
+          1. Download the plugin and signature files
+          2. Import the public key:
+             ```bash
+             gpg --import ORCHESTR8_PUBLIC_KEY.asc
+             ```
+          3. Verify the signature:
+             ```bash
+             cd plugins/orchestr8
+             ./scripts/verify-plugin.sh
+             ```
+
+          **Expected Key Fingerprint:**
+          ```
+          ${KEY_FINGERPRINT}
+          ```
+
+          ### Files Included
+
+          - `CHECKSUMS.txt` - SHA256 checksums of all plugin files
+          - `CHECKSUMS.txt.asc` - GPG signature of checksums
+          - `ORCHESTR8_PUBLIC_KEY.asc` - Public key for verification
+
+          ### Security
+
+          All files have been signed with the orchestr8 security key. Always verify signatures before using this plugin in production environments.
+
+          For more information, see [CODE_SIGNING.md](plugins/orchestr8/docs/CODE_SIGNING.md)
+          EOF
+
+          # Create or update release with signature files
+          gh release create "${{ github.ref_name }}" \
+            --title "orchestr8 Plugin Release ${{ github.ref_name }}" \
+            --notes-file /tmp/release-notes.md \
+            plugins/orchestr8/CHECKSUMS.txt \
+            plugins/orchestr8/CHECKSUMS.txt.asc \
+            plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc \
+            || gh release upload "${{ github.ref_name }}" \
+            plugins/orchestr8/CHECKSUMS.txt \
+            plugins/orchestr8/CHECKSUMS.txt.asc \
+            plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc \
+            --clobber
 
       - name: Upload signature artifacts
         uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
