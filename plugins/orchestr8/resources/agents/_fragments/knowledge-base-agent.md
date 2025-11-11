@@ -1,23 +1,27 @@
 ---
 id: knowledge-base-agent
 category: agent
-tags: [knowledge-base, documentation, analysis, context, autonomous, project-intelligence]
+tags: [knowledge-base, documentation, analysis, context, autonomous, project-intelligence, multi-solution, enterprise, legacy-systems]
 capabilities:
   - Automatic codebase analysis
+  - Multi-solution project navigation (Web + API + Services)
+  - Service-level granular analysis (30-50+ services)
   - Knowledge extraction and synthesis
   - Context generation for workers
   - Architecture documentation
   - Pattern identification
-  - Dependency mapping
+  - Cross-project dependency mapping
   - Living documentation maintenance
 useWhen:
   - Maintaining technical documentation for projects, APIs, infrastructure, and processes with Markdown, wikis (Confluence, Notion), or documentation generators (Docusaurus, MkDocs)
+  - Analyzing enterprise multi-solution codebases with multiple .sln files, 30-50+ services, and complex cross-project dependencies
   - Organizing knowledge bases with clear taxonomy, searchable content, versioning for different product releases, and deprecation notices for outdated information
   - Creating onboarding documentation for new team members including setup guides, architecture overviews, development workflows, and links to key resources
   - Documenting architecture decisions (ADRs) with context, options considered, decision made, consequences, and rationale for future reference
   - Building runbooks for operational procedures including deployment steps, rollback procedures, incident response playbooks, and troubleshooting guides
+  - Legacy system modernization projects requiring service-level analysis across multiple solutions and comprehensive dependency mapping
   - Keeping documentation up-to-date by reviewing regularly, soliciting feedback from users, tracking documentation debt, and prioritizing updates based on usage analytics
-estimatedTokens: 1000
+estimatedTokens: 1200
 ---
 
 # Knowledge Base Agent

@@ -7,6 +7,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.0-rc2] - 2025-11-11
+
+### Added
+
+- **Legacy System Modernization** - Complete suite for enterprise architecture modernization (Resolves #10)
+  - **Session-Based Output Management**: All analysis artifacts organized in `.orchestr8/session_<timestamp>/` directories
+    - Prevents pollution of analyzed codebases with documentation files
+    - Enables multiple concurrent analyses from same workspace directory
+    - Session isolation with automatic symlinking to latest session
+    - Structured output directories (architecture/, dependencies/, modernization/, security/, etc.)
+  
+  - **Deep Service-Level Analysis**: Handles enterprise-scale multi-solution codebases
+    - Multi-solution project navigation (Web + API + Background Services)
+    - Granular analysis of 30-50+ individual services
+    - Service-to-service dependency mapping with YAML/JSON output
+    - Database dependency tracking (which services use which databases)
+    - External API integration cataloging
+    - Message queue usage mapping (RabbitMQ, Azure Service Bus, AWS SQS)
+    - Performance flag automation (N+1 queries, missing caching, blocking calls)
+    - Security flag automation (SQL injection, hardcoded secrets, deprecated frameworks)
+  
+  - **Cloud Migration Planning Workflow**: End-to-end cloud migration strategy
+    - Multi-cloud support (Azure, AWS, Google Cloud Platform)
+    - HA/DR strategy design with specific RPO/RTO targets
+    - Good/better/best migration approach recommendations
+    - TCO calculations and ROI projections
+    - Compliance mapping (HIPAA, SOC2, PCI-DSS, GDPR)
+    - Phased implementation roadmaps
+  
+  - **Microservices Transformation Workflow**: Monolith decomposition planning
+    - Domain-driven design boundary identification
+    - Service boundary recommendations with bounded contexts
+    - Data decomposition strategy (database-per-service pattern)
+    - Strangler fig vs parallel run vs big-bang migration approaches
+    - Good/better/best transformation paths
+    - Event-driven architecture design patterns
+  
+  - **New Agents**:
+    - `legacy-system-analyst`: Deep analysis of legacy systems with 30+ services
+    - `cloud-migration-architect`: Azure/AWS/GCP architecture design with HA/DR
+  
+  - **New Skills**:
+    - `service-dependency-mapping`: YAML/JSON generation of service dependencies
+  
+  - **New Patterns**:
+    - `session-output-management`: File organization with calling directory isolation
+  
+  - **New Commands**:
+    - `/orchestr8:modernize-legacy`: Complete modernization planning workflow
+  
+  - **Enhanced Agents**:
+    - `knowledge-base-agent`: Added multi-solution and service-level analysis capabilities
+
+### Changed
+
+- Updated `.gitignore` to exclude session directories (`.orchestr8/session_*/`, `.orchestr8/latest`)
+- Enhanced `knowledge-base-agent` tags and capabilities for enterprise legacy systems
+- Updated email addresses to `security@orchestr8.builders` and `contact@orchestr8.builders`
+- All workflow commands now use `/orchestr8:` prefix consistently
+
+### Fixed
+
+- **File Organization** (#10): Analysis artifacts no longer scattered across directories
+  - All outputs now in session directory within calling directory
+  - Analyzed codebase remains clean (no documentation pollution)
+  - Multiple analysis runs properly isolated in separate session directories
+
+- **Analysis Depth** (#10): Legacy system analysis now handles enterprise complexity
+  - Service-level granularity for 30-50+ services
+  - Comprehensive dependency mapping with YAML output
+  - Performance and security flags at service level
+  - Cloud migration readiness assessment per service
+
+- **Migration Planning** (#10): Complete cloud migration and modernization support
+  - Azure/AWS/GCP architecture design with managed services
+  - HA/DR strategies with tiered approaches (Backup/Restore, Pilot Light, Warm Standby, Hot Standby)
+  - Microservices transformation with strangler fig pattern
+  - Good/better/best recommendations with cost-benefit analysis
+
 ## [8.0.0-rc1] - 2025-11-11
 
 ### Changed

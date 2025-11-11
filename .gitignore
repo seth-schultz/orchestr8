@@ -49,5 +49,7 @@ secrets.yaml
 # Orchestr8 artifacts
 .orchestr8/intelligence.db
 .orchestr8/docs/
+.orchestr8/session_*/  # Session-based analysis outputs
+.orchestr8/latest       # Symlink to latest session
 *.db
 **/*.db
