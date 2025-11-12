@@ -74,20 +74,21 @@ jobs:
         with:
           filters: |
             agents:
-              - 'plugins/orchestr8/agents/**/*.md'
+              - 'plugins/orchestr8/resources/agents/**/*.md'
             workflows:
               - 'plugins/orchestr8/commands/**/*.md'
             docs:
               - 'README.md'
-              - 'ARCHITECTURE.md'
-              - 'CLAUDE.md'
               - 'CHANGELOG.md'
-              - 'plugins/orchestr8/CLAUDE.md'
+              - 'plugins/orchestr8/USAGE.md'
+              - 'plugins/orchestr8/CONFIGURATION.md'
             config:
               - 'plugins/orchestr8/.claude-plugin/plugin.json'
+              - 'plugins/orchestr8/package.json'
               - '.claude-plugin/marketplace.json'
             version:
               - 'VERSION'
+              - 'plugins/orchestr8/package.json'
               - 'plugins/orchestr8/.claude-plugin/plugin.json'
               - '.claude-plugin/marketplace.json'
 
@@ -107,7 +108,7 @@ jobs:
         id: changed-files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | \
-            grep 'agents/.*\.md$' > changed-agents.txt || true
+            grep 'resources/agents/.*\.md$' > changed-agents.txt || true
 
           if [ -s changed-agents.txt ]; then
             echo "Changed agents:"
@@ -248,16 +249,23 @@ jobs:
           echo "Checking version consistency..."
 
           VERSION_FILE=$(cat VERSION | tr -d '\n')
+          PACKAGE_VERSION=$(jq -r '.version' plugins/orchestr8/package.json)
           PLUGIN_VERSION=$(jq -r '.version' plugins/orchestr8/.claude-plugin/plugin.json)
           MARKETPLACE_META=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
           MARKETPLACE_PLUGIN=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
 
           echo "VERSION file: $VERSION_FILE"
+          echo "package.json: $PACKAGE_VERSION"
           echo "plugin.json: $PLUGIN_VERSION"
           echo "marketplace.json (metadata): $MARKETPLACE_META"
           echo "marketplace.json (plugins[0]): $MARKETPLACE_PLUGIN"
 
           errors=0
+
+          if [ "$VERSION_FILE" != "$PACKAGE_VERSION" ]; then
+            echo "ERROR: Version mismatch between VERSION and package.json"
+            errors=$((errors + 1))
+          fi
 
           if [ "$VERSION_FILE" != "$PLUGIN_VERSION" ]; then
             echo "ERROR: Version mismatch between VERSION and plugin.json"
@@ -278,8 +286,9 @@ jobs:
             echo ""
             echo "❌ Version consistency check failed!"
             echo "All version files must match. Please update:"
-            echo "  - .claude/VERSION"
-            echo "  - .claude/plugin.json (version field)"
+            echo "  - VERSION"
+            echo "  - plugins/orchestr8/package.json (version field)"
+            echo "  - plugins/orchestr8/.claude-plugin/plugin.json (version field)"
             echo "  - .claude-plugin/marketplace.json (metadata.version)"
             echo "  - .claude-plugin/marketplace.json (plugins[0].version)"
             exit 1

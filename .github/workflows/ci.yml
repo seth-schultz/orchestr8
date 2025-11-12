@@ -36,7 +36,7 @@ jobs:
       - name: Validate agent and workflow metadata
         run: |
           echo "Validating agent frontmatter format..."
-          find plugins/orchestr8/agents -name "*.md" 2>/dev/null | while read -r file; do
+          find plugins/orchestr8/resources/agents -name "*.md" 2>/dev/null | while read -r file; do
             # Check for YAML frontmatter delimiters
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "ERROR: $file missing YAML frontmatter"
@@ -72,7 +72,8 @@ jobs:
           # Required directories under plugins/orchestr8/
           required_dirs=(
             "plugins/orchestr8"
-            "plugins/orchestr8/agents"
+            "plugins/orchestr8/resources"
+            "plugins/orchestr8/resources/agents"
             "plugins/orchestr8/commands"
             "plugins/orchestr8/.claude-plugin"
             ".claude-plugin"
@@ -86,11 +87,11 @@ jobs:
           done
 
           # Check that agents and commands exist
-          agent_count=$(find plugins/orchestr8/agents -name "*.md" | wc -l | tr -d ' ')
+          agent_count=$(find plugins/orchestr8/resources/agents -name "*.md" | wc -l | tr -d ' ')
           command_count=$(find plugins/orchestr8/commands -name "*.md" | wc -l | tr -d ' ')
 
           if [ "$agent_count" -eq 0 ]; then
-            echo "ERROR: No agents found in plugins/orchestr8/agents/ directory"
+            echo "ERROR: No agents found in plugins/orchestr8/resources/agents/ directory"
             exit 1
           fi
 
@@ -103,11 +104,11 @@ jobs:
           required_files=(
             "VERSION"
             "plugins/orchestr8/.claude-plugin/plugin.json"
+            "plugins/orchestr8/package.json"
             "CHANGELOG.md"
-            "plugins/orchestr8/CLAUDE.md"
+            "plugins/orchestr8/USAGE.md"
             ".claude-plugin/marketplace.json"
             "README.md"
-            "ARCHITECTURE.md"
           )
 
           for file in "${required_files[@]}"; do
@@ -133,6 +134,39 @@ jobs:
 
           echo "✓ All required files present"
 
+  # Build and test TypeScript
+  build-typescript:
+    name: Build TypeScript MCP Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        working-directory: plugins/orchestr8
+        run: npm install
+
+      - name: Build TypeScript
+        working-directory: plugins/orchestr8
+        run: npm run build
+
+      - name: Run tests
+        working-directory: plugins/orchestr8
+        run: npm test
+
+      - name: Verify dist directory
+        run: |
+          if [ ! -d "plugins/orchestr8/dist" ]; then
+            echo "ERROR: Build did not create dist directory"
+            exit 1
+          fi
+          echo "✓ TypeScript build successful"
+
   # Validate version consistency
   validate-versions:
     name: Validate Version Consistency
@@ -155,16 +189,23 @@ jobs:
 
           # Read versions from different files
           VERSION_FILE=$(cat VERSION | tr -d '\n')
+          PACKAGE_VERSION=$(jq -r '.version' plugins/orchestr8/package.json)
           PLUGIN_VERSION=$(jq -r '.version' plugins/orchestr8/.claude-plugin/plugin.json)
           MARKETPLACE_META_VERSION=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
           MARKETPLACE_PLUGIN_VERSION=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
 
           echo "VERSION file: $VERSION_FILE"
+          echo "package.json: $PACKAGE_VERSION"
           echo "plugin.json: $PLUGIN_VERSION"
           echo "marketplace.json (metadata): $MARKETPLACE_META_VERSION"
           echo "marketplace.json (plugins[0]): $MARKETPLACE_PLUGIN_VERSION"
 
           # Check all versions match
+          if [ "$VERSION_FILE" != "$PACKAGE_VERSION" ]; then
+            echo "ERROR: Version mismatch between VERSION ($VERSION_FILE) and package.json ($PACKAGE_VERSION)"
+            exit 1
+          fi
+
           if [ "$VERSION_FILE" != "$PLUGIN_VERSION" ]; then
             echo "ERROR: Version mismatch between VERSION ($VERSION_FILE) and plugin.json ($PLUGIN_VERSION)"
             exit 1
@@ -252,8 +293,8 @@ jobs:
         run: |
           echo "Validating agent and workflow counts..."
 
-          # Count actual agents in plugins/orchestr8/agents directory
-          AGENT_COUNT=$(find plugins/orchestr8/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          # Count actual agents in plugins/orchestr8/resources/agents directory
+          AGENT_COUNT=$(find plugins/orchestr8/resources/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
           # Count actual workflows in plugins/orchestr8/commands directory
           WORKFLOW_COUNT=$(find plugins/orchestr8/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
@@ -302,11 +343,11 @@ jobs:
           echo "Scanning for potentially malicious patterns..."
 
           # Check for common malicious patterns in agent and command directories
-          if grep -r "eval(" plugins/orchestr8/agents/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
+          if grep -r "eval(" plugins/orchestr8/resources/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
             echo "WARNING: Found eval() usage in markdown files"
           fi
 
-          if grep -r "exec(" plugins/orchestr8/agents/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
+          if grep -r "exec(" plugins/orchestr8/resources/ plugins/orchestr8/commands/ --include="*.md" 2>/dev/null; then
             echo "WARNING: Found exec() usage in markdown files"
           fi
 
@@ -343,6 +384,7 @@ jobs:
     needs:
       [
         validate-structure,
+        build-typescript,
         validate-versions,
         validate-metadata,
         security-scan,
