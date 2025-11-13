@@ -8,7 +8,7 @@ Use the `ReadMcpResourceTool` with these parameters:
 
 ```
 ReadMcpResourceTool:
-- server: "orchestr8"
+- server: "plugin:orchestr8:orchestr8-resources"
 - uri: "<the orchestr8:// URI>"
 ```
 
@@ -17,7 +17,7 @@ ReadMcpResourceTool:
 **Load a specific resource:**
 ```
 ReadMcpResourceTool(
-  server: "orchestr8",
+  server: "plugin:orchestr8:orchestr8-resources",
   uri: "orchestr8://patterns/autonomous-organization"
 )
 ```
@@ -25,7 +25,7 @@ ReadMcpResourceTool(
 **Query for matching resources:**
 ```
 ReadMcpResourceTool(
-  server: "orchestr8",
+  server: "plugin:orchestr8:orchestr8-resources",
   uri: "orchestr8://match?query=typescript react&categories=agents,skills&minScore=15"
 )
 ```
@@ -33,7 +33,7 @@ ReadMcpResourceTool(
 **Load an agent:**
 ```
 ReadMcpResourceTool(
-  server: "orchestr8",
+  server: "plugin:orchestr8:orchestr8-resources",
   uri: "orchestr8://agents/project-manager"
 )
 ```

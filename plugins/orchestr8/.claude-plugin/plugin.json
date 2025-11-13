@@ -1,6 +1,6 @@
 {
   "name": "orchestr8",
-  "version": "8.0.5",
+  "version": "8.0.6",
   "description": "Autonomous software development workflows with minimal token usage via on-demand resource loading",
   "author": {
     "name": "Seth Schultz",

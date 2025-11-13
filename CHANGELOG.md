@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Replaced non-standard `@orchestr8://` URI notation with standard `orchestr8://` (2,249 occurrences across 298 files)
   - Added "How to Load MCP Resources" section to all command files
   - Created `resources/guides/mcp-resource-loading.md` guide with detailed instructions
-  - Commands now properly explain to use `ReadMcpResourceTool` with `server: "orchestr8"` parameter
+  - Commands now properly explain to use `ReadMcpResourceTool` with `server: "plugin:orchestr8:orchestr8-resources"` parameter (fixed incorrect server name)
 
 ### Added
 - Version bump automation script (`scripts/bump-version.sh`) for consistent version management across all files
