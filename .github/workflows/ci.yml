@@ -153,7 +153,7 @@ jobs:
 
       - name: Build TypeScript
         working-directory: plugins/orchestr8
-        run: npm run build
+        run: npm run build:dev
 
       - name: Run tests
         working-directory: plugins/orchestr8

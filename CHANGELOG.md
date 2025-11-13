@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.6] - 2025-01-13
+
+### Fixed
+- **CI/Release Workflows**: Fixed test failures in GitHub Actions workflows
+  - Changed TypeScript build from `npm run build` (bundled) to `npm run build:dev` (structured output)
+  - Tests require structured dist/ directory with individual module files for proper imports
+  - Affects both CI and Release workflows when running tests
+- **Sign Plugin Release Workflow**: Fixed git push race condition causing non-fast-forward errors
+  - Workflow now properly fetches latest changes before committing signatures
+  - Added rebase strategy to handle concurrent commits from Release workflow
+
 ## [8.0.5] - 2025-01-13
 
 ### Fixed

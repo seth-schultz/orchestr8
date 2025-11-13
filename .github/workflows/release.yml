@@ -185,7 +185,7 @@ jobs:
           echo "🔍 Building TypeScript MCP server..."
           cd plugins/orchestr8
           npm install
-          npm run build
+          npm run build:dev
 
           if [ ! -d "dist" ]; then
             echo "❌ Build failed - dist directory not created"

@@ -81,6 +81,16 @@ jobs:
 
       - name: Commit signature files
         run: |
+          # Fetch latest changes from main to avoid non-fast-forward errors
+          git fetch origin main
+
+          # Checkout main branch (we're currently in detached HEAD from tag)
+          git checkout main
+
+          # Pull latest changes with rebase to handle any concurrent commits
+          git pull --rebase origin main
+
+          # Add signature files
           git add plugins/orchestr8/CHECKSUMS.txt
           git add plugins/orchestr8/CHECKSUMS.txt.asc
           git add plugins/orchestr8/ORCHESTR8_PUBLIC_KEY.asc
@@ -89,7 +99,25 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: add code signatures for ${GITHUB_REF_NAME}"
-            git push origin HEAD:main
+
+            # Push with retry logic in case of race conditions
+            max_retries=3
+            retry_count=0
+            while [ $retry_count -lt $max_retries ]; do
+              if git push origin main; then
+                echo "Successfully pushed signature files"
+                break
+              else
+                retry_count=$((retry_count + 1))
+                if [ $retry_count -lt $max_retries ]; then
+                  echo "Push failed, retrying after pull... (attempt $retry_count/$max_retries)"
+                  git pull --rebase origin main
+                else
+                  echo "Failed to push after $max_retries attempts"
+                  exit 1
+                fi
+              fi
+            done
           fi
 
       - name: Create GitHub Release with gh CLI
