@@ -166,11 +166,11 @@ mutation {
 
 ## Related Resources
 
-**GraphQL API operations**: `@orchestr8://skills/runpod-graphql-api`
-**REST API serverless**: `@orchestr8://skills/runpod-rest-api`
-**Serverless deployment**: `@orchestr8://skills/runpod-serverless-deployment`
-**Pod management**: `@orchestr8://skills/runpod-pod-management`
-**Template system**: `@orchestr8://skills/runpod-template-system`
-**Network volumes**: `@orchestr8://skills/runpod-network-volumes`
-**Cost optimization**: `@orchestr8://skills/runpod-cost-optimization`
-**Health monitoring**: `@orchestr8://skills/runpod-monitoring-health`
+**GraphQL API operations**: `orchestr8://skills/runpod-graphql-api`
+**REST API serverless**: `orchestr8://skills/runpod-rest-api`
+**Serverless deployment**: `orchestr8://skills/runpod-serverless-deployment`
+**Pod management**: `orchestr8://skills/runpod-pod-management`
+**Template system**: `orchestr8://skills/runpod-template-system`
+**Network volumes**: `orchestr8://skills/runpod-network-volumes`
+**Cost optimization**: `orchestr8://skills/runpod-cost-optimization`
+**Health monitoring**: `orchestr8://skills/runpod-monitoring-health`

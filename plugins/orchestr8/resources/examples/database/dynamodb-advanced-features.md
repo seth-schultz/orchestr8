@@ -14,8 +14,8 @@ useWhen:
   - Designing secondary indexes for access patterns
 estimatedTokens: 1000
 relatedResources:
-  - @orchestr8://agents/dynamodb-specialist
-  - @orchestr8://patterns/event-driven-pubsub
+  - orchestr8://agents/dynamodb-specialist
+  - orchestr8://patterns/event-driven-pubsub
 ---
 
 # DynamoDB Advanced Features

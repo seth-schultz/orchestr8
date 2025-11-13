@@ -25,12 +25,12 @@ useWhen:
   - Managing GitHub Projects via CLI
   - GitHub SSH key and authentication management
 relatedResources:
-  - @orchestr8://agents/github-workflow-specialist
-  - @orchestr8://agents/git-expert
-  - @orchestr8://skills/git-pr-workflow
-  - @orchestr8://skills/git-workflow
-  - @orchestr8://skills/cicd-pipeline-optimization
-  - @orchestr8://patterns/automation-workflows
+  - orchestr8://agents/github-workflow-specialist
+  - orchestr8://agents/git-expert
+  - orchestr8://skills/git-pr-workflow
+  - orchestr8://skills/git-workflow
+  - orchestr8://skills/cicd-pipeline-optimization
+  - orchestr8://patterns/automation-workflows
 estimatedTokens: 850
 ---
 

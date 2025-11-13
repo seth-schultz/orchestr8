@@ -22,12 +22,12 @@ useWhen:
   - Need help with gh command syntax
   - Integrating GitHub with development tools
 relatedResources:
-  - @orchestr8://agents/git-expert
-  - @orchestr8://skills/git-pr-workflow
-  - @orchestr8://skills/github-cli-essentials
-  - @orchestr8://guides/ci-cd-github-actions
-  - @orchestr8://examples/github-actions-workflows
-  - @orchestr8://examples/git-pr-templates
+  - orchestr8://agents/git-expert
+  - orchestr8://skills/git-pr-workflow
+  - orchestr8://skills/github-cli-essentials
+  - orchestr8://guides/ci-cd-github-actions
+  - orchestr8://examples/github-actions-workflows
+  - orchestr8://examples/git-pr-templates
 estimatedTokens: 1050
 ---
 
@@ -478,6 +478,6 @@ When working with GitHub in Claude Code:
 6. **Monitor CI/CD** with `gh run watch`
 
 For deeper expertise:
-- **Git basics**: Load `@orchestr8://agents/git-expert`
-- **PR workflow**: Load `@orchestr8://skills/git-pr-workflow`
-- **CI/CD setup**: Load `@orchestr8://guides/ci-cd-github-actions`
+- **Git basics**: Load `orchestr8://agents/git-expert`
+- **PR workflow**: Load `orchestr8://skills/git-pr-workflow`
+- **CI/CD setup**: Load `orchestr8://guides/ci-cd-github-actions`

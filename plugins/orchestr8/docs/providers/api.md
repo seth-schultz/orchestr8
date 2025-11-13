@@ -233,7 +233,7 @@ Search within a single provider (local resources only).
   "results": [
     {
       "id": "typescript-developer",
-      "uri": "@orchestr8://agents/typescript-developer",
+      "uri": "orchestr8://agents/typescript-developer",
       "category": "agent",
       "tags": ["typescript", "api"],
       "capabilities": ["REST API development"],
@@ -443,7 +443,7 @@ Fetch content of a specific resource.
 **Examples**:
 ```bash
 # Local resource
-curl "http://localhost:3000/api/resource?uri=@orchestr8://agents/typescript-developer"
+curl "http://localhost:3000/api/resource?uri=orchestr8://agents/typescript-developer"
 
 # AITMPL resource
 curl "http://localhost:3000/api/resource?uri=aitmpl://agents/rust-pro"
@@ -452,7 +452,7 @@ curl "http://localhost:3000/api/resource?uri=aitmpl://agents/rust-pro"
 curl "http://localhost:3000/api/resource?uri=github://myorg/resources/agents/custom"
 
 # Dynamic resource (fuzzy match)
-curl "http://localhost:3000/api/resource?uri=@orchestr8://match?query=typescript+api"
+curl "http://localhost:3000/api/resource?uri=orchestr8://match?query=typescript+api"
 ```
 
 ---
@@ -471,7 +471,7 @@ Get all available agents.
   "agents": [
     {
       "id": "typescript-developer",
-      "uri": "@orchestr8://agents/typescript-developer",
+      "uri": "orchestr8://agents/typescript-developer",
       "tags": ["typescript", "javascript", "node"],
       "capabilities": ["TypeScript API development"],
       "tokens": 1500
@@ -499,7 +499,7 @@ Get all available skills.
   "skills": [
     {
       "id": "error-handling",
-      "uri": "@orchestr8://skills/error-handling",
+      "uri": "orchestr8://skills/error-handling",
       "tags": ["errors", "exceptions", "async"],
       "capabilities": ["Error handling patterns"],
       "tokens": 850
@@ -527,7 +527,7 @@ Get all available workflows.
   "workflows": [
     {
       "id": "new-project",
-      "uri": "@orchestr8://workflows/new-project",
+      "uri": "orchestr8://workflows/new-project",
       "description": "Create new project from scratch"
     }
   ]
@@ -553,7 +553,7 @@ Get all available patterns.
   "patterns": [
     {
       "id": "authentication",
-      "uri": "@orchestr8://patterns/security/authentication",
+      "uri": "orchestr8://patterns/security/authentication",
       "tags": ["security", "auth", "jwt"],
       "tokens": 950
     }

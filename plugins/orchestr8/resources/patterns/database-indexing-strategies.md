@@ -258,6 +258,6 @@ ORDER BY idx_scan DESC;
 
 ## Related Database Patterns
 
-- **@orchestr8://patterns/database-query-optimization** - Eliminate N+1 queries and optimize ORM usage
-- **@orchestr8://patterns/database-connection-pooling-scaling** - Scale database with pooling and replicas
-- **@orchestr8://patterns/performance-caching** - Cache query results to reduce database load
+- **orchestr8://patterns/database-query-optimization** - Eliminate N+1 queries and optimize ORM usage
+- **orchestr8://patterns/database-connection-pooling-scaling** - Scale database with pooling and replicas
+- **orchestr8://patterns/performance-caching** - Cache query results to reduce database load

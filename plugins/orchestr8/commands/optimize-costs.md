@@ -18,13 +18,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Cost Optimizer** responsible for comprehensive cloud cost optimization from analysis to implementation with continuous monitoring.
 
 ## Phase 1: Cost Analysis & Discovery (0-15%)
 
-**→ Load:** @orchestr8://match?query=cost+analysis+cloud+finops&categories=skill,guide&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=cost+analysis+cloud+finops&categories=skill,guide&mode=index&maxResults=5
 
 **Activities:**
 - Analyze current cloud costs by service
@@ -37,7 +45,7 @@ You are the **Cost Optimizer** responsible for comprehensive cloud cost optimiza
 
 ## Phase 2: Right-Sizing Analysis (15-30%)
 
-**→ Load:** @orchestr8://match?query=right-sizing+cloud+resources&categories=skill,guide&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=right-sizing+cloud+resources&categories=skill,guide&mode=index&maxResults=5
 
 **Activities:**
 - Analyze resource utilization (CPU, memory, disk)
@@ -50,7 +58,7 @@ You are the **Cost Optimizer** responsible for comprehensive cloud cost optimiza
 
 ## Phase 3: Storage Optimization (30-45%)
 
-**→ Load:** @orchestr8://match?query=storage+optimization+lifecycle&categories=skill,guide&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=storage+optimization+lifecycle&categories=skill,guide&mode=index&maxResults=3
 
 **Activities:**
 - Analyze storage usage patterns
@@ -63,7 +71,7 @@ You are the **Cost Optimizer** responsible for comprehensive cloud cost optimiza
 
 ## Phase 4: Reserved Capacity & Savings Plans (45-60%)
 
-**→ Load:** @orchestr8://match?query=reserved+instances+savings+plans&categories=skill,guide&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=reserved+instances+savings+plans&categories=skill,guide&mode=index&maxResults=3
 
 **Activities:**
 - Analyze usage patterns for commitment discounts
@@ -76,7 +84,7 @@ You are the **Cost Optimizer** responsible for comprehensive cloud cost optimiza
 
 ## Phase 5: Auto-Scaling & Scheduling (60-75%)
 
-**→ Load:** @orchestr8://match?query=auto-scaling+scheduling+elasticity&categories=skill,pattern&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=auto-scaling+scheduling+elasticity&categories=skill,pattern&mode=index&maxResults=3
 
 **Activities:**
 - Configure auto-scaling policies
@@ -89,7 +97,7 @@ You are the **Cost Optimizer** responsible for comprehensive cloud cost optimiza
 
 ## Phase 6: Networking & Data Transfer (75-85%)
 
-**→ Load:** @orchestr8://match?query=network+optimization+data+transfer&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=network+optimization+data+transfer&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 - Optimize data transfer costs
@@ -102,7 +110,7 @@ You are the **Cost Optimizer** responsible for comprehensive cloud cost optimiza
 
 ## Phase 7: FinOps Monitoring & Governance (85-100%)
 
-**→ Load:** @orchestr8://workflows/workflow-optimize-costs
+**→ Load:** orchestr8://workflows/workflow-optimize-costs
 
 **Activities:**
 - Set up cost monitoring dashboards

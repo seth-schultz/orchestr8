@@ -110,7 +110,7 @@ Orchestr8 minimizes token usage by loading resources on-demand:
 Find relevant resources without hard-coding references:
 
 ```
-@orchestr8://match?query=typescript+api+authentication&maxTokens=2500
+orchestr8://match?query=typescript+api+authentication&maxTokens=2500
 ```
 
 **Two matching modes:**
@@ -147,13 +147,13 @@ TIER 3: Resources (Fragments)
 ### Load Specific Resource
 
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 ### Discover Resources Dynamically
 
 ```
-@orchestr8://match?query=error+handling+retry&mode=catalog&maxResults=10
+orchestr8://match?query=error+handling+retry&mode=catalog&maxResults=10
 ```
 
 ### Use Web UI
@@ -198,13 +198,13 @@ npm run ui
 
 ### URI Examples
 
-All URIs in documentation follow the `@orchestr8://` protocol:
+All URIs in documentation follow the `orchestr8://` protocol:
 
 ```
-@orchestr8://category/resource
-@orchestr8://category/fragment-id
-@orchestr8://match?query=search+terms
-@orchestr8://category/match?query=search+terms
+orchestr8://category/resource
+orchestr8://category/fragment-id
+orchestr8://match?query=search+terms
+orchestr8://category/match?query=search+terms
 ```
 
 ### Code Blocks

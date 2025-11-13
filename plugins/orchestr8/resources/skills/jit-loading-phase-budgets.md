@@ -27,11 +27,11 @@ Optimize token usage by allocating appropriate budgets per workflow phase and lo
 ## Workflow Start
 
 Load everything upfront:
-- @orchestr8://agents/typescript-developer (1500 tokens)
-- @orchestr8://agents/database-expert (1200 tokens)
-- @orchestr8://skills/testing (1000 tokens)
-- @orchestr8://skills/deployment (900 tokens)
-- @orchestr8://patterns/microservices (800 tokens)
+- orchestr8://agents/typescript-developer (1500 tokens)
+- orchestr8://agents/database-expert (1200 tokens)
+- orchestr8://skills/testing (1000 tokens)
+- orchestr8://skills/deployment (900 tokens)
+- orchestr8://patterns/microservices (800 tokens)
 
 Total: 5400 tokens loaded immediately
 Usage: ~40% actually used (3600 tokens wasted)
@@ -40,19 +40,19 @@ Usage: ~40% actually used (3600 tokens wasted)
 **JIT Pattern:**
 ```markdown
 ## Phase 1: Requirements (0-15%)
-**→ Load:** `@orchestr8://agents/match?query=research+requirements&mode=index&maxResults=3`
+**→ Load:** `orchestr8://agents/match?query=research+requirements&mode=index&maxResults=3`
 (800 tokens, 100% utilized)
 
 ## Phase 2: Design (15-30%)
-**→ Load:** `@orchestr8://match?query=${tech-stack}+architecture&categories=agent,pattern&mode=index&maxResults=8`
+**→ Load:** `orchestr8://match?query=${tech-stack}+architecture&categories=agent,pattern&mode=index&maxResults=8`
 (1500 tokens, 95% utilized)
 
 ## Phase 3: Implementation (30-85%)
-**→ Load:** `@orchestr8://match?query=${tech}+${features}&categories=agent,skill,example&mode=index&maxResults=10`
+**→ Load:** `orchestr8://match?query=${tech}+${features}&categories=agent,skill,example&mode=index&maxResults=10`
 (2500 tokens, 90% utilized)
 
 ## Phase 4: Integration (85-100%)
-**→ Load:** `@orchestr8://skills/match?query=testing+integration+${tech}&mode=index&maxResults=5`
+**→ Load:** `orchestr8://skills/match?query=testing+integration+${tech}&mode=index&maxResults=5`
 (1000 tokens, 100% utilized)
 
 Total: 5800 tokens across 4 phases, 93% utilization
@@ -115,7 +115,7 @@ arguments:
 ---
 
 ## Phase 1
-**→ Dynamic:** `@orchestr8://match?query=${project-description}&categories=agent&mode=index&maxResults=8`
+**→ Dynamic:** `orchestr8://match?query=${project-description}&categories=agent&mode=index&maxResults=8`
 
 This analyzes user's full request and loads relevant agents.
 ```
@@ -124,13 +124,13 @@ This analyzes user's full request and loads relevant agents.
 
 ```markdown
 ## Phase 1: Research (0-15%)
-**→ Load:** `@orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3`
+**→ Load:** `orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3`
 
 Identify: Technology stack, architecture pattern
 
 ## Phase 2: Design (15-30%)
 **→ Load based on Phase 1 findings:**
-@orchestr8://match?query=${tech-stack}+${architecture}&categories=agent,pattern&mode=index&maxResults=8`
+orchestr8://match?query=${tech-stack}+${architecture}&categories=agent,pattern&mode=index&maxResults=8`
 
 Refine based on what Phase 1 learned
 ```
@@ -139,15 +139,15 @@ Refine based on what Phase 1 learned
 
 ```markdown
 Early phases (research/design):
-@orchestr8://agents/match?query=${domain}
+orchestr8://agents/match?query=${domain}
 → Load expert agents only
 
 Middle phases (implementation):
-@orchestr8://match?query=${tech}+${feature}&categories=agent,skill,example
+orchestr8://match?query=${tech}+${feature}&categories=agent,skill,example
 → Load agents + skills + code examples
 
 Late phases (testing/deployment):
-@orchestr8://skills/match?query=testing+deployment+${tech}
+orchestr8://skills/match?query=testing+deployment+${tech}
 → Load skills only
 ```
 

@@ -459,14 +459,14 @@ Link to related fragments:
 ```markdown
 ## Related Skills
 
-- [Error Handling Patterns](@orchestr8://skills/error-handling-resilience)
-- [Testing Strategies](@orchestr8://skills/testing-integration-patterns)
-- [API Security](@orchestr8://skills/security-api-security)
+- [Error Handling Patterns](orchestr8://skills/error-handling-resilience)
+- [Testing Strategies](orchestr8://skills/testing-integration-patterns)
+- [API Security](orchestr8://skills/security-api-security)
 
 ## See Also
 
-- Pattern: [Microservices Architecture](@orchestr8://patterns/architecture-microservices)
-- Example: [Express JWT Auth](@orchestr8://examples/express-jwt-auth)
+- Pattern: [Microservices Architecture](orchestr8://patterns/architecture-microservices)
+- Example: [Express JWT Auth](orchestr8://examples/express-jwt-auth)
 ```
 
 ## Token Management
@@ -539,9 +539,9 @@ async function retry(fn, maxRetries = 3) {
 ```
 
 **See detailed implementations:**
-- [TypeScript Retry Patterns](@orchestr8://examples/typescript-retry-patterns)
-- [Python Retry Patterns](@orchestr8://examples/python-retry-patterns)
-- [Go Retry Patterns](@orchestr8://examples/go-retry-patterns)
+- [TypeScript Retry Patterns](orchestr8://examples/typescript-retry-patterns)
+- [Python Retry Patterns](orchestr8://examples/python-retry-patterns)
+- [Go Retry Patterns](orchestr8://examples/go-retry-patterns)
 
 ## Circuit Breaker Pattern
 // Concise explanation with minimal example...
@@ -625,15 +625,15 @@ relatedTo:
 id: python-async-fundamentals
 estimatedTokens: 700
 advancedTopics:
-  - @orchestr8://agents/python-async-concurrency
-  - @orchestr8://agents/python-async-context-managers
+  - orchestr8://agents/python-async-concurrency
+  - orchestr8://agents/python-async-context-managers
 ---
 
 Core async/await concepts and event loop basics.
 
 **For advanced topics:**
-- [Advanced Concurrency Patterns](@orchestr8://agents/python-async-concurrency)
-- [Async Context Managers](@orchestr8://agents/python-async-context-managers)
+- [Advanced Concurrency Patterns](orchestr8://agents/python-async-concurrency)
+- [Async Context Managers](orchestr8://agents/python-async-context-managers)
 
 # python-async-concurrency.md (400 tokens - Advanced)
 ---
@@ -820,17 +820,17 @@ Test that your fragment is discoverable:
 /orchestr8:mcp-ui
 
 # Test queries in the UI:
-@orchestr8://match?query=typescript+api&categories=agent
-@orchestr8://match?query=express+middleware&categories=agent,skill
-@orchestr8://match?query=rest+api+typescript&minScore=20
+orchestr8://match?query=typescript+api&categories=agent
+orchestr8://match?query=express+middleware&categories=agent,skill
+orchestr8://match?query=rest+api+typescript&minScore=20
 ```
 
 **Method 2: Using MCP Resources**
 ```markdown
 Load resource and check if your fragment appears:
-@orchestr8://agents/match?query=typescript+api+development
-@orchestr8://skills/match?query=error+handling+async
-@orchestr8://patterns/match?query=microservices+architecture
+orchestr8://agents/match?query=typescript+api+development
+orchestr8://skills/match?query=error+handling+async
+orchestr8://patterns/match?query=microservices+architecture
 ```
 
 **Create test queries (4-6 per fragment):**

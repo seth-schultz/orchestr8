@@ -98,8 +98,8 @@ Result: Load only relevant expertise (60% token savings)
 ## Example Queries for Testing
 ```markdown
 Agent: typescript-expert-api
-□ @orchestr8://agents/match?query=typescript+api
-□ @orchestr8://agents/match?query=rest+api+express+typescript
-□ @orchestr8://agents/match?query=backend+web+server
-□ @orchestr8://agents/match?query=node+api+development
+□ orchestr8://agents/match?query=typescript+api
+□ orchestr8://agents/match?query=rest+api+express+typescript
+□ orchestr8://agents/match?query=backend+web+server
+□ orchestr8://agents/match?query=node+api+development
 ```

@@ -73,7 +73,7 @@ const usage = tracker.track(
   },
   {
     category: 'agents',
-    resourceUri: '@orchestr8://agents/project-manager',
+    resourceUri: 'orchestr8://agents/project-manager',
     resourceCount: 5, // 5 resources JIT-loaded
   }
 );
@@ -337,7 +337,7 @@ async function handleRequest(request, sessionId) {
     response.usage,
     {
       category: 'agent',
-      resourceUri: '@orchestr8://agents/project-manager',
+      resourceUri: 'orchestr8://agents/project-manager',
       resourceCount: loadedResources.length,
     }
   );

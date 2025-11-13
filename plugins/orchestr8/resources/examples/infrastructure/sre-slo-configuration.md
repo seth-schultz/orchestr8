@@ -14,8 +14,8 @@ useWhen:
   - Establishing reliability targets with automated monitoring
 estimatedTokens: 1800
 relatedResources:
-  - @orchestr8://agents/sre-specialist
-  - @orchestr8://patterns/observability-sli-slo-monitoring
+  - orchestr8://agents/sre-specialist
+  - orchestr8://patterns/observability-sli-slo-monitoring
 ---
 
 # SRE SLO Configuration

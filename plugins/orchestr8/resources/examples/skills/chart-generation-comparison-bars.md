@@ -13,7 +13,7 @@ useWhen:
   - Showing token usage reductions
 estimatedTokens: 280
 relatedResources:
-  - @orchestr8://skills/data-chart-generation
+  - orchestr8://skills/data-chart-generation
 ---
 
 # Chart Generation: Comparison Bar Charts

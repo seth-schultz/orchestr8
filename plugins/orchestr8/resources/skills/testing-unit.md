@@ -23,11 +23,11 @@ useWhen:
 
 # Unit Testing Best Practices
 
-> **Parent skill:** @orchestr8://skills/testing-strategies (Testing philosophy, TDD, test pyramid)
+> **Parent skill:** orchestr8://skills/testing-strategies (Testing philosophy, TDD, test pyramid)
 >
 > **Related skills:**
-> - @orchestr8://skills/testing-integration - Testing component interactions
-> - @orchestr8://skills/testing-e2e-best-practices - Full workflow testing
+> - orchestr8://skills/testing-integration - Testing component interactions
+> - orchestr8://skills/testing-e2e-best-practices - Full workflow testing
 
 ## Test Structure: AAA Pattern
 

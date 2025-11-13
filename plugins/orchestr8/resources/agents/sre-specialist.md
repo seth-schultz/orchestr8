@@ -22,7 +22,7 @@ Define and track Service Level Objectives with error budgets and burn rate alert
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/infrastructure/sre-slo-configuration
+orchestr8://examples/infrastructure/sre-slo-configuration
 ```
 
 **Key Concepts:**
@@ -37,7 +37,7 @@ Automated incident management with war room creation, timeline tracking, and pos
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/infrastructure/sre-incident-management
+orchestr8://examples/infrastructure/sre-incident-management
 ```
 
 **Key Components:**
@@ -327,7 +327,7 @@ Test system resilience, forecast resource needs, and quantify automation ROI.
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/infrastructure/sre-chaos-capacity
+orchestr8://examples/infrastructure/sre-chaos-capacity
 ```
 
 **Key Components:**
@@ -347,9 +347,9 @@ This agent uses progressive loading to minimize token usage:
 - Chaos engineering and capacity planning overview
 
 **Implementation Examples:** Load on-demand via:
-- `@orchestr8://examples/infrastructure/sre-slo-configuration` (~250 tokens)
-- `@orchestr8://examples/infrastructure/sre-incident-management` (~300 tokens)
-- `@orchestr8://examples/infrastructure/sre-chaos-capacity` (~280 tokens)
+- `orchestr8://examples/infrastructure/sre-slo-configuration` (~250 tokens)
+- `orchestr8://examples/infrastructure/sre-incident-management` (~300 tokens)
+- `orchestr8://examples/infrastructure/sre-chaos-capacity` (~280 tokens)
 
 **Typical Usage Pattern:**
 1. Load this agent for SRE concepts, best practices, and decision-making

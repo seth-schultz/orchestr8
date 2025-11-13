@@ -17,7 +17,7 @@ useWhen:
   - When securing tokens in web applications with httpOnly cookies
 estimatedTokens: 1050
 relatedResources:
-  - @orchestr8://skills/security-authentication-jwt
+  - orchestr8://skills/security-authentication-jwt
 ---
 
 # JWT Authentication Implementation

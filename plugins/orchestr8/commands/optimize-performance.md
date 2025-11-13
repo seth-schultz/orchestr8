@@ -16,13 +16,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Performance Engineer** responsible for identifying bottlenecks, optimizing critical paths, and improving system performance while maintaining functionality.
 
 ## Phase 1: Profiling & Analysis (0-30%)
 
-**→ Load:** @orchestr8://workflows/workflow-performance-optimization
+**→ Load:** orchestr8://workflows/workflow-performance-optimization
 
 **Activities:**
 - Measure current performance baselines
@@ -41,7 +49,7 @@ You are the **Performance Engineer** responsible for identifying bottlenecks, op
 
 ## Phase 2: Optimization Implementation (30-70%)
 
-**→ Load:** @orchestr8://match?query=performance+optimization+caching+database+queries&categories=skill,pattern&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=performance+optimization+caching+database+queries&categories=skill,pattern&mode=index&maxResults=8
 
 **Parallel tracks:**
 - **Backend Track:** Database optimization, caching, algorithm improvements
@@ -81,7 +89,7 @@ You are the **Performance Engineer** responsible for identifying bottlenecks, op
 
 ## Phase 3: Validation & Benchmarking (70-90%)
 
-**→ Load:** @orchestr8://match?query=performance+testing+benchmarking+load+testing&categories=skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=performance+testing+benchmarking+load+testing&categories=skill&mode=index&maxResults=5
 
 **Activities:**
 - Run performance benchmarks
@@ -100,7 +108,7 @@ You are the **Performance Engineer** responsible for identifying bottlenecks, op
 
 ## Phase 4: Monitoring & Documentation (90-100%)
 
-**→ Load:** @orchestr8://match?query=monitoring+observability+performance+metrics&categories=guide,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=monitoring+observability+performance+metrics&categories=guide,skill&mode=index&maxResults=5
 
 **Activities:**
 - Set up performance monitoring

@@ -18,13 +18,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Workflow Architect** responsible for designing structured, multi-phase workflows with dynamic resource loading and clear execution strategies.
 
 ## Phase 1: Workflow Definition & Analysis (0-25%)
 
-**→ Load:** @orchestr8://workflows/workflow-create-workflow
+**→ Load:** orchestr8://workflows/workflow-create-workflow
 
 **Activities:**
 - Define workflow purpose and scope
@@ -40,7 +48,7 @@ You are the **Workflow Architect** responsible for designing structured, multi-p
 
 ## Phase 2: Phase Structure Design (25-50%)
 
-**→ Load:** @orchestr8://match?query=workflow+phased+delivery+jit+loading&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=workflow+phased+delivery+jit+loading&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 
@@ -69,7 +77,7 @@ You are the **Workflow Architect** responsible for designing structured, multi-p
 
 ## Phase 3: Content Creation (50-80%)
 
-**→ Load:** @orchestr8://match?query=$ARGUMENTS+implementation&categories=pattern,skill,example&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=$ARGUMENTS+implementation&categories=pattern,skill,example&mode=index&maxResults=8
 
 **Activities:**
 
@@ -78,7 +86,7 @@ You are the **Workflow Architect** responsible for designing structured, multi-p
 - Write workflow overview with phases summary
 - Document each phase with:
   - Phase name and progress range
-  - JIT load directives with @orchestr8:// URIs
+  - JIT load directives with orchestr8:// URIs
   - Activities list
   - Parallel tracks if applicable
   - Checkpoint criteria
@@ -111,7 +119,7 @@ estimatedTokens: 500-600
 **Phases:** Phase1 (0-X%) → Phase2 (X-Y%) → Phase3 (Y-100%)
 
 ## Phase 1: Name (0-X%)
-**→ JIT Load:** @orchestr8://match?query=...&mode=index&maxResults=5
+**→ JIT Load:** orchestr8://match?query=...&mode=index&maxResults=5
 
 **Activities:**
 - Activity 1
@@ -137,23 +145,23 @@ estimatedTokens: 500-600
 **JIT Loading Patterns:**
 ```markdown
 # Static URI (specific agent/skill)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Dynamic URI (query matching)
-@orchestr8://match?query=testing+validation&mode=index&maxResults=5
+orchestr8://match?query=testing+validation&mode=index&maxResults=5
 
 # Category filtering
-@orchestr8://match?query=deployment&categories=guide,skill&mode=index&maxResults=3
+orchestr8://match?query=deployment&categories=guide,skill&mode=index&maxResults=3
 
 # With argument substitution (for commands)
-@orchestr8://match?query=${technology}+${domain}&mode=index&maxResults=8
+orchestr8://match?query=${technology}+${domain}&mode=index&maxResults=8
 ```
 
 **→ Checkpoint:** Workflow content complete with JIT loading
 
 ## Phase 4: Testing & Integration (80-100%)
 
-**→ Load:** @orchestr8://match?query=workflow+testing+discovery&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=workflow+testing+discovery&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 
@@ -192,7 +200,7 @@ description: Brief description
 Brief role description
 
 ## Phase 1: Name (0-X%)
-**→ Load:** @orchestr8://workflows/workflow-name
+**→ Load:** orchestr8://workflows/workflow-name
 
 [Additional command-specific content]
 ```
@@ -275,7 +283,7 @@ estimatedTokens: 520
 **Phases:** Design (0-20%) → Implementation (20-70%) → Quality (70-90%) → Deploy (90-100%)
 
 ## Phase 1: Analysis & Design (0-20%)
-**→ Load:** @orchestr8://match?query=requirement+analysis+design&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=requirement+analysis+design&mode=index&maxResults=5
 
 **Activities:**
 - Parse requirements, define acceptance criteria
@@ -285,7 +293,7 @@ estimatedTokens: 520
 **→ Checkpoint:** Design approved
 
 ## Phase 2: Implementation (20-70%)
-**→ Load:** @orchestr8://match?query=implementation+testing&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=implementation+testing&mode=index&maxResults=8
 
 **Parallel tracks:**
 - **Backend:** Schema, models, API endpoints

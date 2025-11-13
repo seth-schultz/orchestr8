@@ -9,7 +9,7 @@ capabilities:
   - DRY principle application
 estimatedTokens: 240
 relatedResources:
-  - @orchestr8://examples/patterns/refactoring-patterns-complete
+  - orchestr8://examples/patterns/refactoring-patterns-complete
 useWhen:
   - Implementing refactoring techniques improving code maintainability with extract method, rename, and simplify conditionals
   - Building refactoring strategy for legacy codebase incrementally improving code quality without breaking functionality
@@ -120,7 +120,7 @@ Use guard clauses for clarity:
 - Make happy path obvious
 
 For complete before/after examples of all patterns:
-→ `@orchestr8://examples/patterns/refactoring-patterns-complete`
+→ `orchestr8://examples/patterns/refactoring-patterns-complete`
 
 ## Key Principles
 

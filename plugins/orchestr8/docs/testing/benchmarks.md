@@ -252,7 +252,7 @@ test('Build resource index - parallel scanning', async () => {
 
 ```javascript
 test('Cache hit performance - static resource', async () => {
-  const uri = '@orchestr8://agents/resource-0';
+  const uri = 'orchestr8://agents/resource-0';
 
   // First load (cache miss)
   await loader.loadResourceContent(uri);
@@ -281,8 +281,8 @@ test('Cache hit performance - static resource', async () => {
 ```javascript
 test('URI parsing performance', async () => {
   const uris = [
-    '@orchestr8://agents/typescript-developer',
-    '@orchestr8://agents/match?query=typescript+api&maxTokens=2000',
+    'orchestr8://agents/typescript-developer',
+    'orchestr8://agents/match?query=typescript+api&maxTokens=2000',
     // ... more URIs
   ];
 

@@ -128,14 +128,14 @@ if current_error_rate > (1 - slo_target) * 10:
 ## Related Observability Skills
 
 **Three Pillars of Observability:**
-- @orchestr8://skills/observability-structured-logging - Logs for incident investigation
-- @orchestr8://skills/observability-metrics-prometheus - Metrics foundation for SLI/SLO
-- @orchestr8://skills/observability-distributed-tracing - Traces for debugging SLO violations
+- orchestr8://skills/observability-structured-logging - Logs for incident investigation
+- orchestr8://skills/observability-metrics-prometheus - Metrics foundation for SLI/SLO
+- orchestr8://skills/observability-distributed-tracing - Traces for debugging SLO violations
 
 **SRE & Reliability:**
-- @orchestr8://skills/observability-sli-slo-monitoring - SLI/SLO practices (this skill)
-- @orchestr8://guides/prometheus-monitoring-setup - Monitoring infrastructure setup
+- orchestr8://skills/observability-sli-slo-monitoring - SLI/SLO practices (this skill)
+- orchestr8://guides/prometheus-monitoring-setup - Monitoring infrastructure setup
 
 **Infrastructure:**
-- @orchestr8://patterns/architecture-microservices - Distributed system design
-- @orchestr8://skills/error-handling-resilience - Building reliable systems
+- orchestr8://patterns/architecture-microservices - Distributed system design
+- orchestr8://skills/error-handling-resilience - Building reliable systems

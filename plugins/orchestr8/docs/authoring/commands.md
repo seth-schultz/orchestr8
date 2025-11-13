@@ -31,7 +31,7 @@ A **command** (also called **prompt** or **slash command**) is a user-facing ent
 - **User-facing:** Called directly by users via `/command-name`
 - **Parameterized:** Accepts user input as arguments
 - **Self-contained:** Complete instructions in single file
-- **Dynamic:** Loads expertise via `@orchestr8://` URIs
+- **Dynamic:** Loads expertise via `orchestr8://` URIs
 
 ## Command Structure
 
@@ -146,7 +146,7 @@ The `$ARGUMENTS` placeholder receives all user input after the command.
 **Technology:** ${technology}
 
 ## Phase 1: Research ${technology}
-**→ Load:** @orchestr8://match?query=${technology}+${feature}&maxTokens=1000
+**→ Load:** orchestr8://match?query=${technology}+${feature}&maxTokens=1000
 ```
 
 Named arguments use `${arg-name}` syntax and are substituted when the command runs.
@@ -232,7 +232,7 @@ description: Brief workflow description
 **Task:** $ARGUMENTS
 
 ## Phase 1: Name (0-X%)
-**→ JIT Load:** @orchestr8://...
+**→ JIT Load:** orchestr8://...
 
 **Activities:**
 - Activity 1
@@ -287,7 +287,7 @@ You are the [ROLE]. You [RESPONSIBILITY].
 ## Dynamic Expertise System
 
 Load expertise on-demand:
-@orchestr8://match?query=<need>&categories=<cats>
+orchestr8://match?query=<need>&categories=<cats>
 
 ## Execution Workflow
 
@@ -311,13 +311,13 @@ Understand requirements
 
 ```markdown
 ## Phase 1: Research (0-30%)
-**→ Load:** @orchestr8://skills/match?query=research+${domain}&maxTokens=1000
+**→ Load:** orchestr8://skills/match?query=research+${domain}&maxTokens=1000
 
 ## Phase 2: Implementation (30-80%)
-**→ Load:** @orchestr8://agents/match?query=${technology}+development&maxTokens=2000
+**→ Load:** orchestr8://agents/match?query=${technology}+development&maxTokens=2000
 
 ## Phase 3: Validation (80-100%)
-**→ Load:** @orchestr8://skills/match?query=testing+${technology}&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=testing+${technology}&maxTokens=800
 ```
 
 ### Documentation Sections
@@ -453,7 +453,7 @@ arguments:
 **Feature:** ${feature-description}
 
 ## Phase 1: Planning (0-25%)
-**→ Load:** @orchestr8://skills/match?query=feature+planning+requirements&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=feature+planning+requirements&maxTokens=800
 
 **Activities:**
 - Analyze requirements for ${feature-description}
@@ -464,7 +464,7 @@ arguments:
 **→ Checkpoint:** Feature scope defined, tasks identified
 
 ## Phase 2: Design (25-40%)
-**→ Load:** @orchestr8://patterns/match?query=design+architecture&maxTokens=1000
+**→ Load:** orchestr8://patterns/match?query=design+architecture&maxTokens=1000
 
 **Activities:**
 - Design architecture for ${feature-description}
@@ -475,7 +475,7 @@ arguments:
 **→ Checkpoint:** Design documented and reviewed
 
 ## Phase 3: Implementation (40-75%)
-**→ Load:** @orchestr8://match?query=${feature-description}+implementation&categories=agent,skill,example&maxTokens=2500
+**→ Load:** orchestr8://match?query=${feature-description}+implementation&categories=agent,skill,example&maxTokens=2500
 
 **Activities:**
 - Implement ${feature-description}
@@ -486,7 +486,7 @@ arguments:
 **→ Checkpoint:** Feature implemented with tests
 
 ## Phase 4: Validation (75-100%)
-**→ Load:** @orchestr8://skills/match?query=testing+validation&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=testing+validation&maxTokens=800
 
 **Activities:**
 - Run full test suite
@@ -524,7 +524,7 @@ You are the **Chief Orchestrator** coordinating Project Managers to execute this
 Load expertise on-demand via MCP:
 
 ```
-@orchestr8://match?query=<need>&categories=<cats>&minScore=15
+orchestr8://match?query=<need>&categories=<cats>&minScore=15
 ```
 
 The catalog indexes agents, skills, patterns, and workflows with tags, capabilities, useWhen scenarios, and MCP URIs for selective loading.
@@ -535,12 +535,12 @@ The catalog indexes agents, skills, patterns, and workflows with tags, capabilit
 
 **REQUIRED FIRST STEP:** Load autonomous organization pattern
 ```
-@orchestr8://patterns/autonomous-organization
+orchestr8://patterns/autonomous-organization
 ```
 
 **Optional:** Query catalog for additional resources
 ```
-@orchestr8://match?query=autonomous organization project management&categories=patterns,agents&minScore=20
+orchestr8://match?query=autonomous organization project management&categories=patterns,agents&minScore=20
 ```
 
 ### 2. Analyze Request & Dependencies
@@ -567,9 +567,9 @@ Wave 3 = PMs depending ONLY on Waves 1 & 2
 ### 3. Load Agent Resources
 
 ```
-@orchestr8://agents/project-manager
-@orchestr8://agents/worker-developer
-@orchestr8://agents/worker-qa
+orchestr8://agents/project-manager
+orchestr8://agents/worker-developer
+orchestr8://agents/worker-qa
 ```
 
 ### 4. Launch PMs in Waves

@@ -72,12 +72,12 @@ typescript-developer agent
 **Progressive loading example:**
 ```
 # Core content loaded immediately (650 tokens)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
-# Additional examples loaded on-demand via @orchestr8:// URIs:
-→ @orchestr8://examples/typescript-generics-example
-→ @orchestr8://examples/typescript-async-patterns
-→ @orchestr8://skills/typescript-testing-jest
+# Additional examples loaded on-demand via orchestr8:// URIs:
+→ orchestr8://examples/typescript-generics-example
+→ orchestr8://examples/typescript-async-patterns
+→ orchestr8://skills/typescript-testing-jest
 
 Typical savings: 60-75% vs loading all examples upfront
 ```
@@ -93,7 +93,7 @@ Typical savings: 60-75% vs loading all examples upfront
 
 **Static loading** - Direct URI reference:
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 - O(1) lookup (instant)
 - Predictable token cost
@@ -101,7 +101,7 @@ Typical savings: 60-75% vs loading all examples upfront
 
 **Dynamic loading** - Query-based discovery with phase budgets:
 ```
-@orchestr8://match?query=typescript+api+auth&maxTokens=2500&mode=catalog
+orchestr8://match?query=typescript+api+auth&maxTokens=2500&mode=catalog
 ```
 - Finds relevant resources automatically
 - Token budget-aware (respects maxTokens limit)
@@ -179,7 +179,7 @@ See [Workflows Guide](./workflows.md) for detailed documentation.
 
    **→ Load (JIT):**
    ```
-   @orchestr8://match?query=codebase+analysis+feature+design+${tech-stack}&maxTokens=1000
+   orchestr8://match?query=codebase+analysis+feature+design+${tech-stack}&maxTokens=1000
    ```
    - Loaded: requirement-analysis-framework, architecture-decision-records
    - **Tokens used: ~1,000**
@@ -189,7 +189,7 @@ See [Workflows Guide](./workflows.md) for detailed documentation.
 
    **→ Load (JIT):**
    ```
-   @orchestr8://match?query=${tech-stack}+authentication+jwt+implementation&maxTokens=2500
+   orchestr8://match?query=${tech-stack}+authentication+jwt+implementation&maxTokens=2500
    ```
    - Loaded: Agent (typescript-api-development), Skills (security-auth-jwt), Examples (express-jwt-auth)
    - **Tokens used: ~2,500** (single load supports all parallel tracks)
@@ -199,7 +199,7 @@ See [Workflows Guide](./workflows.md) for detailed documentation.
 
    **→ Load (JIT):**
    ```
-   @orchestr8://match?query=${tech-stack}+testing+security+quality&maxTokens=1500
+   orchestr8://match?query=${tech-stack}+testing+security+quality&maxTokens=1500
    ```
    - Loaded: testing-e2e-best-practices, security-input-validation, quality-code-review-checklist
    - **Tokens used: ~1,500**
@@ -210,7 +210,7 @@ See [Workflows Guide](./workflows.md) for detailed documentation.
    **→ Load (JIT - CONDITIONAL):**
    ```
    # Only if production deployment requested
-   @orchestr8://match?query=${platform}+deployment+feature+flags&maxTokens=1000
+   orchestr8://match?query=${platform}+deployment+feature+flags&maxTokens=1000
    ```
    - Loaded: deployment-zero-downtime (if needed)
    - **Tokens used: ~1,000** (optional)
@@ -228,32 +228,32 @@ Resources provide specialized expertise on-demand.
 ### Resource URI Format
 
 ```
-@orchestr8://category/resource
-@orchestr8://category/fragment-id
+orchestr8://category/resource
+orchestr8://category/fragment-id
 ```
 
 ### Categories
 
 | Category | Content | Example URI |
 |----------|---------|-------------|
-| **agents** | AI agent definitions | `@orchestr8://agents/typescript-core` |
-| **skills** | Reusable techniques | `@orchestr8://skills/error-handling-resilience` |
-| **patterns** | Design patterns | `@orchestr8://patterns/microservices-architecture` |
-| **examples** | Code examples | `@orchestr8://examples/express-jwt-auth` |
-| **guides** | Setup guides | `@orchestr8://guides/aws-eks-setup` |
-| **workflows** | Process templates | `@orchestr8://workflows/workflow-new-project` |
+| **agents** | AI agent definitions | `orchestr8://agents/typescript-core` |
+| **skills** | Reusable techniques | `orchestr8://skills/error-handling-resilience` |
+| **patterns** | Design patterns | `orchestr8://patterns/microservices-architecture` |
+| **examples** | Code examples | `orchestr8://examples/express-jwt-auth` |
+| **guides** | Setup guides | `orchestr8://guides/aws-eks-setup` |
+| **workflows** | Process templates | `orchestr8://workflows/workflow-new-project` |
 
 ### Loading a Specific Resource
 
 ```
 Load TypeScript core expertise:
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 Load JWT auth pattern:
-@orchestr8://patterns/security-auth-jwt
+orchestr8://patterns/security-auth-jwt
 
 Load Express example:
-@orchestr8://examples/express-minimal-api
+orchestr8://examples/express-minimal-api
 ```
 
 See [Resources Guide](./resources.md) for comprehensive resource documentation.
@@ -270,7 +270,7 @@ Orchestr8 provides three matching modes:
 
 **Fastest, most token-efficient:**
 ```
-@orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
+orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
 ```
 
 **Characteristics:**
@@ -283,7 +283,7 @@ Orchestr8 provides three matching modes:
 
 **Lightweight resource discovery:**
 ```
-@orchestr8://match?query=typescript+testing&mode=catalog&maxResults=10
+orchestr8://match?query=typescript+testing&mode=catalog&maxResults=10
 ```
 
 **Characteristics:**
@@ -296,7 +296,7 @@ Orchestr8 provides three matching modes:
 
 **Complete content immediately:**
 ```
-@orchestr8://match?query=typescript+api&mode=full&maxTokens=2500&maxResults=3
+orchestr8://match?query=typescript+api&mode=full&maxTokens=2500&maxResults=3
 ```
 
 **Characteristics:**
@@ -320,27 +320,27 @@ Orchestr8 provides three matching modes:
 
 **Find TypeScript API expertise:**
 ```
-@orchestr8://match?query=typescript+rest+api+authentication&mode=catalog
+orchestr8://match?query=typescript+rest+api+authentication&mode=catalog
 ```
 
 **Fast lookup for specific pattern:**
 ```
-@orchestr8://match?query=circuit+breaker+timeout&mode=index&maxResults=5
+orchestr8://match?query=circuit+breaker+timeout&mode=index&maxResults=5
 ```
 
 **Load complete content:**
 ```
-@orchestr8://match?query=python+fastapi+async&mode=full&maxTokens=2500
+orchestr8://match?query=python+fastapi+async&mode=full&maxTokens=2500
 ```
 
 **Category-specific search:**
 ```
-@orchestr8://agents/match?query=build+graphql+api&mode=catalog
+orchestr8://agents/match?query=build+graphql+api&mode=catalog
 ```
 
 **Multi-category search:**
 ```
-@orchestr8://match?query=testing+strategies&categories=skills,patterns&mode=catalog
+orchestr8://match?query=testing+strategies&categories=skills,patterns&mode=catalog
 ```
 
 ## Token Budget Strategies
@@ -366,7 +366,7 @@ Optimize token usage based on task complexity and requirements.
 
 ```
 Step 1: Discover
-@orchestr8://match?query=kubernetes+deployment&mode=catalog&maxResults=10
+orchestr8://match?query=kubernetes+deployment&mode=catalog&maxResults=10
 
 Step 2: Review catalog (100 tokens)
 - kubernetes-deployment-guide
@@ -374,8 +374,8 @@ Step 2: Review catalog (100 tokens)
 - docker-compose-example
 
 Step 3: Load specific resources (2000 tokens)
-@orchestr8://guides/kubernetes-deployment
-@orchestr8://patterns/helm-charts
+orchestr8://guides/kubernetes-deployment
+orchestr8://patterns/helm-charts
 ```
 
 **Token usage:** 100 + 2000 = 2100 tokens (vs 5000+ for loading everything)
@@ -385,7 +385,7 @@ Step 3: Load specific resources (2000 tokens)
 **Fastest queries:**
 
 ```
-@orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
+orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
 ```
 
 **Token usage:** 50-120 tokens
@@ -396,7 +396,7 @@ Step 3: Load specific resources (2000 tokens)
 **When you need content immediately:**
 
 ```
-@orchestr8://match?query=typescript+developer&mode=full&maxTokens=2000&categories=agents
+orchestr8://match?query=typescript+developer&mode=full&maxTokens=2000&categories=agents
 ```
 
 **Token usage:** ~2000 tokens (complete agent content)
@@ -407,7 +407,7 @@ Step 3: Load specific resources (2000 tokens)
 **Narrow search scope:**
 
 ```
-@orchestr8://skills/match?query=error+handling&mode=catalog
+orchestr8://skills/match?query=error+handling&mode=catalog
 ```
 
 **Benefits:**
@@ -421,13 +421,13 @@ Step 3: Load specific resources (2000 tokens)
 
 ```
 Step 1: Core expertise (1000 tokens)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 Step 2: Add specific skills (500 tokens)
-@orchestr8://skills/api-design-rest
+orchestr8://skills/api-design-rest
 
 Step 3: Add examples if needed (800 tokens)
-@orchestr8://examples/express-jwt-auth
+orchestr8://examples/express-jwt-auth
 ```
 
 **Total:** 2300 tokens, loaded progressively

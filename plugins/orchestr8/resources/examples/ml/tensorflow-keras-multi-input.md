@@ -14,7 +14,7 @@ useWhen:
   - Deploying models with TensorFlow Serving
 estimatedTokens: 1400
 relatedResources:
-  - @orchestr8://agents/ml-engineer
+  - orchestr8://agents/ml-engineer
 ---
 
 # TensorFlow/Keras Multi-Input Model

@@ -12,11 +12,11 @@ capabilities:
   - Token revocation and blacklisting strategies
   - JWT security best practices and compliance
 relatedResources:
-  - @orchestr8://examples/security/jwt-authentication-implementation
-  - @orchestr8://skills/security-owasp-top10
-  - @orchestr8://skills/security-authentication-oauth
-  - @orchestr8://skills/security-api-security
-  - @orchestr8://skills/security-secrets-management
+  - orchestr8://examples/security/jwt-authentication-implementation
+  - orchestr8://skills/security-owasp-top10
+  - orchestr8://skills/security-authentication-oauth
+  - orchestr8://skills/security-api-security
+  - orchestr8://skills/security-secrets-management
 estimatedTokens: 350
 useWhen:
   - Implementing JWT authentication for REST API with access tokens, refresh tokens, and secure cookie storage
@@ -38,7 +38,7 @@ useWhen:
 
 JWT (JSON Web Tokens) provide a stateless, scalable authentication mechanism for modern APIs. This skill covers the security concepts, strategies, and best practices for implementing JWT authentication.
 
-For complete implementation code, see: `@orchestr8://examples/security/jwt-authentication-implementation`
+For complete implementation code, see: `orchestr8://examples/security/jwt-authentication-implementation`
 
 ## Core Concepts
 
@@ -162,23 +162,23 @@ For complete implementation code, see: `@orchestr8://examples/security/jwt-authe
 ## Related Security Skills
 
 ### Parent Skills
-- **OWASP Top 10**: `@orchestr8://skills/security-owasp-top10`
+- **OWASP Top 10**: `orchestr8://skills/security-owasp-top10`
   - General authentication security principles
   - Maps to A07:2021 Authentication Failures
 
 ### Sibling Skills
-- **OAuth 2.0 Authentication**: `@orchestr8://skills/security-authentication-oauth`
+- **OAuth 2.0 Authentication**: `orchestr8://skills/security-authentication-oauth`
   - OAuth uses JWT for ID tokens (OpenID Connect)
   - JWT and OAuth complement each other (JWT for internal APIs, OAuth for third-party)
   - Similar token management and storage patterns
 
 ### Related Domain Skills
-- **API Security**: `@orchestr8://skills/security-api-security`
+- **API Security**: `orchestr8://skills/security-api-security`
   - JWT used as Bearer tokens in API authentication
   - Rate limiting on auth endpoints
   - API key management patterns
 
-- **Secrets Management**: `@orchestr8://skills/security-secrets-management`
+- **Secrets Management**: `orchestr8://skills/security-secrets-management`
   - JWT signing key storage and rotation
   - Refresh token encryption at rest
   - Secret manager integration for JWT secrets

@@ -167,7 +167,7 @@ Many systems use multiple brokers:
 
 ## Related Event-Driven Patterns
 
-- **@orchestr8://patterns/event-driven-pubsub** - Implementation patterns for pub/sub systems
-- **@orchestr8://patterns/event-driven-best-practices** - Best practices apply to all brokers
-- **@orchestr8://patterns/event-driven-saga** - Broker selection affects saga implementation
-- **@orchestr8://patterns/architecture-microservices** - Broker choice in microservices communication
+- **orchestr8://patterns/event-driven-pubsub** - Implementation patterns for pub/sub systems
+- **orchestr8://patterns/event-driven-best-practices** - Best practices apply to all brokers
+- **orchestr8://patterns/event-driven-saga** - Broker selection affects saga implementation
+- **orchestr8://patterns/architecture-microservices** - Broker choice in microservices communication

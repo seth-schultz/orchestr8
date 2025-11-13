@@ -87,7 +87,7 @@ resources/
     "scenario-a1b2c3d4e5f6": {
       "scenario": "Implementing retry logic with exponential backoff",
       "keywords": ["implementing", "retry", "logic", "exponential", "backoff"],
-      "uri": "@orchestr8://skills/error-handling-resilience",
+      "uri": "orchestr8://skills/error-handling-resilience",
       "category": "skill",
       "estimatedTokens": 650,
       "relevance": 100
@@ -95,7 +95,7 @@ resources/
     "scenario-f6e5d4c3b2a1": {
       "scenario": "Building circuit breaker pattern for third-party services",
       "keywords": ["building", "circuit", "breaker", "pattern", "third-party", "services"],
-      "uri": "@orchestr8://patterns/resilience-patterns",
+      "uri": "orchestr8://patterns/resilience-patterns",
       "category": "pattern",
       "estimatedTokens": 800,
       "relevance": 100
@@ -187,22 +187,22 @@ resources/
   "commonQueries": {
     "retry": {
       "uris": [
-        "@orchestr8://skills/error-handling-resilience",
-        "@orchestr8://skills/error-handling-async"
+        "orchestr8://skills/error-handling-resilience",
+        "orchestr8://skills/error-handling-async"
       ],
       "tokens": 1100
     },
     "workflow": {
       "uris": [
-        "@orchestr8://agents/workflow-architect",
-        "@orchestr8://patterns/phased-delivery"
+        "orchestr8://agents/workflow-architect",
+        "orchestr8://patterns/phased-delivery"
       ],
       "tokens": 1220
     },
     "testing": {
       "uris": [
-        "@orchestr8://patterns/testing-strategies",
-        "@orchestr8://skills/unit-testing"
+        "orchestr8://patterns/testing-strategies",
+        "orchestr8://skills/unit-testing"
       ],
       "tokens": 950
     }
@@ -287,7 +287,7 @@ for (const fragment of fragments) {
 
     // Generate MCP URI
     const uri = fragmentToURI(fragment);
-    // Output: "@orchestr8://skills/error-handling-resilience"
+    // Output: "orchestr8://skills/error-handling-resilience"
 
     // Create index entry
     index[hash] = {
@@ -420,8 +420,8 @@ Normalized: "retry"
 Cache Check:
   quickLookup.commonQueries["retry"] → {
     uris: [
-      "@orchestr8://skills/error-handling-resilience",
-      "@orchestr8://skills/error-handling-async"
+      "orchestr8://skills/error-handling-resilience",
+      "orchestr8://skills/error-handling-async"
     ],
     tokens: 1100
   }
@@ -522,19 +522,19 @@ Result: 5 results in ~15-20ms (fuzzy match latency)
 ## Top Matches
 
 1. **Skill: error-handling-resilience** (~650 tokens)
-   @orchestr8://skills/error-handling-resilience
+   orchestr8://skills/error-handling-resilience
 
 2. **Pattern: resilience-patterns** (~800 tokens)
-   @orchestr8://patterns/resilience-patterns
+   orchestr8://patterns/resilience-patterns
 
 3. **Skill: error-handling-async** (~550 tokens)
-   @orchestr8://skills/error-handling-async
+   orchestr8://skills/error-handling-async
 
 4. **Example: retry-example** (~450 tokens)
-   @orchestr8://examples/retry-example
+   orchestr8://examples/retry-example
 
 5. **Pattern: circuit-breaker** (~750 tokens)
-   @orchestr8://patterns/circuit-breaker
+   orchestr8://patterns/circuit-breaker
 
 **To load:** Use ReadMcpResourceTool with URIs above
 **To refine:** Add more specific keywords to query

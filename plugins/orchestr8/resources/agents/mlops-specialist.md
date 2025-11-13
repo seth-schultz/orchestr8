@@ -20,7 +20,7 @@ Expert in deploying, monitoring, and managing machine learning models in product
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/ml/mlops-mlflow-tracking
+orchestr8://examples/ml/mlops-mlflow-tracking
 ```
 
 **Key Concepts:**
@@ -34,7 +34,7 @@ Expert in deploying, monitoring, and managing machine learning models in product
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/ml/mlops-kubeflow-pipeline
+orchestr8://examples/ml/mlops-kubeflow-pipeline
 ```
 
 **Key Concepts:**
@@ -100,7 +100,7 @@ predictions = tf.make_ndarray(result.outputs['output'])
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/ml/mlops-model-serving
+orchestr8://examples/ml/mlops-model-serving
 ```
 
 **Key Concepts:**
@@ -114,7 +114,7 @@ predictions = tf.make_ndarray(result.outputs['output'])
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/ml/mlops-monitoring-ab-testing
+orchestr8://examples/ml/mlops-monitoring-ab-testing
 ```
 
 **Key Concepts:**
@@ -136,10 +136,10 @@ This agent uses progressive loading to minimize token usage:
 - Model serving and monitoring strategies
 
 **Implementation Examples:** Load on-demand via:
-- `@orchestr8://examples/ml/mlops-mlflow-tracking` (~220 tokens)
-- `@orchestr8://examples/ml/mlops-kubeflow-pipeline` (~280 tokens)
-- `@orchestr8://examples/ml/mlops-model-serving` (~250 tokens)
-- `@orchestr8://examples/ml/mlops-monitoring-ab-testing` (~300 tokens)
+- `orchestr8://examples/ml/mlops-mlflow-tracking` (~220 tokens)
+- `orchestr8://examples/ml/mlops-kubeflow-pipeline` (~280 tokens)
+- `orchestr8://examples/ml/mlops-model-serving` (~250 tokens)
+- `orchestr8://examples/ml/mlops-monitoring-ab-testing` (~300 tokens)
 
 **Typical Usage Pattern:**
 1. Load this agent for MLOps concepts, deployment strategies, and best practices

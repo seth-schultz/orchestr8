@@ -15,7 +15,7 @@ useWhen:
   - Write-heavy workloads needing connection queue management and idle connection timeout configuration
 estimatedTokens: 380
 relatedResources:
-  - @orchestr8://examples/database/connection-pooling-implementations
+  - orchestr8://examples/database/connection-pooling-implementations
 ---
 
 # Database Connection Pooling & Scaling
@@ -203,7 +203,7 @@ See complete TypeScript implementations with:
 - Connection lifecycle management
 
 ```
-@orchestr8://examples/database/connection-pooling-implementations
+orchestr8://examples/database/connection-pooling-implementations
 ```
 
 ## When to Apply

@@ -260,8 +260,8 @@ code example
 
 ## Related Skills
 
-- [Related Skill 1](@orchestr8://skills/related-1)
-- [Related Skill 2](@orchestr8://skills/related-2)
+- [Related Skill 1](orchestr8://skills/related-1)
+- [Related Skill 2](orchestr8://skills/related-2)
 ```
 
 ### Metadata Best Practices
@@ -647,16 +647,16 @@ Scenario: Building API with resilience
 /orchestr8:mcp-ui
 
 # 2. Test technique queries
-@orchestr8://skills/match?query=error+handling
+orchestr8://skills/match?query=error+handling
 
 # 3. Test use-case queries
-@orchestr8://skills/match?query=retry+failed+requests
+orchestr8://skills/match?query=retry+failed+requests
 
 # 4. Test cross-domain queries
-@orchestr8://skills/match?query=api+resilience
+orchestr8://skills/match?query=api+resilience
 
 # 5. Verify complementary loading
-@orchestr8://match?query=resilient+api&categories=skill,pattern
+orchestr8://match?query=resilient+api&categories=skill,pattern
 ```
 
 ## Examples & Patterns
@@ -759,9 +759,9 @@ class CircuitBreaker {
 
 ## Related Skills
 
-- [Error Handling: API Patterns](@orchestr8://skills/error-handling-api-patterns)
-- [Observability: Structured Logging](@orchestr8://skills/observability-structured-logging)
-- [Performance: API Optimization](@orchestr8://skills/performance-api-optimization)
+- [Error Handling: API Patterns](orchestr8://skills/error-handling-api-patterns)
+- [Observability: Structured Logging](orchestr8://skills/observability-structured-logging)
+- [Performance: API Optimization](orchestr8://skills/performance-api-optimization)
 ```
 
 ### Example 2: Methodology Skill
@@ -869,9 +869,9 @@ afterEach(() => {
 
 ## Related Skills
 
-- [Testing: Unit](@orchestr8://skills/testing-unit)
-- [Testing: E2E Best Practices](@orchestr8://skills/testing-e2e-best-practices)
-- [Testing: Strategies](@orchestr8://skills/testing-strategies)
+- [Testing: Unit](orchestr8://skills/testing-unit)
+- [Testing: E2E Best Practices](orchestr8://skills/testing-e2e-best-practices)
+- [Testing: Strategies](orchestr8://skills/testing-strategies)
 ```
 
 ### Example 3: Domain-Specific Technique
@@ -990,9 +990,9 @@ Server Errors:
 
 ## Related Skills
 
-- [Error Handling: API Patterns](@orchestr8://skills/error-handling-api-patterns)
-- [Security: API Security](@orchestr8://skills/security-api-security)
-- [API Documentation Patterns](@orchestr8://skills/api-documentation-patterns)
+- [Error Handling: API Patterns](orchestr8://skills/error-handling-api-patterns)
+- [Security: API Security](orchestr8://skills/security-api-security)
+- [API Documentation Patterns](orchestr8://skills/api-documentation-patterns)
 ```
 
 ## Skill Creation Workflow

@@ -25,20 +25,20 @@ Test fragment discoverability using query patterns to ensure fragments are selec
 After creating a fragment, test these queries:
 
 ```markdown
-□ Primary technology: @orchestr8://${category}/match?query=${main-tech}
-□ Technology + domain: @orchestr8://${category}/match?query=${tech}+${domain}
-□ Specific use case: @orchestr8://${category}/match?query=${use-case}
-□ Problem-oriented: @orchestr8://${category}/match?query=${problem}+${tech}
-□ Pattern-based: @orchestr8://${category}/match?query=${pattern}+${tech}
+□ Primary technology: orchestr8://${category}/match?query=${main-tech}
+□ Technology + domain: orchestr8://${category}/match?query=${tech}+${domain}
+□ Specific use case: orchestr8://${category}/match?query=${use-case}
+□ Problem-oriented: orchestr8://${category}/match?query=${problem}+${tech}
+□ Pattern-based: orchestr8://${category}/match?query=${pattern}+${tech}
 ```
 
 **Example for TypeScript API fragment:**
 ```markdown
-□ @orchestr8://agents/match?query=typescript
-□ @orchestr8://agents/match?query=typescript+api
-□ @orchestr8://agents/match?query=typescript+rest+express
-□ @orchestr8://agents/match?query=build+api+typescript
-□ @orchestr8://agents/match?query=express+backend
+□ orchestr8://agents/match?query=typescript
+□ orchestr8://agents/match?query=typescript+api
+□ orchestr8://agents/match?query=typescript+rest+express
+□ orchestr8://agents/match?query=build+api+typescript
+□ orchestr8://agents/match?query=express+backend
 ```
 
 ## Query Design Patterns
@@ -46,9 +46,9 @@ After creating a fragment, test these queries:
 ### Pattern 1: Technology-First
 
 ```markdown
-@orchestr8://agents/match?query=python
-@orchestr8://agents/match?query=rust
-@orchestr8://skills/match?query=error+handling
+orchestr8://agents/match?query=python
+orchestr8://agents/match?query=rust
+orchestr8://skills/match?query=error+handling
 ```
 
 Best for: General expertise lookup
@@ -56,9 +56,9 @@ Best for: General expertise lookup
 ### Pattern 2: Technology + Domain
 
 ```markdown
-@orchestr8://agents/match?query=python+api
-@orchestr8://agents/match?query=typescript+web+frontend
-@orchestr8://skills/match?query=testing+integration
+orchestr8://agents/match?query=python+api
+orchestr8://agents/match?query=typescript+web+frontend
+orchestr8://skills/match?query=testing+integration
 ```
 
 Best for: Domain-specific expertise
@@ -66,9 +66,9 @@ Best for: Domain-specific expertise
 ### Pattern 3: Problem-Oriented
 
 ```markdown
-@orchestr8://match?query=build+rest+api+authentication
-@orchestr8://match?query=handle+async+errors+typescript
-@orchestr8://skills/match?query=database+optimization+postgres
+orchestr8://match?query=build+rest+api+authentication
+orchestr8://match?query=handle+async+errors+typescript
+orchestr8://skills/match?query=database+optimization+postgres
 ```
 
 Best for: Solution-focused searches
@@ -76,8 +76,8 @@ Best for: Solution-focused searches
 ### Pattern 4: Tag-Filtered
 
 ```markdown
-@orchestr8://skills/match?query=security&tags=jwt,oauth
-@orchestr8://agents/match?query=api&tags=typescript,express
+orchestr8://skills/match?query=security&tags=jwt,oauth
+orchestr8://agents/match?query=api&tags=typescript,express
 ```
 
 Best for: Narrowing by specific technologies

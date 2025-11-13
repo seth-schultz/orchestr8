@@ -311,7 +311,7 @@ print(f"Savings: ${result['savings']:.2f} ({result['percent']:.0f}%)")
 
 ## Related Resources
 
-**Agent overview**: `@orchestr8://agents/runpod-specialist`
-**Pod management**: `@orchestr8://skills/runpod-pod-management`
-**Serverless deployment**: `@orchestr8://skills/runpod-serverless-deployment`
-**Network volumes**: `@orchestr8://skills/runpod-network-volumes`
+**Agent overview**: `orchestr8://agents/runpod-specialist`
+**Pod management**: `orchestr8://skills/runpod-pod-management`
+**Serverless deployment**: `orchestr8://skills/runpod-serverless-deployment`
+**Network volumes**: `orchestr8://skills/runpod-network-volumes`

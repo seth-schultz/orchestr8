@@ -18,10 +18,10 @@ useWhen:
   - Scaling team collaboration
   - Comparing branching models
 relatedResources:
-  - @orchestr8://agents/git-expert
-  - @orchestr8://skills/git-workflow
-  - @orchestr8://skills/git-commit-best-practices
-  - @orchestr8://patterns/git-collaboration-workflow
+  - orchestr8://agents/git-expert
+  - orchestr8://skills/git-workflow
+  - orchestr8://skills/git-commit-best-practices
+  - orchestr8://patterns/git-collaboration-workflow
 estimatedTokens: 820
 ---
 

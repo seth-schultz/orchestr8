@@ -13,7 +13,7 @@ useWhen:
   - Collecting statistically valid performance data
 estimatedTokens: 280
 relatedResources:
-  - @orchestr8://skills/technology-benchmarking
+  - orchestr8://skills/technology-benchmarking
 ---
 
 # Technology Benchmarking: Performance Suite

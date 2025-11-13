@@ -161,13 +161,13 @@ groups:
 ## Related Observability Skills
 
 **Three Pillars of Observability:**
-- @orchestr8://skills/observability-structured-logging - Logs pillar for contextual debugging
-- @orchestr8://skills/observability-metrics-prometheus - Metrics pillar (this skill)
-- @orchestr8://skills/observability-distributed-tracing - Traces pillar for request flow analysis
+- orchestr8://skills/observability-structured-logging - Logs pillar for contextual debugging
+- orchestr8://skills/observability-metrics-prometheus - Metrics pillar (this skill)
+- orchestr8://skills/observability-distributed-tracing - Traces pillar for request flow analysis
 
 **Reliability & SRE:**
-- @orchestr8://skills/observability-sli-slo-monitoring - SLI/SLO tracking using Prometheus metrics
+- orchestr8://skills/observability-sli-slo-monitoring - SLI/SLO tracking using Prometheus metrics
 
 **Monitoring Infrastructure:**
-- @orchestr8://guides/prometheus-monitoring-setup - Prometheus deployment guide
-- @orchestr8://skills/observability-sli-slo-monitoring - Alerting and dashboards
+- orchestr8://guides/prometheus-monitoring-setup - Prometheus deployment guide
+- orchestr8://skills/observability-sli-slo-monitoring - Alerting and dashboards

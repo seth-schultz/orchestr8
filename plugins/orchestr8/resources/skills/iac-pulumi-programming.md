@@ -166,9 +166,9 @@ pulumi.export("subnet_ids", [subnet.id for subnet in public_subnets])
 ## Related IaC Skills
 
 **Alternative Tool:**
-- @orchestr8://skills/iac-terraform-modules - Infrastructure as code with Terraform
+- orchestr8://skills/iac-terraform-modules - Infrastructure as code with Terraform
 
 **Cross-Cutting Concepts:**
-- @orchestr8://skills/iac-state-management - State management patterns (applies to Pulumi state)
-- @orchestr8://skills/iac-testing-validation - Testing infrastructure code (tools work with Pulumi)
-- @orchestr8://skills/iac-gitops-workflows - GitOps workflows for infrastructure deployment
+- orchestr8://skills/iac-state-management - State management patterns (applies to Pulumi state)
+- orchestr8://skills/iac-testing-validation - Testing infrastructure code (tools work with Pulumi)
+- orchestr8://skills/iac-gitops-workflows - GitOps workflows for infrastructure deployment

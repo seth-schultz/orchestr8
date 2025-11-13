@@ -17,7 +17,7 @@ Generate a world-class Medium article optimized for viral potential, engagement,
 
 ## Workflow
 
-**→ Execute:** @orchestr8://workflows/workflow-create-medium-story
+**→ Execute:** orchestr8://workflows/workflow-create-medium-story
 
 This workflow will:
 

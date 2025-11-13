@@ -26,16 +26,16 @@ useWhen:
   - Release train coordination with multiple parallel development streams, integration branches, and scheduled merge windows
   - Emergency hotfix workflows requiring fast-track PR processes, minimal review requirements, and immediate production deployment paths
 relatedResources:
-  - @orchestr8://patterns/git-release-management
-  - @orchestr8://patterns/git-monorepo-strategies
-  - @orchestr8://skills/git-workflow
-  - @orchestr8://skills/code-quality-standards
-  - @orchestr8://skills/quality-code-review-checklist
-  - @orchestr8://patterns/phased-delivery
-  - @orchestr8://agents/project-manager
-  - @orchestr8://workflows/workflow-code-review
-  - @orchestr8://workflows/workflow-review-pr
-  - @orchestr8://skills/agile-scrum-practices
+  - orchestr8://patterns/git-release-management
+  - orchestr8://patterns/git-monorepo-strategies
+  - orchestr8://skills/git-workflow
+  - orchestr8://skills/code-quality-standards
+  - orchestr8://skills/quality-code-review-checklist
+  - orchestr8://patterns/phased-delivery
+  - orchestr8://agents/project-manager
+  - orchestr8://workflows/workflow-code-review
+  - orchestr8://workflows/workflow-review-pr
+  - orchestr8://skills/agile-scrum-practices
 estimatedTokens: 950
 ---
 

@@ -407,14 +407,14 @@ res.set('Vary', 'Accept-Encoding, Authorization');
 ## Related Skills
 
 **Performance Family:**
-- @orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
-- @orchestr8://skills/performance-database-optimization - Database query optimization to complement API performance
-- @orchestr8://skills/performance-profiling-techniques - Profile to identify API bottlenecks before optimizing
+- orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
+- orchestr8://skills/performance-database-optimization - Database query optimization to complement API performance
+- orchestr8://skills/performance-profiling-techniques - Profile to identify API bottlenecks before optimizing
 
 **Related Patterns:**
-- @orchestr8://patterns/performance-caching - Caching strategies for API responses
-- @orchestr8://patterns/event-driven-pubsub - Async processing patterns for background jobs
+- orchestr8://patterns/performance-caching - Caching strategies for API responses
+- orchestr8://patterns/event-driven-pubsub - Async processing patterns for background jobs
 
 **Implementation Examples:**
-- @orchestr8://examples/express-error-handling - Express.js error handling patterns
-- @orchestr8://examples/fastapi-async-crud - FastAPI async CRUD operations
+- orchestr8://examples/express-error-handling - Express.js error handling patterns
+- orchestr8://examples/fastapi-async-crud - FastAPI async CRUD operations

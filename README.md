@@ -34,7 +34,7 @@ We've completed a major overhaul that achieved **80,000+ tokens saved** across a
 ### Phase 1: Example Extraction
 - 37 files optimized with code examples moved to dedicated fragments
 - ~45,000 tokens saved through example externalization
-- 77 new example files created with @orchestr8:// URI references
+- 77 new example files created with orchestr8:// URI references
 - Improved resource reusability and maintenance
 
 ### Phase 2: Structural Organization
@@ -639,7 +639,7 @@ Resolves static URIs and performs dynamic fuzzy matching. The brain of JIT loadi
 
 **URI Parser**
 Supports `category/resource` and `match?query=...` formats for flexible resource access. Enhanced with:
-- @orchestr8:// URI scheme for examples
+- orchestr8:// URI scheme for examples
 - Cross-reference resolution
 - Family-based resource lookup
 
@@ -794,7 +794,7 @@ All comprehensive documentation is in **[`plugins/orchestr8/docs/`](plugins/orch
 | Feature | Description |
 |---------|-------------|
 | [Progressive Loading](plugins/orchestr8/docs/resources/) | 52-83% token savings with core + advanced modules |
-| [Example Library](plugins/orchestr8/resources/examples/) | 77 ready-to-use code samples with @orchestr8:// URIs |
+| [Example Library](plugins/orchestr8/resources/examples/) | 77 ready-to-use code samples with orchestr8:// URIs |
 | [Skill Families](plugins/orchestr8/resources/skills/) | 6 organized families: Performance, Security, Testing, IaC, Observability, Error Handling |
 | [Pattern Families](plugins/orchestr8/resources/patterns/) | 9 families with 207+ cross-references |
 | [Cross-References](plugins/orchestr8/docs/resources/) | 207+ links between related resources |

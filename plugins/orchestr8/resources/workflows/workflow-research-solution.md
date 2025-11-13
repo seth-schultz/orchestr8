@@ -92,7 +92,7 @@ Research:
 □ Integration strategies
 
 Sources:
-- Orchestr8 patterns: @orchestr8://patterns/match?query=${problem}
+- Orchestr8 patterns: orchestr8://patterns/match?query=${problem}
 - Technical blogs and articles
 - Official documentation
 - Case studies

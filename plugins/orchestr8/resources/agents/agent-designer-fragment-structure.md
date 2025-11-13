@@ -10,7 +10,7 @@ capabilities:
 useWhen:
   - Creating new agent fragments from scratch using standardized templates for core fragments (600-700 tokens) and specialized fragments (450-600 tokens)
   - Structuring agent knowledge systematically with sections for Fundamental Concepts, Common Patterns, Best Practices, and Common Pitfalls with corrections
-  - Designing complementary fragment sets like typescript-core + typescript-api-development + typescript-async-patterns that compose via @orchestr8://match queries
+  - Designing complementary fragment sets like typescript-core + typescript-api-development + typescript-async-patterns that compose via orchestr8://match queries
   - Following content organization patterns with 60% code examples, 25% explanatory text, and 15% best practices for code-heavy fragments
   - Building multi-technology agent families like cloud-architect-core + cloud-architect-aws + cloud-architect-gcp with provider-specific specializations
   - Ensuring fragments are independently useful, follow consistent structure, don't exceed 1000 token maximum, and avoid duplicate content across fragments

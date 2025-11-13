@@ -55,31 +55,31 @@ Different application layers require different optimization strategies:
 ### Domain-Specific Optimization
 
 **API Performance:**
-- @orchestr8://skills/performance-api-optimization - REST/GraphQL optimization, pagination strategies, rate limiting, request batching, GraphQL DataLoader patterns
+- orchestr8://skills/performance-api-optimization - REST/GraphQL optimization, pagination strategies, rate limiting, request batching, GraphQL DataLoader patterns
 
 **Database Performance:**
-- @orchestr8://skills/performance-database-optimization - Query optimization, indexing strategies, N+1 query prevention, connection pooling, read replicas
+- orchestr8://skills/performance-database-optimization - Query optimization, indexing strategies, N+1 query prevention, connection pooling, read replicas
 
 **Frontend Performance:**
-- @orchestr8://skills/performance-frontend-optimization - Bundle optimization, code splitting, lazy loading, React performance, Web Vitals improvement
+- orchestr8://skills/performance-frontend-optimization - Bundle optimization, code splitting, lazy loading, React performance, Web Vitals improvement
 
 ### Tools and Diagnostics
 
 **Profiling and Diagnostics:**
-- @orchestr8://skills/performance-profiling-techniques - CPU profiling, flame graphs, memory leak detection, production profiling, metrics collection
+- orchestr8://skills/performance-profiling-techniques - CPU profiling, flame graphs, memory leak detection, production profiling, metrics collection
 
 ### Related Patterns
 
 **Architecture Patterns:**
-- @orchestr8://patterns/performance-caching - Comprehensive caching strategies and patterns
-- @orchestr8://patterns/database-connection-pooling-scaling - Connection pooling best practices
-- @orchestr8://patterns/database-indexing-strategies - Index design and optimization
-- @orchestr8://patterns/database-query-optimization - Query performance patterns
+- orchestr8://patterns/performance-caching - Comprehensive caching strategies and patterns
+- orchestr8://patterns/database-connection-pooling-scaling - Connection pooling best practices
+- orchestr8://patterns/database-indexing-strategies - Index design and optimization
+- orchestr8://patterns/database-query-optimization - Query performance patterns
 
 ### Implementation Examples
 
 **Code Examples:**
-- @orchestr8://examples/* - Performance optimization implementation examples across different tech stacks
+- orchestr8://examples/* - Performance optimization implementation examples across different tech stacks
 
 ## When to Use Specific Skills
 

@@ -184,6 +184,6 @@ curl -X POST http://localhost:8000/run \
 
 ## Related Resources
 
-**Agent overview**: `@orchestr8://agents/runpod-specialist`
-**REST API**: `@orchestr8://skills/runpod-rest-api`
-**Complete example**: `@orchestr8://examples/runpod-serverless-handler`
+**Agent overview**: `orchestr8://agents/runpod-specialist`
+**REST API**: `orchestr8://skills/runpod-rest-api`
+**Complete example**: `orchestr8://examples/runpod-serverless-handler`

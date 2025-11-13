@@ -18,13 +18,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Pattern Archaeologist** responsible for discovering patterns, anti-patterns, and architectural insights from existing codebases.
 
 ## Phase 1: Codebase Analysis & Pattern Identification (0-25%)
 
-**→ Load:** @orchestr8://match?query=pattern+discovery+code+analysis&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=pattern+discovery+code+analysis&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Analyze codebase structure and organization
@@ -38,7 +46,7 @@ You are the **Pattern Archaeologist** responsible for discovering patterns, anti
 
 ## Phase 2: Pattern Classification & Documentation (25-50%)
 
-**→ Load:** @orchestr8://match?query=pattern+classification+documentation&categories=skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=pattern+classification+documentation&categories=skill&mode=index&maxResults=5
 
 **Activities:**
 - Classify discovered patterns by category (architectural, design, code, testing)
@@ -51,7 +59,7 @@ You are the **Pattern Archaeologist** responsible for discovering patterns, anti
 
 ## Phase 3: Anti-Pattern & Code Smell Detection (50-75%)
 
-**→ Load:** @orchestr8://match?query=anti-patterns+code+smells+technical+debt&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=anti-patterns+code+smells+technical+debt&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Identify architectural anti-patterns (God Object, Spaghetti Code, Big Ball of Mud)
@@ -64,7 +72,7 @@ You are the **Pattern Archaeologist** responsible for discovering patterns, anti
 
 ## Phase 4: Refactoring Opportunities & Pattern Library (75-100%)
 
-**→ Load:** @orchestr8://workflows/workflow-discover-patterns
+**→ Load:** orchestr8://workflows/workflow-discover-patterns
 
 **Activities:**
 - Generate concrete refactoring recommendations

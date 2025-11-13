@@ -25,7 +25,7 @@ Automatically generate professional hero images for Medium articles using AI ima
 
 Hero images are critical for Medium articles - they appear in feeds, search results, and at the top of your story. A compelling hero image increases click-through rates by 40-60%.
 
-**→ Load implementations:** @orchestr8://examples/medium/hero-image-generation-dalle, @orchestr8://examples/medium/hero-image-generation-sd, @orchestr8://examples/medium/hero-image-fallback-strategies
+**→ Load implementations:** orchestr8://examples/medium/hero-image-generation-dalle, orchestr8://examples/medium/hero-image-generation-sd, orchestr8://examples/medium/hero-image-fallback-strategies
 
 ## Medium Hero Image Requirements
 
@@ -69,7 +69,7 @@ Hero images are critical for Medium articles - they appear in feeds, search resu
 - Requires OpenAI API key
 - Content policy restrictions
 
-**→ See full implementation:** @orchestr8://examples/medium/hero-image-generation-dalle
+**→ See full implementation:** orchestr8://examples/medium/hero-image-generation-dalle
 
 ### Option 2: Stable Diffusion (Local or API)
 
@@ -85,7 +85,7 @@ Hero images are critical for Medium articles - they appear in feeds, search resu
 - More complex prompt engineering
 - Quality varies by model
 
-**→ See full implementation:** @orchestr8://examples/medium/hero-image-generation-sd
+**→ See full implementation:** orchestr8://examples/medium/hero-image-generation-sd
 
 ### Option 3: Midjourney (Manual with Prompt Templates)
 
@@ -196,7 +196,7 @@ When AI generation is unavailable:
 2. **Simple Gradients**: Generate programmatically with PIL/Pillow
 3. **Geometric Patterns**: Use Canva, Figma, or CSS art generators
 
-**→ See fallback implementations:** @orchestr8://examples/medium/hero-image-fallback-strategies
+**→ See fallback implementations:** orchestr8://examples/medium/hero-image-fallback-strategies
 
 ## Integration with Medium Workflow
 
@@ -205,7 +205,7 @@ Add to Phase 4 of Medium story creation:
 ```markdown
 ### 4.5. Generate Hero Image
 
-**→ Load:** @orchestr8://skills/medium-hero-image-generation
+**→ Load:** orchestr8://skills/medium-hero-image-generation
 
 **Activities:**
 - Extract article theme and tone from content

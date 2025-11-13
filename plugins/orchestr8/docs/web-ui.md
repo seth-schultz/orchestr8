@@ -254,22 +254,22 @@ Response:
 
 **Static resource:**
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 **Dynamic matching (catalog):**
 ```
-@orchestr8://match?query=typescript+api&mode=catalog&maxResults=10
+orchestr8://match?query=typescript+api&mode=catalog&maxResults=10
 ```
 
 **Dynamic matching (index):**
 ```
-@orchestr8://match?query=retry+backoff&mode=index&maxResults=5
+orchestr8://match?query=retry+backoff&mode=index&maxResults=5
 ```
 
 **Dynamic matching (full):**
 ```
-@orchestr8://match?query=python+async&mode=full&maxTokens=2500
+orchestr8://match?query=python+async&mode=full&maxTokens=2500
 ```
 
 **3. Click "Send Request"**
@@ -359,7 +359,7 @@ Result: Complete resource catalog
 **Example 3: Load TypeScript Agent**
 ```
 Request Type: Read Resource
-URI: @orchestr8://agents/typescript-core
+URI: orchestr8://agents/typescript-core
 
 Result: TypeScript core expertise (~650 tokens)
 ```
@@ -367,7 +367,7 @@ Result: TypeScript core expertise (~650 tokens)
 **Example 4: Fuzzy Match for API Skills**
 ```
 Request Type: Read Resource
-URI: @orchestr8://match?query=api+design+patterns&mode=catalog&maxResults=10
+URI: orchestr8://match?query=api+design+patterns&mode=catalog&maxResults=10
 
 Result: Top 10 API-related resources
 ```
@@ -375,7 +375,7 @@ Result: Top 10 API-related resources
 **Example 5: Full-Stack Match**
 ```
 Request Type: Read Resource
-URI: @orchestr8://match?query=typescript+react+api+testing&categories=agents,skills,examples&mode=catalog
+URI: orchestr8://match?query=typescript+react+api+testing&categories=agents,skills,examples&mode=catalog
 
 Result: Cross-category matches for full-stack development
 ```
@@ -407,7 +407,7 @@ Result: Cross-category matches for full-stack development
 - **Icon**: Category indicator (emoji)
 - **Name**: Fragment ID
 - **Description**: Brief summary
-- **URI**: Full @orchestr8:// URI
+- **URI**: Full orchestr8:// URI
 - **Metadata**: Tags, estimated tokens
 
 **Actions:**

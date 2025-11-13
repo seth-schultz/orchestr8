@@ -16,8 +16,8 @@ useWhen:
   - Configuring logging and monitoring
 estimatedTokens: 480
 relatedResources:
-  - @orchestr8://agents/mysql-specialist
-  - @orchestr8://agents/database-architect-sql
+  - orchestr8://agents/mysql-specialist
+  - orchestr8://agents/database-architect-sql
 ---
 
 # MySQL InnoDB Configuration

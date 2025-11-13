@@ -36,7 +36,7 @@ This guide provides practical examples for everyday Orchestr8 usage. Perfect for
 
 3. **Dynamic resource loading:**
    ```
-   @orchestr8://match?query=typescript+rest+api+authentication+postgresql&maxTokens=2500
+   orchestr8://match?query=typescript+rest+api+authentication+postgresql&maxTokens=2500
    ```
 
 4. **Assembles expertise:**
@@ -194,7 +194,7 @@ This guide provides practical examples for everyday Orchestr8 usage. Perfect for
 
 **URI:**
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 **Returns:**
@@ -229,7 +229,7 @@ Expert in TypeScript's type system...
 
 **URI:**
 ```
-@orchestr8://skills/error-handling-resilience
+orchestr8://skills/error-handling-resilience
 ```
 
 **Returns:**
@@ -263,7 +263,7 @@ Patterns for robust error handling...
 
 **URI:**
 ```
-@orchestr8://examples/express-jwt-auth
+orchestr8://examples/express-jwt-auth
 ```
 
 **Returns:**
@@ -297,7 +297,7 @@ Complete JWT auth implementation...
 
 **URI:**
 ```
-@orchestr8://patterns/microservices-architecture
+orchestr8://patterns/microservices-architecture
 ```
 
 **Returns:**
@@ -332,7 +332,7 @@ Design patterns for microservices...
 
 **Query:**
 ```
-@orchestr8://match?query=typescript+api&mode=catalog
+orchestr8://match?query=typescript+api&mode=catalog
 ```
 
 **Returns:**
@@ -340,17 +340,17 @@ Design patterns for microservices...
 Top 10 Matches for "typescript api"
 
 1. TypeScript API Development (Score: 88)
-   @orchestr8://agents/typescript-api-development
+   orchestr8://agents/typescript-api-development
    Tags: typescript, rest-api, express, nodejs
    Tokens: 900
 
 2. API Design REST (Score: 76)
-   @orchestr8://skills/api-design-rest
+   orchestr8://skills/api-design-rest
    Tags: api, rest, design, best-practices
    Tokens: 720
 
 3. Express Minimal API (Score: 72)
-   @orchestr8://examples/express-minimal-api
+   orchestr8://examples/express-minimal-api
    Tags: express, typescript, api, minimal
    Tokens: 500
 
@@ -367,7 +367,7 @@ Top 10 Matches for "typescript api"
 
 **Query:**
 ```
-@orchestr8://skills/match?query=testing+unit+integration
+orchestr8://skills/match?query=testing+unit+integration
 ```
 
 **Returns:**
@@ -375,13 +375,13 @@ Top 10 Matches for "typescript api"
 Top Matches in Skills Category
 
 1. Testing Integration Strategies (Score: 92)
-   @orchestr8://skills/testing-integration
+   orchestr8://skills/testing-integration
 
 2. Testing Unit Patterns (Score: 85)
-   @orchestr8://skills/testing-unit
+   orchestr8://skills/testing-unit
 
 3. API Testing Best Practices (Score: 78)
-   @orchestr8://skills/api-testing
+   orchestr8://skills/api-testing
 ```
 
 **Benefits:**
@@ -397,7 +397,7 @@ Top Matches in Skills Category
 
 **Query:**
 ```
-@orchestr8://match?query=async+error+handling+retry+timeout
+orchestr8://match?query=async+error+handling+retry+timeout
 ```
 
 **Returns:** Resources matching multiple keywords with higher relevance scores
@@ -418,7 +418,7 @@ Top Matches in Skills Category
 
 **Query:**
 ```
-@orchestr8://match?query=testing+patterns&mode=catalog&maxResults=15
+orchestr8://match?query=testing+patterns&mode=catalog&maxResults=15
 ```
 
 **Returns:**
@@ -455,7 +455,7 @@ Examples:
 
 1. **Discover:**
 ```
-@orchestr8://match?query=kubernetes+deployment&mode=catalog&maxResults=10
+orchestr8://match?query=kubernetes+deployment&mode=catalog&maxResults=10
 ```
 
 2. **Review results:**
@@ -470,8 +470,8 @@ Examples:
 
 4. **Load selectively:**
 ```
-@orchestr8://guides/kubernetes-deployment
-@orchestr8://patterns/helm-charts
+orchestr8://guides/kubernetes-deployment
+orchestr8://patterns/helm-charts
 ```
 
 **Total tokens:** 100 (catalog) + 2000 (content) = 2100 tokens
@@ -486,19 +486,19 @@ Examples:
 
 **Step 1 - Agent (core expertise):**
 ```
-@orchestr8://agents/typescript-api-development
+orchestr8://agents/typescript-api-development
 → 900 tokens
 ```
 
 **Step 2 - Skill (specific technique):**
 ```
-@orchestr8://skills/error-handling-resilience
+orchestr8://skills/error-handling-resilience
 → 720 tokens
 ```
 
 **Step 3 - Example (working code):**
 ```
-@orchestr8://examples/express-error-handling
+orchestr8://examples/express-error-handling
 → 650 tokens
 ```
 
@@ -513,13 +513,13 @@ Examples:
 
 **Step 1 - Pattern (architecture):**
 ```
-@orchestr8://patterns/microservices-architecture
+orchestr8://patterns/microservices-architecture
 → 1100 tokens
 ```
 
 **Step 2 - Guide (setup):**
 ```
-@orchestr8://guides/kubernetes-deployment
+orchestr8://guides/kubernetes-deployment
 → 1200 tokens
 ```
 
@@ -540,10 +540,10 @@ Examples:
 
 **Loading:**
 ```
-@orchestr8://skills/error-handling-resilience      # 720 tokens
-@orchestr8://skills/api-rate-limiting              # 580 tokens
-@orchestr8://skills/caching-strategies             # 650 tokens
-@orchestr8://skills/monitoring-observability       # 800 tokens
+orchestr8://skills/error-handling-resilience      # 720 tokens
+orchestr8://skills/api-rate-limiting              # 580 tokens
+orchestr8://skills/caching-strategies             # 650 tokens
+orchestr8://skills/monitoring-observability       # 800 tokens
 ```
 
 **Total:** 2750 tokens
@@ -560,7 +560,7 @@ Examples:
 **Approach:**
 ```
 # Direct load
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 **Token usage:** ~650 tokens
@@ -576,7 +576,7 @@ Examples:
 **Approach:**
 ```
 # Step 1: Discover
-@orchestr8://match?query=authentication+jwt&mode=catalog
+orchestr8://match?query=authentication+jwt&mode=catalog
 
 # Step 2: Review
 # - security-auth-jwt (680 tokens)
@@ -584,8 +584,8 @@ Examples:
 # - api-security-best-practices (720 tokens)
 
 # Step 3: Load specific
-@orchestr8://patterns/security-auth-jwt
-@orchestr8://examples/express-jwt-auth
+orchestr8://patterns/security-auth-jwt
+orchestr8://examples/express-jwt-auth
 ```
 
 **Token usage:** 100 + 1530 = 1630 tokens
@@ -600,14 +600,14 @@ Examples:
 **Approach:**
 ```
 # Step 1: Core agent (650 tokens)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Step 2: Add skills during development (as needed)
-@orchestr8://skills/error-handling-resilience  # 720 tokens
-@orchestr8://skills/testing-unit  # 680 tokens
+orchestr8://skills/error-handling-resilience  # 720 tokens
+orchestr8://skills/testing-unit  # 680 tokens
 
 # Step 3: Load examples only when stuck (on-demand)
-@orchestr8://examples/express-error-handling  # 850 tokens
+orchestr8://examples/express-error-handling  # 850 tokens
 ```
 
 **Token usage:**
@@ -621,14 +621,14 @@ Examples:
 **Real-world example (SRE agent):**
 ```
 # Core content (180 tokens)
-@orchestr8://agents/sre-specialist
+orchestr8://agents/sre-specialist
 
 # Returns core + references to examples:
-# → @orchestr8://examples/infrastructure/sre-slo-configuration
-# → @orchestr8://examples/infrastructure/sre-incident-management
+# → orchestr8://examples/infrastructure/sre-slo-configuration
+# → orchestr8://examples/infrastructure/sre-incident-management
 
 # Load example when implementing (800 tokens)
-@orchestr8://examples/infrastructure/sre-slo-configuration
+orchestr8://examples/infrastructure/sre-slo-configuration
 
 # Total: 980 tokens vs 2,000+ upfront
 # Savings: 52%

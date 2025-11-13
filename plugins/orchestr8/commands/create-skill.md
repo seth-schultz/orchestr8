@@ -18,13 +18,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Skills Architect** responsible for creating focused, reusable skill fragments that provide specific techniques and patterns to the Orchestr8 system.
 
 ## Phase 1: Skill Definition & Research (0-25%)
 
-**→ Load:** @orchestr8://workflows/workflow-create-skill
+**→ Load:** orchestr8://workflows/workflow-create-skill
 
 **Activities:**
 - Define specific skill or technique
@@ -39,7 +47,7 @@ You are the **Skills Architect** responsible for creating focused, reusable skil
 
 ## Phase 2: Structure & Metadata Design (25-50%)
 
-**→ Load:** @orchestr8://match?query=skill+fragment+structure+metadata&categories=skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=skill+fragment+structure+metadata&categories=skill&mode=index&maxResults=5
 
 **Activities:**
 - Design content organization
@@ -56,7 +64,7 @@ You are the **Skills Architect** responsible for creating focused, reusable skil
 
 ## Phase 3: Content Creation (50-80%)
 
-**→ Load:** @orchestr8://match?query=$ARGUMENTS+technique+pattern&categories=skill,example&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=$ARGUMENTS+technique+pattern&categories=skill,example&mode=index&maxResults=8
 
 **Activities:**
 
@@ -122,7 +130,7 @@ Alternative approaches
 
 ## Phase 4: Discovery Testing & Integration (80-100%)
 
-**→ Load:** @orchestr8://match?query=fragment+discovery+testing&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=fragment+discovery+testing&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 

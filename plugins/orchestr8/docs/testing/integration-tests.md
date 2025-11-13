@@ -153,7 +153,7 @@ LOG_LEVEL=info npm run test:integration:server
   "id": 1,
   "method": "resources/read",
   "params": {
-    "uri": "@orchestr8://agents/typescript-core"
+    "uri": "orchestr8://agents/typescript-core"
   }
 }
 
@@ -163,7 +163,7 @@ LOG_LEVEL=info npm run test:integration:server
   "id": 1,
   "result": {
     "contents": [{
-      "uri": "@orchestr8://agents/typescript-core",
+      "uri": "orchestr8://agents/typescript-core",
       "mimeType": "text/markdown",
       "text": "# TypeScript Developer..."
     }]
@@ -246,7 +246,7 @@ describe('List All Static Resources', () => {
 
   it('should include agent resources', () => {
     const hasAgents = resources.some(r =>
-      r.uri.includes('@orchestr8://agents/')
+      r.uri.includes('orchestr8://agents/')
     );
     assert.ok(hasAgents, 'Should have agent resources');
   });
@@ -257,8 +257,8 @@ describe('List All Static Resources', () => {
       assert.ok(resource.name, 'Resource should have a name');
       assert.ok(resource.mimeType, 'Resource should have a MIME type');
       assert.ok(
-        resource.uri.startsWith('@orchestr8://'),
-        'Resource URI should use @orchestr8:// protocol'
+        resource.uri.startsWith('orchestr8://'),
+        'Resource URI should use orchestr8:// protocol'
       );
     }
   });
@@ -269,7 +269,7 @@ describe('List All Static Resources', () => {
 - `resources/list` returns array
 - Resources from all categories (agents, skills, examples, patterns)
 - Each resource has: uri, name, mimeType
-- URIs use `@orchestr8://` protocol
+- URIs use `orchestr8://` protocol
 - MIME types are valid (text/markdown, text/plain, etc.)
 
 ### 3. Static Resource Retrieval
@@ -284,9 +284,9 @@ describe('List All Static Resources', () => {
 
 ```javascript
 describe('Read Static Resource', () => {
-  it('should read @orchestr8://agents/typescript-core', async () => {
+  it('should read orchestr8://agents/typescript-core', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/typescript-core'
+      uri: 'orchestr8://agents/typescript-core'
     });
 
     assert.ok(result, 'Should return a result');
@@ -299,7 +299,7 @@ describe('Read Static Resource', () => {
 
   it('should return text content', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/typescript-core'
+      uri: 'orchestr8://agents/typescript-core'
     });
 
     const content = result.contents[0];
@@ -313,7 +313,7 @@ describe('Read Static Resource', () => {
 
   it('should have substantial content (>500 chars)', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/typescript-core'
+      uri: 'orchestr8://agents/typescript-core'
     });
 
     const text = result.contents[0].text;
@@ -347,7 +347,7 @@ describe('Read Static Resource', () => {
 describe('Read Dynamic Resource with Fuzzy Matching', () => {
   it('should handle dynamic URI with query parameter', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=typescript+api'
+      uri: 'orchestr8://agents/match?query=typescript+api'
     });
 
     assert.ok(result, 'Should return a result');
@@ -360,7 +360,7 @@ describe('Read Dynamic Resource with Fuzzy Matching', () => {
 
   it('should support maxTokens parameter', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=typescript+testing&maxTokens=1000'
+      uri: 'orchestr8://agents/match?query=typescript+testing&maxTokens=1000'
     });
 
     const text = result.contents[0].text;
@@ -370,7 +370,7 @@ describe('Read Dynamic Resource with Fuzzy Matching', () => {
 
   it('should filter by category in URI path', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://examples/match?query=typescript'
+      uri: 'orchestr8://examples/match?query=typescript'
     });
 
     const text = result.contents[0].text;
@@ -406,7 +406,7 @@ describe('Read Dynamic Resource with Fuzzy Matching', () => {
 describe('Dynamic Resource Assembly from Multiple Fragments', () => {
   it('should assemble content from multiple fragments', async () => {
     const result = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=typescript+api+async'
+      uri: 'orchestr8://agents/match?query=typescript+api+async'
     });
 
     const text = result.contents[0].text;
@@ -421,11 +421,11 @@ describe('Dynamic Resource Assembly from Multiple Fragments', () => {
 
   it('should respect maxTokens budget', async () => {
     const smallResult = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=typescript&maxTokens=500'
+      uri: 'orchestr8://agents/match?query=typescript&maxTokens=500'
     });
 
     const largeResult = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=typescript&maxTokens=5000'
+      uri: 'orchestr8://agents/match?query=typescript&maxTokens=5000'
     });
 
     const smallText = smallResult.contents[0].text;
@@ -463,7 +463,7 @@ describe('Invalid URIs Return Proper Errors', () => {
     await assert.rejects(
       async () => {
         await client.sendRequest('resources/read', {
-          uri: '@orchestr8://agents/non-existent-resource'
+          uri: 'orchestr8://agents/non-existent-resource'
         });
       },
       (error) => {
@@ -494,7 +494,7 @@ describe('Invalid URIs Return Proper Errors', () => {
     await assert.rejects(
       async () => {
         await client.sendRequest('resources/read', {
-          uri: '@orchestr8://agents/match'
+          uri: 'orchestr8://agents/match'
         });
       },
       (error) => {
@@ -526,7 +526,7 @@ describe('Invalid URIs Return Proper Errors', () => {
 ```javascript
 describe('Cache Hit on Second Request', () => {
   it('should cache static resource content', async () => {
-    const uri = '@orchestr8://agents/typescript-core';
+    const uri = 'orchestr8://agents/typescript-core';
 
     // First request (cache miss)
     const result1 = await client.sendRequest('resources/read', { uri });
@@ -542,12 +542,12 @@ describe('Cache Hit on Second Request', () => {
 
   it('should have different cache for different query parameters', async () => {
     const result1 = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=typescript+api&maxTokens=2000'
+      uri: 'orchestr8://agents/match?query=typescript+api&maxTokens=2000'
     });
     const text1 = result1.contents[0].text;
 
     const result2 = await client.sendRequest('resources/read', {
-      uri: '@orchestr8://agents/match?query=python+web&maxTokens=2000'
+      uri: 'orchestr8://agents/match?query=python+web&maxTokens=2000'
     });
     const text2 = result2.contents[0].text;
 

@@ -59,7 +59,7 @@ Your task: {{arg1}}
 Optional parameter: {{arg2}}
 
 Load expertise:
-@orchestr8://match?query={{arg1}}&maxTokens=2000
+orchestr8://match?query={{arg1}}&maxTokens=2000
 ```
 
 ### Creating Prompts
@@ -108,7 +108,7 @@ Required features: {{features}}
 ## Step 1: Load Relevant Expertise
 
 First, load expertise about the chosen tech stack:
-@orchestr8://match?query={{tech_stack}}+api+best+practices&maxTokens=2000
+orchestr8://match?query={{tech_stack}}+api+best+practices&maxTokens=2000
 
 ## Step 2: Design the API
 
@@ -185,10 +185,10 @@ Arguments are URL-encoded when used in URIs:
 
 ```markdown
 # In prompt content:
-@orchestr8://match?query={{task}}&maxTokens=2000
+orchestr8://match?query={{task}}&maxTokens=2000
 
 # User provides: task="build REST API"
-# Becomes: @orchestr8://match?query=build+REST+API&maxTokens=2000
+# Becomes: orchestr8://match?query=build+REST+API&maxTokens=2000
 ```
 
 ### Slash Commands
@@ -259,20 +259,20 @@ resources/
 URIs follow this pattern:
 
 ```
-@orchestr8://<category>/<path>/<filename>
+orchestr8://<category>/<path>/<filename>
 ```
 
 **Examples**:
 
 ```
 File:  resources/agents/typescript-core.md
-URI:   @orchestr8://agents/typescript-core
+URI:   orchestr8://agents/typescript-core
 
 File:  resources/skills/api-design-rest.md
-URI:   @orchestr8://skills/api-design-rest
+URI:   orchestr8://skills/api-design-rest
 
 File:  resources/examples/express-jwt-auth.md
-URI:   @orchestr8://examples/express-jwt-auth
+URI:   orchestr8://examples/express-jwt-auth
 ```
 
 **Note**: File extensions (`.md`, `.json`, `.yaml`) are omitted from URIs.
@@ -327,13 +327,13 @@ Dynamic resources use fuzzy matching to assemble content based on queries. This 
 Dynamic resources use template URIs with wildcards:
 
 ```
-Template:  @orchestr8://agents/match{+rest}
-Matches:   @orchestr8://agents/match?query=...
-           @orchestr8://agents/match?query=...&maxTokens=2000
+Template:  orchestr8://agents/match{+rest}
+Matches:   orchestr8://agents/match?query=...
+           orchestr8://agents/match?query=...&maxTokens=2000
 
-Template:  @orchestr8://match{+rest}
-Matches:   @orchestr8://match?query=...
-           @orchestr8://match?query=...&categories=agent,skill
+Template:  orchestr8://match{+rest}
+Matches:   orchestr8://match?query=...
+           orchestr8://match?query=...&categories=agent,skill
 ```
 
 **Wildcard `{+rest}`**:
@@ -350,8 +350,8 @@ Dynamic URIs support these parameters:
 The search query for fuzzy matching.
 
 ```
-@orchestr8://agents/match?query=typescript+api+design
-@orchestr8://match?query=error+handling+validation
+orchestr8://agents/match?query=typescript+api+design
+orchestr8://match?query=error+handling+validation
 ```
 
 **Query Encoding**:
@@ -363,7 +363,7 @@ The search query for fuzzy matching.
 Maximum token budget for assembled content.
 
 ```
-@orchestr8://agents/match?query=typescript&maxTokens=2000
+orchestr8://agents/match?query=typescript&maxTokens=2000
 ```
 
 **Default**: No limit (assembles all matches)
@@ -378,7 +378,7 @@ Maximum token budget for assembled content.
 Comma-separated required tags for filtering.
 
 ```
-@orchestr8://agents/match?query=api&tags=typescript,rest
+orchestr8://agents/match?query=api&tags=typescript,rest
 ```
 
 **Behavior**:
@@ -391,7 +391,7 @@ Comma-separated required tags for filtering.
 Comma-separated categories to search.
 
 ```
-@orchestr8://match?query=testing&categories=agent,skill
+orchestr8://match?query=testing&categories=agent,skill
 ```
 
 **Valid Categories**:
@@ -412,7 +412,7 @@ Comma-separated categories to search.
 Matching mode: `index` (default), `minimal`, `catalog`, or `full`.
 
 ```
-@orchestr8://agents/match?query=typescript&mode=index
+orchestr8://agents/match?query=typescript&mode=index
 ```
 
 **Modes**:
@@ -426,8 +426,8 @@ Matching mode: `index` (default), `minimal`, `catalog`, or `full`.
 Maximum number of fragments to return (index/minimal/catalog modes).
 
 ```
-@orchestr8://agents/match?query=api&mode=index&maxResults=5
-@orchestr8://agents/match?query=api&mode=catalog&maxResults=10
+orchestr8://agents/match?query=api&mode=index&maxResults=5
+orchestr8://agents/match?query=api&mode=catalog&maxResults=10
 ```
 
 **Default**: 5 for index/minimal modes, 10 for catalog mode
@@ -437,7 +437,7 @@ Maximum number of fragments to return (index/minimal/catalog modes).
 Minimum relevance score threshold (0-100).
 
 ```
-@orchestr8://agents/match?query=api&minScore=50
+orchestr8://agents/match?query=api&minScore=50
 ```
 
 **Default**: No minimum (includes all matches)
@@ -486,7 +486,7 @@ Fragment A wins (higher score)
 Fragments in the queried category receive a bonus:
 
 ```
-@orchestr8://agents/match?query=api
+orchestr8://agents/match?query=api
   → Agents receive +5 bonus
   → Skills receive 0 bonus
 ```
@@ -496,7 +496,7 @@ Fragments in the queried category receive a bonus:
 Required tags must ALL be present:
 
 ```
-@orchestr8://agents/match?query=api&tags=typescript,async
+orchestr8://agents/match?query=api&tags=typescript,async
   → Fragment MUST have both "typescript" AND "async" tags
   → Fragments without both are excluded
 ```
@@ -532,13 +532,13 @@ Token budgets enable progressive loading strategies.
 
 ```markdown
 ## Phase 1: Overview (500 tokens)
-@orchestr8://agents/match?query={{task}}&maxTokens=500&mode=catalog
+orchestr8://agents/match?query={{task}}&maxTokens=500&mode=catalog
 
 ## Phase 2: Core Expertise (2000 tokens)
-@orchestr8://agents/match?query={{task}}&maxTokens=2000
+orchestr8://agents/match?query={{task}}&maxTokens=2000
 
 ## Phase 3: Deep Dive (5000 tokens)
-@orchestr8://agents/match?query={{task}}&maxTokens=5000
+orchestr8://agents/match?query={{task}}&maxTokens=5000
 ```
 
 #### Adaptive Budgets
@@ -574,9 +574,9 @@ The complete resolution flow:
 
 ```
 1. Parse URI
-   ├─ Static? (@orchestr8://agents/typescript-core)
+   ├─ Static? (orchestr8://agents/typescript-core)
    │  └─> Load file directly
-   └─ Dynamic? (@orchestr8://agents/match?query=...)
+   └─ Dynamic? (orchestr8://agents/match?query=...)
       └─> Continue to step 2
 
 2. Parse Query Parameters
@@ -642,7 +642,7 @@ estimatedTokens: 800
 ```typescript
 ReadMcpResourceTool({
   server: "plugin:orchestr8:orchestr8-resources",
-  uri: "@orchestr8://skills/testing-unit"
+  uri: "orchestr8://skills/testing-unit"
 })
 ```
 
@@ -653,7 +653,7 @@ ReadMcpResourceTool({
 ```typescript
 ReadMcpResourceTool({
   server: "plugin:orchestr8:orchestr8-resources",
-  uri: "@orchestr8://agents/match?query=typescript+api+design&maxTokens=2000"
+  uri: "orchestr8://agents/match?query=typescript+api+design&maxTokens=2000"
 })
 ```
 
@@ -666,7 +666,7 @@ ReadMcpResourceTool({
 ```typescript
 ReadMcpResourceTool({
   server: "plugin:orchestr8:orchestr8-resources",
-  uri: "@orchestr8://match?query=error+handling&categories=agent,skill"
+  uri: "orchestr8://match?query=error+handling&categories=agent,skill"
 })
 ```
 
@@ -679,7 +679,7 @@ ReadMcpResourceTool({
 ```typescript
 ReadMcpResourceTool({
   server: "plugin:orchestr8:orchestr8-resources",
-  uri: "@orchestr8://patterns/match?query=async&tags=typescript,concurrency"
+  uri: "orchestr8://patterns/match?query=async&tags=typescript,concurrency"
 })
 ```
 
@@ -692,7 +692,7 @@ ReadMcpResourceTool({
 ```typescript
 ReadMcpResourceTool({
   server: "plugin:orchestr8:orchestr8-resources",
-  uri: "@orchestr8://agents/match?query=api+design&mode=catalog&maxResults=5"
+  uri: "orchestr8://agents/match?query=api+design&mode=catalog&maxResults=5"
 })
 ```
 
@@ -717,15 +717,15 @@ arguments:
 
 ## Step 1: Load Overview
 
-@orchestr8://match?query={{technology}}+overview&maxTokens=1000&mode=catalog
+orchestr8://match?query={{technology}}+overview&maxTokens=1000&mode=catalog
 
 ## Step 2: Load Core Concepts
 
-@orchestr8://match?query={{technology}}+core+concepts&maxTokens=3000
+orchestr8://match?query={{technology}}+core+concepts&maxTokens=3000
 
 ## Step 3: Load Examples
 
-@orchestr8://examples/match?query={{technology}}&maxTokens=2000
+orchestr8://examples/match?query={{technology}}&maxTokens=2000
 
 ## Step 4: Practice
 
@@ -765,7 +765,7 @@ arguments:
 1. **Naming Conventions**:
    - Prompts: kebab-case (e.g., `build-api.md`)
    - Resources: kebab-case (e.g., `typescript-core.md`)
-   - URIs: kebab-case (e.g., `@orchestr8://agents/typescript-core`)
+   - URIs: kebab-case (e.g., `orchestr8://agents/typescript-core`)
 
 2. **File Organization**:
    - Use `` subdirectories for composable resources
@@ -807,7 +807,7 @@ arguments:
 1. Check URI matches file path exactly
 2. Verify file extension is `.md`, `.json`, or `.yaml`
 3. Check file exists: `ls resources/path/to/file.md`
-4. Review URI format: `@orchestr8://category/path/name` (no extension)
+4. Review URI format: `orchestr8://category/path/name` (no extension)
 
 ### Fuzzy Match Returns No Results
 
@@ -818,7 +818,7 @@ arguments:
 2. Remove or reduce tag filters
 3. Check resource index loaded: Look for "Resource index loaded" in logs
 4. Verify resources have tags in frontmatter
-5. Try global template: `@orchestr8://match?query=...`
+5. Try global template: `orchestr8://match?query=...`
 
 ### Token Budget Exceeded
 

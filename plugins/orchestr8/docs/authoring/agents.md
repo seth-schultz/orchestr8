@@ -302,9 +302,9 @@ type Result<T> =
 
 ## See Also
 
-- [TypeScript API Development](@orchestr8://agents/typescript-api-development)
-- [TypeScript Async Patterns](@orchestr8://agents/typescript-async-patterns)
-- [TypeScript Testing](@orchestr8://agents/typescript-testing)
+- [TypeScript API Development](orchestr8://agents/typescript-api-development)
+- [TypeScript Async Patterns](orchestr8://agents/typescript-async-patterns)
+- [TypeScript Testing](orchestr8://agents/typescript-testing)
 ```
 
 ### Core Fragment Checklist
@@ -430,9 +430,9 @@ const asyncHandler = (fn: Function) => (
 
 ## See Also
 
-- [TypeScript Core](@orchestr8://agents/typescript-core)
-- [Error Handling Patterns](@orchestr8://skills/error-handling-api-patterns)
-- [API Design REST](@orchestr8://skills/api-design-rest)
+- [TypeScript Core](orchestr8://agents/typescript-core)
+- [Error Handling Patterns](orchestr8://skills/error-handling-api-patterns)
+- [API Design REST](orchestr8://skills/api-design-rest)
 ```
 
 ### Specialized Fragment Checklist
@@ -488,9 +488,9 @@ relatedTo:
 ---
 
 ## Related Expertise
-- [TypeScript Core](@orchestr8://agents/typescript-core)
-- [Error Handling Patterns](@orchestr8://skills/error-handling-api-patterns)
-- [API Design](@orchestr8://skills/api-design-rest)
+- [TypeScript Core](orchestr8://agents/typescript-core)
+- [Error Handling Patterns](orchestr8://skills/error-handling-api-patterns)
+- [API Design](orchestr8://skills/api-design-rest)
 
 Token cost: ~80 tokens
 ```
@@ -608,14 +608,14 @@ tags: [python, fastapi, dependencies, injection, async]
 
 ## Related FastAPI Expertise
 **Core prerequisite:**
-- [Python Core](@orchestr8://agents/python-core) - Required foundation
+- [Python Core](orchestr8://agents/python-core) - Required foundation
 
 **Related specializations:**
-- [FastAPI Validation](@orchestr8://agents/python-fastapi-validation)
-- [FastAPI Middleware](@orchestr8://agents/python-fastapi-middleware)
+- [FastAPI Validation](orchestr8://agents/python-fastapi-validation)
+- [FastAPI Middleware](orchestr8://agents/python-fastapi-middleware)
 
 **Complementary skills:**
-- [Python Async Fundamentals](@orchestr8://agents/python-async-fundamentals)
+- [Python Async Fundamentals](orchestr8://agents/python-async-fundamentals)
 ```
 
 **Token efficiency with families:**
@@ -656,19 +656,19 @@ Should NOT match:
 
 2. **Test core queries:**
    ```
-   @orchestr8://agents/match?query=typescript
-   @orchestr8://agents/match?query=typescript+development
+   orchestr8://agents/match?query=typescript
+   orchestr8://agents/match?query=typescript+development
    ```
 
 3. **Test specialized queries:**
    ```
-   @orchestr8://agents/match?query=typescript+api+express
-   @orchestr8://agents/match?query=typescript+rest+backend
+   orchestr8://agents/match?query=typescript+api+express
+   orchestr8://agents/match?query=typescript+rest+backend
    ```
 
 4. **Test composition:**
    ```
-   @orchestr8://agents/match?query=typescript+api+async
+   orchestr8://agents/match?query=typescript+api+async
    # Should load: typescript-core + typescript-api + typescript-async
    ```
 

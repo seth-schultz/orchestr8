@@ -8,7 +8,7 @@ capabilities:
   - Complex dependency graph management
   - Multi-wave execution planning
   - Scope-level validation and testing
-prerequisite: @orchestr8://agents/project-manager-agent
+prerequisite: orchestr8://agents/project-manager-agent
 useWhen:
   - Coordinating 5+ workers in parallel waves with complex dependencies
   - Managing large-scale features requiring 15+ file modifications across multiple workers
@@ -22,7 +22,7 @@ estimatedTokens: 700
 
 Advanced techniques for parallel worker coordination, wave-based execution, and complex integration scenarios.
 
-**Prerequisite:** Load `@orchestr8://agents/project-manager-agent` first for core PM capabilities.
+**Prerequisite:** Load `orchestr8://agents/project-manager-agent` first for core PM capabilities.
 
 ## Advanced Parallel Worker Coordination
 

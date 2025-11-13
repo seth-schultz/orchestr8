@@ -16,8 +16,8 @@ useWhen:
   - Creating comprehensive migration roadmaps with phased execution plans including pilot, core services, and full cutover
 estimatedTokens: 480
 relatedResources:
-  - @orchestr8://examples/workflows/cloud-migration-planning-details
-  - @orchestr8://patterns/session-output-management
+  - orchestr8://examples/workflows/cloud-migration-planning-details
+  - orchestr8://patterns/session-output-management
 ---
 
 # Cloud Migration Planning Workflow
@@ -48,8 +48,8 @@ Phase 5: Implementation Roadmap (90-100%)
 ## Phase 1: Initialize & Legacy Assessment (0-25%)
 
 **Load:**
-- `@orchestr8://patterns/session-output-management`
-- `@orchestr8://agents/legacy-system-analyst`
+- `orchestr8://patterns/session-output-management`
+- `orchestr8://agents/legacy-system-analyst`
 
 **Activities:**
 1. Initialize session with metadata (target cloud, HA/DR required, compliance)
@@ -68,7 +68,7 @@ Phase 5: Implementation Roadmap (90-100%)
 ## Phase 2: Cloud Architecture Design (25-50%)
 
 **Load:**
-- `@orchestr8://agents/cloud-migration-architect`
+- `orchestr8://agents/cloud-migration-architect`
 
 **Activities:**
 1. **Cloud Service Selection**:
@@ -207,14 +207,14 @@ Phase 5: Implementation Roadmap (90-100%)
 
 **Combine with Microservices Transformation:**
 ```
-@orchestr8://workflows/workflow-microservices-transformation
+orchestr8://workflows/workflow-microservices-transformation
 ```
 
 For "Best" approach, adds domain-driven design, service boundaries, and data decomposition.
 
 **Combine with Security Audit:**
 ```
-@orchestr8://workflows/workflow-security-audit
+orchestr8://workflows/workflow-security-audit
 ```
 
 For compliance-heavy migrations (HIPAA, SOC2, PCI-DSS).
@@ -248,7 +248,7 @@ See complete templates for:
 - Risk assessment frameworks
 
 ```
-@orchestr8://examples/workflows/cloud-migration-planning-details
+orchestr8://examples/workflows/cloud-migration-planning-details
 ```
 
 ## Success Criteria

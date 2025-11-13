@@ -276,16 +276,16 @@ ls -la resources/agents/typescript-core.md
 
 Correct format:
 ```
-@orchestr8://agents/typescript-core
-@orchestr8://agents/typescript-core
-@orchestr8://skills/api-design-rest
+orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
+orchestr8://skills/api-design-rest
 ```
 
 Incorrect format:
 ```
-@orchestr8://agents/typescript-core.md  ❌ (no extension)
-@orchestr8://typescript-core            ❌ (missing category)
-@orchestr8://agents/typescript_core     ❌ (underscore instead of hyphen)
+orchestr8://agents/typescript-core.md  ❌ (no extension)
+orchestr8://typescript-core            ❌ (missing category)
+orchestr8://agents/typescript_core     ❌ (underscore instead of hyphen)
 ```
 
 #### 3. Check File Extension
@@ -324,7 +324,7 @@ estimated-tokens: 650
 LOG_LEVEL=debug node -e "
 const { ResourceLoader } = require('./dist/loaders/resourceLoader.js');
 const loader = new ResourceLoader('./resources');
-loader.getResource('@orchestr8://agents/typescript-core').then(console.log);
+loader.getResource('orchestr8://agents/typescript-core').then(console.log);
 "
 ```
 
@@ -369,7 +369,7 @@ tr -d '\000' < file.md > file_clean.md
 ### Dynamic Matching Returns No Results
 
 **Symptoms:**
-- `@orchestr8://match?query=...` returns empty
+- `orchestr8://match?query=...` returns empty
 - No resources matched
 - 0 results for valid queries
 
@@ -381,10 +381,10 @@ Try more general terms:
 
 ```bash
 # Too specific (may return nothing)
-@orchestr8://match?query=typescript+express+jwt+authentication+redis
+orchestr8://match?query=typescript+express+jwt+authentication+redis
 
 # Better (broader)
-@orchestr8://match?query=typescript+authentication
+orchestr8://match?query=typescript+authentication
 ```
 
 #### 2. Check Resource Metadata
@@ -400,27 +400,27 @@ grep -r "typescript" resources/agents/*.md | grep "tags:"
 
 ```bash
 # Default is 3000, try increasing
-@orchestr8://match?query=typescript+api&maxTokens=5000
+orchestr8://match?query=typescript+api&maxTokens=5000
 ```
 
 #### 4. Remove Category Filter
 
 ```bash
 # Too restrictive
-@orchestr8://match?query=python&categories=example
+orchestr8://match?query=python&categories=example
 
 # Try without filter
-@orchestr8://match?query=python
+orchestr8://match?query=python
 ```
 
 #### 5. Remove Required Tags
 
 ```bash
 # May be filtering out all results
-@orchestr8://match?query=api&tags=graphql,typescript
+orchestr8://match?query=api&tags=graphql,typescript
 
 # Try without required tags
-@orchestr8://match?query=api+graphql+typescript
+orchestr8://match?query=api+graphql+typescript
 ```
 
 #### 6. Enable Debug Logging
@@ -447,24 +447,24 @@ Look for:
 
 ```bash
 # Generic
-@orchestr8://match?query=api
+orchestr8://match?query=api
 
 # Specific
-@orchestr8://match?query=rest+api+authentication+typescript
+orchestr8://match?query=rest+api+authentication+typescript
 ```
 
 #### 2. Use Category Filters
 
 ```bash
 # Filter to specific categories
-@orchestr8://match?query=testing&categories=example,skill
+orchestr8://match?query=testing&categories=example,skill
 ```
 
 #### 3. Use Required Tags
 
 ```bash
 # Require specific tags
-@orchestr8://match?query=async+patterns&tags=typescript
+orchestr8://match?query=async+patterns&tags=typescript
 ```
 
 #### 4. Reduce Token Budget
@@ -472,7 +472,7 @@ Look for:
 Lower budgets return fewer, higher-quality results:
 
 ```bash
-@orchestr8://match?query=python+api&maxTokens=1500
+orchestr8://match?query=python+api&maxTokens=1500
 ```
 
 #### 5. Improve Fragment Metadata
@@ -797,7 +797,7 @@ npm start
 
 ```bash
 # Lower budgets = faster matching
-@orchestr8://match?query=typescript&maxTokens=1500
+orchestr8://match?query=typescript&maxTokens=1500
 ```
 
 #### 3. Profile Performance
@@ -1059,8 +1059,8 @@ ps -o pid,vsz,rss,comm | grep node
 #### Resource Loading
 
 ```
-[debug] Loading resource: @orchestr8://agents/typescript-core
-[debug] Cache hit: @orchestr8://agents/typescript-core
+[debug] Loading resource: orchestr8://agents/typescript-core
+[debug] Cache hit: orchestr8://agents/typescript-core
 [debug] Resource loaded in 2ms
 ```
 
@@ -1076,7 +1076,7 @@ ps -o pid,vsz,rss,comm | grep node
 #### Errors
 
 ```
-[error] Failed to load resource: @orchestr8://agents/nonexistent
+[error] Failed to load resource: orchestr8://agents/nonexistent
 [error] ENOENT: no such file or directory
 [error] Stack: ...
 ```

@@ -17,7 +17,7 @@ You are creating a new workflow that orchestrates multi-phase execution with dyn
 
 ## Phase 1: Workflow Design (0-25%)
 
-**→ Load:** @orchestr8://patterns/match?query=workflow+design+phases&mode=index&maxResults=5
+**→ Load:** orchestr8://patterns/match?query=workflow+design+phases&mode=index&maxResults=5
 
 **Activities:**
 - Define workflow purpose for {{task}}
@@ -32,7 +32,7 @@ You are creating a new workflow that orchestrates multi-phase execution with dyn
 
 ## Phase 2: Resource Planning (25-50%)
 
-**→ Load:** @orchestr8://skills/match?query=jit+loading+resources&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=jit+loading+resources&mode=index&maxResults=5
 
 **Activities:**
 - Plan JIT loading per phase
@@ -47,13 +47,13 @@ You are creating a new workflow that orchestrates multi-phase execution with dyn
 
 ## Phase 3: Content Creation (50-80%)
 
-**→ Load:** @orchestr8://match?query={{task}}&categories=pattern,skill,example&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query={{task}}&categories=pattern,skill,example&mode=index&maxResults=8
 
 **Activities:**
 - Write workflow frontmatter (name, description, arguments)
 - Define each phase with activities
 - Add checkpoint criteria for each phase
-- Include JIT load directives (@orchestr8:// URIs)
+- Include JIT load directives (orchestr8:// URIs)
 - Document parallel tracks where applicable
 - Add success criteria at end
 - Include phase progress percentages
@@ -63,7 +63,7 @@ You are creating a new workflow that orchestrates multi-phase execution with dyn
 
 ## Phase 4: Testing & Integration (80-100%)
 
-**→ Load:** @orchestr8://skills/match?query=workflow+testing&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=workflow+testing&mode=index&maxResults=3
 
 **Activities:**
 - Test workflow with sample inputs

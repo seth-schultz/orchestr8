@@ -161,7 +161,7 @@ export GITHUB_TOKEN="ghp_your_personal_access_token"
 
 ```bash
 # Local resource
-/now "use @orchestr8://agents/typescript-developer to build an API"
+/now "use orchestr8://agents/typescript-developer to build an API"
 
 # AITMPL community resource
 /now "use aitmpl://agents/rust-pro to build a systems tool"
@@ -195,7 +195,7 @@ Source: aitmpl://agents/rust-pro
 
 ## Skill: Web Server Patterns (Local)
 Best practices for building web servers...
-Source: @orchestr8://skills/web-server-patterns
+Source: orchestr8://skills/web-server-patterns
 
 ## Pattern: Async Error Handling (GitHub: mycompany/resources)
 Comprehensive async error handling patterns...
@@ -462,7 +462,7 @@ Complete documentation available:
 2. **Command Loads:**
    ```markdown
    **→ Load Dynamic Expertise:** 
-   @orchestr8://match?query=build+TypeScript+REST+API&categories=agent,skill,pattern,workflow&maxTokens=4000
+   orchestr8://match?query=build+TypeScript+REST+API&categories=agent,skill,pattern,workflow&maxTokens=4000
    ```
 
 3. **MCP Server Processes:**
@@ -516,7 +516,7 @@ Complete documentation available:
 ┌─────────────────────────────────────────────────────────────┐
 │ Command (now.md)                                             │
 │ - Substitutes $ARGUMENTS                                     │
-│ - Contains: @orchestr8://match?query=${ARGUMENTS}...         │
+│ - Contains: orchestr8://match?query=${ARGUMENTS}...         │
 └────────────────────┬────────────────────────────────────────┘
                      │
                      ▼

@@ -517,7 +517,7 @@ import assert from 'node:assert';
 
 test('server handles dynamic resource matching', async (t) => {
   const result = await server.getResource(
-    '@orchestr8://match?query=typescript+api&maxTokens=2000'
+    'orchestr8://match?query=typescript+api&maxTokens=2000'
   );
 
   assert.ok(result.content.length > 0);

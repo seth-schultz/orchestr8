@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.5] - 2025-01-13
+
+### Fixed
+- **WebUI Overview Tab**: Fixed critical bug where stat cards were resetting to default values after initial update
+  - Memory value now displays correctly instead of showing "--"
+  - Root cause: Stats collector was converting memory to MB, but UI was also converting, causing double-conversion (values became 0)
+  - Solution: Stats collector now sends raw bytes; UI handles formatting
+  - Added stats merging to prevent card flickering during WebSocket updates
+- **MCP Resource Loading**: Fixed all 39 workflow commands to properly instruct Claude how to load MCP resources
+  - Replaced non-standard `@orchestr8://` URI notation with standard `orchestr8://` (2,249 occurrences across 298 files)
+  - Added "How to Load MCP Resources" section to all command files
+  - Created `resources/guides/mcp-resource-loading.md` guide with detailed instructions
+  - Commands now properly explain to use `ReadMcpResourceTool` with `server: "orchestr8"` parameter
+
+### Added
+- Version bump automation script (`scripts/bump-version.sh`) for consistent version management across all files
+  - Supports semantic versioning with `patch`, `minor`, `major` auto-increment
+  - Updates VERSION, package.json, plugin.json, and marketplace.json atomically
+  - Includes validation and helpful next-steps guidance
+  - Available via npm scripts: `npm run version:patch`, `version:minor`, `version:major`
+
 ## [8.0.4] - 2025-01-13
 
 ### Changed

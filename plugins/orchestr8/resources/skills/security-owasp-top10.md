@@ -8,11 +8,11 @@ capabilities:
   - Common attack prevention patterns
   - Security vulnerability identification
 relatedResources:
-  - @orchestr8://skills/security-api-security
-  - @orchestr8://skills/security-authentication-jwt
-  - @orchestr8://skills/security-authentication-oauth
-  - @orchestr8://skills/security-input-validation
-  - @orchestr8://skills/security-secrets-management
+  - orchestr8://skills/security-api-security
+  - orchestr8://skills/security-authentication-jwt
+  - orchestr8://skills/security-authentication-oauth
+  - orchestr8://skills/security-input-validation
+  - orchestr8://skills/security-secrets-management
 useWhen:
   - Implementing security controls to prevent OWASP Top 10 vulnerabilities including broken access control, injection, and auth failures
   - Building secure applications requiring parameterized SQL queries, bcrypt password hashing, and HTTPS-only with secure cookies
@@ -59,7 +59,7 @@ app.get('/users/:id', authenticate, (req, res) => {
 - Use secure random number generation
 - Implement proper key management
 
-**For detailed implementation:** See `@orchestr8://skills/security-secrets-management`
+**For detailed implementation:** See `orchestr8://skills/security-secrets-management`
 
 ## 3. Injection (SQL, NoSQL, Command)
 
@@ -70,7 +70,7 @@ app.get('/users/:id', authenticate, (req, res) => {
 - Avoid shell command execution with user input
 - Whitelist allowed values, never blacklist
 
-**For detailed implementation:** See `@orchestr8://skills/security-input-validation`
+**For detailed implementation:** See `orchestr8://skills/security-input-validation`
 
 ## 4. Insecure Design
 
@@ -101,7 +101,7 @@ app.use('/api/', limiter);
 - Regular dependency updates and security audits
 - Minimal exposed services and endpoints
 
-**For detailed implementation:** See `@orchestr8://skills/security-api-security`
+**For detailed implementation:** See `orchestr8://skills/security-api-security`
 
 ## 6. Vulnerable and Outdated Components
 
@@ -129,8 +129,8 @@ npm outdated
 - Use modern authentication protocols (OAuth 2.0, OpenID Connect)
 
 **For detailed implementation:**
-- JWT authentication: `@orchestr8://skills/security-authentication-jwt`
-- OAuth 2.0/OIDC: `@orchestr8://skills/security-authentication-oauth`
+- JWT authentication: `orchestr8://skills/security-authentication-jwt`
+- OAuth 2.0/OIDC: `orchestr8://skills/security-authentication-oauth`
 
 ## 8. Software and Data Integrity Failures
 
@@ -174,39 +174,39 @@ logger.warn('Failed login attempt', {
 - Use network segmentation
 - Disable unnecessary URL schemas (file://, gopher://)
 
-**For detailed implementation:** See `@orchestr8://skills/security-input-validation`
+**For detailed implementation:** See `orchestr8://skills/security-input-validation`
 
 ## Related Security Skills
 
 This OWASP Top 10 overview provides high-level guidance. For detailed implementations, patterns, and code examples, refer to these specialized security skills:
 
 ### Authentication & Authorization
-- **JWT Authentication**: `@orchestr8://skills/security-authentication-jwt`
+- **JWT Authentication**: `orchestr8://skills/security-authentication-jwt`
   - Token generation, validation, and rotation
   - Refresh token implementation
   - Token revocation strategies
 
-- **OAuth 2.0 & OpenID Connect**: `@orchestr8://skills/security-authentication-oauth`
+- **OAuth 2.0 & OpenID Connect**: `orchestr8://skills/security-authentication-oauth`
   - Authorization code flow with PKCE
   - Social login integration
   - Token management best practices
 
 ### API Security
-- **API Security Patterns**: `@orchestr8://skills/security-api-security`
+- **API Security Patterns**: `orchestr8://skills/security-api-security`
   - Rate limiting strategies
   - CORS configuration
   - API key management
   - DDoS protection
 
 ### Input Validation & Injection Prevention
-- **Input Validation**: `@orchestr8://skills/security-input-validation`
+- **Input Validation**: `orchestr8://skills/security-input-validation`
   - SQL injection prevention
   - XSS attack prevention
   - Command injection prevention
   - Schema validation with Zod
 
 ### Secrets & Key Management
-- **Secrets Management**: `@orchestr8://skills/security-secrets-management`
+- **Secrets Management**: `orchestr8://skills/security-secrets-management`
   - Secure credential storage
   - Secret rotation strategies
   - Vault and cloud secret managers

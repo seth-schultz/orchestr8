@@ -58,9 +58,9 @@ The provider system solves several critical challenges:
 
 **URI Format**:
 ```
-@orchestr8://agents/typescript-developer
-@orchestr8://skills/error-handling
-@orchestr8://match?query=typescript+api&maxTokens=2000
+orchestr8://agents/typescript-developer
+orchestr8://skills/error-handling
+orchestr8://match?query=typescript+api&maxTokens=2000
 ```
 
 ---
@@ -229,7 +229,7 @@ Workflows automatically use the provider system:
 ### Request Flow
 
 ```
-1. Request: "@orchestr8://match?query=rust+api"
+1. Request: "orchestr8://match?query=rust+api"
               ↓
 2. ResourceLoader.loadResourceContent()
               ↓
@@ -474,7 +474,7 @@ const resource = await registry.fetchResource(
 ```markdown
 <!-- In workflow markdown -->
 **Dynamic Resource:**
-@orchestr8://match?query=python+fastapi+validation&maxTokens=2500
+orchestr8://match?query=python+fastapi+validation&maxTokens=2500
 
 **What happens:**
 1. LocalProvider searches local resources for "python fastapi validation"

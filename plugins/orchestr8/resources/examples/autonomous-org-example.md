@@ -35,7 +35,7 @@ estimatedTokens: 2000
 
 ```
 Chief Orchestrator queries:
-@orchestr8://match?query=autonomous organization project management&categories=patterns,agents&minScore=20
+orchestr8://match?query=autonomous organization project management&categories=patterns,agents&minScore=20
 ```
 
 **Catalog returns:**
@@ -52,7 +52,7 @@ Chief Orchestrator queries:
 Chief Orchestrator loads KB Agent:
 ReadMcpResourceTool(
   server="plugin:orchestr8:orchestr8-resources",
-  uri="@orchestr8://agents/knowledge-base-agent"
+  uri="orchestr8://agents/knowledge-base-agent"
 )
 
 KB Agent analyzes repository and provides:
@@ -150,10 +150,10 @@ Chief Orchestrator uses TodoWrite:
 
 ```
 Chief Orchestrator loads in parallel:
-- @orchestr8://agents/project-manager
-- @orchestr8://agents/worker-developer
-- @orchestr8://agents/worker-qa
-- @orchestr8://agents/worker-sre
+- orchestr8://agents/project-manager
+- orchestr8://agents/worker-developer
+- orchestr8://agents/worker-qa
+- orchestr8://agents/worker-sre
 ```
 
 ### Step 6: Launch Project Managers
@@ -283,7 +283,7 @@ You have access to Orchestr8 catalog - load domain-specific expertise as needed.
 **Step 1: Load Expertise**
 ```
 PM-Backend queries catalog:
-@orchestr8://match?query=TypeScript Express REST API authentication PostgreSQL&categories=agents,skills,patterns&minScore=20
+orchestr8://match?query=TypeScript Express REST API authentication PostgreSQL&categories=agents,skills,patterns&minScore=20
 
 Loads:
 - Express best practices

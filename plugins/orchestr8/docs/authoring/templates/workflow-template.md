@@ -46,7 +46,7 @@ ${Brief-explanation-of-workflow} (2-3 sentences describing purpose, approach, an
 
 ## Phase 1: ${Phase-Name} (0-X%)
 
-**→ JIT Load:** @orchestr8://match?query=${relevant-query}&categories=${relevant-categories}&maxTokens=${token-budget}
+**→ JIT Load:** orchestr8://match?query=${relevant-query}&categories=${relevant-categories}&maxTokens=${token-budget}
 
 **Activities:**
 - ${Activity-1}: ${Description-of-what-to-do}
@@ -61,7 +61,7 @@ ${Brief-explanation-of-workflow} (2-3 sentences describing purpose, approach, an
 
 ## Phase 2: ${Phase-Name} (X%-Y%)
 
-**→ JIT Load:** @orchestr8://agents/match?query=${technology}+${domain}&maxTokens=${token-budget}
+**→ JIT Load:** orchestr8://agents/match?query=${technology}+${domain}&maxTokens=${token-budget}
 
 **Activities:**
 - ${Activity-1}: ${Specific-action-with-${arg-name}-reference}
@@ -75,7 +75,7 @@ ${Brief-explanation-of-workflow} (2-3 sentences describing purpose, approach, an
 
 ## Phase 3: ${Phase-Name} (Y%-Z%)
 
-**→ JIT Load:** @orchestr8://match?query=${specific-need}&categories=agent,skill,example&maxTokens=${token-budget}
+**→ JIT Load:** orchestr8://match?query=${specific-need}&categories=agent,skill,example&maxTokens=${token-budget}
 
 **Activities:**
 - ${Activity-1}: ${Action}
@@ -127,7 +127,7 @@ Clear checklist of what "done" looks like:
 **Phase structure:**
 ```markdown
 ## Phase N: Name (X%-Y%)
-**→ JIT Load:** @orchestr8://...
+**→ JIT Load:** orchestr8://...
 **Activities:** [list]
 **Parallel tracks:** [if applicable]
 **→ Checkpoint:** [criteria]
@@ -175,35 +175,35 @@ Phase 6: Deployment (90-100%)
 
 ```markdown
 Phase 1 (Research/Planning): 800-1200 tokens
-└─ @orchestr8://match?query=research+analysis&maxTokens=1000
+└─ orchestr8://match?query=research+analysis&maxTokens=1000
 
 Phase 2 (Design): 1200-1800 tokens
-└─ @orchestr8://match?query=${domain}+architecture&maxTokens=1500
+└─ orchestr8://match?query=${domain}+architecture&maxTokens=1500
 
 Phase 3 (Implementation): 2000-2500 tokens
-└─ @orchestr8://match?query=${tech}+${feature}&categories=agent,skill,example&maxTokens=2500
+└─ orchestr8://match?query=${tech}+${feature}&categories=agent,skill,example&maxTokens=2500
 
 Phase 4 (Testing): 800-1200 tokens
-└─ @orchestr8://skills/match?query=testing+${tech}&maxTokens=1000
+└─ orchestr8://skills/match?query=testing+${tech}&maxTokens=1000
 ```
 
 **Loading strategies:**
 
 **Static URI (fixed dependency):**
 ```markdown
-@orchestr8://agents/typescript-core
-@orchestr8://patterns/autonomous-organization
+orchestr8://agents/typescript-core
+orchestr8://patterns/autonomous-organization
 ```
 
 **Dynamic query (variable need):**
 ```markdown
-@orchestr8://match?query=${technology}+${domain}&categories=agent,skill
-@orchestr8://agents/match?query=${language}+${framework}
+orchestr8://match?query=${technology}+${domain}&categories=agent,skill
+orchestr8://agents/match?query=${language}+${framework}
 ```
 
 **With constraints:**
 ```markdown
-@orchestr8://match?query=${need}&categories=agent,skill&maxTokens=1500&minScore=20
+orchestr8://match?query=${need}&categories=agent,skill&maxTokens=1500&minScore=20
 ```
 
 ### Argument Usage
@@ -224,7 +224,7 @@ arguments:
 
 # Named substitution
 ## Implementing ${feature-description}
-**→ Load:** @orchestr8://match?query=${technology}+${feature-description}
+**→ Load:** orchestr8://match?query=${technology}+${feature-description}
 ```
 
 ### Parallelism
@@ -236,11 +236,11 @@ arguments:
 
 **Parallel tracks (launch in single message):**
 - **Track A - Backend:** API implementation
-  └─ Load: @orchestr8://agents/backend-${technology}
+  └─ Load: orchestr8://agents/backend-${technology}
 - **Track B - Frontend:** UI implementation
-  └─ Load: @orchestr8://agents/frontend-${framework}
+  └─ Load: orchestr8://agents/frontend-${framework}
 - **Track C - Database:** Schema design
-  └─ Load: @orchestr8://patterns/database-design
+  └─ Load: orchestr8://patterns/database-design
 
 **→ Checkpoint:** All tracks complete (70%)
 ```
@@ -302,7 +302,7 @@ Registration: Automatic via MCP
 **As pattern fragment:**
 ```
 Location: resources/workflows/workflow-name.md
-Discovery: @orchestr8://workflows/match?query=...
+Discovery: orchestr8://workflows/match?query=...
 ```
 
 ### Quality Checklist for Workflows

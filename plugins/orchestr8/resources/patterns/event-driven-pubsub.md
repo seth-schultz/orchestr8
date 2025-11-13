@@ -157,9 +157,9 @@ async function handleEvent(event) {
 
 ## Related Event-Driven Patterns
 
-- **@orchestr8://patterns/event-driven-best-practices** - Idempotency, DLQ, and monitoring practices
-- **@orchestr8://patterns/event-driven-cqrs** - Build read models with pub/sub events
-- **@orchestr8://patterns/event-driven-eventsourcing** - Event sourcing with pub/sub distribution
-- **@orchestr8://patterns/event-driven-saga** - Choreography-based sagas with pub/sub
-- **@orchestr8://patterns/message-broker-comparison** - Choose between Kafka, RabbitMQ, SQS/SNS
-- **@orchestr8://patterns/architecture-microservices** - Pub/sub in microservices communication
+- **orchestr8://patterns/event-driven-best-practices** - Idempotency, DLQ, and monitoring practices
+- **orchestr8://patterns/event-driven-cqrs** - Build read models with pub/sub events
+- **orchestr8://patterns/event-driven-eventsourcing** - Event sourcing with pub/sub distribution
+- **orchestr8://patterns/event-driven-saga** - Choreography-based sagas with pub/sub
+- **orchestr8://patterns/message-broker-comparison** - Choose between Kafka, RabbitMQ, SQS/SNS
+- **orchestr8://patterns/architecture-microservices** - Pub/sub in microservices communication

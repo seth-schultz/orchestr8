@@ -16,8 +16,8 @@ useWhen:
   - Optimizing query execution plans
 estimatedTokens: 620
 relatedResources:
-  - @orchestr8://agents/mysql-specialist
-  - @orchestr8://agents/database-architect-sql
+  - orchestr8://agents/mysql-specialist
+  - orchestr8://agents/database-architect-sql
 ---
 
 # MySQL Performance Tuning

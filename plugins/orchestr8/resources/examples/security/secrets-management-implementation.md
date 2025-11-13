@@ -17,7 +17,7 @@ useWhen:
   - When managing secrets in Kubernetes environments
 estimatedTokens: 400
 relatedResources:
-  - @orchestr8://skills/security-secrets-management
+  - orchestr8://skills/security-secrets-management
 ---
 
 # Secrets Management Implementation

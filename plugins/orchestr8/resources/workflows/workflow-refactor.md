@@ -29,9 +29,9 @@ estimatedTokens: 2200
 
 **→ Load Code Analysis Expertise (JIT):**
 ```
-@orchestr8://match?query=code+analysis+smells+complexity+${tech-stack}&categories=skill,pattern&mode=index&maxResults=5
-@orchestr8://skills/quality-code-review-checklist
-@orchestr8://patterns/architecture-decision-records
+orchestr8://match?query=code+analysis+smells+complexity+${tech-stack}&categories=skill,pattern&mode=index&maxResults=5
+orchestr8://skills/quality-code-review-checklist
+orchestr8://patterns/architecture-decision-records
 ```
 
 **Activities:**
@@ -45,9 +45,9 @@ estimatedTokens: 2200
 
 **→ Load Testing & Legacy Code Expertise (JIT):**
 ```
-@orchestr8://match?query=${tech-stack}+testing+coverage+characterization&categories=skill,agent&mode=index&maxResults=5
-@orchestr8://skills/testing-strategies
-@orchestr8://skills/testing-unit
+orchestr8://match?query=${tech-stack}+testing+coverage+characterization&categories=skill,agent&mode=index&maxResults=5
+orchestr8://skills/testing-strategies
+orchestr8://skills/testing-unit
 ```
 
 **Activities:**
@@ -63,9 +63,9 @@ estimatedTokens: 2200
 
 **→ Load Refactoring Techniques (JIT):**
 ```
-@orchestr8://match?query=${tech-stack}+refactoring+patterns+SOLID&categories=skill,pattern&mode=index&maxResults=8
-@orchestr8://skills/quality-refactoring-techniques
-@orchestr8://patterns/architecture-layered
+orchestr8://match?query=${tech-stack}+refactoring+patterns+SOLID&categories=skill,pattern&mode=index&maxResults=8
+orchestr8://skills/quality-refactoring-techniques
+orchestr8://patterns/architecture-layered
 ```
 
 **Continuous testing runs alongside transformation:**
@@ -80,7 +80,7 @@ estimatedTokens: 2200
 **→ Load Validation Expertise (JIT - CONDITIONAL):**
 ```
 # Only if comprehensive validation needed beyond basic testing
-@orchestr8://match?query=${tech-stack}+integration+testing+metrics&categories=skill&mode=index&maxResults=3
+orchestr8://match?query=${tech-stack}+integration+testing+metrics&categories=skill&mode=index&maxResults=3
 ```
 
 **Activities:**

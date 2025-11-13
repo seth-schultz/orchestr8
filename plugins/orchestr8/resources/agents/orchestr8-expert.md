@@ -17,11 +17,11 @@ useWhen:
   - Architecting workflows with phased loading and budget awareness
 estimatedTokens: 1850
 relatedResources:
-  - @orchestr8://skills/fragment-creation-workflow
-  - @orchestr8://skills/fragment-metadata-optimization
-  - @orchestr8://skills/jit-loading-progressive-strategies
-  - @orchestr8://skills/jit-loading-phase-budgets
-  - @orchestr8://patterns/dynamic-expertise-core
+  - orchestr8://skills/fragment-creation-workflow
+  - orchestr8://skills/fragment-metadata-optimization
+  - orchestr8://skills/jit-loading-progressive-strategies
+  - orchestr8://skills/jit-loading-phase-budgets
+  - orchestr8://patterns/dynamic-expertise-core
 ---
 
 # Orchestr8 Expert - Token Optimization Architecture Specialist
@@ -39,7 +39,7 @@ Orchestr8 achieves **95-98% token reduction** through six complementary strategi
 **Architecture:**
 ```
 Upfront: 9 workflows × 2KB = 18KB
-On-demand: @orchestr8://match queries load 2-5 fragments (~1,500 tokens)
+On-demand: orchestr8://match queries load 2-5 fragments (~1,500 tokens)
 Savings: 91-97% vs loading everything
 ```
 
@@ -47,10 +47,10 @@ Savings: 91-97% vs loading everything
 ```yaml
 # Instead of embedding all content, use dynamic loading
 ## Phase 1: Core Setup (0-30%)
-**→ Load:** @orchestr8://match?query=typescript+setup&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=typescript+setup&mode=index&maxResults=5
 
 ## Phase 2: Implementation (30-70%)
-**→ Load:** @orchestr8://match?query=async+error+handling&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=async+error+handling&mode=index&maxResults=8
 ```
 
 ### Strategy 2: Fragment-Based Organization (ADR-003)
@@ -111,7 +111,7 @@ Token Savings: 85-95% vs fuzzy-only
     "scenario-a1b2c3": {
       "scenario": "Implementing retry logic with exponential backoff",
       "keywords": ["retry", "exponential", "backoff"],
-      "uri": "@orchestr8://skills/error-handling-resilience",
+      "uri": "orchestr8://skills/error-handling-resilience",
       "estimatedTokens": 650
     }
   },
@@ -137,7 +137,7 @@ Token Savings: 85-95% vs fuzzy-only
 agent-name.md (core, 500-600 tokens)
 ├─ Essential functionality
 ├─ Common use cases (80% of usage)
-└─ Reference: @orchestr8://agents/agent-name-advanced
+└─ Reference: orchestr8://agents/agent-name-advanced
 
 agent-name-advanced.md (600-700 tokens, on-demand)
 ├─ Advanced features
@@ -176,12 +176,12 @@ Savings: 49% through phased loading
 
 **User Flow:**
 ```
-1. Query: @orchestr8://match?query=typescript+async&mode=index&maxResults=5
+1. Query: orchestr8://match?query=typescript+async&mode=index&maxResults=5
    Returns: 5 fragments, ~80 tokens, URIs only
 
 2. User reviews resource names and quick descriptions
 
-3. Load specific: @orchestr8://skills/typescript-async-patterns
+3. Load specific: orchestr8://skills/typescript-async-patterns
    Returns: Full content, 800 tokens
 
 Token Cost: 80 + 800 = 880 tokens
@@ -244,7 +244,7 @@ useWhen:  # 5-20 scenarios, natural language
   - Include relevant technology names and terms
 estimatedTokens: 650  # Actual token count
 relatedResources:  # 3-10 cross-references
-  - @orchestr8://category/related-fragment
+  - orchestr8://category/related-fragment
 ---
 ```
 
@@ -301,8 +301,8 @@ useWhen:
 
 ## Related Resources
 
-- @orchestr8://skills/related-skill
-- @orchestr8://patterns/related-pattern
+- orchestr8://skills/related-skill
+- orchestr8://patterns/related-pattern
 ```
 
 ### Workflow Creation with JIT Loading
@@ -313,7 +313,7 @@ useWhen:
 
 ## Phase 1: Discovery (0-30%)
 
-**→ Load:** @orchestr8://match?query=specific+keywords&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=specific+keywords&mode=index&maxResults=5
 
 **Activities:**
 - Do discovery work
@@ -323,7 +323,7 @@ useWhen:
 
 ## Phase 2: Implementation (30-70%)
 
-**→ Load:** @orchestr8://match?query=different+keywords&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=different+keywords&mode=index&maxResults=8
 
 **Activities:**
 - Implementation work
@@ -333,7 +333,7 @@ useWhen:
 
 ## Phase 3: Validation (70-100%)
 
-**→ Load:** @orchestr8://match?query=testing+keywords&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=testing+keywords&mode=index&maxResults=3
 
 **Activities:**
 - Testing and validation
@@ -375,13 +375,13 @@ argument-hint: [type] [details]
 
 ​```
 # Phase 0: Discovery (if needed)
-@orchestr8://match?query=discovery+keywords&mode=index&maxResults=3
+orchestr8://match?query=discovery+keywords&mode=index&maxResults=3
 
 # Phase 1: Core Work
-@orchestr8://match?query=core+keywords&mode=index&maxResults=5
+orchestr8://match?query=core+keywords&mode=index&maxResults=5
 
 # Phase 2: Advanced (if needed)
-@orchestr8://agents/specific-expert-advanced
+orchestr8://agents/specific-expert-advanced
 ​```
 
 **Token Efficiency:**
@@ -391,14 +391,14 @@ argument-hint: [type] [details]
 
 ## Phase 1: Work (0-40%)
 
-**→ Load:** @orchestr8://match?query=phase1+keywords&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=phase1+keywords&mode=index&maxResults=5
 
 **Activities:**
 - Use loaded expertise
 
 ## Phase 2: More Work (40-100%)
 
-**→ Load (if needed):** @orchestr8://agents/advanced-expert
+**→ Load (if needed):** orchestr8://agents/advanced-expert
 
 **Activities:**
 - Advanced implementation
@@ -412,7 +412,7 @@ argument-hint: [type] [details]
 
 1. **Use JIT Loading in Workflows**
    ```markdown
-   **→ Load:** @orchestr8://match?query=keywords&mode=index&maxResults=5
+   **→ Load:** orchestr8://match?query=keywords&mode=index&maxResults=5
    ```
 
 2. **Fragment Large Resources**
@@ -425,7 +425,7 @@ argument-hint: [type] [details]
    - Powers index-based lookup
 
 4. **Leverage Cross-References**
-   - Link related fragments with `@orchestr8://` URIs
+   - Link related fragments with `orchestr8://` URIs
    - Enables JIT navigation
    - Users load what they need, when they need it
 
@@ -439,8 +439,8 @@ argument-hint: [type] [details]
 1. **Don't Load Everything Upfront**
    ```markdown
    # ❌ BAD
-   **→ Load:** @orchestr8://agents/full-agent
-   **→ Load:** @orchestr8://skills/all-skills
+   **→ Load:** orchestr8://agents/full-agent
+   **→ Load:** orchestr8://skills/all-skills
    # Wastes tokens, slow, poor UX
    ```
 
@@ -463,7 +463,7 @@ argument-hint: [type] [details]
 
 4. **Don't Duplicate Content**
    - Extract common knowledge to shared fragments
-   - Reference via `@orchestr8://` URIs
+   - Reference via `orchestr8://` URIs
    - Single source of truth
 
 5. **Don't Ignore Token Budgets**
@@ -507,7 +507,7 @@ argument-hint: [type] [details]
 □ Capabilities: 3-8, action-oriented
 □ Cross-references: 3-10 related resources
 □ Content structure: Clear, practical, copy-paste examples
-□ JIT loading: Commands/workflows use @orchestr8://match
+□ JIT loading: Commands/workflows use orchestr8://match
 □ Progressive loading: Large resources split into core + advanced
 □ Index validation: npm run build-index (no errors)
 ```
@@ -534,9 +534,9 @@ useWhen:
   - Converting callback-based APIs to Promise-based with util.promisify
 estimatedTokens: 750
 relatedResources:
-  - @orchestr8://skills/error-handling-async
-  - @orchestr8://patterns/async-patterns
-  - @orchestr8://examples/typescript-async-examples
+  - orchestr8://skills/error-handling-async
+  - orchestr8://patterns/async-patterns
+  - orchestr8://examples/typescript-async-examples
 ---
 
 # TypeScript Async/Await Expert
@@ -584,8 +584,8 @@ async function fetchWithFallback(): Promise<Data> {
 
 ## Related Resources
 
-- @orchestr8://skills/error-handling-async - Async error strategies
-- @orchestr8://patterns/async-patterns - Design patterns
+- orchestr8://skills/error-handling-async - Async error strategies
+- orchestr8://patterns/async-patterns - Design patterns
 ```
 
 **Optimization Analysis:**

@@ -19,13 +19,13 @@ The system organizes resources into seven primary categories:
 
 | Category | Purpose | Example URIs |
 |----------|---------|--------------|
-| **agents** | AI agent definitions with specialized expertise | `@orchestr8://agents/typescript-core` |
-| **skills** | Reusable techniques and best practices | `@orchestr8://skills/error-handling-resilience` |
-| **patterns** | Design patterns and architectural approaches | `@orchestr8://patterns/autonomous-organization` |
-| **examples** | Code examples and reference implementations | `@orchestr8://examples/express-jwt-auth` |
-| **guides** | Setup and configuration guides | `@orchestr8://guides/aws-eks-cluster` |
-| **best-practices** | Code standards and quality guidelines | `@orchestr8://best-practices/api-design-rest` |
-| **workflows** | Execution strategies and process templates | `@orchestr8://workflows/workflow-new-project` |
+| **agents** | AI agent definitions with specialized expertise | `orchestr8://agents/typescript-core` |
+| **skills** | Reusable techniques and best practices | `orchestr8://skills/error-handling-resilience` |
+| **patterns** | Design patterns and architectural approaches | `orchestr8://patterns/autonomous-organization` |
+| **examples** | Code examples and reference implementations | `orchestr8://examples/express-jwt-auth` |
+| **guides** | Setup and configuration guides | `orchestr8://guides/aws-eks-cluster` |
+| **best-practices** | Code standards and quality guidelines | `orchestr8://best-practices/api-design-rest` |
+| **workflows** | Execution strategies and process templates | `orchestr8://workflows/workflow-new-project` |
 
 See [categories.md](./categories.md) for detailed information about each category.
 
@@ -67,10 +67,10 @@ Load specific resources by direct URI reference:
 
 ```typescript
 // Load a specific agent fragment
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 // Load a specific workflow
-@orchestr8://workflows/workflow-new-project
+orchestr8://workflows/workflow-new-project
 ```
 
 **Characteristics:**
@@ -85,13 +85,13 @@ Dynamically assemble resources based on query matching:
 
 ```typescript
 // Match against use-case scenarios
-@orchestr8://match?query=typescript+api+error+handling&maxTokens=2000
+orchestr8://match?query=typescript+api+error+handling&maxTokens=2000
 
 // Category-specific matching
-@orchestr8://agents/match?query=build+rest+api
+orchestr8://agents/match?query=build+rest+api
 
 // Index-based lookup (85-95% faster)
-@orchestr8://match?query=retry+exponential+backoff&mode=index
+orchestr8://match?query=retry+exponential+backoff&mode=index
 ```
 
 **Characteristics:**
@@ -117,7 +117,7 @@ Keyword Index: ["retry", "exponential", "backoff"]
   ↓
 UseWhen Index: Matching scenarios from fragments
   ↓
-Result: @orchestr8://skills/error-handling-resilience
+Result: orchestr8://skills/error-handling-resilience
 ```
 
 **Performance:**
@@ -137,7 +137,7 @@ See `resources/.index/README.md` for index architecture.
 Returns a lightweight catalog of matching resources without full content:
 
 ```typescript
-@orchestr8://match?query=typescript+testing&mode=catalog&maxResults=5
+orchestr8://match?query=typescript+testing&mode=catalog&maxResults=5
 ```
 
 **Returns:**
@@ -145,7 +145,7 @@ Returns a lightweight catalog of matching resources without full content:
 {
   "matches": [
     {
-      "uri": "@orchestr8://agents/typescript-testing",
+      "uri": "orchestr8://agents/typescript-testing",
       "score": 95,
       "estimatedTokens": 720
     }
@@ -163,7 +163,7 @@ Returns a lightweight catalog of matching resources without full content:
 Scores and assembles full content from matching fragments:
 
 ```typescript
-@orchestr8://match?query=express+middleware&mode=full&maxTokens=3000
+orchestr8://match?query=express+middleware&mode=full&maxTokens=3000
 ```
 
 **Returns:**
@@ -214,7 +214,7 @@ See [authoring-guide.md](./authoring-guide.md) for writing effective metadata.
 ```markdown
 You are a TypeScript expert. Load core expertise:
 
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 Your task: Design a type-safe API client...
 ```
@@ -224,7 +224,7 @@ Your task: Design a type-safe API client...
 ```markdown
 Load relevant expertise for this task:
 
-@orchestr8://match?query=error+handling+async+retry&maxTokens=1500
+orchestr8://match?query=error+handling+async+retry&maxTokens=1500
 
 Task: Implement resilient API client with retry logic...
 ```
@@ -234,7 +234,7 @@ Task: Implement resilient API client with retry logic...
 ```markdown
 Load TypeScript experts from agent catalog:
 
-@orchestr8://agents/match?query=advanced+type+patterns&maxResults=3
+orchestr8://agents/match?query=advanced+type+patterns&maxResults=3
 
 Task: Design complex type transformations...
 ```
@@ -244,7 +244,7 @@ Task: Design complex type transformations...
 ```markdown
 Load expertise using index lookup:
 
-@orchestr8://match?query=circuit+breaker+resilience&mode=index
+orchestr8://match?query=circuit+breaker+resilience&mode=index
 
 Task: Implement fault tolerance for microservices...
 ```
@@ -333,7 +333,7 @@ The system respects token budgets during dynamic assembly:
 
 ```typescript
 // Request up to 2000 tokens of content
-@orchestr8://match?query=kubernetes+deployment&maxTokens=2000
+orchestr8://match?query=kubernetes+deployment&maxTokens=2000
 ```
 
 **Budget allocation strategy:**
@@ -465,7 +465,7 @@ Static resource cache automatically expires after 4 hours. To force invalidation
 
 1. **Use index mode for efficiency**
    ```typescript
-   @orchestr8://match?query=keywords&mode=index
+   orchestr8://match?query=keywords&mode=index
    ```
 
 2. **Include specific keywords** in queries
@@ -484,7 +484,7 @@ Static resource cache automatically expires after 4 hours. To force invalidation
 
 5. **Use category filters** to narrow scope
    ```typescript
-   @orchestr8://agents/match?query=typescript+api
+   orchestr8://agents/match?query=typescript+api
    ```
 
 ## Architecture Diagrams

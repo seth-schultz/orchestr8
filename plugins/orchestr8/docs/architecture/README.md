@@ -66,8 +66,8 @@ Orchestr8 is an MCP (Model Context Protocol) server plugin for Claude Code that 
 │  └───────────────────────────────────────────────────────────────┘   │
 │  ┌───────────────────────────────────────────────────────────────┐   │
 │  │  URI Parser (src/utils/uriParser.ts)                           │   │
-│  │  • Static: @orchestr8://agents/typescript-developer             │   │
-│  │  • Dynamic: @orchestr8://match?query=typescript+api             │   │
+│  │  • Static: orchestr8://agents/typescript-developer             │   │
+│  │  • Dynamic: orchestr8://match?query=typescript+api             │   │
 │  │  • Query param extraction • Category filtering                 │   │
 │  └───────────────────────────────────────────────────────────────┘   │
 │  ┌───────────────────────────────────────────────────────────────┐   │
@@ -118,7 +118,7 @@ Orchestr8 is an MCP (Model Context Protocol) server plugin for Claude Code that 
 │  │  • Sibling references: Related fragments in same family        │   │
 │  │  • Parent-child: Core → specialized fragments                  │   │
 │  │  • Cross-category: Skills ↔ Patterns ↔ Examples                │   │
-│  │  • @orchestr8:// URIs for JIT loading                           │   │
+│  │  • orchestr8:// URIs for JIT loading                           │   │
 │  └───────────────────────────────────────────────────────────────┘   │
 │  ┌───────────────────────────────────────────────────────────────┐   │
 │  │  Indexes (.index/)                                             │   │
@@ -145,8 +145,8 @@ Orchestr8 is an MCP (Model Context Protocol) server plugin for Claude Code that 
 
 **Key Features:**
 - Dynamic resource templates with wildcard support (`{+rest}`)
-- Category-specific matching (e.g., `@orchestr8://agents/match?query=...`)
-- Global cross-category matching (e.g., `@orchestr8://match?query=...`)
+- Category-specific matching (e.g., `orchestr8://agents/match?query=...`)
+- Global cross-category matching (e.g., `orchestr8://match?query=...`)
 - Hot reload support in development mode
 
 **Source:** `/Users/seth/Projects/orchestr8-mcp/plugins/orchestr8/src/index.ts`
@@ -187,15 +187,15 @@ Orchestr8 is an MCP (Model Context Protocol) server plugin for Claude Code that 
 ### 4. URI Parser (src/utils/uriParser.ts)
 
 **Responsibilities:**
-- Parse `@orchestr8://` protocol URIs
+- Parse `orchestr8://` protocol URIs
 - Distinguish static vs dynamic URIs
 - Extract query parameters (query, maxTokens, tags, categories, mode, maxResults, minScore)
 - Validate URI format and required parameters
 
 **URI Types:**
-- **Static**: `@orchestr8://agents/typescript-developer`
-- **Dynamic (category-specific)**: `@orchestr8://agents/match?query=build+api`
-- **Dynamic (global)**: `@orchestr8://match?query=python+async`
+- **Static**: `orchestr8://agents/typescript-developer`
+- **Dynamic (category-specific)**: `orchestr8://agents/match?query=build+api`
+- **Dynamic (global)**: `orchestr8://match?query=python+async`
 
 **Source:** `/Users/seth/Projects/orchestr8-mcp/plugins/orchestr8/src/utils/uriParser.ts`
 
@@ -280,7 +280,7 @@ The Orchestr8 resource library has undergone comprehensive optimization across t
 - 37 files optimized with examples extracted
 - 77 new example files created in `resources/examples/`
 - ~45,000 tokens saved across the library
-- Examples referenced via `@orchestr8://examples/...` URIs
+- Examples referenced via `orchestr8://examples/...` URIs
 
 **Example Families Created:**
 - `docker-multistage-*` (Go, Node.js)
@@ -344,7 +344,7 @@ The Orchestr8 resource library has undergone comprehensive optimization across t
    - Architecture Decision Records (ADRs)
 
 **Cross-Reference Network:**
-- 207+ @orchestr8:// URI references
+- 207+ orchestr8:// URI references
 - Sibling references within families
 - Parent-child references (core → specialized)
 - Cross-category links (skills ↔ patterns ↔ examples)
@@ -544,7 +544,7 @@ Fuzzy matching uses multi-factor scoring:
 **Index Metrics:**
 - UseWhen scenarios: 1,675 (up from ~1,200, +40%)
 - Unique keywords: 4,036 (comprehensive coverage)
-- Cross-references: 207+ @orchestr8:// URIs
+- Cross-references: 207+ orchestr8:// URIs
 - Avg scenarios per fragment: 4.4
 - Avg keywords per scenario: 11.4
 

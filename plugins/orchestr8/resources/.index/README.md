@@ -33,7 +33,7 @@ This directory contains pre-built indexes for efficient resource lookup based on
     "scenario-<hash>": {
       "scenario": "Full useWhen scenario text",
       "keywords": ["extracted", "keywords", "from", "scenario"],
-      "uri": "@orchestr8://category/fragment-id",
+      "uri": "orchestr8://category/fragment-id",
       "category": "agent|skill|pattern|example|workflow",
       "estimatedTokens": 650,
       "relevance": 100
@@ -103,15 +103,15 @@ This directory contains pre-built indexes for efficient resource lookup based on
   "commonQueries": {
     "retry": {
       "uris": [
-        "@orchestr8://skills/error-handling-resilience",
-        "@orchestr8://skills/error-handling-async"
+        "orchestr8://skills/error-handling-resilience",
+        "orchestr8://skills/error-handling-async"
       ],
       "tokens": 1100
     },
     "workflow": {
       "uris": [
-        "@orchestr8://agents/workflow-architect",
-        "@orchestr8://patterns/phased-delivery"
+        "orchestr8://agents/workflow-architect",
+        "orchestr8://patterns/phased-delivery"
       ],
       "tokens": 1220
     }
@@ -346,7 +346,7 @@ function extractKeywords(text: string): string[] {
 
 ### Category Mapping
 
-**URI Format:** `@orchestr8://<category-plural>/<fragment-id>`
+**URI Format:** `orchestr8://<category-plural>/<fragment-id>`
 
 **Category mappings:**
 - agent → agents

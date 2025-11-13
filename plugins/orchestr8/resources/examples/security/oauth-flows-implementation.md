@@ -17,7 +17,7 @@ useWhen:
   - When handling OAuth token refresh and rotation
 estimatedTokens: 420
 relatedResources:
-  - @orchestr8://skills/security-authentication-oauth
+  - orchestr8://skills/security-authentication-oauth
 ---
 
 # OAuth 2.0 Flows Implementation

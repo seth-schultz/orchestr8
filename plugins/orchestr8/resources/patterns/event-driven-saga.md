@@ -269,8 +269,8 @@ class SagaState {
 
 ## Related Event-Driven Patterns
 
-- **@orchestr8://patterns/event-driven-best-practices** - Idempotency and retry patterns essential for sagas
-- **@orchestr8://patterns/event-driven-pubsub** - Choreography-based sagas use pub/sub
-- **@orchestr8://patterns/event-driven-cqrs** - Saga state can be event-sourced
-- **@orchestr8://patterns/event-driven-eventsourcing** - Event sourcing saga state
-- **@orchestr8://patterns/architecture-microservices** - Sagas for distributed microservices transactions
+- **orchestr8://patterns/event-driven-best-practices** - Idempotency and retry patterns essential for sagas
+- **orchestr8://patterns/event-driven-pubsub** - Choreography-based sagas use pub/sub
+- **orchestr8://patterns/event-driven-cqrs** - Saga state can be event-sourced
+- **orchestr8://patterns/event-driven-eventsourcing** - Event sourcing saga state
+- **orchestr8://patterns/architecture-microservices** - Sagas for distributed microservices transactions

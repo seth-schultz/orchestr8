@@ -288,8 +288,8 @@ URIs of related fragments that complement this one.
 
 ```yaml
 relatedFragments:
-  - @orchestr8://agents/typescript-async-patterns
-  - @orchestr8://skills/error-handling-async
+  - orchestr8://agents/typescript-async-patterns
+  - orchestr8://skills/error-handling-async
 ```
 
 **Use cases:**
@@ -303,7 +303,7 @@ Fragments that should be loaded before this one (prerequisite knowledge).
 
 ```yaml
 dependencies:
-  - @orchestr8://agents/python-core
+  - orchestr8://agents/python-core
 ```
 
 **Use cases:**
@@ -416,11 +416,11 @@ typescript-core (650 tokens)
 **Loading:**
 ```typescript
 // Basic task: Load core only
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 // API task: Load core + API extension
-@orchestr8://agents/typescript-core
-@orchestr8://agents/typescript-api-development
+orchestr8://agents/typescript-core
+orchestr8://agents/typescript-api-development
 ```
 
 ### Pattern 2: Skill Composition
@@ -443,7 +443,7 @@ Total: 2,080 tokens
 
 **Loading:**
 ```typescript
-@orchestr8://match?query=resilient+api+error+retry&maxTokens=2500
+orchestr8://match?query=resilient+api+error+retry&maxTokens=2500
 // Returns: All three fragments (2,080 tokens)
 ```
 
@@ -468,7 +468,7 @@ Total: 2,840 tokens
 
 **Loading:**
 ```typescript
-@orchestr8://workflows/workflow-deploy
+orchestr8://workflows/workflow-deploy
 // Workflow references other fragments
 // System can auto-load referenced fragments
 ```
@@ -494,7 +494,7 @@ Total: 2,650 tokens
 
 **Loading:**
 ```typescript
-@orchestr8://agents/match?query=fastapi+pydantic+async&maxTokens=3000
+orchestr8://agents/match?query=fastapi+pydantic+async&maxTokens=3000
 // Returns: Combination of python and fastapi fragments
 ```
 
@@ -642,19 +642,19 @@ workflow-{task-name}.md
 
 1. **Reference related fragments** in content
    ```markdown
-   For async patterns, see [typescript-async-patterns](@orchestr8://agents/typescript-async-patterns).
+   For async patterns, see [typescript-async-patterns](orchestr8://agents/typescript-async-patterns).
    ```
 
 2. **Use relatedFragments** frontmatter
    ```yaml
    relatedFragments:
-     - @orchestr8://agents/typescript-async-patterns
+     - orchestr8://agents/typescript-async-patterns
    ```
 
 3. **Mention dependencies**
    ```yaml
    dependencies:
-     - @orchestr8://agents/typescript-core
+     - orchestr8://agents/typescript-core
    ```
 
 ### Common Pitfalls
@@ -704,7 +704,7 @@ Total: 2,760 tokens
 
 **URI:**
 ```typescript
-@orchestr8://match?query=typescript+express+jwt+error+handling&maxTokens=3000
+orchestr8://match?query=typescript+express+jwt+error+handling&maxTokens=3000
 ```
 
 ### Example 2: Kubernetes Deployment
@@ -730,7 +730,7 @@ Total: 2,590 tokens
 
 **URI:**
 ```typescript
-@orchestr8://match?query=kubernetes+nodejs+health+checks+monitoring&maxTokens=3000
+orchestr8://match?query=kubernetes+nodejs+health+checks+monitoring&maxTokens=3000
 ```
 
 ### Example 3: React Frontend with State Management
@@ -756,7 +756,7 @@ Total: 2,710 tokens
 
 **URI:**
 ```typescript
-@orchestr8://agents/match?query=react+hooks+context+api+integration&maxTokens=3000
+orchestr8://agents/match?query=react+hooks+context+api+integration&maxTokens=3000
 ```
 
 ## Fragment Versioning
@@ -786,7 +786,7 @@ version: 1.2.0
 2. **Update frontmatter** with deprecation info
    ```yaml
    deprecated: true
-   deprecatedBy: @orchestr8://agents/new-fragment-id
+   deprecatedBy: orchestr8://agents/new-fragment-id
    deprecationReason: "Split into multiple focused fragments"
    ```
 
@@ -804,10 +804,10 @@ Test if fragments can be discovered with expected queries:
 
 ```bash
 # Test query
-@orchestr8://match?query=retry+exponential+backoff&mode=index
+orchestr8://match?query=retry+exponential+backoff&mode=index
 
 # Expected result should include:
-# @orchestr8://skills/error-handling-resilience
+# orchestr8://skills/error-handling-resilience
 ```
 
 **Validation:**
@@ -838,7 +838,7 @@ Test if fragments compose well together:
 
 ```typescript
 // Test assembly
-@orchestr8://match?query=typescript+api+jwt&maxTokens=3000
+orchestr8://match?query=typescript+api+jwt&maxTokens=3000
 
 // Validate:
 // 1. Total tokens < maxTokens

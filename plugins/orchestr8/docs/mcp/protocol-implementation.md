@@ -228,7 +228,7 @@ const dynamicCategories = [
 ];
 
 for (const { category, description } of dynamicCategories) {
-  const templateUri = `@orchestr8://${category}/match{+rest}`;
+  const templateUri = `orchestr8://${category}/match{+rest}`;
 
   server.registerResource(
     `${category}-dynamic`,
@@ -259,14 +259,14 @@ for (const { category, description } of dynamicCategories) {
 
 **Template Wildcards**:
 - `{+rest}` captures everything after the prefix
-- Enables URIs like `@orchestr8://agents/match?query=api&maxTokens=2000`
+- Enables URIs like `orchestr8://agents/match?query=api&maxTokens=2000`
 
 ### 8. Register Global Template
 
 A global template matches across all categories:
 
 ```typescript
-const globalTemplateUri = "@orchestr8://match{+rest}";
+const globalTemplateUri = "orchestr8://match{+rest}";
 server.registerResource(
   "global-dynamic",
   new ResourceTemplate(globalTemplateUri, { list: undefined }),
@@ -376,7 +376,7 @@ tags:
 Your task: {{task}}
 
 Load relevant expertise dynamically using:
-@orchestr8://match?query={{task}}&maxTokens=3000
+orchestr8://match?query={{task}}&maxTokens=3000
 ```
 
 ### Frontmatter Parsing
@@ -484,7 +484,7 @@ Resources are the core of Orchestr8's expertise delivery. There are two types:
 Static resources map directly to files:
 
 ```
-URI:  @orchestr8://agents/typescript-core
+URI:  orchestr8://agents/typescript-core
 File: ./resources/agents/typescript-core.md
 ```
 
@@ -493,7 +493,7 @@ File: ./resources/agents/typescript-core.md
 ```typescript
 server.registerResource(
   resource.name,           // "typescript-core"
-  resource.uri,            // "@orchestr8://agents/typescript-core"
+  resource.uri,            // "orchestr8://agents/typescript-core"
   {
     mimeType: resource.mimeType,    // "text/markdown"
     description: resource.description,
@@ -520,14 +520,14 @@ server.registerResource(
 Dynamic resources use templates with wildcards:
 
 ```
-Template: @orchestr8://agents/match{+rest}
-Matches:  @orchestr8://agents/match?query=typescript+api&maxTokens=2000
+Template: orchestr8://agents/match{+rest}
+Matches:  orchestr8://agents/match?query=typescript+api&maxTokens=2000
 ```
 
 **Registration**:
 
 ```typescript
-const templateUri = `@orchestr8://${category}/match{+rest}`;
+const templateUri = `orchestr8://${category}/match{+rest}`;
 
 server.registerResource(
   `${category}-dynamic`,
@@ -558,7 +558,7 @@ server.registerResource(
 ### Resource Loading Flow
 
 ```
-1. Client requests URI (e.g., @orchestr8://agents/match?query=api)
+1. Client requests URI (e.g., orchestr8://agents/match?query=api)
 2. Server receives resources/read request
 3. URI parser determines: static or dynamic?
 4. If static  → Read file from disk
@@ -633,9 +633,9 @@ constructor(logger: Logger) {
 **File**: `src/loaders/resourceLoader.ts:34-38`
 
 **Cache Key**: Full URI including query parameters
-- `@orchestr8://agents/typescript-core` → Cached
-- `@orchestr8://agents/match?query=api&maxTokens=2000` → Cached
-- `@orchestr8://agents/match?query=database&maxTokens=2000` → Separate cache entry
+- `orchestr8://agents/typescript-core` → Cached
+- `orchestr8://agents/match?query=api&maxTokens=2000` → Cached
+- `orchestr8://agents/match?query=database&maxTokens=2000` → Separate cache entry
 
 ## Request/Response Handling
 
@@ -649,7 +649,7 @@ MCP uses JSON-RPC 2.0 over stdio. The SDK handles protocol details, but understa
   "id": 1,
   "method": "resources/read",
   "params": {
-    "uri": "@orchestr8://agents/typescript-core"
+    "uri": "orchestr8://agents/typescript-core"
   }
 }
 ```
@@ -663,7 +663,7 @@ MCP uses JSON-RPC 2.0 over stdio. The SDK handles protocol details, but understa
   "result": {
     "contents": [
       {
-        "uri": "@orchestr8://agents/typescript-core",
+        "uri": "orchestr8://agents/typescript-core",
         "mimeType": "text/markdown",
         "text": "# TypeScript Core Expert\n\n..."
       }
@@ -770,13 +770,13 @@ Lists all static resources and templates.
   "result": {
     "resources": [
       {
-        "uri": "@orchestr8://agents/typescript-core",
+        "uri": "orchestr8://agents/typescript-core",
         "name": "typescript-core",
-        "description": "Resource: @orchestr8://agents/typescript-core",
+        "description": "Resource: orchestr8://agents/typescript-core",
         "mimeType": "text/markdown"
       },
       {
-        "uri": "@orchestr8://agents/match{+rest}",
+        "uri": "orchestr8://agents/match{+rest}",
         "name": "agents-dynamic",
         "description": "Dynamic agent matching...",
         "mimeType": "text/markdown"
@@ -795,7 +795,7 @@ Reads resource content (static or dynamic).
 {
   "method": "resources/read",
   "params": {
-    "uri": "@orchestr8://agents/match?query=typescript+api&maxTokens=2000"
+    "uri": "orchestr8://agents/match?query=typescript+api&maxTokens=2000"
   }
 }
 ```
@@ -806,7 +806,7 @@ Reads resource content (static or dynamic).
   "result": {
     "contents": [
       {
-        "uri": "@orchestr8://agents/match?query=typescript+api&maxTokens=2000",
+        "uri": "orchestr8://agents/match?query=typescript+api&maxTokens=2000",
         "mimeType": "text/markdown",
         "text": "# Assembled Expertise\n\n..."
       }
@@ -825,7 +825,7 @@ Reads resource content (static or dynamic).
   "id": 1,
   "error": {
     "code": -32602,
-    "message": "Resource not found: @orchestr8://agents/non-existent"
+    "message": "Resource not found: orchestr8://agents/non-existent"
   }
 }
 ```
@@ -845,8 +845,8 @@ const content = await fs.readFile(filePath, "utf-8"); // Throws ENOENT
 #### 2. Invalid URI Format
 
 ```typescript
-// URI doesn't match @orchestr8:// protocol
-if (!uri.startsWith("@orchestr8://")) {
+// URI doesn't match orchestr8:// protocol
+if (!uri.startsWith("orchestr8://")) {
   throw new Error("Invalid URI protocol");
 }
 ```

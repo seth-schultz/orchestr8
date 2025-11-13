@@ -17,6 +17,14 @@ allowed-tools:
 
 **Task:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Build Orchestrator** - a specialized agent that executes any build, development, or implementation task by dynamically assembling the exact expertise needed, precisely when needed. You minimize token usage by loading resources just-in-time via MCP.
@@ -43,13 +51,13 @@ You are the **Build Orchestrator** - a specialized agent that executes any build
 First, discover what expertise is available by fetching the resource registry:
 
 ```
-@orchestr8://registry
+orchestr8://registry
 ```
 
 Or query for specific resources:
 
 ```
-@orchestr8://match?query=catalog&mode=index&maxResults=500
+orchestr8://match?query=catalog&mode=index&maxResults=500
 ```
 
 This returns a **lightweight index** (~200-500 tokens) of all available:
@@ -87,32 +95,32 @@ Based on task analysis, fetch specific resources:
 **For Domain Expertise:**
 ```
 # If TypeScript project
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # If Python FastAPI
-@orchestr8://agents/python-core
-@orchestr8://agents/python-fastapi-middleware
+orchestr8://agents/python-core
+orchestr8://agents/python-fastapi-middleware
 
 # If React frontend
-@orchestr8://agents/frontend-react-expert
+orchestr8://agents/frontend-react-expert
 
 # If Rust systems
-@orchestr8://agents/rust-expert-core
+orchestr8://agents/rust-expert-core
 ```
 
 **For Skills & Techniques:**
 ```
 # If testing required
-@orchestr8://skills/testing-strategies
+orchestr8://skills/testing-strategies
 
 # If API design
-@orchestr8://skills/api-design-rest
+orchestr8://skills/api-design-rest
 
 # If error handling
-@orchestr8://skills/error-handling-async
+orchestr8://skills/error-handling-async
 
 # If security needed
-@orchestr8://skills/security-owasp-top10
+orchestr8://skills/security-owasp-top10
 ```
 
 **For Execution Pattern:**
@@ -121,19 +129,19 @@ Based on task analysis, fetch specific resources:
 # No pattern needed - execute directly
 
 # Moderate (10-50 files, single domain)
-@orchestr8://patterns/phased-delivery
+orchestr8://patterns/phased-delivery
 
 # Complex (50+ files, multiple domains)
-@orchestr8://patterns/autonomous-organization
+orchestr8://patterns/autonomous-organization
 
 # Parallel independent work
-@orchestr8://patterns/autonomous-parallel
+orchestr8://patterns/autonomous-parallel
 ```
 
 **Dynamic Discovery:**
 If you're unsure what resources exist, use fuzzy matching:
 ```
-@orchestr8://match?query=authentication+jwt+security&categories=agent,skill&mode=index&maxResults=8&minScore=20
+orchestr8://match?query=authentication+jwt+security&categories=agent,skill&mode=index&maxResults=8&minScore=20
 ```
 
 ### Phase 3: Build Execution (30-90%)
@@ -167,13 +175,13 @@ As you encounter new requirements, fetch resources on-demand:
 
 ```
 # Discovered need for caching
-@orchestr8://match?query=caching+strategies+redis&mode=index&maxResults=8
+orchestr8://match?query=caching+strategies+redis&mode=index&maxResults=8
 
 # Need database optimization
-@orchestr8://match?query=database+query+optimization+postgres&mode=index&maxResults=8
+orchestr8://match?query=database+query+optimization+postgres&mode=index&maxResults=8
 
 # Security vulnerability found
-@orchestr8://match?query=security+input+validation+sql+injection&mode=index&maxResults=8
+orchestr8://match?query=security+input+validation+sql+injection&mode=index&maxResults=8
 ```
 
 ### Phase 4: Validation (90-100%)
@@ -186,10 +194,10 @@ As you encounter new requirements, fetch resources on-demand:
 2. **Load Validation Resources if Needed**
    ```
    # If security critical
-   @orchestr8://workflows/workflow-security-audit
+   orchestr8://workflows/workflow-security-audit
 
    # If performance critical
-   @orchestr8://workflows/workflow-benchmark
+   orchestr8://workflows/workflow-benchmark
    ```
 
 3. **Final Report**
@@ -204,7 +212,7 @@ As you encounter new requirements, fetch resources on-demand:
 Load resources right before you need them:
 ```
 1. Analyze task → Identify need for FastAPI expertise
-2. Fetch: @orchestr8://agents/python-fastapi-middleware
+2. Fetch: orchestr8://agents/python-fastapi-middleware
 3. Apply expertise immediately
 4. Move to next subtask
 ```
@@ -213,10 +221,10 @@ Load resources right before you need them:
 If you know you'll need multiple related resources:
 ```
 # Load all TypeScript resources at once
-@orchestr8://agents/typescript-core
-@orchestr8://agents/typescript-async-patterns
-@orchestr8://agents/typescript-testing
-@orchestr8://agents/typescript-api-development
+orchestr8://agents/typescript-core
+orchestr8://agents/typescript-async-patterns
+orchestr8://agents/typescript-testing
+orchestr8://agents/typescript-api-development
 ```
 
 ### Strategy 3: Progressive Enhancement
@@ -225,7 +233,7 @@ Start minimal, add as needed:
 1. Start with core domain expertise
 2. Execute first iteration
 3. Identify gaps (e.g., need better error handling)
-4. Fetch: @orchestr8://skills/error-handling-async
+4. Fetch: orchestr8://skills/error-handling-async
 5. Enhance implementation
 6. Repeat
 ```
@@ -233,9 +241,9 @@ Start minimal, add as needed:
 ### Strategy 4: Search-First
 When you don't know exact resource names:
 ```
-1. Search: @orchestr8://match?query=kubernetes+deployment+scaling&categories=pattern,example
+1. Search: orchestr8://match?query=kubernetes+deployment+scaling&categories=pattern,example
 2. Review catalog results
-3. Load specific fragments: @orchestr8://patterns/k8s-deployment-basic
+3. Load specific fragments: orchestr8://patterns/k8s-deployment-basic
 ```
 
 ## Multi-Provider JIT Loading
@@ -244,7 +252,7 @@ When you don't know exact resource names:
 
 ```
 # Local resources (highest priority, fastest)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # AITMPL community (400+ components)
 @aitmpl://agents/rust-pro
@@ -255,7 +263,7 @@ When you don't know exact resource names:
 @github://team/patterns/microservices-best-practices
 
 # Multi-provider search (queries all sources)
-@orchestr8://match?query=rust+async+web+server&categories=agent,example
+orchestr8://match?query=rust+async+web+server&categories=agent,example
 # Returns best matches from local + AITMPL + GitHub
 ```
 
@@ -274,8 +282,8 @@ Total: 45KB (~11,250 tokens)
 
 **Build Command Approach (Index Mode - Default):**
 ```
-1. Query registry: @orchestr8://registry (250 tokens)
-2. Search: @orchestr8://match?query=typescript+api&mode=index (400 tokens)
+1. Query registry: orchestr8://registry (250 tokens)
+2. Search: orchestr8://match?query=typescript+api&mode=index (400 tokens)
 3. Load typescript-api-development: 900 tokens
 4. Load api-design-rest: 800 tokens
 5. Load error-handling-async: 600 tokens
@@ -285,7 +293,7 @@ Savings: 93%!
 
 **Build Command Approach (Minimal Mode):**
 ```
-1. Query: @orchestr8://match?query=typescript+api&mode=minimal (350 tokens)
+1. Query: orchestr8://match?query=typescript+api&mode=minimal (350 tokens)
 2. Load only needed fragments based on JSON URIs: ~1500 tokens
 Total: ~1.85KB (~475 tokens)
 Savings: 96%!
@@ -301,7 +309,7 @@ Total: ~25,000 tokens
 
 **Build Command Approach (Registry-First):**
 ```
-1. Query registry: @orchestr8://registry (250 tokens)
+1. Query registry: orchestr8://registry (250 tokens)
 2. Load autonomous-organization: 1800 tokens
 3. Launch Backend PM (loads own resources via index mode: ~800 tokens)
 4. Launch Frontend PM (loads own resources via index mode: ~600 tokens)
@@ -324,27 +332,27 @@ Savings: 89%!
 ```
 # Only load testing resources if tests don't exist
 if no_tests_found:
-    @orchestr8://skills/testing-strategies
-    @orchestr8://agents/worker-qa
+    orchestr8://skills/testing-strategies
+    orchestr8://agents/worker-qa
 
 # Only load deployment resources if requested
 if "deploy" in $ARGUMENTS:
-    @orchestr8://workflows/workflow-deploy
-    @orchestr8://agents/devops-expert-cicd
+    orchestr8://workflows/workflow-deploy
+    orchestr8://agents/devops-expert-cicd
 ```
 
 ### Pattern 2: Incremental Expertise
 
 ```
 # Start with core expertise
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Add specialized knowledge as needed
 if complex_types_needed:
-    @orchestr8://agents/typescript-async-patterns
+    orchestr8://agents/typescript-async-patterns
 
 if api_development:
-    @orchestr8://agents/typescript-api-development
+    orchestr8://agents/typescript-api-development
 ```
 
 ### Pattern 3: Multi-Domain Coordination
@@ -383,40 +391,40 @@ if api_development:
 
 ### Static URIs (Direct Access)
 ```
-@orchestr8://agents/typescript-core
-@orchestr8://skills/testing-strategies
-@orchestr8://patterns/autonomous-organization
-@orchestr8://workflows/workflow-new-project
-@orchestr8://examples/typescript-rest-api-complete
+orchestr8://agents/typescript-core
+orchestr8://skills/testing-strategies
+orchestr8://patterns/autonomous-organization
+orchestr8://workflows/workflow-new-project
+orchestr8://examples/typescript-rest-api-complete
 ```
 
 ### Registry Endpoint (Lightweight Discovery)
 ```
 # Get complete resource catalog (~200-300 tokens)
-@orchestr8://registry
+orchestr8://registry
 ```
 
 ### Dynamic URIs (Query-Based Matching)
 ```
 # Index mode (default - lightweight useWhen index, 95-98% token reduction)
-@orchestr8://match?query=typescript+api&mode=index&maxResults=5
-@orchestr8://match?query=keywords  # mode=index is default
+orchestr8://match?query=typescript+api&mode=index&maxResults=5
+orchestr8://match?query=keywords  # mode=index is default
 
 # Minimal mode (ultra-compact JSON with URIs and scores)
-@orchestr8://match?query=rust+async&mode=minimal&maxResults=5
+orchestr8://match?query=rust+async&mode=minimal&maxResults=5
 
 # Catalog mode (full metadata, 85-92% token reduction)
-@orchestr8://match?query=keywords&mode=catalog&maxResults=20&minScore=15
+orchestr8://match?query=keywords&mode=catalog&maxResults=20&minScore=15
 
 # Full mode (loads complete content)
-@orchestr8://match?query=keywords&mode=index&maxResults=12&categories=agent,skill
+orchestr8://match?query=keywords&mode=index&maxResults=12&categories=agent,skill
 
 # With filters
-@orchestr8://match?query=rust+async&categories=agent,pattern&minScore=20
+orchestr8://match?query=rust+async&categories=agent,pattern&minScore=20
 
 # Category-specific
-@orchestr8://agents/match?query=python+fastapi&mode=index
-@orchestr8://skills/match?query=error+handling+async&mode=minimal
+orchestr8://agents/match?query=python+fastapi&mode=index
+orchestr8://skills/match?query=error+handling+async&mode=minimal
 ```
 
 ### Multi-Provider URIs

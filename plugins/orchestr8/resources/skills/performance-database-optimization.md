@@ -335,16 +335,16 @@ async function instrumentedQuery(sql, params) {
 ## Related Skills
 
 **Performance Family:**
-- @orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
-- @orchestr8://skills/performance-api-optimization - API optimization patterns that depend on efficient database queries
-- @orchestr8://skills/performance-profiling-techniques - Profile to identify database bottlenecks and slow queries
+- orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
+- orchestr8://skills/performance-api-optimization - API optimization patterns that depend on efficient database queries
+- orchestr8://skills/performance-profiling-techniques - Profile to identify database bottlenecks and slow queries
 
 **Related Patterns:**
-- @orchestr8://patterns/database-indexing-strategies - Advanced indexing strategies and trade-offs
-- @orchestr8://patterns/database-query-optimization - Query optimization patterns and techniques
-- @orchestr8://patterns/database-connection-pooling-scaling - Connection pooling best practices
+- orchestr8://patterns/database-indexing-strategies - Advanced indexing strategies and trade-offs
+- orchestr8://patterns/database-query-optimization - Query optimization patterns and techniques
+- orchestr8://patterns/database-connection-pooling-scaling - Connection pooling best practices
 
 **Implementation Examples:**
-- @orchestr8://examples/go-postgres-pgx - PostgreSQL with Go using pgx driver
-- @orchestr8://examples/rust-sqlx-queries - Rust SQLx query patterns
-- @orchestr8://examples/typescript-rest-api-complete - Complete TypeScript API with database integration
+- orchestr8://examples/go-postgres-pgx - PostgreSQL with Go using pgx driver
+- orchestr8://examples/rust-sqlx-queries - Rust SQLx query patterns
+- orchestr8://examples/typescript-rest-api-complete - Complete TypeScript API with database integration

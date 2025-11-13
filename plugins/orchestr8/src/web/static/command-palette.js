@@ -437,7 +437,7 @@ class CommandPalette {
                 document.getElementById('requestType').value = 'resources/list';
             } else if (testType === 'match') {
                 document.getElementById('requestType').value = 'resources/read';
-                document.getElementById('resourceUri').value = '@orchestr8://match?query=api&categories=agent,skill';
+                document.getElementById('resourceUri').value = 'orchestr8://match?query=api&categories=agent,skill';
             }
             this.dashboard.updateTestingForm();
         }, 300);

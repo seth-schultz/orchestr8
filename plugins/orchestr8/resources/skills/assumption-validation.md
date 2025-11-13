@@ -274,7 +274,7 @@ Design comprehensive measurement plans covering:
 - **Statistics**: Sample size, confidence level, margin of error
 
 For complete measurement plan structure and TypeScript implementation:
-→ `@orchestr8://examples/skills/assumption-validation-measurement-plan`
+→ `orchestr8://examples/skills/assumption-validation-measurement-plan`
 
 ### Phase 5: Confidence Scoring
 
@@ -296,7 +296,7 @@ Multi-dimensional scoring system calculating confidence (0-100) across:
 - <50: Insufficient data → More testing required
 
 For complete TypeScript implementation with all calculation functions:
-→ `@orchestr8://examples/skills/assumption-validation-confidence-scoring`
+→ `orchestr8://examples/skills/assumption-validation-confidence-scoring`
 
 **Confidence Score Report Example:**
 

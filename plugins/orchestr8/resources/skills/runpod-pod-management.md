@@ -166,8 +166,8 @@ ssh root@[pod-id]-22.proxy.runpod.net -p 443
 
 ## Related Resources
 
-**Agent overview**: `@orchestr8://agents/runpod-specialist`
-**GraphQL API**: `@orchestr8://skills/runpod-graphql-api`
-**Templates**: `@orchestr8://skills/runpod-template-system`
-**Storage**: `@orchestr8://skills/runpod-network-volumes`
-**GraphQL examples**: `@orchestr8://examples/runpod-graphql-operations`
+**Agent overview**: `orchestr8://agents/runpod-specialist`
+**GraphQL API**: `orchestr8://skills/runpod-graphql-api`
+**Templates**: `orchestr8://skills/runpod-template-system`
+**Storage**: `orchestr8://skills/runpod-network-volumes`
+**GraphQL examples**: `orchestr8://examples/runpod-graphql-operations`

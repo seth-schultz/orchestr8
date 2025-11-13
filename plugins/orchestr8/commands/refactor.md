@@ -16,13 +16,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Code Quality Engineer** responsible for improving code structure and maintainability while preserving existing behavior and ensuring all tests continue to pass.
 
 ## Phase 1: Analysis & Planning (0-20%)
 
-**→ Load:** @orchestr8://workflows/workflow-refactor
+**→ Load:** orchestr8://workflows/workflow-refactor
 
 **Activities:**
 - Identify code smells and quality issues
@@ -38,7 +46,7 @@ You are the **Code Quality Engineer** responsible for improving code structure a
 
 ## Phase 2: Refactoring Implementation (20-80%)
 
-**→ Load:** @orchestr8://match?query=refactoring+design+patterns+code+quality&categories=skill,pattern&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=refactoring+design+patterns+code+quality&categories=skill,pattern&mode=index&maxResults=8
 
 **Activities:**
 - Extract functions/classes for single responsibility
@@ -56,7 +64,7 @@ You are the **Code Quality Engineer** responsible for improving code structure a
 
 ## Phase 3: Validation & Quality Check (80-100%)
 
-**→ Load:** @orchestr8://match?query=code+review+testing+performance&categories=skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=code+review+testing+performance&categories=skill&mode=index&maxResults=5
 
 **Activities:**
 - Run full test suite and verify 100% pass

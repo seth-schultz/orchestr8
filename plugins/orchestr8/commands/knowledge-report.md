@@ -17,6 +17,14 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Knowledge Analyst** responsible for generating comprehensive reports from the organizational knowledge base to visualize patterns, track trends, identify gaps, and measure learning effectiveness.
@@ -56,7 +64,7 @@ Metrics showing how knowledge is improving outcomes.
 
 ## Phase 2: Data Collection (10-40%)
 
-**→ Load:** @orchestr8://match?query=data+analysis+metrics+statistics&categories=skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=data+analysis+metrics+statistics&categories=skill&mode=index&maxResults=5
 
 **Activities:**
 - Collect knowledge statistics
@@ -69,7 +77,7 @@ Metrics showing how knowledge is improving outcomes.
 
 ## Phase 3: Analysis and Visualization (40-80%)
 
-**→ Load:** @orchestr8://agents/knowledge-base-agent
+**→ Load:** orchestr8://agents/knowledge-base-agent
 
 **Activities:**
 - Analyze collected data

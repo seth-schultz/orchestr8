@@ -223,8 +223,8 @@ class OrderAnalyticsProjection {
 
 ## Related Event-Driven Patterns
 
-- **@orchestr8://patterns/event-driven-best-practices** - Foundational principles for event systems
-- **@orchestr8://patterns/event-driven-eventsourcing** - Combine CQRS with event sourcing
-- **@orchestr8://patterns/event-driven-pubsub** - Event distribution infrastructure
-- **@orchestr8://patterns/event-driven-saga** - Distributed transactions across services
-- **@orchestr8://patterns/architecture-microservices** - Microservices architecture with CQRS
+- **orchestr8://patterns/event-driven-best-practices** - Foundational principles for event systems
+- **orchestr8://patterns/event-driven-eventsourcing** - Combine CQRS with event sourcing
+- **orchestr8://patterns/event-driven-pubsub** - Event distribution infrastructure
+- **orchestr8://patterns/event-driven-saga** - Distributed transactions across services
+- **orchestr8://patterns/architecture-microservices** - Microservices architecture with CQRS

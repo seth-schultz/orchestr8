@@ -144,7 +144,7 @@ it('should substitute $ARGUMENTS placeholder with first argument', async () => {
 
 **What It Tests**:
 - Loading resources from multiple categories
-- URI generation (@orchestr8://category/resource)
+- URI generation (orchestr8://category/resource)
 - MIME type detection
 - Content caching
 - Parallel directory scanning
@@ -183,9 +183,9 @@ it('should load agent resources with correct URIs', async () => {
   const loader = new ResourceLoader(logger);
   const resources = await loader.loadAllResources();
 
-  const agent = resources.find(r => r.uri.includes('@orchestr8://agents/'));
+  const agent = resources.find(r => r.uri.includes('orchestr8://agents/'));
   assert.ok(agent);
-  assert.strictEqual(agent.uri, '@orchestr8://agents/test-agent');
+  assert.strictEqual(agent.uri, 'orchestr8://agents/test-agent');
   assert.strictEqual(agent.name, 'test-agent');
   assert.strictEqual(agent.mimeType, 'text/markdown');
   assert.strictEqual(agent.category, 'agents');
@@ -194,7 +194,7 @@ it('should load agent resources with correct URIs', async () => {
 
 **Key Assertions**:
 - Resources loaded from all categories
-- URIs follow @orchestr8:// protocol format
+- URIs follow orchestr8:// protocol format
 - Metadata includes name, category, MIME type
 - Content is cached after first load
 - Errors thrown for invalid URIs
@@ -204,8 +204,8 @@ it('should load agent resources with correct URIs', async () => {
 **File**: `tests/unit/uriParser.test.js`
 
 **What It Tests**:
-- Static URI parsing (@orchestr8://category/resource)
-- Dynamic URI parsing (@orchestr8://category/match?query=...)
+- Static URI parsing (orchestr8://category/resource)
+- Dynamic URI parsing (orchestr8://category/match?query=...)
 - Query parameter decoding
 - URL encoding/decoding
 - Error handling for malformed URIs
@@ -253,7 +253,7 @@ describe('URIParser', () => {
 it('should parse dynamic URI with all query parameters', () => {
   setup();
   const uri =
-    '@orchestr8://agents/match?query=typescript+developer&maxTokens=2000&tags=typescript,async&categories=agents,skills';
+    'orchestr8://agents/match?query=typescript+developer&maxTokens=2000&tags=typescript,async&categories=agents,skills';
   const result = parser.parse(uri);
 
   assert.strictEqual(result.type, 'dynamic');
@@ -647,7 +647,7 @@ it('should load asynchronously', async () => {
 
 ```javascript
 it('should cache content', async () => {
-  const uri = '@orchestr8://agents/test';
+  const uri = 'orchestr8://agents/test';
 
   // First load (cache miss)
   const content1 = await loader.loadContent(uri);

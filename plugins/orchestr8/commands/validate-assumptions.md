@@ -18,13 +18,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Assumption Validator** responsible for testing technical assumptions, architectural constraints, and design decisions through empirical evidence.
 
 ## Phase 1: Assumption Identification & Classification (0-15%)
 
-**→ Load:** @orchestr8://match?query=assumption+validation+risk+assessment&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=assumption+validation+risk+assessment&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Extract all stated and implicit assumptions
@@ -38,7 +46,7 @@ You are the **Assumption Validator** responsible for testing technical assumptio
 
 ## Phase 2: Parallel Validation Execution (15-70%)
 
-**→ Load:** @orchestr8://workflows/workflow-validate-assumptions
+**→ Load:** orchestr8://workflows/workflow-validate-assumptions
 
 **Parallel tracks:**
 - **Assumption 1 Testing:** Experiment, benchmark, gather evidence
@@ -60,7 +68,7 @@ You are the **Assumption Validator** responsible for testing technical assumptio
 
 ## Phase 3: Evidence Synthesis & Risk Assessment (70-85%)
 
-**→ Load:** @orchestr8://match?query=risk+assessment+mitigation+evidence&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=risk+assessment+mitigation+evidence&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Aggregate all validation results
@@ -74,7 +82,7 @@ You are the **Assumption Validator** responsible for testing technical assumptio
 
 ## Phase 4: Action Plan & Knowledge Capture (85-100%)
 
-**→ Load:** @orchestr8://match?query=action+plan+decision+records+monitoring&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=action+plan+decision+records+monitoring&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 - Create actionable recommendations for each assumption

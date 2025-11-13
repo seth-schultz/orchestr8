@@ -26,16 +26,16 @@ useWhen:
   - Version management complexity requiring independent package versioning, fixed versioning, or hybrid strategies with Lerna or Changesets
   - Git operations optimization with sparse checkout, partial clone, and worktree strategies for large monorepo performance
 relatedResources:
-  - @orchestr8://patterns/git-collaboration-workflow
-  - @orchestr8://patterns/git-release-management
-  - @orchestr8://skills/git-workflow
-  - @orchestr8://patterns/architecture-microservices
-  - @orchestr8://skills/cicd-pipeline-optimization
-  - @orchestr8://workflows/workflow-setup-cicd
-  - @orchestr8://agents/devops-expert-cicd
-  - @orchestr8://skills/docker-best-practices
-  - @orchestr8://workflows/workflow-new-project
-  - @orchestr8://patterns/phased-delivery
+  - orchestr8://patterns/git-collaboration-workflow
+  - orchestr8://patterns/git-release-management
+  - orchestr8://skills/git-workflow
+  - orchestr8://patterns/architecture-microservices
+  - orchestr8://skills/cicd-pipeline-optimization
+  - orchestr8://workflows/workflow-setup-cicd
+  - orchestr8://agents/devops-expert-cicd
+  - orchestr8://skills/docker-best-practices
+  - orchestr8://workflows/workflow-new-project
+  - orchestr8://patterns/phased-delivery
 estimatedTokens: 1000
 ---
 

@@ -25,7 +25,7 @@ Serverless function patterns for GCP:
 - Firestore triggers
 - Error handling and structured logging
 
-**Example:** `@orchestr8://examples/cloud/gcp-cloud-functions-patterns`
+**Example:** `orchestr8://examples/cloud/gcp-cloud-functions-patterns`
 
 ## Cloud Run (Containerized)
 
@@ -178,7 +178,7 @@ NoSQL document database with real-time capabilities:
 - Real-time listeners for live updates
 - Collection group queries
 
-**Example:** `@orchestr8://examples/cloud/gcp-firestore-advanced`
+**Example:** `orchestr8://examples/cloud/gcp-firestore-advanced`
 
 ## Pub/Sub
 

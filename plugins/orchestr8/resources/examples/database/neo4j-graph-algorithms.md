@@ -15,7 +15,7 @@ useWhen:
   - Pathfinding and route optimization
 estimatedTokens: 680
 relatedResources:
-  - @orchestr8://agents/neo4j-specialist
+  - orchestr8://agents/neo4j-specialist
 ---
 
 # Neo4j Graph Algorithms (GDS Library)

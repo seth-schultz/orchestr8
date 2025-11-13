@@ -14,7 +14,7 @@ useWhen:
   - Complex analytical queries with window functions
 estimatedTokens: 1100
 relatedResources:
-  - @orchestr8://agents/sqlserver-specialist
+  - orchestr8://agents/sqlserver-specialist
 ---
 
 # SQL Server T-SQL Stored Procedures

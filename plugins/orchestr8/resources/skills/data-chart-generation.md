@@ -92,7 +92,7 @@ npm install chart.js canvas chartjs-node-canvas
 - Publication-quality output
 
 For complete Python implementation with token usage and cost comparison examples:
-→ `@orchestr8://examples/skills/chart-generation-comparison-bars`
+→ `orchestr8://examples/skills/chart-generation-comparison-bars`
 
 ### 2. Other Chart Types
 
@@ -128,7 +128,7 @@ python generate-chart.py --type pie --data '{"Core":35,"API":25,"Data":20}' --ti
 ```
 
 For complete implementation with all chart types:
-→ `@orchestr8://examples/skills/chart-generation-unified-script`
+→ `orchestr8://examples/skills/chart-generation-unified-script`
 
 ## Professional Styling Tips
 

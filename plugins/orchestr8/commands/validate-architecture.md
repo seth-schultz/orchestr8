@@ -20,6 +20,14 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Architecture Validator** responsible for testing architectural assumptions and design decisions through empirical validation.
@@ -47,23 +55,23 @@ The delegated validation workflow will load these resources progressively:
 
 ```
 # Phase 1: Assumption Identification
-@orchestr8://registry                                   # Lightweight catalog (~300 tokens)
-@orchestr8://agents/research-specialist                 # Hypothesis formulation (~800 tokens)
-@orchestr8://skills/requirement-analysis-framework      # Assumption extraction (~600 tokens)
+orchestr8://registry                                   # Lightweight catalog (~300 tokens)
+orchestr8://agents/research-specialist                 # Hypothesis formulation (~800 tokens)
+orchestr8://skills/requirement-analysis-framework      # Assumption extraction (~600 tokens)
 
 # Phase 2: Test Design (per assumption type)
-@orchestr8://match?query=<architecture>+validation&mode=index&maxResults=8
+orchestr8://match?query=<architecture>+validation&mode=index&maxResults=8
 
 # Examples based on assumption type:
-@orchestr8://skills/performance-profiling-techniques    # For performance assumptions (~700 tokens)
-@orchestr8://skills/observability-metrics-prometheus    # For monitoring assumptions (~600 tokens)
-@orchestr8://patterns/architecture-decision-records     # For design decisions (~800 tokens)
+orchestr8://skills/performance-profiling-techniques    # For performance assumptions (~700 tokens)
+orchestr8://skills/observability-metrics-prometheus    # For monitoring assumptions (~600 tokens)
+orchestr8://patterns/architecture-decision-records     # For design decisions (~800 tokens)
 
 # Phase 3: Validation Execution
-@orchestr8://match?query=testing+benchmark+validation&mode=index&maxResults=5
+orchestr8://match?query=testing+benchmark+validation&mode=index&maxResults=5
 
 # Phase 4: Risk Assessment
-@orchestr8://patterns/trade-off-analysis-framework      # Risk evaluation (~500 tokens)
+orchestr8://patterns/trade-off-analysis-framework      # Risk evaluation (~500 tokens)
 ```
 
 **Token Efficiency:**

@@ -8,7 +8,7 @@ capabilities:
   - Query construction strategies
   - Token budget management
 useWhen:
-  - Variable requirements across workflow invocations requiring JIT resource loading with @orchestr8:// URIs and fuzzy matching queries
+  - Variable requirements across workflow invocations requiring JIT resource loading with orchestr8:// URIs and fuzzy matching queries
   - Token budget optimization needing dynamic expertise assembly instead of static fragment inclusion to minimize upfront token usage
   - Adaptive workflow construction requiring context-specific resource selection based on user input and runtime conditions
   - Multi-phase workflows where Phase 1 research results determine Phase 2 expertise needs with maxTokens budget control
@@ -24,9 +24,9 @@ Assemble custom expertise on-demand using fuzzy matching instead of loading fixe
 **Traditional (Static) Approach:**
 ```markdown
 Always load:
-- @orchestr8://agents/typescript-developer (1500 tokens)
-- @orchestr8://skills/testing (1000 tokens)
-- @orchestr8://patterns/rest-api (800 tokens)
+- orchestr8://agents/typescript-developer (1500 tokens)
+- orchestr8://skills/testing (1000 tokens)
+- orchestr8://patterns/rest-api (800 tokens)
 
 Total: 3300 tokens
 Problem: User might only need async patterns
@@ -36,7 +36,7 @@ Result: 400 tokens relevant, 2900 wasted (88% waste)
 **Dynamic Assembly Solution:**
 ```markdown
 Load based on actual query:
-@orchestr8://match?query=typescript+async+error+handling&mode=index&maxResults=8
+orchestr8://match?query=typescript+async+error+handling&mode=index&maxResults=8
 
 Assembles only relevant fragments:
 - typescript-core.md (600 tokens)
@@ -51,9 +51,9 @@ Savings: 56% token reduction with better relevance
 
 ### Static URIs (Traditional)
 ```markdown
-@orchestr8://agents/typescript-developer
-@orchestr8://skills/error-handling
-@orchestr8://examples/typescript/rest-api
+orchestr8://agents/typescript-developer
+orchestr8://skills/error-handling
+orchestr8://examples/typescript/rest-api
 
 Always loads complete resource
 Same content every time
@@ -63,14 +63,14 @@ No adaptation to request
 ### Dynamic URIs (Adaptive)
 ```markdown
 Single-category:
-@orchestr8://agents/match?query=python+fastapi+api&mode=index&maxResults=8
-@orchestr8://skills/match?query=error+handling+async&mode=index&maxResults=5
+orchestr8://agents/match?query=python+fastapi+api&mode=index&maxResults=8
+orchestr8://skills/match?query=error+handling+async&mode=index&maxResults=5
 
 Multi-category:
-@orchestr8://match?query=typescript+api+auth&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=typescript+api+auth&categories=agent,skill,example&mode=index&maxResults=10
 
 Tag-filtered:
-@orchestr8://skills/match?query=testing&tags=integration,api&mode=index&maxResults=8
+orchestr8://skills/match?query=testing&tags=integration,api&mode=index&maxResults=8
 
 Loads relevant fragments only
 Adapts to specific request
@@ -86,7 +86,7 @@ Maximizes token efficiency
 Use when need domain expertise only
 
 Example:
-@orchestr8://agents/match?query=python+fastapi+api&mode=index&maxResults=8
+orchestr8://agents/match?query=python+fastapi+api&mode=index&maxResults=8
 
 Assembles:
 - python-core (600 tokens) - Core Python expertise
@@ -100,7 +100,7 @@ Total: 1100 tokens of focused Python API expertise
 Use when need techniques/methods only
 
 Example:
-@orchestr8://skills/match?query=error+handling+async+validation&mode=index&maxResults=5
+orchestr8://skills/match?query=error+handling+async+validation&mode=index&maxResults=5
 
 Assembles:
 - async-error-handling-patterns (520 tokens)
@@ -114,7 +114,7 @@ Total: 1000 tokens of error handling techniques
 Use when need architectural guidance only
 
 Example:
-@orchestr8://patterns/match?query=microservices+event+driven&mode=index&maxResults=5
+orchestr8://patterns/match?query=microservices+event+driven&mode=index&maxResults=5
 
 Assembles:
 - architecture-microservices (600 tokens)
@@ -130,7 +130,7 @@ Total: 1000 tokens of architectural patterns
 Use when need comprehensive knowledge
 
 Example:
-@orchestr8://match?query=typescript+api+rest+auth+testing&categories=agent,skill,pattern,example&mode=index&maxResults=15
+orchestr8://match?query=typescript+api+rest+auth+testing&categories=agent,skill,pattern,example&mode=index&maxResults=15
 
 Assembles:
 - typescript-api-development (agent, 520 tokens)
@@ -147,7 +147,7 @@ Total: 2630 tokens of comprehensive, relevant expertise
 Use when need specific categories only
 
 Example:
-@orchestr8://match?query=python+data+pipeline&categories=agent,skill&mode=index&maxResults=8
+orchestr8://match?query=python+data+pipeline&categories=agent,skill&mode=index&maxResults=8
 
 Assembles only agents and skills (excludes patterns/examples):
 - python-core (agent, 600 tokens)
@@ -165,7 +165,7 @@ Total: 1970 tokens focused on expertise and techniques
 Use when need precise filtering
 
 Example:
-@orchestr8://skills/match?query=testing&tags=integration,api&mode=index&maxResults=8
+orchestr8://skills/match?query=testing&tags=integration,api&mode=index&maxResults=8
 
 Only loads fragments tagged with BOTH "integration" AND "api":
 - testing-integration-api (580 tokens)
@@ -193,7 +193,7 @@ Extract keywords:
 - Type: application
 
 Construct query:
-@orchestr8://match?query=typescript+real-time+websockets+chat&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=typescript+real-time+websockets+chat&categories=agent,skill,example&mode=index&maxResults=10
 ```
 
 ### Strategy 2: Progressive Refinement
@@ -201,12 +201,12 @@ Construct query:
 Start broad, refine based on findings:
 ```markdown
 ## Phase 1: Initial Requirements
-@orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3
+orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3
 
 Phase 1 determines: Need Python + FastAPI + PostgreSQL
 
 ## Phase 2: Targeted Implementation
-@orchestr8://match?query=python+fastapi+postgresql+api&categories=agent,skill&mode=index&maxResults=10
+orchestr8://match?query=python+fastapi+postgresql+api&categories=agent,skill&mode=index&maxResults=10
 
 Load specific expertise based on Phase 1 discovery
 ```
@@ -219,10 +219,10 @@ Core feature: API with authentication
 Additional features: Caching, rate limiting, logging
 
 Query 1 (core):
-@orchestr8://match?query=api+authentication+${tech}&mode=index&maxResults=8
+orchestr8://match?query=api+authentication+${tech}&mode=index&maxResults=8
 
 Query 2 (enhancements):
-@orchestr8://skills/match?query=caching+rate-limiting+logging&mode=index&maxResults=5
+orchestr8://skills/match?query=caching+rate-limiting+logging&mode=index&maxResults=5
 
 Separate queries for core vs enhancements to control token allocation
 ```
@@ -234,7 +234,7 @@ Query based on problems to solve:
 Problem: Slow database queries in production
 
 Query:
-@orchestr8://match?query=database+performance+optimization+query+indexing&categories=agent,skill,pattern&mode=index&maxResults=8
+orchestr8://match?query=database+performance+optimization+query+indexing&categories=agent,skill,pattern&mode=index&maxResults=8
 
 Assembles expertise relevant to the specific problem
 ```
@@ -244,28 +244,28 @@ Assembles expertise relevant to the specific problem
 ### Adaptive Budgeting
 ```markdown
 Simple task: mode=index&maxResults=8
-@orchestr8://match?query=${simple-crud-api}&mode=index&maxResults=8
+orchestr8://match?query=${simple-crud-api}&mode=index&maxResults=8
 
 Medium complexity: mode=index&maxResults=10
-@orchestr8://match?query=${multi-service-integration}&mode=index&maxResults=10
+orchestr8://match?query=${multi-service-integration}&mode=index&maxResults=10
 
 High complexity: mode=index&maxResults=15
-@orchestr8://match?query=${distributed-system-event-driven}&mode=index&maxResults=15
+orchestr8://match?query=${distributed-system-event-driven}&mode=index&maxResults=15
 ```
 
 ### Phased Budgeting
 ```markdown
 ## Phase 1: Research (smaller budget)
-@orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3
+orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3
 
 ## Phase 2: Design (medium budget)
-@orchestr8://match?query=${tech}+architecture&categories=agent,pattern&mode=index&maxResults=8
+orchestr8://match?query=${tech}+architecture&categories=agent,pattern&mode=index&maxResults=8
 
 ## Phase 3: Implementation (largest budget)
-@orchestr8://match?query=${tech}+${features}&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=${tech}+${features}&categories=agent,skill,example&mode=index&maxResults=10
 
 ## Phase 4: Testing (focused budget)
-@orchestr8://skills/match?query=testing+${tech}&mode=index&maxResults=5
+orchestr8://skills/match?query=testing+${tech}&mode=index&maxResults=5
 ```
 
 ## Best Practices

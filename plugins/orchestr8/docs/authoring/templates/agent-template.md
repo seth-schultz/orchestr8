@@ -43,8 +43,8 @@ estimatedTokens: ${calculated-count}
 # Optional: Optimization fields (Phases 2-3)
 # prerequisite: [core-agent-id]  # For specialized agents (Phase 3)
 # relatedTo: [related-agent-1, related-skill-1]  # Cross-references (Phase 2)
-# examples: [@orchestr8://examples/example-id]  # Example extraction (Phase 1)
-# advancedTopics: [@orchestr8://agents/advanced-module]  # Progressive loading (Phase 3)
+# examples: [orchestr8://examples/example-id]  # Example extraction (Phase 1)
+# advancedTopics: [orchestr8://agents/advanced-module]  # Progressive loading (Phase 3)
 ---
 
 # ${Technology} ${Specialization} Expertise
@@ -124,24 +124,24 @@ ${code-example}
 ## Related Expertise
 
 **Prerequisites (Phase 3 - if specialized agent):**
-- [${Technology} Core](@orchestr8://agents/${technology}-core) - Required foundation
+- [${Technology} Core](orchestr8://agents/${technology}-core) - Required foundation
 
 **Core Agent (if you're a specialized agent):**
-- [${Technology} Core](@orchestr8://agents/${technology}-core)
+- [${Technology} Core](orchestr8://agents/${technology}-core)
 
 **Specialized Agents (Phase 2 - Cross-references):**
-- [${Technology} ${Other-Specialization}](@orchestr8://agents/${technology}-${other-specialization})
-- [${Technology} ${Another-Specialization}](@orchestr8://agents/${technology}-${another-specialization})
+- [${Technology} ${Other-Specialization}](orchestr8://agents/${technology}-${other-specialization})
+- [${Technology} ${Another-Specialization}](orchestr8://agents/${technology}-${another-specialization})
 
 **Complementary Skills (Phase 2 - Cross-references):**
-- [${Related-Skill}](@orchestr8://skills/${skill-id})
-- [${Another-Skill}](@orchestr8://skills/${skill-id})
+- [${Related-Skill}](orchestr8://skills/${skill-id})
+- [${Another-Skill}](orchestr8://skills/${skill-id})
 
 **Detailed Examples (Phase 1 - if extracted):**
-- [${Example-Name}](@orchestr8://examples/${example-id})
+- [${Example-Name}](orchestr8://examples/${example-id})
 
 **Advanced Topics (Phase 3 - if split for progressive loading):**
-- [${Advanced-Topic}](@orchestr8://agents/${advanced-module-id})
+- [${Advanced-Topic}](orchestr8://agents/${advanced-module-id})
 
 ---
 
@@ -284,7 +284,7 @@ Apply these optimization patterns when appropriate:
 **Phase 1: Example Extraction**
 - [ ] Fragment >100 lines? Consider extracting detailed examples
 - [ ] Examples >30% of content? Extract to separate example files
-- [ ] Added `examples: [@orchestr8://examples/...]` field?
+- [ ] Added `examples: [orchestr8://examples/...]` field?
 - [ ] Brief inline examples remain in main content?
 
 **Phase 2: Cross-Referencing**

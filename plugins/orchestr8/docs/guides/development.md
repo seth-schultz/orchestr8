@@ -371,7 +371,7 @@ test('MCP server handles resource requests', async (t) => {
   const server = new McpServer();
   await server.initialize();
 
-  const resource = await server.getResource('@orchestr8://agents/typescript-core');
+  const resource = await server.getResource('orchestr8://agents/typescript-core');
   assert.ok(resource.content);
 });
 ```

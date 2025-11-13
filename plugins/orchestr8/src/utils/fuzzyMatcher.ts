@@ -669,12 +669,12 @@ This catalog provides a lightweight index of relevant resources. Each entry incl
    - You need more specific or different expertise
 
 **To load a resource:**
-Simply reference it using the \`@orchestr8://\` URI shown in each entry below. Claude will automatically load it via MCP.
+Simply reference it using the \`orchestr8://\` URI shown in each entry below. Claude will automatically load it via MCP.
 
-Example: @orchestr8://agents/api-designer-rest
+Example: orchestr8://agents/api-designer-rest
 
 **To requery the catalog:**
-Reference: @orchestr8://match?query=<refined-search>&categories=<cats>&minScore=15
+Reference: orchestr8://match?query=<refined-search>&categories=<cats>&minScore=15
 
 ---
 
@@ -703,7 +703,7 @@ ${resource.capabilities.slice(0, 4).map(cap => `  - ${cap}`).join('\n')}${resour
 ${useWhenSection}
 **Estimated Tokens:** ~${resource.estimatedTokens}
 
-**Load this resource:** @orchestr8://${resource.category}s/${resourceId}
+**Load this resource:** orchestr8://${resource.category}s/${resourceId}
 `;
     });
 

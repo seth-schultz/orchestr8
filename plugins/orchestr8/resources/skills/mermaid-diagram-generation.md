@@ -41,7 +41,7 @@ Mermaid is a JavaScript-based diagramming tool that uses markdown-like syntax to
 - Renders consistently across platforms
 - Fast to create and iterate
 
-**→ See comprehensive examples:** @orchestr8://examples/diagrams/mermaid-c4-architecture, @orchestr8://examples/diagrams/mermaid-sequence-flow
+**→ See comprehensive examples:** orchestr8://examples/diagrams/mermaid-c4-architecture, orchestr8://examples/diagrams/mermaid-sequence-flow
 
 ## C4 Model Architecture Diagrams
 
@@ -96,7 +96,7 @@ C4Context
 - Design pattern explanation
 - Code refactoring planning
 
-**→ See complete C4 examples:** @orchestr8://examples/diagrams/mermaid-c4-architecture
+**→ See complete C4 examples:** orchestr8://examples/diagrams/mermaid-c4-architecture
 
 ## Sequence Diagrams
 
@@ -123,7 +123,7 @@ sequenceDiagram
     deactivate API
 ```
 
-**→ See detailed sequence examples:** @orchestr8://examples/diagrams/mermaid-sequence-flow
+**→ See detailed sequence examples:** orchestr8://examples/diagrams/mermaid-sequence-flow
 
 ## Flowcharts and Data Flows
 
@@ -145,7 +145,7 @@ flowchart LR
     Action2 --> End
 ```
 
-**→ See complex flow examples:** @orchestr8://examples/diagrams/mermaid-sequence-flow
+**→ See complex flow examples:** orchestr8://examples/diagrams/mermaid-sequence-flow
 
 ## State Machines
 
@@ -168,7 +168,7 @@ stateDiagram-v2
     Success --> [*]
 ```
 
-**→ See state machine examples:** @orchestr8://examples/diagrams/mermaid-sequence-flow
+**→ See state machine examples:** orchestr8://examples/diagrams/mermaid-sequence-flow
 
 ## Entity Relationship Diagrams
 
@@ -195,7 +195,7 @@ erDiagram
     }
 ```
 
-**→ See ER diagram examples:** @orchestr8://examples/diagrams/mermaid-sequence-flow
+**→ See ER diagram examples:** orchestr8://examples/diagrams/mermaid-sequence-flow
 
 ## Best Practices
 
@@ -270,7 +270,7 @@ C4 container diagram showing services, databases, and message broker
 ### Deployment Topology
 Flowchart showing load balancers, app servers, databases across availability zones
 
-**→ See all common patterns:** @orchestr8://examples/diagrams/mermaid-c4-architecture, @orchestr8://examples/diagrams/mermaid-sequence-flow
+**→ See all common patterns:** orchestr8://examples/diagrams/mermaid-c4-architecture, orchestr8://examples/diagrams/mermaid-sequence-flow
 
 ## Troubleshooting
 

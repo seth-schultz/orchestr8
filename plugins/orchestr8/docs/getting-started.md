@@ -135,17 +135,17 @@ Orchestr8 organizes knowledge into **resources** - fragments of expertise that c
 
 **Static loading** (specific resource):
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 **Dynamic matching** (find by query):
 ```
-@orchestr8://match?query=error+handling+retry&maxTokens=2000
+orchestr8://match?query=error+handling+retry&maxTokens=2000
 ```
 
 **Category-specific** (narrow scope):
 ```
-@orchestr8://agents/match?query=build+graphql+api
+orchestr8://agents/match?query=build+graphql+api
 ```
 
 ## Common Workflows
@@ -211,7 +211,7 @@ Dynamic matching is Orchestr8's superpower - it finds relevant resources without
 
 Find TypeScript API expertise:
 ```
-@orchestr8://match?query=typescript+rest+api+authentication&maxTokens=2500
+orchestr8://match?query=typescript+rest+api+authentication&maxTokens=2500
 ```
 
 **Returns:** Top-scored fragments on TypeScript APIs and authentication (~2400 tokens)
@@ -220,7 +220,7 @@ Find TypeScript API expertise:
 
 Browse available resources without loading full content:
 ```
-@orchestr8://match?query=testing+patterns&mode=catalog&maxResults=10
+orchestr8://match?query=testing+patterns&mode=catalog&maxResults=10
 ```
 
 **Returns:** List of 10 matching resources with URIs and scores (~100 tokens)
@@ -229,7 +229,7 @@ Browse available resources without loading full content:
 
 Use pre-built indexes for ultra-fast lookups:
 ```
-@orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
+orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
 ```
 
 **Returns:** Top 5 matches from keyword index (~60 tokens, <10ms)
@@ -293,7 +293,7 @@ Write better queries for more relevant results:
 Not sure what's available? Use catalog mode:
 
 ```
-@orchestr8://match?query=your+topic&mode=catalog&maxResults=20
+orchestr8://match?query=your+topic&mode=catalog&maxResults=20
 ```
 
 Then load specific resources you need.
@@ -346,10 +346,10 @@ Then load specific resources you need.
 
 ```
 # Search for patterns
-@orchestr8://patterns/match?query=circuit+breaker+resilience&mode=catalog
+orchestr8://patterns/match?query=circuit+breaker+resilience&mode=catalog
 
 # Review results and load:
-@orchestr8://patterns/resilience-patterns
+orchestr8://patterns/resilience-patterns
 ```
 
 ## Troubleshooting
@@ -389,7 +389,7 @@ Then load specific resources you need.
 
 **Solution:**
 1. Use index mode: `mode=index`
-2. Add category filters: `@orchestr8://agents/match?...`
+2. Add category filters: `orchestr8://agents/match?...`
 3. Reduce maxResults in catalog mode
 4. Check cache is working (should be fast on second query)
 

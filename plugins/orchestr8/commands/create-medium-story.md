@@ -18,13 +18,21 @@ allowed-tools:
 
 **Topic:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Mission
 
 Generate a world-class Medium article optimized for viral potential, engagement, and Medium's 2025 distribution standards. The article will be saved to the `medium/` folder with complete publishing instructions.
 
 ## Phase 1: Research & Planning (0-25%)
 
-**→ Load:** @orchestr8://match?query=$ARGUMENTS+research+analysis&categories=agent,skill&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=$ARGUMENTS+research+analysis&categories=agent,skill&mode=index&maxResults=8
 
 **Activities:**
 - **Topic Analysis**: Validate evergreen potential, audience breadth, and unique angle
@@ -43,9 +51,9 @@ Generate a world-class Medium article optimized for viral potential, engagement,
 
 ## Phase 2: Content Creation (25-70%)
 
-**→ Load:** @orchestr8://agents/medium-writer-expert
+**→ Load:** orchestr8://agents/medium-writer-expert
 
-**→ Load:** @orchestr8://match?query=medium+headline+story-structure+engagement&categories=skill&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=medium+headline+story-structure+engagement&categories=skill&mode=index&maxResults=8
 
 **Parallel tracks:**
 
@@ -76,7 +84,7 @@ Generate a world-class Medium article optimized for viral potential, engagement,
 
 ## Phase 3: Optimization & Polish (70-90%)
 
-**→ Load:** @orchestr8://skills/match?query=technical-writing+editing+readability&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=technical-writing+editing+readability&mode=index&maxResults=3
 
 **Quality checks:**
 
@@ -187,7 +195,7 @@ If user has Medium integration token, create `medium/[filename]-API-PUBLISH.py`:
 # This is a template - requires MEDIUM_INTEGRATION_TOKEN environment variable
 ```
 
-**→ Load:** @orchestr8://skills/medium-api-publishing (only if API publishing requested)
+**→ Load:** orchestr8://skills/medium-api-publishing (only if API publishing requested)
 
 **→ Checkpoint:** Story saved to medium/ folder with publishing instructions
 

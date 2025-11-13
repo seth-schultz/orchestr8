@@ -14,11 +14,11 @@ useWhen:
   - Implementing Iso27001-specific features, integrations, or troubleshooting complex issues requiring specialized domain knowledge
 estimatedTokens: 120
 relatedResources:
-  - @orchestr8://examples/iso27001-risk-assessment
-  - @orchestr8://examples/iso27001-statement-of-applicability
-  - @orchestr8://examples/iso27001-isms-documentation
-  - @orchestr8://agents/compliance-audit-specialist
-  - @orchestr8://agents/security-testing-compliance
+  - orchestr8://examples/iso27001-risk-assessment
+  - orchestr8://examples/iso27001-statement-of-applicability
+  - orchestr8://examples/iso27001-isms-documentation
+  - orchestr8://agents/compliance-audit-specialist
+  - orchestr8://agents/security-testing-compliance
 ---
 
 
@@ -160,7 +160,7 @@ RACI Matrix:
 
 ### Clause 6: Planning
 
-**See:** @orchestr8://examples/iso27001-risk-assessment
+**See:** orchestr8://examples/iso27001-risk-assessment
 
 ## 6.1 Risk Assessment and Treatment
 
@@ -203,7 +203,7 @@ Example objectives:
 
 ### Clauses 7-10: Support, Operation, Evaluation, Improvement
 
-**See:** @orchestr8://examples/iso27001-isms-documentation
+**See:** orchestr8://examples/iso27001-isms-documentation
 
 ## Clause 7: Support
 
@@ -273,7 +273,7 @@ Quarterly review covering:
 
 ## Annex A Controls (93 Controls in ISO 27001:2022)
 
-**See:** @orchestr8://examples/iso27001-statement-of-applicability
+**See:** orchestr8://examples/iso27001-statement-of-applicability
 
 ISO 27001:2022 contains 93 controls across 4 themes:
 
@@ -306,7 +306,7 @@ ISO 27001:2022 contains 93 controls across 4 themes:
 
 ## Statement of Applicability (SoA)
 
-**See:** @orchestr8://examples/iso27001-statement-of-applicability
+**See:** orchestr8://examples/iso27001-statement-of-applicability
 
 The SoA documents:
 - Which of the 93 Annex A controls apply to your organization

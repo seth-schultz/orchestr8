@@ -287,12 +287,12 @@ pub fn get_unchecked(slice: &[i32], idx: usize) -> i32 {
 
 This is the advanced module of the Rust expert agent:
 
-**Core Module:** `@orchestr8://agents/rust-expert-core` (~700 tokens)
+**Core Module:** `orchestr8://agents/rust-expert-core` (~700 tokens)
 - Essential Rust concepts for most development tasks
 - Ownership, borrowing, basic lifetimes, traits, concurrency
 - Load this first for typical Rust projects
 
-**Advanced Module:** `@orchestr8://agents/rust-expert-advanced` (~680 tokens - this module)
+**Advanced Module:** `orchestr8://agents/rust-expert-advanced` (~680 tokens - this module)
 - Complex ownership patterns and lifetime management
 - Smart pointers (Box, Rc, Arc, RefCell)
 - Zero-cost abstractions and performance optimization

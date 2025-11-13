@@ -154,21 +154,21 @@
 └─────┬─────┘
       │
       │ Read Resource
-      │ @orchestr8://agents/typescript-developer
+      │ orchestr8://agents/typescript-developer
       │
       ▼
 ┌─────────────────────────────────────────┐
 │  MCP Server (Resource Handler)          │
 │                                         │
 │  1. Receive URI                         │
-│     └─ @orchestr8://agents/...           │
+│     └─ orchestr8://agents/...           │
 │                                         │
 │  2. Check cache                         │
 │     ├─ Hit? Return cached (<1ms) ──────┼──┐
 │     └─ Miss? Continue...                │  │
 │                                         │  │
 │  3. Call resourceLoader.loadContent()   │  │
-│     └─ URI: @orchestr8://agents/...      │  │
+│     └─ URI: orchestr8://agents/...      │  │
 └─────┬───────────────────────────────────┘  │
       │                                      │
       ▼                                      │
@@ -176,7 +176,7 @@
 │  URI Parser                             │  │
 │                                         │  │
 │  1. Validate protocol                   │  │
-│     └─ Starts with "@orchestr8://"?      │  │
+│     └─ Starts with "orchestr8://"?      │  │
 │                                         │  │
 │  2. Parse components                    │  │
 │     ├─ category: "agents"               │  │
@@ -209,7 +209,7 @@
 │  Return to Claude Code:                 │  │
 │  {                                      │  │
 │    contents: [{                         │  │
-│      uri: "@orchestr8://...",            │  │
+│      uri: "orchestr8://...",            │  │
 │      mimeType: "text/markdown",         │  │
 │      text: "[content]"                  │  │
 │    }]                                   │  │
@@ -232,7 +232,7 @@
 └─────┬─────┘
       │
       │ Read Resource
-      │ @orchestr8://match?query=typescript+async&maxTokens=2500&mode=catalog
+      │ orchestr8://match?query=typescript+async&maxTokens=2500&mode=catalog
       │
       ▼
 ┌──────────────────────────────────────────────────────────────┐
@@ -464,7 +464,7 @@ loadResourceContent(uri)
 ### Static Loading Pipeline
 
 ```
-Static URI: @orchestr8://agents/typescript-developer
+Static URI: orchestr8://agents/typescript-developer
                     │
                     ▼
         ┌─────────────────────┐
@@ -504,7 +504,7 @@ Static URI: @orchestr8://agents/typescript-developer
 ### Dynamic Loading Pipeline (Fuzzy)
 
 ```
-Dynamic URI: @orchestr8://match?query=typescript+async&mode=catalog
+Dynamic URI: orchestr8://match?query=typescript+async&mode=catalog
                     │
                     ▼
         ┌─────────────────────────┐
@@ -644,10 +644,10 @@ Dynamic URI: @orchestr8://match?query=typescript+async&mode=catalog
 ### Cache Flow Example
 
 ```
-Request: @orchestr8://agents/typescript-developer
+Request: orchestr8://agents/typescript-developer
 
 1. Check Resource Cache (Level 3)
-   ├─ Key: "@orchestr8://agents/typescript-developer"
+   ├─ Key: "orchestr8://agents/typescript-developer"
    ├─ Hit? Return cached content (<1ms) ─────────────────┐
    └─ Miss? Continue...                                  │
                                                          │
@@ -660,7 +660,7 @@ Request: @orchestr8://agents/typescript-developer
    └─ Content: 2000 tokens                               │
                                                          │
 5. Store in Resource Cache (Level 3)                     │
-   ├─ Key: "@orchestr8://agents/typescript-developer"     │
+   ├─ Key: "orchestr8://agents/typescript-developer"     │
    ├─ Value: content                                     │
    └─ TTL: 4 hours                                       │
                                                          │
@@ -797,7 +797,7 @@ User         Claude       MCP        Prompt      Resource
  │ workflow   │            │           │            │
  │            │            │           │            │
  │            │ (Workflow references dynamic resource)  │
- │            │ readResource("@orchestr8://match?...")   │
+ │            │ readResource("orchestr8://match?...")   │
  │            ├───────────>│           │            │
  │            │            │ loadResourceContent(uri)
  │            │            ├───────────────────────>│
@@ -838,7 +838,7 @@ User         Claude       MCP        Prompt      Resource
 │  │  │  ├──> performance-frontend-optimization (specialized, 460) │ │ │
 │  │  │  └──> performance-profiling-techniques (specialized, 420)  │ │ │
 │  │  │                                                            │ │ │
-│  │  │  Cross-refs: 15 @orchestr8:// URIs                          │ │ │
+│  │  │  Cross-refs: 15 orchestr8:// URIs                          │ │ │
 │  │  └────────────────────────────────────────────────────────────┘ │ │
 │  │                                                                  │ │
 │  │  ┌────────────────────────────────────────────────────────────┐ │ │
@@ -851,7 +851,7 @@ User         Claude       MCP        Prompt      Resource
 │  │  │  ├──> security-owasp-top10 (specialized, 680)             │ │ │
 │  │  │  └──> security-secrets-management (specialized, 440)       │ │ │
 │  │  │                                                            │ │ │
-│  │  │  Cross-refs: 28 @orchestr8:// URIs                          │ │ │
+│  │  │  Cross-refs: 28 orchestr8:// URIs                          │ │ │
 │  │  └────────────────────────────────────────────────────────────┘ │ │
 │  │                                                                  │ │
 │  │  ┌────────────────────────────────────────────────────────────┐ │ │
@@ -875,7 +875,7 @@ User         Claude       MCP        Prompt      Resource
 │  │  │  ├──> event-driven-best-practices (design patterns)        │ │ │
 │  │  │  └──> message-broker-comparison (Kafka/RabbitMQ/NATS)      │ │ │
 │  │  │                                                            │ │ │
-│  │  │  Cross-refs: 18 @orchestr8:// URIs                          │ │ │
+│  │  │  Cross-refs: 18 orchestr8:// URIs                          │ │ │
 │  │  └────────────────────────────────────────────────────────────┘ │ │
 │  │                                                                  │ │
 │  │  ┌────────────────────────────────────────────────────────────┐ │ │

@@ -29,7 +29,7 @@ Expert in AWS DynamoDB NoSQL database, data modeling, partition strategies, inde
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/database/dynamodb-data-modeling
+orchestr8://examples/database/dynamodb-data-modeling
 ```
 
 **Key Concepts:**
@@ -42,7 +42,7 @@ Expert in AWS DynamoDB NoSQL database, data modeling, partition strategies, inde
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/database/dynamodb-sdk-operations
+orchestr8://examples/database/dynamodb-sdk-operations
 ```
 
 **Key Concepts:**
@@ -56,7 +56,7 @@ Expert in AWS DynamoDB NoSQL database, data modeling, partition strategies, inde
 
 **Complete Implementation:**
 ```
-@orchestr8://examples/database/dynamodb-advanced-features
+orchestr8://examples/database/dynamodb-advanced-features
 ```
 
 **Key Concepts:**
@@ -91,9 +91,9 @@ This agent uses progressive loading to minimize token usage:
 - Performance and cost optimization best practices
 
 **Implementation Examples:** Load on-demand via:
-- `@orchestr8://examples/database/dynamodb-data-modeling` (~180 tokens)
-- `@orchestr8://examples/database/dynamodb-sdk-operations` (~220 tokens)
-- `@orchestr8://examples/database/dynamodb-advanced-features` (~200 tokens)
+- `orchestr8://examples/database/dynamodb-data-modeling` (~180 tokens)
+- `orchestr8://examples/database/dynamodb-sdk-operations` (~220 tokens)
+- `orchestr8://examples/database/dynamodb-advanced-features` (~200 tokens)
 
 **Typical Usage Pattern:**
 1. Load this agent for DynamoDB concepts, access patterns, and architecture decisions

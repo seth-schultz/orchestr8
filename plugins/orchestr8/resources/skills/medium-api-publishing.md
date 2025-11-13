@@ -23,7 +23,7 @@ estimatedTokens: 280
 
 Programmatically publish articles to Medium using their REST API, with authentication, content formatting, and error handling.
 
-**→ See complete implementations:** @orchestr8://examples/medium/medium-api-implementations
+**→ See complete implementations:** orchestr8://examples/medium/medium-api-implementations
 
 ## Important Limitations (2025)
 
@@ -130,7 +130,7 @@ curl -X POST https://api.medium.com/v1/users/USER_ID/posts \
 
 ## Code Examples
 
-**→ See complete Python and Node.js implementations:** @orchestr8://examples/medium/medium-api-implementations
+**→ See complete Python and Node.js implementations:** orchestr8://examples/medium/medium-api-implementations
 
 ### Python Quick Start
 
@@ -210,7 +210,7 @@ Use standard HTML tags: `<h1>`, `<p>`, `<strong>`, `<em>`, `<a>`, `<code>`, `<pr
 
 Implement retry logic with exponential backoff for transient errors (5xx). Don't retry authentication errors (401, 403).
 
-**→ See error handling examples:** @orchestr8://examples/medium/medium-api-implementations
+**→ See error handling examples:** orchestr8://examples/medium/medium-api-implementations
 
 ## Best Practices
 
@@ -262,7 +262,7 @@ publish_status: "draft"
 
 Use `publish_from_file()` method to automatically extract metadata and publish.
 
-**→ See workflow examples:** @orchestr8://examples/medium/medium-api-implementations
+**→ See workflow examples:** orchestr8://examples/medium/medium-api-implementations
 
 ## Limitations and Workarounds
 

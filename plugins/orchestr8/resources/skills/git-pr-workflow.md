@@ -23,13 +23,13 @@ useWhen:
   - Using PR comments and review threads
   - Managing PR dependencies and stacked PRs
 relatedResources:
-  - @orchestr8://agents/github-workflow-specialist
-  - @orchestr8://agents/git-expert
-  - @orchestr8://skills/git-workflow
-  - @orchestr8://skills/git-rebase-merge
-  - @orchestr8://skills/github-cli-essentials
-  - @orchestr8://skills/cicd-pipeline-optimization
-  - @orchestr8://skills/code-quality-standards
+  - orchestr8://agents/github-workflow-specialist
+  - orchestr8://agents/git-expert
+  - orchestr8://skills/git-workflow
+  - orchestr8://skills/git-rebase-merge
+  - orchestr8://skills/github-cli-essentials
+  - orchestr8://skills/cicd-pipeline-optimization
+  - orchestr8://skills/code-quality-standards
 estimatedTokens: 750
 ---
 

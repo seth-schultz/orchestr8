@@ -17,7 +17,7 @@ You are creating a new agent fragment for domain expertise in the Orchestr8 syst
 
 ## Phase 1: Expertise Scoping (0-25%)
 
-**→ Load:** @orchestr8://agents/agent-designer
+**→ Load:** orchestr8://agents/agent-designer
 
 **Activities:**
 - Define agent specialization for {{task}}
@@ -31,7 +31,7 @@ You are creating a new agent fragment for domain expertise in the Orchestr8 syst
 
 ## Phase 2: Structure Design (25-50%)
 
-**→ Load:** @orchestr8://skills/match?query=fragment+metadata+authoring&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=fragment+metadata+authoring&mode=index&maxResults=5
 
 **Activities:**
 - Design content structure (role, capabilities, best practices)
@@ -46,7 +46,7 @@ You are creating a new agent fragment for domain expertise in the Orchestr8 syst
 
 ## Phase 3: Content Creation (50-80%)
 
-**→ Load:** @orchestr8://match?query={{task}}&categories=agent,skill,example&mode=index&maxResults=10
+**→ Load:** orchestr8://match?query={{task}}&categories=agent,skill,example&mode=index&maxResults=10
 
 **Activities:**
 - Write agent frontmatter (YAML with all metadata)
@@ -62,14 +62,14 @@ You are creating a new agent fragment for domain expertise in the Orchestr8 syst
 
 ## Phase 4: Validation & Integration (80-100%)
 
-**→ Load:** @orchestr8://skills/match?query=fragment+testing+discovery&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=fragment+testing+discovery&mode=index&maxResults=3
 
 **Activities:**
 - Test fuzzy matching with queries
 - Verify metadata enables discovery
 - Optimize tags and capabilities if needed
 - Save to /resources/agents/
-- Test loading via @orchestr8:// URI
+- Test loading via orchestr8:// URI
 - Verify token count (should match estimate)
 - Rebuild resource index
 - Document in catalog

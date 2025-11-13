@@ -371,7 +371,7 @@ export class IndexLookup {
       output += `   @${match.uri}\n\n`;
     });
 
-    output += `**To load:** Simply reference the @orchestr8:// URIs shown above\n`;
+    output += `**To load:** Simply reference the orchestr8:// URIs shown above\n`;
     output += `**To refine:** Add more specific keywords to query\n`;
 
     return output;

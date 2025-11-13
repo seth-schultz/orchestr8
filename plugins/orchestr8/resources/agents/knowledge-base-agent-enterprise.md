@@ -8,7 +8,7 @@ capabilities:
   - Cross-service dependency mapping
   - Enterprise-scale codebase analysis
   - Cross-project dependency mapping
-prerequisite: @orchestr8://agents/knowledge-base-agent
+prerequisite: orchestr8://agents/knowledge-base-agent
 useWhen:
   - Analyzing enterprise multi-solution codebases with multiple .sln files, 30-50+ services, and complex cross-project dependencies
   - Legacy system modernization projects requiring service-level analysis across multiple solutions and comprehensive dependency mapping
@@ -22,7 +22,7 @@ estimatedTokens: 600
 
 Advanced capabilities for analyzing and documenting enterprise multi-solution codebases with 30-50+ services.
 
-**Prerequisite:** Load `@orchestr8://agents/knowledge-base-agent` first for core KB capabilities.
+**Prerequisite:** Load `orchestr8://agents/knowledge-base-agent` first for core KB capabilities.
 
 ## Enterprise-Scale Analysis
 
@@ -408,7 +408,7 @@ Quick wins: 8
 
 **For legacy modernization projects:**
 ```
-Combine with: @orchestr8://agents/legacy-system-analyst
+Combine with: orchestr8://agents/legacy-system-analyst
 
 Knowledge Base provides: Service catalog, current state
 Legacy Analyst provides: Performance flags, security issues, migration readiness

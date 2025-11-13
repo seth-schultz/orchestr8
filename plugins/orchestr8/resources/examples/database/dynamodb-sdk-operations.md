@@ -14,8 +14,8 @@ useWhen:
   - Implementing atomic updates and counters
 estimatedTokens: 1100
 relatedResources:
-  - @orchestr8://agents/dynamodb-specialist
-  - @orchestr8://agents/typescript-core
+  - orchestr8://agents/dynamodb-specialist
+  - orchestr8://agents/typescript-core
 ---
 
 # DynamoDB AWS SDK v3 Operations

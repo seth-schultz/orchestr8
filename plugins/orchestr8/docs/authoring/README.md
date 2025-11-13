@@ -111,7 +111,7 @@ Main Fragment (reduced by 200-300 tokens):
 - Brief inline examples (5-10 lines)
 - References to detailed examples
 
-Example File (@orchestr8://examples/example-name):
+Example File (orchestr8://examples/example-name):
 - Complete working implementation
 - Detailed comments and explanations
 - Multiple variations
@@ -216,8 +216,8 @@ All fragments MUST include valid YAML frontmatter with these fields:
 ### Optional Fields (for optimization)
 - **prerequisite:** Array of fragment IDs that should be loaded first
 - **relatedTo:** Array of fragment IDs for cross-referencing
-- **examples:** Array of @orchestr8:// URIs to example files
-- **advancedTopics:** Array of @orchestr8:// URIs to advanced modules
+- **examples:** Array of orchestr8:// URIs to example files
+- **advancedTopics:** Array of orchestr8:// URIs to advanced modules
 
 ### Validation Rules
 ```yaml
@@ -234,7 +234,7 @@ useWhen:
   - Reviewing or writing TypeScript code
 estimatedTokens: 650
 examples:
-  - @orchestr8://examples/typescript-generics-advanced
+  - orchestr8://examples/typescript-generics-advanced
 ---
 
 # ❌ Invalid - missing required fields

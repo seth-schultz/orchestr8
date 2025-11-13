@@ -14,8 +14,8 @@ useWhen:
   - Automating ML training and evaluation processes
 estimatedTokens: 1200
 relatedResources:
-  - @orchestr8://agents/mlops-specialist
-  - @orchestr8://skills/ml-hyperparameter-tuning
+  - orchestr8://agents/mlops-specialist
+  - orchestr8://skills/ml-hyperparameter-tuning
 ---
 
 # Kubeflow ML Pipeline Orchestration

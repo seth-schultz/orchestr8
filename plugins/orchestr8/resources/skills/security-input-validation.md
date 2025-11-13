@@ -9,9 +9,9 @@ capabilities:
   - Command injection prevention methods
   - Schema validation design principles
 relatedResources:
-  - @orchestr8://examples/security/input-validation-implementation
-  - @orchestr8://skills/security-owasp-top10
-  - @orchestr8://skills/security-api-security
+  - orchestr8://examples/security/input-validation-implementation
+  - orchestr8://skills/security-owasp-top10
+  - orchestr8://skills/security-api-security
 estimatedTokens: 280
 useWhen:
   - Implementing input validation with Zod schema validation preventing injection attacks and malformed data
@@ -27,7 +27,7 @@ useWhen:
 
 Input validation is critical for preventing injection attacks and ensuring data integrity. This skill covers validation strategies, sanitization patterns, and security best practices.
 
-For complete implementation code, see: `@orchestr8://examples/security/input-validation-implementation`
+For complete implementation code, see: `orchestr8://examples/security/input-validation-implementation`
 
 ## Schema Validation with Zod
 
@@ -184,12 +184,12 @@ For complete implementation code, see: `@orchestr8://examples/security/input-val
 ## Related Security Skills
 
 ### Parent Skills
-- **OWASP Top 10**: `@orchestr8://skills/security-owasp-top10`
+- **OWASP Top 10**: `orchestr8://skills/security-owasp-top10`
   - Maps to A03:2021 Injection vulnerabilities
   - General security vulnerability framework
 
 ### Related Domain Skills
-- **API Security**: `@orchestr8://skills/security-api-security`
+- **API Security**: `orchestr8://skills/security-api-security`
   - Request validation in API middleware
   - Rate limiting to prevent abuse
   - Security headers for XSS protection

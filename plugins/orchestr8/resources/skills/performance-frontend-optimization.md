@@ -381,13 +381,13 @@ getTTFB(sendToAnalytics);
 ## Related Skills
 
 **Performance Family:**
-- @orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
-- @orchestr8://skills/performance-api-optimization - API optimization to complement frontend performance
-- @orchestr8://skills/performance-profiling-techniques - Browser profiling tools and performance diagnostics
+- orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
+- orchestr8://skills/performance-api-optimization - API optimization to complement frontend performance
+- orchestr8://skills/performance-profiling-techniques - Browser profiling tools and performance diagnostics
 
 **Related Patterns:**
-- @orchestr8://patterns/performance-caching - Client-side caching strategies including service workers
-- @orchestr8://patterns/architecture-microservices - Frontend architecture patterns for large applications
+- orchestr8://patterns/performance-caching - Client-side caching strategies including service workers
+- orchestr8://patterns/architecture-microservices - Frontend architecture patterns for large applications
 
 **Implementation Examples:**
-- @orchestr8://examples/typescript-rest-api-complete - Full-stack TypeScript application with frontend optimization
+- orchestr8://examples/typescript-rest-api-complete - Full-stack TypeScript application with frontend optimization

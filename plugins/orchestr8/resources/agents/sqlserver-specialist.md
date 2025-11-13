@@ -88,7 +88,7 @@ Use Dynamic Management Views (DMVs) for performance diagnostics:
 - Identify top CPU and I/O consuming queries
 - Monitor buffer pool usage and wait statistics
 
-**Example:** `@orchestr8://examples/database/sqlserver-dmv-performance-tuning`
+**Example:** `orchestr8://examples/database/sqlserver-dmv-performance-tuning`
 
 ## T-SQL Optimization
 
@@ -98,7 +98,7 @@ Efficient T-SQL patterns for production code:
 - MERGE statements for upsert logic
 - Window functions for analytics
 
-**Example:** `@orchestr8://examples/database/sqlserver-tsql-procedures`
+**Example:** `orchestr8://examples/database/sqlserver-tsql-procedures`
 
 ## Always On Availability Groups
 
@@ -108,7 +108,7 @@ High availability and disaster recovery with automatic failover:
 - Monitoring synchronization lag and health
 - Failover procedures
 
-**Example:** `@orchestr8://examples/database/sqlserver-always-on-availability`
+**Example:** `orchestr8://examples/database/sqlserver-always-on-availability`
 
 ## Partitioning
 
@@ -317,7 +317,7 @@ Enterprise security for compliance and data protection:
 - Dynamic Data Masking for PII protection
 - Audit specifications for compliance tracking
 
-**Example:** `@orchestr8://examples/database/sqlserver-security-features`
+**Example:** `orchestr8://examples/database/sqlserver-security-features`
 
 ## Query Store
 
@@ -366,10 +366,10 @@ This agent uses progressive loading to minimize token usage:
 - High availability and security best practices
 
 **Implementation Examples:** Load on-demand via:
-- `@orchestr8://examples/database/sqlserver-dmv-performance-tuning` (~240 tokens)
-- `@orchestr8://examples/database/sqlserver-tsql-procedures` (~220 tokens)
-- `@orchestr8://examples/database/sqlserver-always-on-availability` (~260 tokens)
-- `@orchestr8://examples/database/sqlserver-security-features` (~200 tokens)
+- `orchestr8://examples/database/sqlserver-dmv-performance-tuning` (~240 tokens)
+- `orchestr8://examples/database/sqlserver-tsql-procedures` (~220 tokens)
+- `orchestr8://examples/database/sqlserver-always-on-availability` (~260 tokens)
+- `orchestr8://examples/database/sqlserver-security-features` (~200 tokens)
 
 **Typical Usage Pattern:**
 1. Load this agent for SQL Server concepts, optimization strategies, and architecture decisions

@@ -1,6 +1,6 @@
 {
   "name": "orchestr8-mcp-server",
-  "version": "8.0.4",
+  "version": "8.0.5",
   "description": "MCP server for orchestr8 - Autonomous software development workflows, agents, and skills for Claude Code",
   "main": "dist/index.js",
   "scripts": {
@@ -29,7 +29,11 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "verify": "bash tests/verify-structure.sh",
-    "benchmark": "node --test tests/benchmarks/**/*.bench.js"
+    "benchmark": "node --test tests/benchmarks/**/*.bench.js",
+    "version:bump": "bash scripts/bump-version.sh",
+    "version:patch": "bash scripts/bump-version.sh patch",
+    "version:minor": "bash scripts/bump-version.sh minor",
+    "version:major": "bash scripts/bump-version.sh major"
   },
   "keywords": [
     "mcp",

@@ -29,7 +29,7 @@ Implement core features
 
 ## Phase 4: Optimization (80-90%) [CONDITIONAL]
 Only if Phase 3 reveals performance issues:
-**→ Load:** `@orchestr8://skills/match?query=performance+optimization+${tech}&mode=index&maxResults=5`
+**→ Load:** `orchestr8://skills/match?query=performance+optimization+${tech}&mode=index&maxResults=5`
 
 Don't load performance optimization upfront if not needed
 ```
@@ -38,11 +38,11 @@ Don't load performance optimization upfront if not needed
 ```markdown
 ## Phase 5: Security Hardening [OPTIONAL]
 Only if handling sensitive data or production deployment:
-**→ Load:** `@orchestr8://skills/match?query=security+${threat-model}+${tech}&mode=index&maxResults=5`
+**→ Load:** `orchestr8://skills/match?query=security+${threat-model}+${tech}&mode=index&maxResults=5`
 
 ## Phase 6: Deployment [CONDITIONAL]
 Only if user requests deployment:
-**→ Load:** `@orchestr8://skills/match?query=deployment+${platform}+${tech}&mode=index&maxResults=5`
+**→ Load:** `orchestr8://skills/match?query=deployment+${platform}+${tech}&mode=index&maxResults=5`
 ```
 
 ## Strategy 2: Incremental Detail
@@ -50,22 +50,22 @@ Only if user requests deployment:
 **Load general → specific:**
 ```markdown
 ## Phase 1: High-level design (0-20%)
-**→ Load:** `@orchestr8://patterns/match?query=architecture+${type}&mode=index&maxResults=5`
+**→ Load:** `orchestr8://patterns/match?query=architecture+${type}&mode=index&maxResults=5`
 General architectural patterns
 
 ## Phase 2: Detailed design (20-40%)
-**→ Load:** `@orchestr8://agents/match?query=${specific-tech}+${component}&mode=index&maxResults=8`
+**→ Load:** `orchestr8://agents/match?query=${specific-tech}+${component}&mode=index&maxResults=8`
 Specific technology expertise for implementation
 ```
 
 **Example:**
 ```markdown
 ## Phase 1: API Design (0-20%)
-**→ Load:** `@orchestr8://patterns/match?query=api+design+rest&mode=index&maxResults=3`
+**→ Load:** `orchestr8://patterns/match?query=api+design+rest&mode=index&maxResults=3`
 General REST API patterns
 
 ## Phase 2: Framework Implementation (20-60%)
-**→ Load:** `@orchestr8://agents/match?query=${framework}+api+implementation&mode=index&maxResults=8`
+**→ Load:** `orchestr8://agents/match?query=${framework}+api+implementation&mode=index&maxResults=8`
 Framework-specific implementation details
 ```
 
@@ -74,7 +74,7 @@ Framework-specific implementation details
 **Load once, use multiple times:**
 ```markdown
 ## Phase 2 + 3: Design and Implementation (15-85%)
-**→ Load once:** `@orchestr8://match?query=${tech-stack}+${architecture}&categories=agent,skill,pattern&mode=index&maxResults=12`
+**→ Load once:** `orchestr8://match?query=${tech-stack}+${architecture}&categories=agent,skill,pattern&mode=index&maxResults=12`
 
 Use loaded expertise for both:
 - Phase 2: Architecture decisions
@@ -87,7 +87,7 @@ Avoid reloading same content
 ```markdown
 ## Phases 2-4: Design Through Testing (20-90%)
 **→ Comprehensive Load:**
-@orchestr8://match?query=${tech}+${domain}+full-stack&categories=agent,skill,example&mode=index&maxResults=15
+orchestr8://match?query=${tech}+${domain}+full-stack&categories=agent,skill,example&mode=index&maxResults=15
 
 Single load supports:
 - Phase 2: Architecture design
@@ -103,13 +103,13 @@ Single load supports:
 ## Phase 3: Data Layer (40-60%)
 
 **If user selected SQL database:**
-**→ Load:** `@orchestr8://match?query=sql+${database}+orm&mode=index&maxResults=8`
+**→ Load:** `orchestr8://match?query=sql+${database}+orm&mode=index&maxResults=8`
 
 **Else if user selected NoSQL:**
-**→ Load:** `@orchestr8://match?query=nosql+${database}+modeling&mode=index&maxResults=7`
+**→ Load:** `orchestr8://match?query=nosql+${database}+modeling&mode=index&maxResults=7`
 
 **Else if user selected in-memory:**
-**→ Load:** `@orchestr8://match?query=cache+${cache-tech}+patterns&mode=index&maxResults=5`
+**→ Load:** `orchestr8://match?query=cache+${cache-tech}+patterns&mode=index&maxResults=5`
 
 Load different expertise based on runtime decisions
 ```
@@ -123,16 +123,16 @@ Load different expertise based on runtime decisions
 
 **If simple CRUD:**
 Reduce budget: 1800 tokens
-**→ Load:** `@orchestr8://match?query=${tech}+crud+basic&mode=index&maxResults=8`
+**→ Load:** `orchestr8://match?query=${tech}+crud+basic&mode=index&maxResults=8`
 
 **If complex business logic:**
 Increase budget: 3000 tokens
-**→ Load:** `@orchestr8://match?query=${tech}+${domain}+complex&mode=index&maxResults=12`
+**→ Load:** `orchestr8://match?query=${tech}+${domain}+complex&mode=index&maxResults=12`
 
 **If microservices:**
 Split across sub-phases: 2 × 1500 tokens
-**→ Load Service A:** `@orchestr8://match?query=${tech}+${service-a}&mode=index&maxResults=8`
-**→ Load Service B:** `@orchestr8://match?query=${tech}+${service-b}&mode=index&maxResults=8`
+**→ Load Service A:** `orchestr8://match?query=${tech}+${service-a}&mode=index&maxResults=8`
+**→ Load Service B:** `orchestr8://match?query=${tech}+${service-b}&mode=index&maxResults=8`
 
 Adjust budgets based on actual complexity
 ```
@@ -145,10 +145,10 @@ Adjust budgets based on actual complexity
 ## Phase 2: Implementation
 
 **Primary:** Try dynamic loading
-@orchestr8://match?query=${specific-requirements}&mode=index&maxResults=8
+orchestr8://match?query=${specific-requirements}&mode=index&maxResults=8
 
 **Fallback:** If no good matches, use static reliable resource
-@orchestr8://agents/typescript-developer
+orchestr8://agents/typescript-developer
 
 → Ensures expertise always available
 ```

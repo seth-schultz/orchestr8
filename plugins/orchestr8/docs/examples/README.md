@@ -49,12 +49,12 @@ Examples are organized into two categories:
 
 ```
 # Step 1: Fast lookup with index mode (5-10ms, 50-120 tokens)
-@orchestr8://match?query=testing+unit+integration&mode=index&maxResults=5
+orchestr8://match?query=testing+unit+integration&mode=index&maxResults=5
 
 # Returns: testing-integration, testing-unit, testing-e2e, etc.
 
 # Step 2: Load specific resource (680 tokens)
-@orchestr8://skills/testing-integration
+orchestr8://skills/testing-integration
 
 # Total: 730-800 tokens vs 2,000+ loading all testing resources
 # Savings: 60-70%
@@ -64,13 +64,13 @@ Examples are organized into two categories:
 
 ```
 # Core agent (immediate load, 650 tokens)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Skill fragment (720 tokens)
-@orchestr8://skills/error-handling-resilience
+orchestr8://skills/error-handling-resilience
 
 # Working example (850 tokens)
-@orchestr8://examples/express-jwt-auth
+orchestr8://examples/express-jwt-auth
 
 # Total: 2,220 tokens for complete expertise
 # Progressive: Load core first, add skills/examples as needed
@@ -80,14 +80,14 @@ Examples are organized into two categories:
 
 ```
 # Agent with core content + on-demand examples
-@orchestr8://agents/sre-specialist
+orchestr8://agents/sre-specialist
 
 # Returns core (180 tokens) with references:
-# → @orchestr8://examples/infrastructure/sre-slo-configuration
-# → @orchestr8://examples/infrastructure/sre-incident-management
+# → orchestr8://examples/infrastructure/sre-slo-configuration
+# → orchestr8://examples/infrastructure/sre-incident-management
 
 # Load examples only when needed:
-@orchestr8://examples/infrastructure/sre-slo-configuration  # 800 tokens
+orchestr8://examples/infrastructure/sre-slo-configuration  # 800 tokens
 
 # Total: 980 tokens vs 2,000+ loading all SRE content upfront
 # Savings: 52%
@@ -97,7 +97,7 @@ Examples are organized into two categories:
 
 ```
 # Use index mode for ultra-fast lookup (5-10ms)
-@orchestr8://match?query=retry+exponential+backoff+circuit+breaker&mode=index&maxResults=5
+orchestr8://match?query=retry+exponential+backoff+circuit+breaker&mode=index&maxResults=5
 
 # Returns:
 # 1. error-handling-resilience (Score: 95)
@@ -224,14 +224,14 @@ See [Basic Usage - Fix Bug](./basic-usage.md#fix-bug-workflow) for details.
 **Approach:**
 ```
 # Step 1: Fast lookup with index
-@orchestr8://match?query=circuit+breaker+resilience&mode=index&maxResults=5
+orchestr8://match?query=circuit+breaker+resilience&mode=index&maxResults=5
 
 # Step 2: Review results
 # - error-handling-resilience (Score: 95)
 # - microservices-patterns (Score: 82)
 
 # Step 3: Load specific resource
-@orchestr8://skills/error-handling-resilience
+orchestr8://skills/error-handling-resilience
 ```
 
 See [Advanced Usage - Index Lookup](./advanced-usage.md#index-based-lookup) for details.
@@ -245,12 +245,12 @@ See [Advanced Usage - Index Lookup](./advanced-usage.md#index-based-lookup) for 
 **Approach:**
 ```
 # Strategy 1: Catalog first (most efficient)
-@orchestr8://match?query=typescript+api+testing&mode=catalog
+orchestr8://match?query=typescript+api+testing&mode=catalog
 
 # Review (~100 tokens), then load selectively
-@orchestr8://agents/typescript-core       # 650 tokens
-@orchestr8://skills/api-design-rest       # 720 tokens
-@orchestr8://examples/express-minimal-api # 500 tokens
+orchestr8://agents/typescript-core       # 650 tokens
+orchestr8://skills/api-design-rest       # 720 tokens
+orchestr8://examples/express-minimal-api # 500 tokens
 
 # Total: 1970 tokens (within budget)
 ```
@@ -266,7 +266,7 @@ See [Advanced Usage - Token Optimization](./advanced-usage.md#token-budget-optim
 **Approach:**
 ```
 # Multi-category search
-@orchestr8://match?query=authentication+jwt+security&categories=skills,patterns,examples&mode=catalog&maxResults=15
+orchestr8://match?query=authentication+jwt+security&categories=skills,patterns,examples&mode=catalog&maxResults=15
 
 # Results from:
 # - Skills: error-handling, api-design
@@ -320,16 +320,16 @@ See [Basic Usage - Deployment](./basic-usage.md#deployment-workflows) for exampl
 
 ```
 # TypeScript core expertise
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Error handling skill
-@orchestr8://skills/error-handling-resilience
+orchestr8://skills/error-handling-resilience
 
 # JWT authentication pattern
-@orchestr8://patterns/security-auth-jwt
+orchestr8://patterns/security-auth-jwt
 
 # Express API example
-@orchestr8://examples/express-jwt-auth
+orchestr8://examples/express-jwt-auth
 ```
 
 See [Basic Usage - Static Loading](./basic-usage.md#static-resource-loading) for examples.
@@ -340,13 +340,13 @@ See [Basic Usage - Static Loading](./basic-usage.md#static-resource-loading) for
 
 ```
 # Catalog mode (discovery)
-@orchestr8://match?query=typescript+testing&mode=catalog&maxResults=10
+orchestr8://match?query=typescript+testing&mode=catalog&maxResults=10
 
 # Index mode (fast lookup)
-@orchestr8://match?query=retry+backoff&mode=index&maxResults=5
+orchestr8://match?query=retry+backoff&mode=index&maxResults=5
 
 # Full mode (complete content)
-@orchestr8://match?query=python+async&mode=full&maxTokens=2500
+orchestr8://match?query=python+async&mode=full&maxTokens=2500
 ```
 
 See [Basic Usage - Dynamic Matching](./basic-usage.md#dynamic-matching) for examples.
@@ -358,7 +358,7 @@ See [Basic Usage - Dynamic Matching](./basic-usage.md#dynamic-matching) for exam
 ### Quick Reference (500-1000 tokens)
 
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 **Use case:** Need quick expertise reference
@@ -366,7 +366,7 @@ See [Basic Usage - Dynamic Matching](./basic-usage.md#dynamic-matching) for exam
 ### Task Context (1500-2500 tokens)
 
 ```
-@orchestr8://match?query=typescript+api+testing&mode=full&maxTokens=2500
+orchestr8://match?query=typescript+api+testing&mode=full&maxTokens=2500
 ```
 
 **Use case:** Feature implementation, bug fix
@@ -374,7 +374,7 @@ See [Basic Usage - Dynamic Matching](./basic-usage.md#dynamic-matching) for exam
 ### Deep Expertise (3000-5000 tokens)
 
 ```
-@orchestr8://match?query=microservices+kubernetes+deployment&mode=full&maxTokens=5000
+orchestr8://match?query=microservices+kubernetes+deployment&mode=full&maxTokens=5000
 ```
 
 **Use case:** Architecture design, complex system
@@ -389,27 +389,27 @@ See [Advanced Usage - Token Budgets](./advanced-usage.md#token-budget-strategies
 
 ```
 # Index mode for specific keywords
-@orchestr8://match?query=circuit+breaker+timeout&mode=index
+orchestr8://match?query=circuit+breaker+timeout&mode=index
 ```
 
 ### Efficient Discovery (~100 tokens)
 
 ```
 # Catalog mode for browsing
-@orchestr8://match?query=testing+patterns&mode=catalog&maxResults=10
+orchestr8://match?query=testing+patterns&mode=catalog&maxResults=10
 ```
 
 ### Progressive Loading
 
 ```
 # Step 1: Core (1000 tokens)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Step 2: Skills as needed (500 tokens)
-@orchestr8://skills/api-design-rest
+orchestr8://skills/api-design-rest
 
 # Step 3: Examples if needed (800 tokens)
-@orchestr8://examples/express-jwt-auth
+orchestr8://examples/express-jwt-auth
 ```
 
 See [Advanced Usage - Performance](./advanced-usage.md#performance-optimization) for more.

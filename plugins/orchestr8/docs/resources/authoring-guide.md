@@ -423,7 +423,7 @@ Key points:
 
 ```bash
 # Query with expected keywords
-@orchestr8://match?query=typescript+generics+constraints&mode=index
+orchestr8://match?query=typescript+generics+constraints&mode=index
 
 # Expected: Your fragment should appear in results
 # Check: Is the relevance score high?
@@ -470,7 +470,7 @@ console.log(`Within range: ${withinRange}`);
 
 ```bash
 # Test assembly with related fragments
-@orchestr8://match?query=typescript+api+error+handling&maxTokens=3000
+orchestr8://match?query=typescript+api+error+handling&maxTokens=3000
 
 # Validate:
 # 1. Your fragment is included
@@ -524,13 +524,13 @@ Built quick lookup cache with 20 queries
 
 ```bash
 # Static loading (direct URI)
-@orchestr8://agents/your-fragment-id
+orchestr8://agents/your-fragment-id
 
 # Dynamic loading (query-based)
-@orchestr8://match?query=your+expected+keywords&mode=index
+orchestr8://match?query=your+expected+keywords&mode=index
 
 # Category-specific matching
-@orchestr8://agents/match?query=your+keywords
+orchestr8://agents/match?query=your+keywords
 ```
 
 **Validation:**
@@ -544,15 +544,15 @@ Built quick lookup cache with 20 queries
 **Add cross-references in content:**
 
 ```markdown
-For async patterns, see [typescript-async-patterns](@orchestr8://agents/typescript-async-patterns).
+For async patterns, see [typescript-async-patterns](orchestr8://agents/typescript-async-patterns).
 ```
 
 **Add relatedFragments in frontmatter (optional):**
 
 ```yaml
 relatedFragments:
-  - @orchestr8://agents/typescript-async-patterns
-  - @orchestr8://skills/error-handling-async
+  - orchestr8://agents/typescript-async-patterns
+  - orchestr8://skills/error-handling-async
 ```
 
 ### Step 10: Commit and Share
@@ -794,11 +794,11 @@ estimatedTokens: 600
 ```markdown
 # Fragment Title
 
-For foundational knowledge, see [typescript-core](@orchestr8://agents/typescript-core).
+For foundational knowledge, see [typescript-core](orchestr8://agents/typescript-core).
 
 Related patterns:
-- [Error Handling](@orchestr8://skills/error-handling-resilience)
-- [API Design](@orchestr8://skills/api-design-rest)
+- [Error Handling](orchestr8://skills/error-handling-resilience)
+- [API Design](orchestr8://skills/api-design-rest)
 ```
 
 ### Mistake 7: Code Without Explanation
@@ -1046,8 +1046,8 @@ class Bulkhead {
 
 ## Related Patterns
 
-For async error handling, see [error-handling-async](@orchestr8://skills/error-handling-async).
-For logging strategies, see [error-handling-logging](@orchestr8://skills/error-handling-logging).
+For async error handling, see [error-handling-async](orchestr8://skills/error-handling-async).
+For logging strategies, see [error-handling-logging](orchestr8://skills/error-handling-logging).
 ```
 
 **Why this is a high-quality fragment:**

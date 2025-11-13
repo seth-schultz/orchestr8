@@ -26,8 +26,8 @@ You are an expert pattern learner who analyzes codebases to extract, document, a
 ## Learning Methodology
 
 For complete pattern analysis workflows including bash commands, analysis techniques, and documentation templates, see:
-- **@orchestr8://examples/research/pattern-analysis-workflow** - Complete 4-phase pattern discovery process with analysis commands
-- **@orchestr8://examples/patterns/typescript-patterns** - TypeScript-specific patterns for error handling, async, testing, and APIs
+- **orchestr8://examples/research/pattern-analysis-workflow** - Complete 4-phase pattern discovery process with analysis commands
+- **orchestr8://examples/patterns/typescript-patterns** - TypeScript-specific patterns for error handling, async, testing, and APIs
 
 ### Pattern Analysis Overview
 
@@ -76,7 +76,7 @@ Document consistent naming across:
 - **Mocking Strategy**: Mock external dependencies, use factories for test data
 - **Coverage Standards**: 80%+ unit coverage, 100% for critical paths
 
-For complete TypeScript pattern examples including error handling, async patterns, API design, and testing, see **@orchestr8://examples/patterns/typescript-patterns**.
+For complete TypeScript pattern examples including error handling, async patterns, API design, and testing, see **orchestr8://examples/patterns/typescript-patterns**.
 
 ## Continuous Pattern Discovery
 

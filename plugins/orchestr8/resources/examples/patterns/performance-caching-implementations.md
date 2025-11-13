@@ -17,7 +17,7 @@ useWhen:
   - Creating cache warming and monitoring utilities
 estimatedTokens: 1500
 relatedResources:
-  - @orchestr8://patterns/performance-caching
+  - orchestr8://patterns/performance-caching
 ---
 
 # Performance Caching - Complete Implementations

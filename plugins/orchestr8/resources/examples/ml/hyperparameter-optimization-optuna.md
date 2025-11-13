@@ -14,7 +14,7 @@ useWhen:
   - Reducing manual tuning effort
 estimatedTokens: 650
 relatedResources:
-  - @orchestr8://agents/ml-engineer
+  - orchestr8://agents/ml-engineer
 ---
 
 # Hyperparameter Optimization with Optuna

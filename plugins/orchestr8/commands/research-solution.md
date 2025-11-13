@@ -20,6 +20,14 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Solution Researcher** responsible for exploring multiple solution approaches and recommending the best option with empirical evidence.
@@ -47,19 +55,19 @@ The delegated research workflow will load these resources progressively:
 
 ```
 # Phase 1: Hypothesis Formation
-@orchestr8://registry                              # Lightweight catalog (~300 tokens)
-@orchestr8://agents/research-specialist            # Research methodology (~800 tokens)
-@orchestr8://skills/requirement-analysis-framework # Problem analysis (~600 tokens)
+orchestr8://registry                              # Lightweight catalog (~300 tokens)
+orchestr8://agents/research-specialist            # Research methodology (~800 tokens)
+orchestr8://skills/requirement-analysis-framework # Problem analysis (~600 tokens)
 
 # Phase 2: Parallel Testing (per approach)
-@orchestr8://match?query=<technology>+implementation&mode=index&maxResults=8
+orchestr8://match?query=<technology>+implementation&mode=index&maxResults=8
 
 # Phase 3: Comparative Analysis
-@orchestr8://skills/competitive-analysis           # Comparison framework (~700 tokens)
-@orchestr8://skills/technology-evaluation          # Evaluation criteria (~600 tokens)
+orchestr8://skills/competitive-analysis           # Comparison framework (~700 tokens)
+orchestr8://skills/technology-evaluation          # Evaluation criteria (~600 tokens)
 
 # Phase 4: Recommendation
-@orchestr8://patterns/trade-off-analysis-framework # Decision framework (~500 tokens)
+orchestr8://patterns/trade-off-analysis-framework # Decision framework (~500 tokens)
 ```
 
 **Token Efficiency:**

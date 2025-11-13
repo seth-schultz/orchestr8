@@ -9,11 +9,11 @@ capabilities:
   - Vault and cloud secret manager integration
   - Encryption at rest for sensitive data
 relatedResources:
-  - @orchestr8://examples/security/secrets-management-implementation
-  - @orchestr8://skills/security-owasp-top10
-  - @orchestr8://skills/security-authentication-jwt
-  - @orchestr8://skills/security-authentication-oauth
-  - @orchestr8://skills/security-api-security
+  - orchestr8://examples/security/secrets-management-implementation
+  - orchestr8://skills/security-owasp-top10
+  - orchestr8://skills/security-authentication-jwt
+  - orchestr8://skills/security-authentication-oauth
+  - orchestr8://skills/security-api-security
 estimatedTokens: 300
 useWhen:
   - Implementing secrets management with AWS Secrets Manager for database credentials and API keys in production
@@ -29,7 +29,7 @@ useWhen:
 
 Secrets management is critical for protecting sensitive credentials, API keys, and encryption keys. This skill covers strategies for secure storage, rotation, and access control of secrets.
 
-For complete implementation code, see: `@orchestr8://examples/security/secrets-management-implementation`
+For complete implementation code, see: `orchestr8://examples/security/secrets-management-implementation`
 
 ## Core Concepts
 
@@ -279,23 +279,23 @@ path "secret/data/automation/*" {
 ## Related Security Skills
 
 ### Parent Skills
-- **OWASP Top 10**: `@orchestr8://skills/security-owasp-top10`
+- **OWASP Top 10**: `orchestr8://skills/security-owasp-top10`
   - Maps to A02:2021 Cryptographic Failures
   - General secrets and credential security principles
 
 ### Authentication Skills
-- **JWT Authentication**: `@orchestr8://skills/security-authentication-jwt`
+- **JWT Authentication**: `orchestr8://skills/security-authentication-jwt`
   - JWT signing key management and rotation
   - Refresh token encryption at rest
   - Secret storage for token generation
 
-- **OAuth 2.0**: `@orchestr8://skills/security-authentication-oauth`
+- **OAuth 2.0**: `orchestr8://skills/security-authentication-oauth`
   - OAuth client secret storage and rotation
   - Access and refresh token encryption
   - Provider API key management
 
 ### Related Domain Skills
-- **API Security**: `@orchestr8://skills/security-api-security`
+- **API Security**: `orchestr8://skills/security-api-security`
   - API key generation and management
   - Secure storage of API credentials
   - Key rotation strategies for API keys

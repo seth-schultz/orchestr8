@@ -101,13 +101,13 @@ UseWhen (3-4):
 Run fuzzy match queries:
 
 Generic queries:
-@orchestr8://agents/match?query=${technology}
+orchestr8://agents/match?query=${technology}
 
 Specialized queries:
-@orchestr8://agents/match?query=${tech}+${specialization}
+orchestr8://agents/match?query=${tech}+${specialization}
 
 Use-case queries:
-@orchestr8://agents/match?query=${problem}+${technology}
+orchestr8://agents/match?query=${problem}+${technology}
 
 Verify:
 ✓ Correct fragments appear in results
@@ -135,19 +135,19 @@ Examples:
 For typescript-core + specializations:
 
 Core only:
-@orchestr8://agents/match?query=typescript
+orchestr8://agents/match?query=typescript
 → Expect: typescript-core
 
 API focus:
-@orchestr8://agents/match?query=typescript+rest+api+express
+orchestr8://agents/match?query=typescript+rest+api+express
 → Expect: typescript-core + typescript-api-development
 
 Async focus:
-@orchestr8://agents/match?query=typescript+async+concurrent
+orchestr8://agents/match?query=typescript+async+concurrent
 → Expect: typescript-core + typescript-async-patterns
 
 Testing focus:
-@orchestr8://agents/match?query=typescript+jest+testing
+orchestr8://agents/match?query=typescript+jest+testing
 → Expect: typescript-core + typescript-testing
 ```
 

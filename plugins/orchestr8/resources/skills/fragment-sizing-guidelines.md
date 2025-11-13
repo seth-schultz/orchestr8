@@ -196,7 +196,7 @@ Complementary specializations:
 - 450-600 tokens each
 
 Example combination:
-@orchestr8://agents/match?query=typescript+api+testing
+orchestr8://agents/match?query=typescript+api+testing
 → Loads: typescript-core + typescript-api + typescript-testing
 → Total: ~1550 tokens of highly relevant content
 ```

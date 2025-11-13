@@ -24,7 +24,7 @@ useWhen:
   - Implementing HTTP caching with ETag headers and CDN integration for static assets and API responses
 estimatedTokens: 650
 relatedResources:
-  - @orchestr8://examples/patterns/performance-caching-implementations
+  - orchestr8://examples/patterns/performance-caching-implementations
 ---
 
 # Caching Strategies Pattern
@@ -251,5 +251,5 @@ See complete TypeScript implementations with:
 - Cache warming and monitoring
 
 ```
-@orchestr8://examples/patterns/performance-caching-implementations
+orchestr8://examples/patterns/performance-caching-implementations
 ```

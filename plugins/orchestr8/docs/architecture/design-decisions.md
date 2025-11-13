@@ -65,7 +65,7 @@ Claude Code needs a standardized way to access external resources (workflows, ag
    - Easy debugging (separate stderr for logs)
 
 3. **Dynamic Templates**
-   - MCP supports wildcard URIs (`@orchestr8://agents/match{+rest}`)
+   - MCP supports wildcard URIs (`orchestr8://agents/match{+rest}`)
    - Enables dynamic resource matching without pre-registration
    - Flexible query parameter support
 
@@ -554,7 +554,7 @@ For common queries and production use, we can do better.
        "scenario-hash": {
          "scenario": "Building async TypeScript applications",
          "keywords": ["building", "async", "typescript"],
-         "uri": "@orchestr8://agents/typescript-async",
+         "uri": "orchestr8://agents/typescript-async",
          "category": "agent",
          "estimatedTokens": 800
        }
@@ -711,7 +711,7 @@ Load resources on-demand when needed:
 
 **Load this resource:**
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 ```
 
@@ -1382,13 +1382,13 @@ With 384 fragments organized into families, we needed a way to link related cont
    - Pros: Simple, standard Markdown
    - Cons: Not loadable via MCP, just documentation
 
-3. **@orchestr8:// URI References (Loadable)**
+3. **orchestr8:// URI References (Loadable)**
    - Pros: JIT loadable, MCP-native, structured
    - Cons: Requires URI maintenance, non-standard Markdown
 
 ### Decision
 
-**Use @orchestr8:// URI References for Cross-Fragment Linking (Option 3)**
+**Use orchestr8:// URI References for Cross-Fragment Linking (Option 3)**
 
 ### Rationale
 
@@ -1398,9 +1398,9 @@ With 384 fragments organized into families, we needed a way to link related cont
    - Maintains token efficiency (load only what's needed)
 
 2. **Type-Safe References**
-   - `@orchestr8://skills/performance-api-optimization`
-   - `@orchestr8://patterns/event-driven-saga`
-   - `@orchestr8://examples/express-jwt-auth`
+   - `orchestr8://skills/performance-api-optimization`
+   - `orchestr8://patterns/event-driven-saga`
+   - `orchestr8://examples/express-jwt-auth`
    - URI format validated by MCP server
 
 3. **Three Reference Types**
@@ -1422,18 +1422,18 @@ With 384 fragments organized into families, we needed a way to link related cont
 ## Related Resources
 
 **Core Concepts:**
-- @orchestr8://skills/performance-optimization (foundational patterns)
+- orchestr8://skills/performance-optimization (foundational patterns)
 
 **Specialized Topics:**
-- @orchestr8://skills/performance-database-optimization (database-specific)
-- @orchestr8://skills/performance-frontend-optimization (frontend-specific)
+- orchestr8://skills/performance-database-optimization (database-specific)
+- orchestr8://skills/performance-frontend-optimization (frontend-specific)
 
 **Patterns:**
-- @orchestr8://patterns/performance-caching (caching strategies)
-- @orchestr8://patterns/database-query-optimization (query optimization)
+- orchestr8://patterns/performance-caching (caching strategies)
+- orchestr8://patterns/database-query-optimization (query optimization)
 
 **Examples:**
-- @orchestr8://examples/express-error-handling (practical implementation)
+- orchestr8://examples/express-error-handling (practical implementation)
 ```
 
 **Reference Patterns:**
@@ -1560,7 +1560,7 @@ Some agents and workflows are large (1,200+ tokens) but users often only need ba
    ├── Basic planning and organization
    ├── Team coordination
    ├── Reference to advanced module
-   └── @orchestr8://agents/project-manager-advanced
+   └── orchestr8://agents/project-manager-advanced
 
    project-manager-advanced.md (700 tokens, on-demand)
    ├── Risk management
@@ -1575,7 +1575,7 @@ Some agents and workflows are large (1,200+ tokens) but users often only need ba
    ├── Basic indexing and search
    ├── Document organization
    ├── Reference to advanced module
-   └── @orchestr8://agents/knowledge-base-agent-advanced
+   └── orchestr8://agents/knowledge-base-agent-advanced
 
    knowledge-base-agent-advanced.md (600 tokens, on-demand)
    ├── Semantic search

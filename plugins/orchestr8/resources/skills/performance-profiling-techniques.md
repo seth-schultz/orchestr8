@@ -220,16 +220,16 @@ setInterval(() => {
 ## Related Skills
 
 **Performance Family:**
-- @orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
-- @orchestr8://skills/performance-api-optimization - API optimization after identifying bottlenecks with profiling
-- @orchestr8://skills/performance-database-optimization - Database optimization guided by profiling data
-- @orchestr8://skills/performance-frontend-optimization - Frontend optimization using browser profiling tools
+- orchestr8://skills/performance-optimization - Overview of performance optimization principles and when to use each domain
+- orchestr8://skills/performance-api-optimization - API optimization after identifying bottlenecks with profiling
+- orchestr8://skills/performance-database-optimization - Database optimization guided by profiling data
+- orchestr8://skills/performance-frontend-optimization - Frontend optimization using browser profiling tools
 
 **Related Patterns:**
-- @orchestr8://patterns/performance-caching - Caching patterns to address profiling-identified bottlenecks
+- orchestr8://patterns/performance-caching - Caching patterns to address profiling-identified bottlenecks
 
 **Implementation Examples:**
-- @orchestr8://examples/* - Performance examples across different tech stacks
+- orchestr8://examples/* - Performance examples across different tech stacks
 
 ## Profiling Workflow
 

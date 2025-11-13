@@ -8,7 +8,7 @@ capabilities:
   - Integrate dynamic resource assembly and parallel execution
 useWhen:
   - Workflow template creation requiring phase definition, JIT resource loading, argument parameterization, and success criteria
-  - Adaptive workflow design needing dynamic expertise assembly with @orchestr8:// URIs and progressive refinement patterns
+  - Adaptive workflow design needing dynamic expertise assembly with orchestr8:// URIs and progressive refinement patterns
 estimatedTokens: 580
 ---
 
@@ -44,17 +44,17 @@ estimatedTokens: 580
 **Phase-based token budgeting:**
 ```markdown
 Phase 1 (Research): 1200-1500 tokens
-- @orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=5
-- @orchestr8://skills/match?query=requirements+analysis&mode=index&maxResults=3
+- orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=5
+- orchestr8://skills/match?query=requirements+analysis&mode=index&maxResults=3
 
 Phase 2 (Design): 1500-2000 tokens
-- @orchestr8://match?query=${tech}+architecture&categories=agent,pattern&mode=index&maxResults=8
+- orchestr8://match?query=${tech}+architecture&categories=agent,pattern&mode=index&maxResults=8
 
 Phase 3 (Implementation): 2500-3000 tokens
-- @orchestr8://match?query=${tech}+${features}&categories=agent,skill,example&mode=index&maxResults=10
+- orchestr8://match?query=${tech}+${features}&categories=agent,skill,example&mode=index&maxResults=10
 
 Phase 4 (Validation): 800-1200 tokens
-- @orchestr8://skills/match?query=testing+${tech}&mode=index&maxResults=3
+- orchestr8://skills/match?query=testing+${tech}&mode=index&maxResults=3
 ```
 
 **Argument substitution:**
@@ -63,8 +63,8 @@ Phase 4 (Validation): 800-1200 tokens
 - Make queries specific (better matches)
 
 **Resource selection:**
-- Static URIs for fixed dependencies: `@orchestr8://agents/typescript-developer`
-- Dynamic URIs for variable needs: `@orchestr8://agents/match?query=${project-type}`
+- Static URIs for fixed dependencies: `orchestr8://agents/typescript-developer`
+- Dynamic URIs for variable needs: `orchestr8://agents/match?query=${project-type}`
 - **Checkpoint:** JIT loading designed, token budgets set, URIs constructed
 
 ## Phase 4: Finalization & Testing (75-100%)
@@ -90,7 +90,7 @@ estimatedTokens: total-size
 **Task:** $ARGUMENTS
 
 ## Phase 1: Name (0-X%)
-**→ JIT Load:** @orchestr8://...
+**→ JIT Load:** orchestr8://...
 
 **Activities:**
 - Activity 1
@@ -136,7 +136,7 @@ Accessible via MCP prompts system
 **As pattern reference:**
 ```markdown
 Save to: resources/patterns/workflow-name.md
-Discoverable via: @orchestr8://patterns/match?query=...
+Discoverable via: orchestr8://patterns/match?query=...
 ```
 
 ## Example: Minimal Workflow
@@ -151,12 +151,12 @@ arguments:
 # Quick Fix: ${bug-description}
 
 ## Phase 1: Analysis (0-30%)
-**→ Load:** @orchestr8://skills/match?query=debugging+${bug-description}&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=debugging+${bug-description}&mode=index&maxResults=3
 - Reproduce issue, analyze root cause
 - **Checkpoint:** Cause identified
 
 ## Phase 2: Fix (30-80%)
-**→ Load:** @orchestr8://match?query=${bug-description}+solution&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=${bug-description}+solution&mode=index&maxResults=5
 - Implement fix, add test
 - **Checkpoint:** Test passes
 

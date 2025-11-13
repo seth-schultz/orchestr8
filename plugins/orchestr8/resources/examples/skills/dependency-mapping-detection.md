@@ -13,7 +13,7 @@ useWhen:
   - Creating architecture documentation
 estimatedTokens: 480
 relatedResources:
-  - @orchestr8://skills/service-dependency-mapping
+  - orchestr8://skills/service-dependency-mapping
 ---
 
 # Dependency Mapping: Detection Implementations

@@ -11,7 +11,7 @@ useWhen:
   - Deciding whether to create agent (domain expertise/WHO), skill (technique/HOW), or pattern (architectural approach/WHY) resource types
   - Planning agent fragmentation strategy to avoid monolithic 2000+ token agents by splitting into core (600-750 tokens) and specialized fragments (450-650 tokens)
   - Designing multi-level agent families with core fragments containing always-relevant fundamentals and specialized fragments for use-case specific knowledge
-  - Optimizing token efficiency through @orchestr8://agents/match?query= dynamic loading based on specific user requests versus loading all expertise upfront
+  - Optimizing token efficiency through orchestr8://agents/match?query= dynamic loading based on specific user requests versus loading all expertise upfront
   - Understanding when to create agents (TypeScript Developer, Cloud Architect) versus skills (Error Handling, Testing Strategies) versus patterns (Microservices, CQRS)
   - Structuring agent sets for composability where generic queries load core only (600 tokens) and specific queries load core + specializations (1100 tokens)
 estimatedTokens: 620
@@ -82,7 +82,7 @@ Specialized (load as needed):
 - python-testing.md (400 tokens)
 
 Usage:
-@orchestr8://agents/match?query=python+api+rest
+orchestr8://agents/match?query=python+api+rest
 → Loads: python-core + python-api-development (1100 tokens, 63% savings)
 ```
 

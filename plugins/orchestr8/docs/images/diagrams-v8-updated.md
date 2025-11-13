@@ -127,7 +127,7 @@ graph TB
         subgraph "Core Components"
             PromptLoader["Prompt Loader<br/>(1hr cache)"]
             ResourceLoader["Resource Loader<br/>(Progressive Loading)"]
-            URIParser["URI Parser<br/>(@orchestr8:// + cross-refs)"]
+            URIParser["URI Parser<br/>(orchestr8:// + cross-refs)"]
             FuzzyMatcher["Fuzzy Matcher<br/>(1,675 scenarios, 4,036 keywords)"]
             IndexLookup["Index Lookup<br/>(3-tier: cache→index→fuzzy)"]
         end
@@ -239,14 +239,14 @@ sequenceDiagram
     MCP-->>Claude: Workflow ready
 
     Note over Claude,MCP: Phase 1: Research (0-20%)
-    Claude->>MCP: @orchestr8://match?query=typescript+api&mode=index
+    Claude->>MCP: orchestr8://match?query=typescript+api&mode=index
     MCP->>Index: Keyword lookup
     Index->>Index: Tier 1: Quick cache (2ms)
     Index-->>MCP: 5 matched resources (500 tokens)
     MCP-->>Claude: Lightweight catalog
 
     Note over Claude,Resources: Phase 2: Load Core (20-40%)
-    Claude->>MCP: @orchestr8://agents/typescript-core
+    Claude->>MCP: orchestr8://agents/typescript-core
     MCP->>Loader: Load static resource
     Loader->>Resources: Read typescript-core.md
     Resources-->>Loader: Core agent (600 tokens)
@@ -254,7 +254,7 @@ sequenceDiagram
     MCP-->>Claude: Core agent loaded
 
     Note over Claude,Resources: Phase 3: Load Examples JIT (40-70%)
-    Claude->>MCP: @orchestr8://examples/express-jwt-auth
+    Claude->>MCP: orchestr8://examples/express-jwt-auth
     MCP->>Loader: Load example (cross-ref from skill)
     Loader->>Resources: Read express-jwt-auth.md
     Resources-->>Loader: Example (350 tokens)
@@ -262,7 +262,7 @@ sequenceDiagram
     MCP-->>Claude: Example loaded on-demand
 
     Note over Claude,Resources: Phase 4: Progressive Loading (70-90%)
-    Claude->>MCP: @orchestr8://agents/typescript-api-development
+    Claude->>MCP: orchestr8://agents/typescript-api-development
     MCP->>Loader: Load advanced module
     Loader->>Resources: Read advanced module
     Resources-->>Loader: Advanced features (400 tokens)
@@ -279,7 +279,7 @@ sequenceDiagram
 graph TB
     subgraph "Phase 1: Example Extraction"
         P1_Before["37 files with embedded examples<br/>Large token counts<br/>Duplication across resources"]
-        P1_After["77 extracted example files<br/>@orchestr8:// URI references<br/>~45,000 tokens saved"]
+        P1_After["77 extracted example files<br/>orchestr8:// URI references<br/>~45,000 tokens saved"]
 
         P1_Before -->|Optimize| P1_After
     end

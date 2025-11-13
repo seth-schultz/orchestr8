@@ -44,7 +44,7 @@ The testing pyramid guides test distribution for optimal coverage and speed:
 ### Unit Testing
 **Focus:** Individual functions, classes, components in isolation
 
-**See:** @orchestr8://skills/testing-unit
+**See:** orchestr8://skills/testing-unit
 
 **Key principles:** Test behavior not implementation, mock all dependencies, fast execution (<1ms per test)
 
@@ -52,15 +52,15 @@ The testing pyramid guides test distribution for optimal coverage and speed:
 **Focus:** Multiple components working together (API + database, service interactions)
 
 **See:**
-- @orchestr8://skills/testing-integration - Basic integration patterns
-- @orchestr8://skills/testing-integration-patterns - Advanced patterns with test containers
+- orchestr8://skills/testing-integration - Basic integration patterns
+- orchestr8://skills/testing-integration-patterns - Advanced patterns with test containers
 
 **Key principles:** Use real dependencies (databases, queues), test boundaries between systems, proper cleanup
 
 ### End-to-End Testing
 **Focus:** Complete user workflows through the full application stack
 
-**See:** @orchestr8://skills/testing-e2e-best-practices
+**See:** orchestr8://skills/testing-e2e-best-practices
 
 **Key principles:** Test critical paths only, stable selectors, retry logic for flakiness
 
@@ -240,7 +240,7 @@ npm test -- --coverage
 
 ## Related Skills
 
-- **@orchestr8://skills/testing-unit** - Unit testing patterns and test doubles
-- **@orchestr8://skills/testing-integration** - Integration test setup and API testing
-- **@orchestr8://skills/testing-integration-patterns** - Advanced integration patterns with test containers
-- **@orchestr8://skills/testing-e2e-best-practices** - E2E testing with Playwright, page objects, flaky test prevention
+- **orchestr8://skills/testing-unit** - Unit testing patterns and test doubles
+- **orchestr8://skills/testing-integration** - Integration test setup and API testing
+- **orchestr8://skills/testing-integration-patterns** - Advanced integration patterns with test containers
+- **orchestr8://skills/testing-e2e-best-practices** - E2E testing with Playwright, page objects, flaky test prevention

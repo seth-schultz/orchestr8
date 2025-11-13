@@ -38,7 +38,7 @@ Workflow loads (~2KB)
    ↓
 Analyzes requirements: "TypeScript", "REST API"
    ↓
-Dynamic matching: @orchestr8://match?query=typescript+rest+api&maxTokens=2500
+Dynamic matching: orchestr8://match?query=typescript+rest+api&maxTokens=2500
    ↓
 Assembles expertise:
   - typescript-core
@@ -127,35 +127,35 @@ Workflows use **phase-based JIT loading** for maximum token efficiency:
 
 **Phase 1 (0-20%) - Requirements & Architecture:**
 ```
-→ Load: @orchestr8://match?query=requirements+analysis+architecture+design&maxTokens=1200
+→ Load: orchestr8://match?query=requirements+analysis+architecture+design&maxTokens=1200
 Loaded: requirement-analysis-framework, architecture-decision-records
 Tokens: ~1,200
 ```
 
 **Phase 2 (20-30%) - Project Setup:**
 ```
-→ Load: @orchestr8://match?query=typescript+project+initialization+tooling&maxTokens=1000
+→ Load: orchestr8://match?query=typescript+project+initialization+tooling&maxTokens=1000
 Loaded: typescript-core, git-workflow, docker-best-practices
 Tokens: ~1,000
 ```
 
 **Phase 3 (30-70%) - Core Implementation:**
 ```
-→ Load: @orchestr8://match?query=typescript+rest+api+implementation&maxTokens=3500
+→ Load: orchestr8://match?query=typescript+rest+api+implementation&maxTokens=3500
 Loaded: typescript-api-development, api-design-rest, express-jwt-auth (examples)
 Tokens: ~3,500 (supports all parallel tracks: backend, frontend, infra)
 ```
 
 **Phase 4 (70-90%) - Testing & Quality:**
 ```
-→ Load: @orchestr8://match?query=typescript+testing+quality+security&maxTokens=2000
+→ Load: orchestr8://match?query=typescript+testing+quality+security&maxTokens=2000
 Loaded: testing-strategies, security-owasp-top10, quality-code-review-checklist
 Tokens: ~2,000
 ```
 
 **Phase 5 (90-100%) - Deployment (conditional):**
 ```
-→ Load: @orchestr8://match?query=${deployment-platform}+cicd+infrastructure&maxTokens=1800
+→ Load: orchestr8://match?query=${deployment-platform}+cicd+infrastructure&maxTokens=1800
 Loaded: deployment-zero-downtime, ci-cd-github-actions (if deployment requested)
 Tokens: ~1,800 (optional)
 ```
@@ -650,7 +650,7 @@ Creates new workflow with phases, checkpoints, and dynamic resource loading.
    - Determine complexity
 
 4. Dynamic resource loading
-   @orchestr8://match?query=typescript+rest+api&maxTokens=2500
+   orchestr8://match?query=typescript+rest+api&maxTokens=2500
    → Assembles relevant fragments
 
 5. Phase-by-phase execution
@@ -774,7 +774,7 @@ estimatedTokens: 600
 
 ## Dynamic Resources
 Load relevant expertise:
-@orchestr8://match?query=relevant+keywords&maxTokens=2500
+orchestr8://match?query=relevant+keywords&maxTokens=2500
 
 ## Parallelism
 - **Independent:** Track A + Track B (Phase 2)

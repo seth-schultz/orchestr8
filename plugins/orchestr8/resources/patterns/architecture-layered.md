@@ -113,6 +113,6 @@ class UserRepository {
 
 ## Related Architecture Patterns
 
-- **@orchestr8://patterns/architecture-microservices** - Alternative to layered monolith for large systems
-- **@orchestr8://patterns/architecture-decision-records** - Document layering decisions
-- **@orchestr8://patterns/event-driven-cqrs** - CQRS can work within layered architecture
+- **orchestr8://patterns/architecture-microservices** - Alternative to layered monolith for large systems
+- **orchestr8://patterns/architecture-decision-records** - Document layering decisions
+- **orchestr8://patterns/event-driven-cqrs** - CQRS can work within layered architecture

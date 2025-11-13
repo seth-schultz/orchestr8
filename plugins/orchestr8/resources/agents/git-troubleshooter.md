@@ -22,11 +22,11 @@ useWhen:
   - Remote tracking branch problems
   - Submodule issues
 relatedResources:
-  - @orchestr8://agents/git-expert
-  - @orchestr8://agents/github-workflow-specialist
-  - @orchestr8://skills/git-rebase-merge
-  - @orchestr8://skills/git-advanced-commands
-  - @orchestr8://examples/git-troubleshooting-scenarios
+  - orchestr8://agents/git-expert
+  - orchestr8://agents/github-workflow-specialist
+  - orchestr8://skills/git-rebase-merge
+  - orchestr8://skills/git-advanced-commands
+  - orchestr8://examples/git-troubleshooting-scenarios
 estimatedTokens: 1100
 ---
 
@@ -481,6 +481,6 @@ When troubleshooting in Claude Code:
 5. **Check reflog first** - Often shows the path to recovery
 
 For specialized help:
-- **Basic Git**: Load `@orchestr8://agents/git-expert`
-- **GitHub-specific**: Load `@orchestr8://agents/github-workflow-specialist`
-- **Merge strategies**: Load `@orchestr8://skills/git-rebase-merge`
+- **Basic Git**: Load `orchestr8://agents/git-expert`
+- **GitHub-specific**: Load `orchestr8://agents/github-workflow-specialist`
+- **Merge strategies**: Load `orchestr8://skills/git-rebase-merge`

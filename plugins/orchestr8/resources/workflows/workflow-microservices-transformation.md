@@ -16,8 +16,8 @@ useWhen:
   - Evaluating transformation approaches comparing strangler fig pattern, parallel run, and big bang cutover strategies
 estimatedTokens: 520
 relatedResources:
-  - @orchestr8://examples/workflows/microservices-transformation-roadmap
-  - @orchestr8://patterns/session-output-management
+  - orchestr8://examples/workflows/microservices-transformation-roadmap
+  - orchestr8://patterns/session-output-management
 ---
 
 # Microservices Transformation Workflow
@@ -48,9 +48,9 @@ Phase 5: Implementation Roadmap (90-100%)
 ## Phase 1: Monolith Analysis (0-25%)
 
 **Load:**
-- `@orchestr8://patterns/session-output-management`
-- `@orchestr8://agents/legacy-system-analyst`
-- `@orchestr8://agents/knowledge-base-agent`
+- `orchestr8://patterns/session-output-management`
+- `orchestr8://agents/legacy-system-analyst`
+- `orchestr8://agents/knowledge-base-agent`
 
 **Activities:**
 1. Initialize session with metadata
@@ -68,7 +68,7 @@ Phase 5: Implementation Roadmap (90-100%)
 ## Phase 2: Service Boundary Identification (25-50%)
 
 **Load:**
-- `@orchestr8://skills/match?query=domain-driven+design+bounded+context`
+- `orchestr8://skills/match?query=domain-driven+design+bounded+context`
 
 **Activities:**
 1. **Domain Discovery**: Identify business capabilities and subdomains
@@ -182,7 +182,7 @@ Phase 5: Implementation Roadmap (90-100%)
 
 **Combine with Cloud Migration:**
 ```
-@orchestr8://workflows/workflow-cloud-migration-planning
+orchestr8://workflows/workflow-cloud-migration-planning
 ```
 
 This provides cloud infrastructure design + microservices architecture for complete modernization.
@@ -216,7 +216,7 @@ See complete roadmap template with:
 - Communication patterns
 
 ```
-@orchestr8://examples/workflows/microservices-transformation-roadmap
+orchestr8://examples/workflows/microservices-transformation-roadmap
 ```
 
 ## Success Criteria

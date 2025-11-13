@@ -15,7 +15,7 @@ useWhen:
   - Batch updates or transactional operations
 estimatedTokens: 850
 relatedResources:
-  - @orchestr8://agents/gcp-specialist
+  - orchestr8://agents/gcp-specialist
 ---
 
 # GCP Firestore Advanced Patterns

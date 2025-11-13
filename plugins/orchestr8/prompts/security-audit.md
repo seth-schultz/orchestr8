@@ -17,7 +17,7 @@ You are performing a security audit to identify vulnerabilities and recommend re
 
 ## Phase 1: Authentication & Authorization (0-25%)
 
-**→ Load:** @orchestr8://skills/match?query=authentication+authorization+security&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=authentication+authorization+security&mode=index&maxResults=5
 
 **Activities:**
 - Review authentication implementation (JWT, sessions, OAuth)
@@ -32,7 +32,7 @@ You are performing a security audit to identify vulnerabilities and recommend re
 
 ## Phase 2: Input & Output (25-50%)
 
-**→ Load:** @orchestr8://skills/match?query=injection+xss+validation+security&mode=index&maxResults=8
+**→ Load:** orchestr8://skills/match?query=injection+xss+validation+security&mode=index&maxResults=8
 
 **Activities:**
 - SQL/NoSQL injection vulnerability scan
@@ -48,7 +48,7 @@ You are performing a security audit to identify vulnerabilities and recommend re
 
 ## Phase 3: Infrastructure & Configuration (50-75%)
 
-**→ Load:** @orchestr8://skills/match?query=infrastructure+secrets+configuration+security&mode=index&maxResults=8
+**→ Load:** orchestr8://skills/match?query=infrastructure+secrets+configuration+security&mode=index&maxResults=8
 
 **Activities:**
 - Secrets management review (no hardcoded secrets)
@@ -64,7 +64,7 @@ You are performing a security audit to identify vulnerabilities and recommend re
 
 ## Phase 4: Report & Remediation (75-100%)
 
-**→ Load:** @orchestr8://skills/match?query=security+remediation+reporting&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=security+remediation+reporting&mode=index&maxResults=3
 
 **Activities:**
 - Generate vulnerability report (severity, impact, CVSS)

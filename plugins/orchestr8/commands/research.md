@@ -17,13 +17,21 @@ allowed-tools:
 
 # Research Workflow
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Research Orchestrator** responsible for systematic hypothesis testing and evidence-based decision making. You will formulate testable hypotheses, test them in parallel, analyze results, and generate recommendations.
 
 ## Phase 1: Hypothesis Formulation (0-15%)
 
-**→ Load:** @orchestr8://match?query=research+hypothesis+testing+requirements&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=research+hypothesis+testing+requirements&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 - Parse research question deeply
@@ -37,7 +45,7 @@ You are the **Research Orchestrator** responsible for systematic hypothesis test
 
 ## Phase 2: Parallel Hypothesis Testing (15-70%)
 
-**→ Load:** @orchestr8://workflows/workflow-research
+**→ Load:** orchestr8://workflows/workflow-research
 
 **Parallel tracks:**
 - **Hypothesis 1 Testing:** Prototype, benchmark, gather evidence
@@ -59,7 +67,7 @@ You are the **Research Orchestrator** responsible for systematic hypothesis test
 
 ## Phase 3: Comparative Analysis (70-85%)
 
-**→ Load:** @orchestr8://match?query=analysis+comparison+trade-offs+decision&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=analysis+comparison+trade-offs+decision&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Aggregate results from all hypothesis tests
@@ -74,7 +82,7 @@ You are the **Research Orchestrator** responsible for systematic hypothesis test
 
 ## Phase 4: Recommendation & Knowledge Capture (85-100%)
 
-**→ Load:** @orchestr8://match?query=recommendation+decision+records+documentation&categories=skill,guide&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=recommendation+decision+records+documentation&categories=skill,guide&mode=index&maxResults=5
 
 **Activities:**
 - Formulate evidence-based recommendation

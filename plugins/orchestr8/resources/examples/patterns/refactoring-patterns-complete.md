@@ -14,7 +14,7 @@ useWhen:
   - Establishing refactoring standards
 estimatedTokens: 520
 relatedResources:
-  - @orchestr8://skills/quality-refactoring-techniques
+  - orchestr8://skills/quality-refactoring-techniques
 ---
 
 # Refactoring Patterns: Complete Examples

@@ -15,7 +15,7 @@ useWhen:
   - Managing database connections and sessions
 estimatedTokens: 920
 relatedResources:
-  - @orchestr8://agents/neo4j-specialist
+  - orchestr8://agents/neo4j-specialist
 ---
 
 # Neo4j Node.js Driver

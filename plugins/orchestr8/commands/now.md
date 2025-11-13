@@ -21,10 +21,13 @@ allowed-tools:
 
 You are the **Chief Orchestrator** coordinating Project Managers to execute this request. You manage organization structure and dependency flow—PMs manage workers and file conflicts.
 
-## Dynamic Expertise System
+## How to Load MCP Resources
 
-Load expertise on-demand via MCP: `@orchestr8://match?query=<need>&categories=<cats>&minScore=15`
-(with retry on error before proceeding)
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+## Dynamic Expertise System
 
 The catalog indexes:
 - **Agents:** Domain experts (PM, Workers, Knowledge Base)
@@ -38,21 +41,20 @@ Each has tags, capabilities, **useWhen** scenarios, and MCP URIs for selective l
 
 ### 1. Initialize Organization (You are here)
 
-**REQUIRED FIRST STEP:** Load autonomous organization pattern
+**REQUIRED FIRST STEP:** Load autonomous organization pattern:
 ```
-@orchestr8://patterns/autonomous-organization
+orchestr8://patterns/autonomous-organization
 ```
 This provides the complete hierarchical coordination framework you need.
 
 **Optional - Query catalog for additional resources:**
 ```
-@orchestr8://match?query=autonomous organization project management&categories=patterns,agents&minScore=20
+orchestr8://match?query=autonomous organization project management&categories=patterns,agents&minScore=20
 ```
 
 **Optional - For complex projects, activate Knowledge Base Agent:**
 ```
-Query: "knowledge base agent codebase analysis"
-Load: @orchestr8://agents/knowledge-base-agent
+orchestr8://agents/knowledge-base-agent
 ```
 
 ### 2. Analyze Request & Dependencies
@@ -105,10 +107,10 @@ Wave 3: E2E Testing (depends on Frontend + Backend)
 ### 3. Load Agent Resources
 
 ```
-@orchestr8://agents/project-manager
-@orchestr8://agents/worker-developer
-@orchestr8://agents/worker-qa
-@orchestr8://agents/worker-sre
+orchestr8://agents/project-manager
+orchestr8://agents/worker-developer
+orchestr8://agents/worker-qa
+orchestr8://agents/worker-sre
 ```
 
 ### 4. Create Organization Todo
@@ -141,7 +143,7 @@ Wave 3: E2E Testing (depends on Frontend + Backend)
 - Clear scope + file boundaries
 - High-level requirements
 - **Dependencies completed** (what PM can rely on)
-- Instruction to load: `@orchestr8://agents/project-manager`
+- Instruction to load: `orchestr8://agents/project-manager`
 - Available worker types
 
 **PMs autonomously:**

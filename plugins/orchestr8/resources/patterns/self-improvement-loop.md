@@ -194,15 +194,15 @@ estimatedTokens: ${calculated-count}
 For each new fragment, test queries:
 
 Agent fragment (typescript-async-patterns):
-□ @orchestr8://agents/match?query=typescript
-□ @orchestr8://agents/match?query=typescript+async
-□ @orchestr8://agents/match?query=async+promises+typescript
-□ @orchestr8://agents/match?query=concurrent+operations
+□ orchestr8://agents/match?query=typescript
+□ orchestr8://agents/match?query=typescript+async
+□ orchestr8://agents/match?query=async+promises+typescript
+□ orchestr8://agents/match?query=concurrent+operations
 
 Skill fragment (error-handling-async):
-□ @orchestr8://skills/match?query=error+handling
-□ @orchestr8://skills/match?query=async+errors
-□ @orchestr8://skills/match?query=try+catch+async
+□ orchestr8://skills/match?query=error+handling
+□ orchestr8://skills/match?query=async+errors
+□ orchestr8://skills/match?query=try+catch+async
 
 If fragment NOT selected:
 → Enhance metadata (add tags, improve capabilities/useWhen)
@@ -314,7 +314,7 @@ After using a workflow pattern successfully:
    # ${Pattern} Workflow
 
    ## Phase 1: ${stage} (0-X%)
-   **→ JIT Load:** @orchestr8://match?query=${argument}&...
+   **→ JIT Load:** orchestr8://match?query=${argument}&...
 
    ## Phase 2: ...
 

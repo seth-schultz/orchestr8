@@ -19,10 +19,10 @@ useWhen:
   - Implementing pre-commit linting
   - Scanning for secrets before commit
 relatedResources:
-  - @orchestr8://agents/git-expert
-  - @orchestr8://skills/git-commit-best-practices
-  - @orchestr8://skills/cicd-pipeline-optimization
-  - @orchestr8://examples/git-hooks-implementations
+  - orchestr8://agents/git-expert
+  - orchestr8://skills/git-commit-best-practices
+  - orchestr8://skills/cicd-pipeline-optimization
+  - orchestr8://examples/git-hooks-implementations
 estimatedTokens: 880
 ---
 

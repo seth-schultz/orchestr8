@@ -17,7 +17,7 @@ useWhen:
   - Architecture reviews, security audits, or modernization assessments requiring organized artifact storage
 estimatedTokens: 420
 relatedResources:
-  - @orchestr8://examples/patterns/session-output-typescript-implementation
+  - orchestr8://examples/patterns/session-output-typescript-implementation
 ---
 
 # Session Output Management Pattern
@@ -159,7 +159,7 @@ All analysis workflows must:
 
 See complete TypeScript implementation:
 ```
-@orchestr8://examples/patterns/session-output-typescript-implementation
+orchestr8://examples/patterns/session-output-typescript-implementation
 ```
 
 ## User Communication

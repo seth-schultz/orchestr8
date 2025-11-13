@@ -216,7 +216,7 @@ query {
 
 ## Related Resources
 
-**Agent overview**: `@orchestr8://agents/runpod-specialist`
-**Pod management**: `@orchestr8://skills/runpod-pod-management`
-**Serverless deployment**: `@orchestr8://skills/runpod-serverless-deployment`
-**GraphQL examples**: `@orchestr8://examples/runpod-graphql-operations`
+**Agent overview**: `orchestr8://agents/runpod-specialist`
+**Pod management**: `orchestr8://skills/runpod-pod-management`
+**Serverless deployment**: `orchestr8://skills/runpod-serverless-deployment`
+**GraphQL examples**: `orchestr8://examples/runpod-graphql-operations`

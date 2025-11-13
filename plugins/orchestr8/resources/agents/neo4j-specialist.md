@@ -192,7 +192,7 @@ Graph-based recommendation strategies:
 - Trending analysis (time-windowed popularity)
 - Personalized PageRank
 
-**Example:** `@orchestr8://examples/database/neo4j-recommendation-engine`
+**Example:** `orchestr8://examples/database/neo4j-recommendation-engine`
 
 ## Graph Algorithms (GDS Library)
 
@@ -204,7 +204,7 @@ Production-grade graph analytics and ML:
 - Centrality measures (betweenness, closeness)
 - Connected components analysis
 
-**Example:** `@orchestr8://examples/database/neo4j-graph-algorithms`
+**Example:** `orchestr8://examples/database/neo4j-graph-algorithms`
 
 ## Indexing & Performance
 
@@ -273,7 +273,7 @@ Production Node.js integration:
 - Parameterized queries for security
 - Multi-operation transactions
 
-**Example:** `@orchestr8://examples/database/neo4j-nodejs-driver`
+**Example:** `orchestr8://examples/database/neo4j-nodejs-driver`
 
 ## Python Driver
 

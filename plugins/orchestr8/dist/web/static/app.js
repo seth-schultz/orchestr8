@@ -382,27 +382,29 @@ class Dashboard {
   // ============================================
 
   updateStats(stats) {
-    this.stats = stats;
+    // Merge with existing stats to prevent flickering/resetting
+    this.stats = { ...this.stats, ...stats };
 
     // Update stat cards - handle both old and new format
     document.getElementById("uptimeValue").textContent = this.formatUptime(
-      stats.uptime,
+      this.stats.uptime,
     );
     document.getElementById("requestsValue").textContent =
-      stats.requests?.total || stats.requestCount || 0;
+      this.stats.requests?.total || this.stats.requestCount || 0;
     document.getElementById("latencyValue").textContent =
-      `${stats.latency?.avg || 0}ms`;
+      `${Math.round(this.stats.latency?.avg || 0)}ms`;
     document.getElementById("p95Value").textContent =
-      `${stats.latency?.p95 || 0}ms`;
+      `${Math.round(this.stats.latency?.p95 || 0)}ms`;
     document.getElementById("p99Value").textContent =
-      `${stats.latency?.p99 || 0}ms`;
-    document.getElementById("errorsValue").textContent = stats.errors || 0;
-    document.getElementById("memoryValue").textContent = this.formatMemory(
-      stats.memory?.heapUsed || stats.memoryUsage?.heapUsed,
-    );
+      `${Math.round(this.stats.latency?.p99 || 0)}ms`;
+    document.getElementById("errorsValue").textContent = this.stats.errors || 0;
+
+    // Memory value - handle bytes from stats collector
+    const memoryBytes = this.stats.memory?.heapUsed || this.stats.memoryUsage?.heapUsed || 0;
+    document.getElementById("memoryValue").textContent = this.formatMemory(memoryBytes);
 
     // Update charts
-    this.updateCharts(stats);
+    this.updateCharts(this.stats);
   }
 
   formatUptime(seconds) {
@@ -849,7 +851,7 @@ class Dashboard {
                     <div class="form-group">
                         <label>Resource URI</label>
                         <input type="text" id="resourceUri" class="form-control"
-                               placeholder="@orchestr8://agents/typescript-developer">
+                               placeholder="orchestr8://agents/typescript-developer">
                     </div>
                 `;
         break;
@@ -1091,7 +1093,7 @@ class Dashboard {
         typeSelect.value = "resources/read";
         this.updateTestingForm();
         setTimeout(() => {
-          document.getElementById("resourceUri").value = "@orchestr8://registry";
+          document.getElementById("resourceUri").value = "orchestr8://registry";
         }, 100);
         break;
 
@@ -1100,7 +1102,7 @@ class Dashboard {
         this.updateTestingForm();
         setTimeout(() => {
           document.getElementById("resourceUri").value =
-            "@orchestr8://agents/typescript-developer";
+            "orchestr8://agents/typescript-developer";
         }, 100);
         break;
 
@@ -1109,7 +1111,7 @@ class Dashboard {
         this.updateTestingForm();
         setTimeout(() => {
           document.getElementById("resourceUri").value =
-            "@orchestr8://match?query=api+development&maxTokens=2000";
+            "orchestr8://match?query=api+development&maxTokens=2000";
         }, 100);
         break;
 
@@ -1118,7 +1120,7 @@ class Dashboard {
         this.updateTestingForm();
         setTimeout(() => {
           document.getElementById("resourceUri").value =
-            "@orchestr8://match?query=full+stack+development&categories=agent,skill,example&maxTokens=3000";
+            "orchestr8://match?query=full+stack+development&categories=agent,skill,example&maxTokens=3000";
         }, 100);
         break;
 
@@ -1127,7 +1129,7 @@ class Dashboard {
         this.updateTestingForm();
         setTimeout(() => {
           document.getElementById("resourceUri").value =
-            "@orchestr8://match?query=typescript+api&mode=minimal";
+            "orchestr8://match?query=typescript+api&mode=minimal";
         }, 100);
         break;
     }

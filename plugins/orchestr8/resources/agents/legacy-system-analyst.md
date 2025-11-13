@@ -554,7 +554,7 @@ services:
 **Phase 1: Legacy System Analysis (0-30%)**
 
 → Load Legacy System Analyst:
-`@orchestr8://agents/legacy-system-analyst`
+`orchestr8://agents/legacy-system-analyst`
 
 Activities:
 - Discover all solutions, projects, services
@@ -576,7 +576,7 @@ Output:
 **Phase 1: Monolith Analysis (0-25%)**
 
 → Load Legacy System Analyst:
-`@orchestr8://agents/legacy-system-analyst`
+`orchestr8://agents/legacy-system-analyst`
 
 Activities:
 - Map service boundaries within monolith

@@ -113,7 +113,7 @@ application.yml
 4. Extract database name and sanitize credentials
 
 For TypeScript implementation:
-→ `@orchestr8://examples/skills/dependency-mapping-detection`
+→ `orchestr8://examples/skills/dependency-mapping-detection`
 
 ### 3. Service-to-Service Call Detection
 
@@ -164,7 +164,7 @@ For TypeScript implementation:
 4. Map endpoints to target services
 
 For TypeScript implementation with URL resolution:
-→ `@orchestr8://examples/skills/dependency-mapping-detection`
+→ `orchestr8://examples/skills/dependency-mapping-detection`
 
 ### 4. Message Queue Dependency Detection
 
@@ -208,7 +208,7 @@ For TypeScript implementation with URL resolution:
 4. Extract queue names and message types
 
 For TypeScript implementation with all queue types:
-→ `@orchestr8://examples/skills/dependency-mapping-detection`
+→ `orchestr8://examples/skills/dependency-mapping-detection`
 
 ### 5. External API Integration Detection
 
@@ -223,7 +223,7 @@ For TypeScript implementation with all queue types:
 4. Infer purpose from domain and context
 
 For TypeScript implementation with API catalog:
-→ `@orchestr8://examples/skills/dependency-mapping-detection`
+→ `orchestr8://examples/skills/dependency-mapping-detection`
 
 ## YAML Output Format
 
@@ -385,7 +385,7 @@ graph LR
 5. Calculate cascade depth for risk assessment
 
 For complete TypeScript implementation with impact calculation:
-→ `@orchestr8://examples/skills/dependency-mapping-analysis`
+→ `orchestr8://examples/skills/dependency-mapping-analysis`
 
 **Example Impact Report:**
 
@@ -427,7 +427,7 @@ impactAnalysis:
 5. Generate recommendations to break cycles
 
 For complete DFS implementation with severity calculation:
-→ `@orchestr8://examples/skills/dependency-mapping-analysis`
+→ `orchestr8://examples/skills/dependency-mapping-analysis`
 
 ## Best Practices
 
@@ -457,7 +457,7 @@ For complete DFS implementation with severity calculation:
 **Phase 2: Dependency Mapping (20-40%)**
 
 → Load Service Dependency Mapping Skill:
-`@orchestr8://skills/service-dependency-mapping`
+`orchestr8://skills/service-dependency-mapping`
 
 Activities:
 - Discover all services in codebase

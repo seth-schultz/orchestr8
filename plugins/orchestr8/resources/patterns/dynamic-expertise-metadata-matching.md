@@ -224,10 +224,10 @@ For each new fragment, test multiple queries:
 **Agent fragment (typescript-async-patterns):**
 ```markdown
 Test queries:
-□ @orchestr8://agents/match?query=typescript
-□ @orchestr8://agents/match?query=typescript+async
-□ @orchestr8://agents/match?query=async+promises+typescript
-□ @orchestr8://agents/match?query=concurrent+operations
+□ orchestr8://agents/match?query=typescript
+□ orchestr8://agents/match?query=typescript+async
+□ orchestr8://agents/match?query=async+promises+typescript
+□ orchestr8://agents/match?query=concurrent+operations
 
 Expected: High match scores on queries 2-3, good on query 4
 ```
@@ -235,10 +235,10 @@ Expected: High match scores on queries 2-3, good on query 4
 **Skill fragment (error-handling-async):**
 ```markdown
 Test queries:
-□ @orchestr8://skills/match?query=error+handling
-□ @orchestr8://skills/match?query=async+errors
-□ @orchestr8://skills/match?query=try+catch+async
-□ @orchestr8://skills/match?query=promise+rejection
+□ orchestr8://skills/match?query=error+handling
+□ orchestr8://skills/match?query=async+errors
+□ orchestr8://skills/match?query=try+catch+async
+□ orchestr8://skills/match?query=promise+rejection
 
 Expected: High match scores on all queries
 ```

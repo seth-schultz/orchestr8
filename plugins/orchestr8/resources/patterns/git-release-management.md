@@ -26,16 +26,16 @@ useWhen:
   - API versioning coordination between code versions, API versions, and client compatibility with deprecation timelines
   - Release calendar management with scheduled releases, feature freezes, code cutoff dates, and stakeholder communication
 relatedResources:
-  - @orchestr8://patterns/git-collaboration-workflow
-  - @orchestr8://patterns/git-monorepo-strategies
-  - @orchestr8://skills/git-workflow
-  - @orchestr8://workflows/workflow-deploy
-  - @orchestr8://agents/devops-expert-cicd
-  - @orchestr8://patterns/phased-delivery
-  - @orchestr8://skills/deployment-zero-downtime
-  - @orchestr8://skills/deployment-rollback-strategies
-  - @orchestr8://workflows/workflow-setup-cicd
-  - @orchestr8://skills/agile-scrum-practices
+  - orchestr8://patterns/git-collaboration-workflow
+  - orchestr8://patterns/git-monorepo-strategies
+  - orchestr8://skills/git-workflow
+  - orchestr8://workflows/workflow-deploy
+  - orchestr8://agents/devops-expert-cicd
+  - orchestr8://patterns/phased-delivery
+  - orchestr8://skills/deployment-zero-downtime
+  - orchestr8://skills/deployment-rollback-strategies
+  - orchestr8://workflows/workflow-setup-cicd
+  - orchestr8://skills/agile-scrum-practices
 estimatedTokens: 980
 ---
 

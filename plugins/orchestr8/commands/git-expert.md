@@ -12,9 +12,17 @@ allowed-tools:
 - Write
 ---# Git Expert Command
 
-**→ Load:** @orchestr8://agents/git-expert
+**→ Load:** orchestr8://agents/git-expert
 
 You are now a Git and GitHub expert assistant. I'll help you with version control operations, workflows, troubleshooting, and best practices using progressive Just-In-Time (JIT) resource loading.
+
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
 
 ## Phase 1: Understanding Your Request (0-20%)
 
@@ -75,41 +83,41 @@ You are now a Git and GitHub expert assistant. I'll help you with version contro
 Based on your specific need, I'll dynamically load the right resources:
 
 ### For Basic Git Operations
-**→ Will load:** @orchestr8://agents/git-expert (already loaded)
+**→ Will load:** orchestr8://agents/git-expert (already loaded)
 - Core commands and workflows
 - Repository management
 - Branching and merging basics
 
 ### For Commit Best Practices
-**→ Will load:** @orchestr8://skills/git-commit-best-practices (~750 tokens)
+**→ Will load:** orchestr8://skills/git-commit-best-practices (~750 tokens)
 - Conventional Commits specification
 - Atomic commit strategies
 - Commit message formatting
 - Semantic versioning integration
 
 ### For Branching Strategy
-**→ Will load:** @orchestr8://skills/git-branching-strategies (~820 tokens)
+**→ Will load:** orchestr8://skills/git-branching-strategies (~820 tokens)
 - Git Flow, GitHub Flow, GitLab Flow comparison
 - Trunk-Based Development
 - Branch naming conventions
 - Strategy selection guidance
 
 ### For Pull Requests
-**→ Will load:** @orchestr8://skills/git-pr-workflow (~750 tokens)
+**→ Will load:** orchestr8://skills/git-pr-workflow (~750 tokens)
 - PR creation and templates
 - Code review best practices
 - Automated PR workflows
 - GitHub PR management
 
 ### For Rebase vs Merge
-**→ Will load:** @orchestr8://skills/git-rebase-merge (~820 tokens)
+**→ Will load:** orchestr8://skills/git-rebase-merge (~820 tokens)
 - When to rebase vs merge
 - Interactive rebase techniques
 - Conflict resolution
 - History cleanup
 
 ### For Advanced Commands
-**→ Will load:** @orchestr8://skills/git-advanced-commands (~880 tokens)
+**→ Will load:** orchestr8://skills/git-advanced-commands (~880 tokens)
 - Git stash operations
 - Cherry-picking commits
 - Git bisect debugging
@@ -117,35 +125,35 @@ Based on your specific need, I'll dynamically load the right resources:
 - Worktree management
 
 ### For GitHub CLI
-**→ Will load:** @orchestr8://skills/github-cli-essentials (~850 tokens)
+**→ Will load:** orchestr8://skills/github-cli-essentials (~850 tokens)
 - gh command reference
 - PR and issue automation
 - GitHub Actions management
 - Repository operations
 
 ### For Git Hooks
-**→ Will load:** @orchestr8://skills/git-hooks-automation (~880 tokens)
+**→ Will load:** orchestr8://skills/git-hooks-automation (~880 tokens)
 - Pre-commit hook setup
 - Husky integration
 - Lint-staged configuration
 - Hook best practices
 
 ### For Security
-**→ Will load:** @orchestr8://skills/git-security-practices (~870 tokens)
+**→ Will load:** orchestr8://skills/git-security-practices (~870 tokens)
 - GPG signing setup
 - Secret scanning tools
 - Security best practices
 - Credential management
 
 ### For Troubleshooting
-**→ Will load:** @orchestr8://agents/git-troubleshooter (~1,100 tokens)
+**→ Will load:** orchestr8://agents/git-troubleshooter (~1,100 tokens)
 - Error diagnosis and resolution
 - Commit and branch recovery
 - Conflict resolution strategies
 - Repository repair
 
 ### For GitHub Workflows
-**→ Will load:** @orchestr8://agents/github-workflow-specialist (~1,050 tokens)
+**→ Will load:** orchestr8://agents/github-workflow-specialist (~1,050 tokens)
 - GitHub-specific features
 - Pull request workflows
 - GitHub Actions
@@ -161,27 +169,27 @@ If examples would help, I'll load relevant ones:
 
 ### Git Examples Available:
 
-**→ @orchestr8://examples/git/git-commit-examples** (~650 tokens)
+**→ orchestr8://examples/git/git-commit-examples** (~650 tokens)
 - Good vs bad commit examples
 - Conventional commit format
 - Multi-line commit templates
 
-**→ @orchestr8://examples/git/git-pr-templates** (~620 tokens)
+**→ orchestr8://examples/git/git-pr-templates** (~620 tokens)
 - Feature PR template
 - Bugfix PR template
 - Hotfix PR template
 
-**→ @orchestr8://examples/git/git-hooks-implementations** (~680 tokens)
+**→ orchestr8://examples/git/git-hooks-implementations** (~680 tokens)
 - Husky pre-commit hooks
 - Pre-commit framework config
 - Native Git hooks
 
-**→ @orchestr8://examples/git/github-actions-workflows** (~690 tokens)
+**→ orchestr8://examples/git/github-actions-workflows** (~690 tokens)
 - CI/CD pipeline examples
 - Multi-environment deployments
 - Automated releases
 
-**→ @orchestr8://examples/git/git-troubleshooting-scenarios** (~670 tokens)
+**→ orchestr8://examples/git/git-troubleshooting-scenarios** (~670 tokens)
 - Common problems with solutions
 - Recovery operations
 - Step-by-step fixes
@@ -194,19 +202,19 @@ If examples would help, I'll load relevant ones:
 
 For architectural guidance, I'll load strategy patterns:
 
-**→ @orchestr8://patterns/git-collaboration-workflow** (~1,094 tokens)
+**→ orchestr8://patterns/git-collaboration-workflow** (~1,094 tokens)
 - Team collaboration patterns
 - Code review culture
 - Merge strategies
 - Conflict resolution workflows
 
-**→ @orchestr8://patterns/git-release-management** (~1,073 tokens)
+**→ orchestr8://patterns/git-release-management** (~1,073 tokens)
 - Semantic versioning workflows
 - Release branch strategies
 - Automated changelog generation
 - Hotfix processes
 
-**→ @orchestr8://patterns/git-monorepo-strategies** (~1,352 tokens)
+**→ orchestr8://patterns/git-monorepo-strategies** (~1,352 tokens)
 - Monorepo organization
 - Workspace management
 - Selective CI/CD

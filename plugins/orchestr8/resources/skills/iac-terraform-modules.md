@@ -193,9 +193,9 @@ variable "ingress_rules" {
 ## Related IaC Skills
 
 **Alternative Tool:**
-- @orchestr8://skills/iac-pulumi-programming - Infrastructure as code with programming languages
+- orchestr8://skills/iac-pulumi-programming - Infrastructure as code with programming languages
 
 **Cross-Cutting Concepts:**
-- @orchestr8://skills/iac-state-management - Remote state, locking, and drift detection
-- @orchestr8://skills/iac-testing-validation - Testing infrastructure code with Terratest
-- @orchestr8://skills/iac-gitops-workflows - GitOps workflows for infrastructure deployment
+- orchestr8://skills/iac-state-management - Remote state, locking, and drift detection
+- orchestr8://skills/iac-testing-validation - Testing infrastructure code with Terratest
+- orchestr8://skills/iac-gitops-workflows - GitOps workflows for infrastructure deployment

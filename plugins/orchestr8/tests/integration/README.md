@@ -71,24 +71,24 @@ node --test --test-reporter=spec tests/integration/mcp-protocol.test.js
 - Returns proper message structure (role, content, type)
 - Substitutes `$ARGUMENTS` placeholder with first argument
 - Content is substantial (>500 characters)
-- Content includes `@orchestr8://` resource references
+- Content includes `orchestr8://` resource references
 
 ### ✅ 4. List All Static Resources (7 tests)
 - Returns array of resources
-- Includes agent resources (`@orchestr8://agents/*`)
-- Includes skill resources (`@orchestr8://skills/*`)
-- Includes example resources (`@orchestr8://examples/*`)
-- Includes pattern resources (`@orchestr8://patterns/*`)
+- Includes agent resources (`orchestr8://agents/*`)
+- Includes skill resources (`orchestr8://skills/*`)
+- Includes example resources (`orchestr8://examples/*`)
+- Includes pattern resources (`orchestr8://patterns/*`)
 - Each resource has required metadata (uri, name, mimeType)
 - MIME types are valid (text/markdown, text/plain, application/json, etc.)
 
 ### ✅ 5. Read Static Resource (6 tests)
-- Read specific resource by URI (`@orchestr8://agents/typescript-developer`)
+- Read specific resource by URI (`orchestr8://agents/typescript-developer`)
 - Returns content array with text property
 - Content is substantial (>500 characters)
 - Correct MIME type (text/markdown or text/plain)
 - Response includes the requested URI
-- Can read nested resource paths (`@orchestr8://examples/typescript/api-rest`)
+- Can read nested resource paths (`orchestr8://examples/typescript/api-rest`)
 
 ### ⚠️ 6. Read Dynamic Resource with Fuzzy Matching (5 tests)
 - Handle dynamic URI with query parameter
@@ -153,7 +153,7 @@ node --test --test-reporter=spec tests/integration/mcp-protocol.test.js
 ### Known Issues
 
 **Dynamic Resource Matching Not Fully Implemented**
-- Error: `MCP error -32602: Resource @orchestr8://agents/match?query=typescript+api not found`
+- Error: `MCP error -32602: Resource orchestr8://agents/match?query=typescript+api not found`
 - Root cause: Dynamic resource templates are registered in `index.ts` but the URI matching logic may not be properly resolving the template URIs
 - The fuzzy matcher and URI parser are implemented but not being invoked correctly by the MCP server
 

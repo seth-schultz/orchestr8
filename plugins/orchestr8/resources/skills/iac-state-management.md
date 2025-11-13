@@ -191,9 +191,9 @@ backend:
 ## Related IaC Skills
 
 **Tool-Specific Implementation:**
-- @orchestr8://skills/iac-terraform-modules - Terraform module development
-- @orchestr8://skills/iac-pulumi-programming - Pulumi infrastructure programming
+- orchestr8://skills/iac-terraform-modules - Terraform module development
+- orchestr8://skills/iac-pulumi-programming - Pulumi infrastructure programming
 
 **Related Practices:**
-- @orchestr8://skills/iac-testing-validation - Testing and validating infrastructure
-- @orchestr8://skills/iac-gitops-workflows - GitOps deployment workflows
+- orchestr8://skills/iac-testing-validation - Testing and validating infrastructure
+- orchestr8://skills/iac-gitops-workflows - GitOps deployment workflows

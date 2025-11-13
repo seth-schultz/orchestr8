@@ -468,7 +468,7 @@ const ordered = fragments.sort((a, b) =>
 
 **Load this resource:**
 ```
-@orchestr8://agents/typescript-developer
+orchestr8://agents/typescript-developer
 ```
 ```
 
@@ -515,15 +515,15 @@ const ordered = fragments.sort((a, b) =>
 ```typescript
 // Step 1: Get catalog
 const catalog = await readResource(
-  '@orchestr8://match?query=typescript+api&mode=catalog&maxResults=10'
+  'orchestr8://match?query=typescript+api&mode=catalog&maxResults=10'
 );
 
 // Step 2: Review catalog and choose
 // User sees: 10 resources with scores, tags, URIs
 
 // Step 3: Load selected resources
-const agent = await readResource('@orchestr8://agents/typescript-developer');
-const skill = await readResource('@orchestr8://skills/async-patterns');
+const agent = await readResource('orchestr8://agents/typescript-developer');
+const skill = await readResource('orchestr8://skills/async-patterns');
 ```
 
 ### When to Use Full Mode
@@ -542,7 +542,7 @@ const skill = await readResource('@orchestr8://skills/async-patterns');
 ```typescript
 // Single step: Get full content
 const result = await readResource(
-  '@orchestr8://match?query=typescript+developer&mode=full&maxTokens=2500&categories=agents'
+  'orchestr8://match?query=typescript+developer&mode=full&maxTokens=2500&categories=agents'
 );
 
 // Content immediately available

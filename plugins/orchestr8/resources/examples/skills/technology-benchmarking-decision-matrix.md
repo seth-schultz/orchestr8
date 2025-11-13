@@ -13,7 +13,7 @@ useWhen:
   - Creating stakeholder recommendation reports
 estimatedTokens: 340
 relatedResources:
-  - @orchestr8://skills/technology-benchmarking
+  - orchestr8://skills/technology-benchmarking
 ---
 
 # Technology Benchmarking: Decision Matrix

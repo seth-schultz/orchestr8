@@ -17,7 +17,7 @@ You are fixing a bug systematically. You will investigate, identify root cause, 
 
 ## Phase 1: Investigation (0-30%)
 
-**→ Load:** @orchestr8://skills/match?query=debugging+root+cause+analysis&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=debugging+root+cause+analysis&mode=index&maxResults=5
 
 **Activities:**
 - Reproduce the issue reliably
@@ -31,7 +31,7 @@ You are fixing a bug systematically. You will investigate, identify root cause, 
 
 ## Phase 2: Fix Implementation (30-70%)
 
-**→ Load:** @orchestr8://match?query={{task}}+fix+solution&categories=agent,skill,example&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query={{task}}+fix+solution&categories=agent,skill,example&mode=index&maxResults=8
 
 **Activities:**
 - Design fix strategy addressing root cause
@@ -45,7 +45,7 @@ You are fixing a bug systematically. You will investigate, identify root cause, 
 
 ## Phase 3: Validation (70-90%)
 
-**→ Load:** @orchestr8://skills/match?query=testing+regression+validation&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=testing+regression+validation&mode=index&maxResults=5
 
 **Activities:**
 - Write regression test for the bug
@@ -59,7 +59,7 @@ You are fixing a bug systematically. You will investigate, identify root cause, 
 
 ## Phase 4: Prevention (90-100%)
 
-**→ Load:** @orchestr8://skills/match?query=monitoring+documentation&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=monitoring+documentation&mode=index&maxResults=3
 
 **Activities:**
 - Add monitoring/alerting for similar issues

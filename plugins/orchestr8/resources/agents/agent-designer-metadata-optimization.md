@@ -9,7 +9,7 @@ capabilities:
   - Improving agent discoverability
 useWhen:
   - Optimizing agent metadata with 5-8 specific tags (technology, ecosystem, domain, specialization, related tools) avoiding generic buzzwords like "expert" or "advanced"
-  - Improving agent discoverability through fuzzy matching by testing with @orchestr8://agents/match?query= and ensuring correct fragments appear for expected queries
+  - Improving agent discoverability through fuzzy matching by testing with orchestr8://agents/match?query= and ensuring correct fragments appear for expected queries
   - Creating capability descriptions using [Technology] + [Specific Area] + [Details] format like "TypeScript advanced type system (generics, conditional types, mapped types)"
   - Writing concrete useWhen scenarios with [Action Verb] + [Specific Technology/Pattern] + [Context] structure avoiding vague phrases like "Working with TypeScript"
   - Designing metadata that enables token-efficient loading where generic queries return core fragments and specific queries return core + specialized combinations
@@ -143,20 +143,20 @@ Examples:
 
 ```markdown
 Core fragment:
-@orchestr8://agents/match?query=typescript
-@orchestr8://agents/match?query=typescript+development
+orchestr8://agents/match?query=typescript
+orchestr8://agents/match?query=typescript+development
 
 API specialization:
-@orchestr8://agents/match?query=typescript+api+rest
-@orchestr8://agents/match?query=express+api+typescript
+orchestr8://agents/match?query=typescript+api+rest
+orchestr8://agents/match?query=express+api+typescript
 
 Async specialization:
-@orchestr8://agents/match?query=typescript+async+promises
-@orchestr8://agents/match?query=concurrent+typescript
+orchestr8://agents/match?query=typescript+async+promises
+orchestr8://agents/match?query=concurrent+typescript
 
 Testing specialization:
-@orchestr8://agents/match?query=typescript+testing+jest
-@orchestr8://agents/match?query=unit+test+typescript
+orchestr8://agents/match?query=typescript+testing+jest
+orchestr8://agents/match?query=unit+test+typescript
 ```
 
 **If fragment doesn't appear in expected queries:**

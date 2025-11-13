@@ -31,7 +31,7 @@ estimatedTokens: 500
 - Note CI/CD status (tests passing, builds green?)
 - Check for breaking changes, migrations, or config updates
 
-**→ Load Review Framework:** `@orchestr8://patterns/match?query=code+review+quality&mode=index&maxResults=3`
+**→ Load Review Framework:** `orchestr8://patterns/match?query=code+review+quality&mode=index&maxResults=3`
 
 **Red Flags (Request Changes Immediately):**
 - ❌ Mixed concerns (feature + refactor + bug fix → split PRs)

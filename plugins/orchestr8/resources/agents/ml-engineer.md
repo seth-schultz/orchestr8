@@ -23,7 +23,7 @@ Build production-ready PyTorch models with Lightning:
 - Training with callbacks, early stopping, and checkpointing
 - Mixed precision training and gradient accumulation
 
-**Example:** `@orchestr8://examples/ml/pytorch-transformer-classifier`
+**Example:** `orchestr8://examples/ml/pytorch-transformer-classifier`
 
 ## TensorFlow/Keras - Production Models
 
@@ -33,7 +33,7 @@ Multi-input Keras models with functional API:
 - Advanced callbacks and learning rate scheduling
 - TensorFlow Serving deployment format
 
-**Example:** `@orchestr8://examples/ml/tensorflow-keras-multi-input`
+**Example:** `orchestr8://examples/ml/tensorflow-keras-multi-input`
 
 ## Scikit-learn - Classical ML
 
@@ -211,7 +211,7 @@ Automated hyperparameter tuning with Optuna:
 - Visualize optimization progress and parameter importance
 - Integration with PyTorch Lightning
 
-**Example:** `@orchestr8://examples/ml/hyperparameter-optimization-optuna`
+**Example:** `orchestr8://examples/ml/hyperparameter-optimization-optuna`
 
 ## Model Interpretability
 
@@ -329,9 +329,9 @@ This agent uses progressive loading to minimize token usage:
 - Feature engineering and model interpretability principles
 
 **Implementation Examples:** Load on-demand via:
-- `@orchestr8://examples/ml/pytorch-transformer-classifier` (~280 tokens)
-- `@orchestr8://examples/ml/tensorflow-keras-multi-input` (~260 tokens)
-- `@orchestr8://examples/ml/hyperparameter-optimization-optuna` (~240 tokens)
+- `orchestr8://examples/ml/pytorch-transformer-classifier` (~280 tokens)
+- `orchestr8://examples/ml/tensorflow-keras-multi-input` (~260 tokens)
+- `orchestr8://examples/ml/hyperparameter-optimization-optuna` (~240 tokens)
 
 **Typical Usage Pattern:**
 1. Load this agent for ML framework concepts, feature engineering strategies, and best practices

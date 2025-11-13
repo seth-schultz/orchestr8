@@ -16,10 +16,10 @@ useWhen:
   - Timing article releases and managing publication workflows
 estimatedTokens: 500
 relatedResources:
-  - @orchestr8://workflows/workflow-create-medium-story
-  - @orchestr8://skills/medium-story-structure
-  - @orchestr8://skills/medium-headline-craft
-  - @orchestr8://skills/medium-engagement-hooks
+  - orchestr8://workflows/workflow-create-medium-story
+  - orchestr8://skills/medium-story-structure
+  - orchestr8://skills/medium-headline-craft
+  - orchestr8://skills/medium-engagement-hooks
 ---
 
 # Medium Publishing Comprehensive Guide

@@ -20,13 +20,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Plugin Architect** responsible for creating complete Claude Code plugins with agents, commands, skills, and comprehensive documentation.
 
 ## Phase 1: Requirements Analysis (0-20%)
 
-**→ Load:** @orchestr8://match?query=plugin+architecture+design&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=plugin+architecture+design&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Extract plugin specifications from requirements
@@ -39,7 +47,7 @@ You are the **Plugin Architect** responsible for creating complete Claude Code p
 
 ## Phase 2: Agent Design & Creation (20-40%)
 
-**→ Load:** @orchestr8://workflows/workflow-create-plugin
+**→ Load:** orchestr8://workflows/workflow-create-plugin
 
 **Activities:**
 - Design specialized agents needed
@@ -52,7 +60,7 @@ You are the **Plugin Architect** responsible for creating complete Claude Code p
 
 ## Phase 3: Command & Workflow Creation (40-60%)
 
-**→ Load:** @orchestr8://match?query=workflow+commands+orchestration&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=workflow+commands+orchestration&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Design slash commands and workflows
@@ -65,7 +73,7 @@ You are the **Plugin Architect** responsible for creating complete Claude Code p
 
 ## Phase 4: Skills & Documentation (60-80%)
 
-**→ Load:** @orchestr8://match?query=skills+documentation+best+practices&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=skills+documentation+best+practices&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 - Create reusable skill fragments
@@ -78,7 +86,7 @@ You are the **Plugin Architect** responsible for creating complete Claude Code p
 
 ## Phase 5: Testing & Publishing (80-100%)
 
-**→ Load:** @orchestr8://match?query=testing+validation+publishing&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=testing+validation+publishing&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 - Test all plugin components

@@ -9,7 +9,7 @@ capabilities:
   - Tag-filtered and category-filtered queries
 useWhen:
   - Implementing dynamic resource URIs for JIT fragment loading with fuzzy query parameters and match thresholds
-  - Building @orchestr8:// URI scheme for agent and skill discovery enabling declarative workflow composition
+  - Building orchestr8:// URI scheme for agent and skill discovery enabling declarative workflow composition
   - Designing URI-based fragment resolution with fallback strategies when exact matches are unavailable
   - Creating parameterized resource loading patterns supporting wildcard queries and multi-fragment selection
   - Implementing lazy evaluation for workflow resources deferring fragment loading until execution context requires it
@@ -18,22 +18,22 @@ estimatedTokens: 680
 
 # JIT Loading: Dynamic URI Construction
 
-Construct dynamic @orchestr8:// URIs for query-based resource loading using fuzzy matching and filtering.
+Construct dynamic orchestr8:// URIs for query-based resource loading using fuzzy matching and filtering.
 
 ## Static vs Dynamic
 
 **Static (when requirements are fixed):**
 ```markdown
-@orchestr8://agents/typescript-developer
-@orchestr8://skills/error-handling
+orchestr8://agents/typescript-developer
+orchestr8://skills/error-handling
 
 → Use when: Specific expertise always needed
 ```
 
 **Dynamic (when requirements vary):**
 ```markdown
-@orchestr8://agents/match?query=${project-type}+${technology}
-@orchestr8://skills/match?query=${technique}+${context}
+orchestr8://agents/match?query=${project-type}+${technology}
+orchestr8://skills/match?query=${technique}+${context}
 
 → Use when: Expertise depends on user request
 ```
@@ -46,13 +46,13 @@ Construct dynamic @orchestr8:// URIs for query-based resource loading using fuzz
 User request: "Build a TypeScript REST API with JWT auth"
 
 Phase 1:
-@orchestr8://agents/match?query=research+api+requirements&mode=index&maxResults=3
+orchestr8://agents/match?query=research+api+requirements&mode=index&maxResults=3
 
 Phase 2:
-@orchestr8://agents/match?query=typescript+api+rest+backend&mode=index&maxResults=8
+orchestr8://agents/match?query=typescript+api+rest+backend&mode=index&maxResults=8
 
 Phase 3:
-@orchestr8://skills/match?query=jwt+authentication+typescript&mode=index&maxResults=5
+orchestr8://skills/match?query=jwt+authentication+typescript&mode=index&maxResults=5
 ```
 
 ### Pattern 2: Query from Phase Findings
@@ -63,7 +63,7 @@ Determine: Need Python FastAPI + PostgreSQL + JWT
 
 ## Phase 2: Implementation (15-85%)
 **→ Load based on Phase 1:**
-@orchestr8://match?query=python+fastapi+postgresql+jwt&categories=agent,skill&mode=index&maxResults=10
+orchestr8://match?query=python+fastapi+postgresql+jwt&categories=agent,skill&mode=index&maxResults=10
 
 → Loads exactly what Phase 1 identified
 ```
@@ -72,15 +72,15 @@ Determine: Need Python FastAPI + PostgreSQL + JWT
 
 ```markdown
 Early phases (research/design):
-@orchestr8://agents/match?query=${domain}
+orchestr8://agents/match?query=${domain}
 → Load expert agents only
 
 Middle phases (implementation):
-@orchestr8://match?query=${tech}+${feature}&categories=agent,skill,example
+orchestr8://match?query=${tech}+${feature}&categories=agent,skill,example
 → Load agents + skills + code examples
 
 Late phases (testing/deployment):
-@orchestr8://skills/match?query=testing+deployment+${tech}
+orchestr8://skills/match?query=testing+deployment+${tech}
 → Load skills only
 ```
 
@@ -89,7 +89,7 @@ Late phases (testing/deployment):
 ```markdown
 ## Phase 3: Security (60-75%)
 **→ Load security expertise:**
-@orchestr8://skills/match?query=security+authentication+authorization&tags=jwt,oauth&mode=index&maxResults=8
+orchestr8://skills/match?query=security+authentication+authorization&tags=jwt,oauth&mode=index&maxResults=8
 
 Filter to specific techniques using tags parameter
 ```
@@ -106,10 +106,10 @@ arguments:
 ---
 
 ## Phase 1
-**→ Reference:** `@orchestr8://match?query=${project-description}&categories=agent&mode=index&maxResults=8`
+**→ Reference:** `orchestr8://match?query=${project-description}&categories=agent&mode=index&maxResults=8`
 
 ## Phase 2
-**→ Reference:** `@orchestr8://match?query=${tech-stack}+architecture&categories=pattern&mode=index&maxResults=5`
+**→ Reference:** `orchestr8://match?query=${tech-stack}+architecture&categories=pattern&mode=index&maxResults=5`
 
 Variables are substituted at runtime
 ```
@@ -120,13 +120,13 @@ Variables are substituted at runtime
 ## Phase 2: Implementation (30-80%)
 
 If building API:
-**→ Load:** `@orchestr8://match?query=${language}+api+rest&mode=index&maxResults=8`
+**→ Load:** `orchestr8://match?query=${language}+api+rest&mode=index&maxResults=8`
 
 If building CLI:
-**→ Load:** `@orchestr8://match?query=${language}+cli+command&mode=index&maxResults=8`
+**→ Load:** `orchestr8://match?query=${language}+cli+command&mode=index&maxResults=8`
 
 If building web app:
-**→ Load:** `@orchestr8://match?query=${language}+web+frontend&mode=index&maxResults=10`
+**→ Load:** `orchestr8://match?query=${language}+web+frontend&mode=index&maxResults=10`
 
 Load different expertise based on project type
 ```
@@ -148,7 +148,7 @@ arguments:
 ## Phase 1: Requirements Analysis (0-15%)
 
 **→ Research Expertise:**
-@orchestr8://agents/match?query=research+api+requirements&mode=index&maxResults=3
+orchestr8://agents/match?query=research+api+requirements&mode=index&maxResults=3
 
 Tasks:
 - Extract technology stack from ${api-description}
@@ -158,7 +158,7 @@ Tasks:
 ## Phase 2: Architecture Design (15-30%)
 
 **→ Domain Experts (based on Phase 1 findings):**
-@orchestr8://match?query=${tech-stack}+api+architecture&categories=agent,pattern&mode=index&maxResults=8
+orchestr8://match?query=${tech-stack}+api+architecture&categories=agent,pattern&mode=index&maxResults=8
 
 Tasks:
 - Design API structure
@@ -168,7 +168,7 @@ Tasks:
 ## Phase 3: Implementation (30-80%)
 
 **→ Implementation Expertise:**
-@orchestr8://match?query=${tech}+${features}+${auth-method}&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=${tech}+${features}+${auth-method}&categories=agent,skill,example&mode=index&maxResults=10
 
 Tasks:
 - Implement endpoints
@@ -179,7 +179,7 @@ Tasks:
 ## Phase 4: Testing & Deployment (80-100%)
 
 **→ Testing & Deployment Skills:**
-@orchestr8://skills/match?query=testing+deployment+api+${tech}&mode=index&maxResults=5
+orchestr8://skills/match?query=testing+deployment+api+${tech}&mode=index&maxResults=5
 
 Tasks:
 - Write tests (>80% coverage)

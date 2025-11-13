@@ -359,7 +359,7 @@ Design **comprehensive cloud migration strategies** with:
 **Phase 2: Architecture Design (30-60%)**
 
 → Load Cloud Migration Architect:
-`@orchestr8://agents/cloud-migration-architect`
+`orchestr8://agents/cloud-migration-architect`
 
 Activities:
 - Design target cloud architecture (compute, data, network, security)

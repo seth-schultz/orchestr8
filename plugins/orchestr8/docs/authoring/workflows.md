@@ -30,7 +30,7 @@ A **workflow** represents a multi-phase execution strategy that dynamically load
 
 **Key characteristics:**
 - **Multi-phase:** 3-6 distinct phases with progress tracking
-- **Dynamic loading:** Loads expertise per phase using `@orchestr8://` URIs
+- **Dynamic loading:** Loads expertise per phase using `orchestr8://` URIs
 - **Parameterized:** Accepts arguments for customization
 - **Autonomous:** Can delegate to subagents (PMs, workers)
 - **Trackable:** Clear progress indicators and checkpoints
@@ -54,16 +54,16 @@ Phase 4: Validation/Integration (75-100%)
 
 ```markdown
 ❌ Bad: Load all expertise upfront
-@orchestr8://agents/typescript-core
-@orchestr8://agents/typescript-api-development
-@orchestr8://agents/typescript-testing
+orchestr8://agents/typescript-core
+orchestr8://agents/typescript-api-development
+orchestr8://agents/typescript-testing
 # Loads ~2000 tokens immediately
 
 ✅ Good: Load per phase
-Phase 1: @orchestr8://match?query=requirements+analysis&maxTokens=800
-Phase 2: @orchestr8://agents/typescript-core
-Phase 3: @orchestr8://agents/typescript-api-development
-Phase 4: @orchestr8://skills/testing-integration-patterns
+Phase 1: orchestr8://match?query=requirements+analysis&maxTokens=800
+Phase 2: orchestr8://agents/typescript-core
+Phase 3: orchestr8://agents/typescript-api-development
+Phase 4: orchestr8://skills/testing-integration-patterns
 # Loads 800-1200 tokens per phase
 ```
 
@@ -75,26 +75,26 @@ Phase 4: @orchestr8://skills/testing-integration-patterns
 Phase 1 (Research): 800-1200 tokens
 ├─ Load: Research skills + analysis patterns
 ├─ Strategy: Core concepts only, no advanced topics
-└─ Example: @orchestr8://skills/match?query=requirement+analysis&maxTokens=1000
+└─ Example: orchestr8://skills/match?query=requirement+analysis&maxTokens=1000
 
 Phase 2 (Design): 1200-1800 tokens
 ├─ Load: Core agent + design patterns
 ├─ Strategy: Fundamentals + architecture, defer implementation details
-└─ Example: @orchestr8://match?query=${tech}+architecture&categories=agent,pattern&maxTokens=1500
+└─ Example: orchestr8://match?query=${tech}+architecture&categories=agent,pattern&maxTokens=1500
 
 Phase 3 (Implementation): 2000-2500 tokens
 ├─ Load: Core + specialized agents + targeted examples
 ├─ Strategy: Now load detailed implementation knowledge
 ├─ Use prerequisite field to ensure core loaded first
 └─ Example:
-    @orchestr8://agents/${tech}-core (prerequisite)
-    @orchestr8://agents/${tech}-${specialization}
-    @orchestr8://examples/${specific-pattern}
+    orchestr8://agents/${tech}-core (prerequisite)
+    orchestr8://agents/${tech}-${specialization}
+    orchestr8://examples/${specific-pattern}
 
 Phase 4 (Testing): 800-1200 tokens
 ├─ Load: Testing skills + validation patterns
 ├─ Strategy: Only testing-specific knowledge
-└─ Example: @orchestr8://skills/match?query=testing+${tech}&maxTokens=1000
+└─ Example: orchestr8://skills/match?query=testing+${tech}&maxTokens=1000
 
 Total worst case: 6000-7500 tokens
 But loaded progressively across 4 phases (1500-1875 per phase average)
@@ -105,58 +105,58 @@ But loaded progressively across 4 phases (1500-1875 per phase average)
 1. **Use maxTokens parameter:**
 ```markdown
 # Limit expertise loaded per phase
-@orchestr8://match?query=python+api&maxTokens=1500
+orchestr8://match?query=python+api&maxTokens=1500
 
 # Instead of unlimited loading that might fetch 3000+ tokens
-@orchestr8://match?query=python+api
+orchestr8://match?query=python+api
 ```
 
 2. **Category filtering:**
 ```markdown
 # Phase 1: Only load patterns and skills (no examples yet)
-@orchestr8://match?query=api+design&categories=pattern,skill&maxTokens=1000
+orchestr8://match?query=api+design&categories=pattern,skill&maxTokens=1000
 
 # Phase 3: Now load examples too
-@orchestr8://match?query=api+implementation&categories=agent,example&maxTokens=2000
+orchestr8://match?query=api+implementation&categories=agent,example&maxTokens=2000
 ```
 
 3. **Progressive specificity:**
 ```markdown
 # Phase 1: Broad query (loads core only)
-@orchestr8://agents/match?query=${technology}
+orchestr8://agents/match?query=${technology}
 
 # Phase 2: More specific (loads core + specialization)
-@orchestr8://agents/match?query=${technology}+${framework}
+orchestr8://agents/match?query=${technology}+${framework}
 
 # Phase 3: Very specific (loads core + multiple specializations + examples)
-@orchestr8://match?query=${technology}+${framework}+${feature}&categories=agent,skill,example
+orchestr8://match?query=${technology}+${framework}+${feature}&categories=agent,skill,example
 ```
 
 **Example: Feature Development Workflow with Progressive Budgets**
 
 ```markdown
 ## Phase 1: Planning (0-25%) - Budget: 1000 tokens
-**→ Load:** @orchestr8://skills/match?query=feature+planning+requirements&maxTokens=1000
+**→ Load:** orchestr8://skills/match?query=feature+planning+requirements&maxTokens=1000
 
 Load only planning skills, no implementation details yet.
 
 ## Phase 2: Architecture (25-50%) - Budget: 1500 tokens
 **→ Load:**
-- @orchestr8://agents/${tech}-core (prerequisite)
-- @orchestr8://patterns/match?query=${architecture}&maxTokens=800
+- orchestr8://agents/${tech}-core (prerequisite)
+- orchestr8://patterns/match?query=${architecture}&maxTokens=800
 
 Load core language agent + architectural patterns.
 
 ## Phase 3: Implementation (50-80%) - Budget: 2500 tokens
 **→ Load:**
-- @orchestr8://agents/${tech}-core (prerequisite, may already be cached)
-- @orchestr8://agents/${tech}-${specialization}
-- @orchestr8://examples/match?query=${tech}+${pattern}&maxTokens=1000
+- orchestr8://agents/${tech}-core (prerequisite, may already be cached)
+- orchestr8://agents/${tech}-${specialization}
+- orchestr8://examples/match?query=${tech}+${pattern}&maxTokens=1000
 
 Now load specialized implementation knowledge and examples.
 
 ## Phase 4: Testing (80-100%) - Budget: 1000 tokens
-**→ Load:** @orchestr8://skills/match?query=testing+${tech}&maxTokens=1000
+**→ Load:** orchestr8://skills/match?query=testing+${tech}&maxTokens=1000
 
 Load testing-specific skills only.
 
@@ -199,7 +199,7 @@ Phase 2: Parallel Design (20-60%)
 ```markdown
 ## Phase N: Phase Name (X%-Y%)
 
-**→ JIT Load:** @orchestr8://match?query=...&maxTokens=...
+**→ JIT Load:** orchestr8://match?query=...&maxTokens=...
 
 **Activities:**
 - Activity 1 with clear action
@@ -261,8 +261,8 @@ Phase 3: Polish (70-100%)
 
 ```markdown
 ## Phase 2: Design (25-50%)
-**→ Load:** @orchestr8://agents/typescript-core
-**→ Load:** @orchestr8://patterns/api-design-principles
+**→ Load:** orchestr8://agents/typescript-core
+**→ Load:** orchestr8://patterns/api-design-principles
 ```
 
 ### Dynamic URIs with Query Matching
@@ -271,21 +271,21 @@ Phase 3: Polish (70-100%)
 
 ```markdown
 ## Phase 1: Research (0-25%)
-**→ Load:** @orchestr8://match?query=${technology}+${domain}&categories=agent,skill&maxTokens=1200
+**→ Load:** orchestr8://match?query=${technology}+${domain}&categories=agent,skill&maxTokens=1200
 
 ## Phase 3: Implementation (50-80%)
-**→ Load:** @orchestr8://agents/match?query=${language}+${framework}&maxTokens=2000
+**→ Load:** orchestr8://agents/match?query=${language}+${framework}&maxTokens=2000
 ```
 
 ### Token Budget Control
 
 ```markdown
 ## Phase 1: Analysis (0-20%)
-**→ Load:** @orchestr8://skills/match?query=requirement+analysis&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=requirement+analysis&maxTokens=800
 # Limits to ~800 tokens
 
 ## Phase 3: Implementation (40-80%)
-**→ Load:** @orchestr8://match?query=${tech}+development&categories=agent,skill,example&maxTokens=2500
+**→ Load:** orchestr8://match?query=${tech}+development&categories=agent,skill,example&maxTokens=2500
 # Allows up to ~2500 tokens for complex implementation
 ```
 
@@ -293,13 +293,13 @@ Phase 3: Polish (70-100%)
 
 ```markdown
 # Load only agents
-@orchestr8://agents/match?query=typescript+api
+orchestr8://agents/match?query=typescript+api
 
 # Load agents and skills
-@orchestr8://match?query=api+development&categories=agent,skill
+orchestr8://match?query=api+development&categories=agent,skill
 
 # Load all relevant content
-@orchestr8://match?query=microservices&categories=agent,skill,pattern,example
+orchestr8://match?query=microservices&categories=agent,skill,pattern,example
 ```
 
 ## Argument Parameterization
@@ -344,7 +344,7 @@ estimatedTokens: 1200
 **Technology:** ${technology}
 
 ## Phase 1: Research ${technology} (0-25%)
-**→ Load:** @orchestr8://match?query=${technology}+${domain}&maxTokens=1000
+**→ Load:** orchestr8://match?query=${technology}+${domain}&maxTokens=1000
 ```
 
 ### Example with Arguments
@@ -366,7 +366,7 @@ arguments:
 **Task:** $ARGUMENTS
 
 ## Phase 1: Planning (0-25%)
-**→ Load:** @orchestr8://skills/match?query=feature+planning&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=feature+planning&maxTokens=800
 
 **Activities:**
 - Analyze feature requirements for ${feature-description}
@@ -376,7 +376,7 @@ arguments:
 **→ Checkpoint:** Feature scope defined
 
 ## Phase 2: Implementation (25-75%)
-**→ Load:** @orchestr8://agents/match?query=${technology}+development&maxTokens=2000
+**→ Load:** orchestr8://agents/match?query=${technology}+development&maxTokens=2000
 
 **Activities:**
 - Implement ${feature-description}
@@ -386,7 +386,7 @@ arguments:
 **→ Checkpoint:** Feature implemented with tests
 
 ## Phase 3: Validation (75-100%)
-**→ Load:** @orchestr8://skills/match?query=testing+${technology}&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=testing+${technology}&maxTokens=800
 
 **Activities:**
 - Run test suite
@@ -433,7 +433,7 @@ Input arguments:
 - feature: "authentication"
 
 Expected in Phase 2:
-@orchestr8://agents/match?query=typescript+development
+orchestr8://agents/match?query=typescript+development
 
 Actual query should contain "typescript", not "${technology}"
 ```
@@ -474,7 +474,7 @@ estimatedTokens: 980
 **Task:** $ARGUMENTS
 
 ## Phase 1: Analysis (0-30%)
-**→ Load:** @orchestr8://skills/match?query=debugging+root+cause&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=debugging+root+cause&maxTokens=800
 
 **Activities:**
 - Reproduce bug: ${bug-description}
@@ -485,7 +485,7 @@ estimatedTokens: 980
 **→ Checkpoint:** Root cause identified
 
 ## Phase 2: Fix Implementation (30-70%)
-**→ Load:** @orchestr8://match?query=${bug-description}+fix&categories=agent,skill,example&maxTokens=1500
+**→ Load:** orchestr8://match?query=${bug-description}+fix&categories=agent,skill,example&maxTokens=1500
 
 **Activities:**
 - Implement fix for identified root cause
@@ -496,7 +496,7 @@ estimatedTokens: 980
 **→ Checkpoint:** Fix implemented with test
 
 ## Phase 3: Validation (70-100%)
-**→ Load:** @orchestr8://skills/match?query=testing+integration&maxTokens=600
+**→ Load:** orchestr8://skills/match?query=testing+integration&maxTokens=600
 
 **Activities:**
 - Run full test suite
@@ -536,7 +536,7 @@ estimatedTokens: 1100
 **Task:** $ARGUMENTS
 
 ## Phase 1: Discovery (0-30%)
-**→ Load:** @orchestr8://skills/match?query=technology+evaluation+research&maxTokens=1000
+**→ Load:** orchestr8://skills/match?query=technology+evaluation+research&maxTokens=1000
 
 **Activities:**
 - Gather information about ${technology}
@@ -547,7 +547,7 @@ estimatedTokens: 1100
 **→ Checkpoint:** Technology landscape understood
 
 ## Phase 2: Evaluation (30-70%)
-**→ Load:** @orchestr8://match?query=${technology}+${use-case}&categories=agent,pattern,example&maxTokens=2000
+**→ Load:** orchestr8://match?query=${technology}+${use-case}&categories=agent,pattern,example&maxTokens=2000
 
 **Parallel tracks:**
 - Technical assessment: Capabilities, performance, scalability
@@ -557,7 +557,7 @@ estimatedTokens: 1100
 **→ Checkpoint:** Comprehensive evaluation complete
 
 ## Phase 3: Recommendation (70-100%)
-**→ Load:** @orchestr8://patterns/match?query=technology+selection&maxTokens=800
+**→ Load:** orchestr8://patterns/match?query=technology+selection&maxTokens=800
 
 **Activities:**
 - Synthesize findings
@@ -594,7 +594,7 @@ estimatedTokens: 520
 **Task:** $ARGUMENTS
 
 ## Phase 1: Expertise Scoping (0-25%)
-**→ Load:** @orchestr8://agents/match?query=agent+designer&maxTokens=800
+**→ Load:** orchestr8://agents/match?query=agent+designer&maxTokens=800
 
 **Activities:**
 - Define specialization: ${domain}
@@ -605,7 +605,7 @@ estimatedTokens: 520
 **→ Checkpoint:** Agent scope defined
 
 ## Phase 2: Structure Design (25-50%)
-**→ Load:** @orchestr8://skills/match?query=fragment+metadata&maxTokens=600
+**→ Load:** orchestr8://skills/match?query=fragment+metadata&maxTokens=600
 
 **Activities:**
 - Design content structure
@@ -616,7 +616,7 @@ estimatedTokens: 520
 **→ Checkpoint:** Structure planned
 
 ## Phase 3: Content Creation (50-75%)
-**→ Load:** @orchestr8://match?query=${domain}&categories=agent,skill,example&maxTokens=2000
+**→ Load:** orchestr8://match?query=${domain}&categories=agent,skill,example&maxTokens=2000
 
 **Activities:**
 - Write fragment with metadata
@@ -627,7 +627,7 @@ estimatedTokens: 520
 **→ Checkpoint:** Fragment written
 
 ## Phase 4: Validation (75-100%)
-**→ Load:** @orchestr8://skills/match?query=fragment+discovery+testing&maxTokens=600
+**→ Load:** orchestr8://skills/match?query=fragment+discovery+testing&maxTokens=600
 
 **Parallel tracks:**
 - Discovery testing: Verify fuzzy matching
@@ -675,7 +675,7 @@ Access: Via MCP prompts system
 **As pattern fragment:**
 ```markdown
 Location: resources/workflows/workflow-name.md
-Discovery: @orchestr8://workflows/match?query=...
+Discovery: orchestr8://workflows/match?query=...
 ```
 
 ## Next Steps

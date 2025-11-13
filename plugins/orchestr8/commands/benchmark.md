@@ -19,13 +19,21 @@ allowed-tools:
 
 **Request:** Benchmark and compare alternatives for: $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Benchmark Engineer** responsible for systematic technology/pattern comparison using empirical benchmarks and structured analysis.
 
 ## Phase 1: Benchmark Definition (0-15%)
 
-**→ Load:** @orchestr8://workflows/workflow-benchmark
+**→ Load:** orchestr8://workflows/workflow-benchmark
 
 **Activities:**
 - Parse comparison question and identify candidates (typically 3-5)
@@ -41,7 +49,7 @@ You are the **Benchmark Engineer** responsible for systematic technology/pattern
 
 ## Phase 2: Parallel Benchmark Execution (15-70%)
 
-**→ Load:** @orchestr8://match?query=performance+benchmarking+testing+comparison&categories=skill,pattern&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=performance+benchmarking+testing+comparison&categories=skill,pattern&mode=index&maxResults=8
 
 **Parallel Execution (3-5x speedup):**
 Execute all candidate benchmarks IN PARALLEL for maximum speed.
@@ -64,7 +72,7 @@ Execute all candidate benchmarks IN PARALLEL for maximum speed.
 
 ## Phase 3: Comparative Analysis (70-85%)
 
-**→ Load:** @orchestr8://match?query=analysis+comparison+trade+offs&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=analysis+comparison+trade+offs&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Aggregate and normalize benchmark data
@@ -81,7 +89,7 @@ Execute all candidate benchmarks IN PARALLEL for maximum speed.
 
 ## Phase 4: Reporting & Decision Support (85-100%)
 
-**→ Load:** @orchestr8://match?query=reporting+decision+documentation&categories=skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=reporting+decision+documentation&categories=skill&mode=index&maxResults=5
 
 **Activities:**
 - Create executive summary with clear recommendation

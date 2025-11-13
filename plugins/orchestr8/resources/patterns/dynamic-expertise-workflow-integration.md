@@ -8,7 +8,7 @@ capabilities:
   - Phase-based expertise loading
   - Complete workflow example
 useWhen:
-  - Adaptive workflow creation requiring dynamic @orchestr8:// URIs with query parameters determined by user input or prior phase results
+  - Adaptive workflow creation requiring dynamic orchestr8:// URIs with query parameters determined by user input or prior phase results
   - Static-to-dynamic workflow conversion replacing hardcoded fragment inclusions with JIT resource loading for token efficiency
   - Token-efficient workflow design loading 500-2500 tokens per phase based on context instead of 10K+ tokens upfront
   - Multi-phase workflow implementation where Phase 1 research guides Phase 2-3 expertise loading with progressive specialization
@@ -42,7 +42,7 @@ arguments:
 **Task:** ${project-description}
 
 **→ Research Assembly:**
-@orchestr8://agents/match?query=research+requirements&mode=index&maxResults=3
+orchestr8://agents/match?query=research+requirements&mode=index&maxResults=3
 
 Activities:
 - Analyze project description
@@ -55,7 +55,7 @@ Extract for next phase: ${tech-stack}, ${features}, ${architecture}
 ## Phase 2: Design (15-30%)
 
 **→ Design Assembly (based on Phase 1):**
-@orchestr8://match?query=${tech-stack}+${architecture}&categories=agent,pattern&mode=index&maxResults=8
+orchestr8://match?query=${tech-stack}+${architecture}&categories=agent,pattern&mode=index&maxResults=8
 
 Activities:
 - Design system architecture
@@ -66,7 +66,7 @@ Activities:
 ## Phase 3: Implementation (30-85%)
 
 **→ Implementation Assembly (based on Phases 1-2):**
-@orchestr8://match?query=${tech-stack}+${features}+${patterns}&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=${tech-stack}+${features}+${patterns}&categories=agent,skill,example&mode=index&maxResults=10
 
 Activities:
 - Implement core functionality
@@ -77,7 +77,7 @@ Activities:
 ## Phase 4: Validation (85-100%)
 
 **→ Testing Assembly:**
-@orchestr8://skills/match?query=testing+${tech-stack}&mode=index&maxResults=5
+orchestr8://skills/match?query=testing+${tech-stack}&mode=index&maxResults=5
 
 Activities:
 - Run test suites
@@ -93,9 +93,9 @@ Activities:
 ## Phase 2: Implementation
 
 **→ Load Static Resources:**
-@orchestr8://agents/typescript-developer
-@orchestr8://skills/api-development
-@orchestr8://patterns/rest-architecture
+orchestr8://agents/typescript-developer
+orchestr8://skills/api-development
+orchestr8://patterns/rest-architecture
 
 Always loads same 3 resources (total: 3500 tokens)
 Even if user needs Python, or doesn't need REST
@@ -106,7 +106,7 @@ Even if user needs Python, or doesn't need REST
 ## Phase 2: Implementation
 
 **→ Load Dynamic Resources:**
-@orchestr8://match?query=${task-description}&categories=agent,skill,pattern&mode=index&maxResults=10
+orchestr8://match?query=${task-description}&categories=agent,skill,pattern&mode=index&maxResults=10
 
 Adapts based on actual request:
 - TypeScript request → TypeScript agent
@@ -122,13 +122,13 @@ Adapts based on actual request:
 ```markdown
 ## Phase 1: Research (0-20%)
 **→ Broad Research:**
-@orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3
+orchestr8://agents/match?query=research+${domain}&mode=index&maxResults=3
 
 Determine: Need FastAPI + PostgreSQL + JWT
 
 ## Phase 2: Implementation (20-90%)
 **→ Targeted Loading (based on Phase 1 findings):**
-@orchestr8://match?query=python+fastapi+postgresql+jwt&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=python+fastapi+postgresql+jwt&categories=agent,skill,example&mode=index&maxResults=10
 
 Load exactly what's needed based on research
 ```
@@ -138,15 +138,15 @@ Load exactly what's needed based on research
 ```markdown
 ## Phase 1: Core (0-40%)
 **→ Core Expertise:**
-@orchestr8://agents/match?query=${tech}+core&mode=index&maxResults=5
+orchestr8://agents/match?query=${tech}+core&mode=index&maxResults=5
 
 ## Phase 2: Features (40-75%)
 **→ Feature-Specific:**
-@orchestr8://match?query=${tech}+${features}&categories=skill,example&mode=index&maxResults=8
+orchestr8://match?query=${tech}+${features}&categories=skill,example&mode=index&maxResults=8
 
 ## Phase 3: Polish (75-100%)
 **→ Quality & Testing:**
-@orchestr8://skills/match?query=testing+optimization+${tech}&mode=index&maxResults=5
+orchestr8://skills/match?query=testing+optimization+${tech}&mode=index&maxResults=5
 ```
 
 ### Pattern 3: Parallel with Dynamic Loading
@@ -155,7 +155,7 @@ Load exactly what's needed based on research
 ## Phase 2: Parallel Implementation (30-85%)
 
 **→ Load Comprehensive Expertise:**
-@orchestr8://match?query=${full-stack-description}&categories=agent,skill,pattern&mode=index&maxResults=15
+orchestr8://match?query=${full-stack-description}&categories=agent,skill,pattern&mode=index&maxResults=15
 
 Launch parallel subagents:
 - Track A: Backend (uses backend-relevant fragments)
@@ -174,10 +174,10 @@ Workflow argument: ${task-description}
 User provides: "Build TypeScript REST API"
 
 Direct use in URI:
-@orchestr8://match?query=${task-description}&mode=index&maxResults=8
+orchestr8://match?query=${task-description}&mode=index&maxResults=8
 
 Expands to:
-@orchestr8://match?query=Build+TypeScript+REST+API&mode=index&maxResults=8
+orchestr8://match?query=Build+TypeScript+REST+API&mode=index&maxResults=8
 
 FuzzyMatcher extracts keywords automatically
 ```
@@ -192,7 +192,7 @@ Parse ${task-description} to extract:
 - Features: ${features}
 
 ## Phase 2: Use extracted values
-@orchestr8://match?query=${tech}+${pattern}+${features}&mode=index&maxResults=10
+orchestr8://match?query=${tech}+${pattern}+${features}&mode=index&maxResults=10
 
 More controlled than direct substitution
 ```
@@ -204,11 +204,11 @@ More controlled than direct substitution
 ```markdown
 ## Phase 1: Domain Expertise
 **→ Query 1:**
-@orchestr8://agents/match?query=${domain}+expert&mode=index&maxResults=8
+orchestr8://agents/match?query=${domain}+expert&mode=index&maxResults=8
 
 ## Phase 2: Specific Skills
 **→ Query 2:**
-@orchestr8://skills/match?query=${specific-technique}+${tech}&mode=index&maxResults=5
+orchestr8://skills/match?query=${specific-technique}+${tech}&mode=index&maxResults=5
 
 Load different resources at different phases
 ```
@@ -219,10 +219,10 @@ Load different resources at different phases
 ## Phase 2: Implementation
 
 **→ Core Query (expertise):**
-@orchestr8://agents/match?query=${tech}+${domain}&mode=index&maxResults=8
+orchestr8://agents/match?query=${tech}+${domain}&mode=index&maxResults=8
 
 **→ Supplementary Query (techniques):**
-@orchestr8://skills/match?query=${pattern}+${technique}&mode=index&maxResults=5
+orchestr8://skills/match?query=${pattern}+${technique}&mode=index&maxResults=5
 
 Load complementary resources together
 ```
@@ -238,7 +238,7 @@ Load complementary resources together
 ## Phase 1: Requirements (0-15%)
 
 **→ Query:**
-@orchestr8://match?query=python+microservice+payment+stripe&categories=agent,pattern&mode=index&maxResults=8
+orchestr8://match?query=python+microservice+payment+stripe&categories=agent,pattern&mode=index&maxResults=8
 
 **FuzzyMatcher assembles:**
 - python-core (agent, 600 tokens)
@@ -260,7 +260,7 @@ Extract: Need FastAPI, microservice pattern, Stripe SDK
 ## Phase 2: Implementation (15-85%)
 
 **→ Query (based on Phase 1):**
-@orchestr8://match?query=python+fastapi+stripe+api+integration&categories=agent,skill,example&mode=index&maxResults=10
+orchestr8://match?query=python+fastapi+stripe+api+integration&categories=agent,skill,example&mode=index&maxResults=10
 
 **Assembles:**
 - python-fastapi-advanced (agent, 600 tokens)
@@ -273,7 +273,7 @@ Total: 2130 tokens, highly relevant to implementation
 ## Phase 3: Testing (85-100%)
 
 **→ Query:**
-@orchestr8://skills/match?query=testing+python+fastapi+integration&mode=index&maxResults=5
+orchestr8://skills/match?query=testing+python+fastapi+integration&mode=index&maxResults=5
 
 **Assembles:**
 - testing-integration-api (skill, 580 tokens)

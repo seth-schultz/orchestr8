@@ -14,7 +14,7 @@ useWhen:
   - Need production-ready training pipeline with monitoring
 estimatedTokens: 1700
 relatedResources:
-  - @orchestr8://agents/ml-engineer
+  - orchestr8://agents/ml-engineer
 ---
 
 # PyTorch Transformer Classifier

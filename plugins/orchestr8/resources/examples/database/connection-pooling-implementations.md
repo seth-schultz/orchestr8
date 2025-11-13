@@ -16,7 +16,7 @@ useWhen:
   - Need production-ready connection management examples
 estimatedTokens: 1200
 relatedResources:
-  - @orchestr8://patterns/database-connection-pooling-scaling
+  - orchestr8://patterns/database-connection-pooling-scaling
 ---
 
 # Database Connection Pooling - Complete Implementations

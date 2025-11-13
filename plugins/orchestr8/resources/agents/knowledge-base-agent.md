@@ -466,4 +466,4 @@ A successful Knowledge Base Agent:
 
 For large enterprise systems with multiple solutions (Web + API + Services), 30-50+ individual services, and complex cross-project dependencies, load:
 
-**@orchestr8://agents/knowledge-base-agent-enterprise**
+**orchestr8://agents/knowledge-base-agent-enterprise**

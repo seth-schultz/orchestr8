@@ -18,13 +18,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Architecture Auditor** responsible for comprehensive evaluation of system design, architectural patterns, scalability, security architecture, and long-term maintainability.
 
 ## Phase 1: Architecture Discovery & Mapping (0-15%)
 
-**→ Load:** @orchestr8://match?query=architecture+discovery+mapping&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=architecture+discovery+mapping&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 - Identify architecture type (monolith, microservices, serverless, layered)
@@ -36,7 +44,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 2: Architecture Pattern Analysis (15-30%)
 
-**→ Load:** @orchestr8://match?query=architecture+patterns+evaluation&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=architecture+patterns+evaluation&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 - Evaluate current architecture pattern appropriateness
@@ -48,7 +56,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 3: Design Patterns & Principles Review (30-45%)
 
-**→ Load:** @orchestr8://workflows/workflow-review-architecture
+**→ Load:** orchestr8://workflows/workflow-review-architecture
 
 **Activities:**
 - Evaluate SOLID principles compliance
@@ -60,7 +68,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 4: Scalability & Performance Architecture (45-60%)
 
-**→ Load:** @orchestr8://match?query=scalability+performance+architecture&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=scalability+performance+architecture&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 - Evaluate horizontal scalability (stateless design, load balancing)
@@ -72,7 +80,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 5: Security Architecture Review (60-75%)
 
-**→ Load:** @orchestr8://match?query=security+architecture+defense+depth&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=security+architecture+defense+depth&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 - Evaluate defense in depth (network, application, data layers)
@@ -84,7 +92,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 6: Technical Debt & Code Quality (75-85%)
 
-**→ Load:** @orchestr8://match?query=technical+debt+code+quality&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=technical+debt+code+quality&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Identify code smells (God classes, long methods, high complexity)
@@ -96,7 +104,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 7: API Design & Integration Review (85-95%)
 
-**→ Load:** @orchestr8://match?query=api+design+integration+resilience&categories=pattern,skill&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=api+design+integration+resilience&categories=pattern,skill&mode=index&maxResults=5
 
 **Activities:**
 - Evaluate API design principles (REST/GraphQL/gRPC)
@@ -108,7 +116,7 @@ You are the **Architecture Auditor** responsible for comprehensive evaluation of
 
 ## Phase 8: Architecture Report & Recommendations (95-100%)
 
-**→ Load:** @orchestr8://match?query=architecture+report+decision+records&categories=skill&mode=index&maxResults=3
+**→ Load:** orchestr8://match?query=architecture+report+decision+records&categories=skill&mode=index&maxResults=3
 
 **Activities:**
 - Synthesize all analyses into executive summary

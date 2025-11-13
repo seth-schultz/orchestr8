@@ -13,7 +13,7 @@ useWhen:
   - Building reusable chart generation tools
 estimatedTokens: 350
 relatedResources:
-  - @orchestr8://skills/data-chart-generation
+  - orchestr8://skills/data-chart-generation
 ---
 
 # Chart Generation: Unified CLI Script

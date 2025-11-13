@@ -15,9 +15,9 @@ useWhen:
   - Establishing SRE practices for reliability engineering teams
 estimatedTokens: 1800
 relatedResources:
-  - @orchestr8://agents/sre-specialist
-  - @orchestr8://skills/observability-sli-slo-monitoring
-  - @orchestr8://patterns/performance-caching
+  - orchestr8://agents/sre-specialist
+  - orchestr8://skills/observability-sli-slo-monitoring
+  - orchestr8://patterns/performance-caching
 ---
 
 # SRE SLO Configuration Implementation

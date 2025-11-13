@@ -17,7 +17,7 @@ You are performing a comprehensive code review to assess quality, security, perf
 
 ## Phase 1: Code Quality (0-30%)
 
-**→ Load:** @orchestr8://skills/match?query=code+quality+best+practices&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=code+quality+best+practices&mode=index&maxResults=5
 
 **Activities:**
 - Check code style and formatting standards
@@ -32,7 +32,7 @@ You are performing a comprehensive code review to assess quality, security, perf
 
 ## Phase 2: Architecture & Design (30-60%)
 
-**→ Load:** @orchestr8://match?query={{task}}+architecture+design+patterns&categories=pattern,skill&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query={{task}}+architecture+design+patterns&categories=pattern,skill&mode=index&maxResults=8
 
 **Activities:**
 - Evaluate design patterns usage
@@ -47,7 +47,7 @@ You are performing a comprehensive code review to assess quality, security, perf
 
 ## Phase 3: Security & Performance (60-90%)
 
-**→ Load:** @orchestr8://skills/match?query=security+performance+optimization&mode=index&maxResults=8
+**→ Load:** orchestr8://skills/match?query=security+performance+optimization&mode=index&maxResults=8
 
 **Activities:**
 - Security vulnerability scan (injection, XSS, auth issues)
@@ -62,7 +62,7 @@ You are performing a comprehensive code review to assess quality, security, perf
 
 ## Phase 4: Recommendations (90-100%)
 
-**→ Load:** @orchestr8://skills/match?query=code+review+recommendations&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=code+review+recommendations&mode=index&maxResults=3
 
 **Activities:**
 - Prioritize issues (critical, high, medium, low)

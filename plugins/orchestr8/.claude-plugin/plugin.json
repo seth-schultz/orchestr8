@@ -1,6 +1,6 @@
 {
   "name": "orchestr8",
-  "version": "8.0.4",
+  "version": "8.0.5",
   "description": "Autonomous software development workflows with minimal token usage via on-demand resource loading",
   "author": {
     "name": "Seth Schultz",
@@ -22,7 +22,9 @@
   "mcpServers": {
     "orchestr8-resources": {
       "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/dist/index.js"],
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/dist/index.js"
+      ],
       "env": {
         "PROMPTS_PATH": "${CLAUDE_PLUGIN_ROOT}/prompts",
         "RESOURCES_PATH": "${CLAUDE_PLUGIN_ROOT}/resources",

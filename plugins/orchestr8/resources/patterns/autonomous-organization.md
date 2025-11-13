@@ -204,7 +204,7 @@ Code/Tests/Infrastructure
 Each PM is a Task subagent that executes this workflow autonomously:
 
 1. **Scope Analysis**
-   - Load PM expertise: @orchestr8://agents/project-manager
+   - Load PM expertise: orchestr8://agents/project-manager
    - Load relevant scope-specific expertise from catalog
    - Break scope into granular worker tasks
    - Identify file dependencies and blocking relationships

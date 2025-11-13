@@ -43,8 +43,8 @@
    ├─ Static resources (direct URIs)
    └─ Dynamic templates (wildcard URIs)
 9. Register dynamic resource templates
-   ├─ Category-specific: @orchestr8://{category}/match{+rest}
-   └─ Global: @orchestr8://match{+rest}
+   ├─ Category-specific: orchestr8://{category}/match{+rest}
+   └─ Global: orchestr8://match{+rest}
 10. Setup hot reload (development mode only)
 11. Create stdio transport
 12. Connect server to transport
@@ -118,7 +118,7 @@ server.registerResource(
 
 **Dynamic Templates:**
 ```typescript
-const templateUri = `@orchestr8://${category}/match{+rest}`;
+const templateUri = `orchestr8://${category}/match{+rest}`;
 
 server.registerResource(
   `${category}-dynamic`,
@@ -403,21 +403,21 @@ loadResourceContent(uri)
 
 **Static URI:**
 ```
-@orchestr8://category/resource-id
+orchestr8://category/resource-id
          ↑        ↑            ↑
       protocol  category   identifier
 ```
 
 **Dynamic URI:**
 ```
-@orchestr8://category/match?query=typescript+api&maxTokens=2000
+orchestr8://category/match?query=typescript+api&maxTokens=2000
          ↑        ↑     ↑              ↑
       protocol category path      query params
 ```
 
 **Global Dynamic URI:**
 ```
-@orchestr8://match?query=python+async&categories=skill,example
+orchestr8://match?query=python+async&categories=skill,example
          ↑     ↑              ↑
       protocol path     query params
 ```
@@ -429,12 +429,12 @@ loadResourceContent(uri)
 ```typescript
 parse(uri: string): ParsedURI {
   // Validate protocol
-  if (!uri.startsWith("@orchestr8://")) {
+  if (!uri.startsWith("orchestr8://")) {
     throw new Error("Invalid URI protocol");
   }
 
   // Remove protocol
-  const withoutProtocol = uri.substring("@orchestr8://".length);
+  const withoutProtocol = uri.substring("orchestr8://".length);
 
   // Check if dynamic matching URI
   if (withoutProtocol.includes("/match?") || withoutProtocol.startsWith("match?")) {
@@ -465,7 +465,7 @@ parse(uri: string): ParsedURI {
 **Parsing Example:**
 ```
 Input:
-  "@orchestr8://agents/match?query=typescript+api&maxTokens=2500&tags=async&mode=catalog"
+  "orchestr8://agents/match?query=typescript+api&maxTokens=2500&tags=async&mode=catalog"
 
 Output:
   {
@@ -566,7 +566,7 @@ await server.connect(transport);
     "code": -32602,
     "message": "Invalid params",
     "data": {
-      "details": "Resource not found: @orchestr8://agents/nonexistent"
+      "details": "Resource not found: orchestr8://agents/nonexistent"
     }
   }
 }
@@ -592,7 +592,7 @@ await server.connect(transport);
    │
    ├─ STATIC PATH:
    │  ├─ Convert URI to file path
-   │  │  └─ @orchestr8://agents/typescript-developer
+   │  │  └─ orchestr8://agents/typescript-developer
    │  │     → resources/agents/typescript-developer.md
    │  ├─ Read file (fs.readFile)
    │  ├─ Cache content (4hr TTL)
@@ -639,7 +639,7 @@ await server.connect(transport);
 
 **Request:**
 ```
-URI: @orchestr8://agents/typescript-developer
+URI: orchestr8://agents/typescript-developer
 ```
 
 **Processing:**
@@ -647,7 +647,7 @@ URI: @orchestr8://agents/typescript-developer
 2. Parse URI → `{ type: "static", category: "agents", resourceId: "typescript-developer" }`
 3. Convert to path → `resources/agents/typescript-developer.md`
 4. Read file → 2000 tokens
-5. Cache with key `@orchestr8://agents/typescript-developer`
+5. Cache with key `orchestr8://agents/typescript-developer`
 6. Return content
 
 **Subsequent Requests:**
@@ -658,7 +658,7 @@ URI: @orchestr8://agents/typescript-developer
 
 **Request:**
 ```
-URI: @orchestr8://match?query=typescript+async+error&maxTokens=2500&mode=catalog
+URI: orchestr8://match?query=typescript+async+error&maxTokens=2500&mode=catalog
 ```
 
 **Processing:**
@@ -682,7 +682,7 @@ URI: @orchestr8://match?query=typescript+async+error&maxTokens=2500&mode=catalog
 
 **Request:**
 ```
-URI: @orchestr8://match?query=typescript+async+error&mode=index
+URI: orchestr8://match?query=typescript+async+error&mode=index
 ```
 
 **Processing:**
@@ -905,7 +905,7 @@ Load resources on-demand when needed:
 
 **Load this resource:**
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 ```
 
 [... more entries ...]
@@ -930,7 +930,7 @@ Load resources on-demand when needed:
     "scenario-a1b2c3d4e5f6": {
       "scenario": "Building async TypeScript applications",
       "keywords": ["building", "async", "typescript", "applications"],
-      "uri": "@orchestr8://agents/typescript-async-patterns",
+      "uri": "orchestr8://agents/typescript-async-patterns",
       "category": "agent",
       "estimatedTokens": 800,
       "relevance": 100
@@ -938,7 +938,7 @@ Load resources on-demand when needed:
     "scenario-f6e5d4c3b2a1": {
       "scenario": "Need error handling for promises",
       "keywords": ["need", "error", "handling", "promises"],
-      "uri": "@orchestr8://skills/error-handling-async",
+      "uri": "orchestr8://skills/error-handling-async",
       "category": "skill",
       "estimatedTokens": 650,
       "relevance": 100
@@ -1109,13 +1109,13 @@ new LRUCache<string, string>({
 **Static Resources:**
 ```
 Key: Full URI
-Example: "@orchestr8://agents/typescript-developer"
+Example: "orchestr8://agents/typescript-developer"
 ```
 
 **Dynamic Resources:**
 ```
 Key: Full query URI (including all parameters)
-Example: "@orchestr8://match?query=typescript+async&maxTokens=2500&mode=catalog"
+Example: "orchestr8://match?query=typescript+async&maxTokens=2500&mode=catalog"
 ```
 
 ### Cache Invalidation

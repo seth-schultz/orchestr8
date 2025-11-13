@@ -22,14 +22,14 @@ useWhen:
 ## Related Error Handling Skills
 
 **Foundational (use first):**
-- @orchestr8://skills/error-handling-validation - Custom error types (ValidationError, NotFoundError, etc.)
+- orchestr8://skills/error-handling-validation - Custom error types (ValidationError, NotFoundError, etc.)
 
 **Complementary:**
-- @orchestr8://skills/error-handling-logging - Logging errors with request correlation
-- @orchestr8://skills/error-handling-resilience - Retry logic for external API calls
+- orchestr8://skills/error-handling-logging - Logging errors with request correlation
+- orchestr8://skills/error-handling-resilience - Retry logic for external API calls
 
 **Related Patterns:**
-- @orchestr8://patterns/event-driven-best-practices - Event-driven error handling
+- orchestr8://patterns/event-driven-best-practices - Event-driven error handling
 
 ## Core Principles
 
@@ -188,7 +188,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 ## Custom Error Classes
 
-**Note:** Use error types from @orchestr8://skills/error-handling-validation
+**Note:** Use error types from orchestr8://skills/error-handling-validation
 
 ```typescript
 // Import custom error types

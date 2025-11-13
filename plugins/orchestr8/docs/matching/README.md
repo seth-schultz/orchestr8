@@ -32,7 +32,7 @@ Orchestr8 provides **dynamic resource matching** to discover relevant agents, sk
 - Four output modes: index (default), minimal, catalog, full
 - 15-20ms latency, best for exploratory searches
 
-Both systems use the same `@orchestr8://` URI protocol with query parameters to specify search criteria.
+Both systems use the same `orchestr8://` URI protocol with query parameters to specify search criteria.
 
 ---
 
@@ -79,7 +79,7 @@ Orchestr8 provides four response modes optimized for different use cases. The de
   "totalTokens": 4200,
   "results": [
     {
-      "uri": "@orchestr8://agents/typescript-developer",
+      "uri": "orchestr8://agents/typescript-developer",
       "score": 45,
       "tokens": 1200,
       "tags": ["typescript", "nodejs", "api", "async", "testing"]
@@ -139,8 +139,8 @@ Orchestr8 provides four response modes optimized for different use cases. The de
 
 **Example:**
 ```
-@orchestr8://match?query=typescript+api+patterns
-@orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
+orchestr8://match?query=typescript+api+patterns
+orchestr8://match?query=retry+exponential+backoff&mode=index&maxResults=5
 ```
 
 ### Use Minimal Mode when:
@@ -153,7 +153,7 @@ Orchestr8 provides four response modes optimized for different use cases. The de
 
 **Example:**
 ```
-@orchestr8://match?query=typescript+api&mode=minimal&maxResults=5
+orchestr8://match?query=typescript+api&mode=minimal&maxResults=5
 ```
 
 ### Use Catalog Mode when:
@@ -166,7 +166,7 @@ Orchestr8 provides four response modes optimized for different use cases. The de
 
 **Example:**
 ```
-@orchestr8://match?query=typescript+api+patterns&mode=catalog&maxResults=10
+orchestr8://match?query=typescript+api+patterns&mode=catalog&maxResults=10
 ```
 
 ### Use Full Mode when:
@@ -178,7 +178,7 @@ Orchestr8 provides four response modes optimized for different use cases. The de
 
 **Example:**
 ```
-@orchestr8://match?query=typescript+developer&mode=full&maxResults=2&maxTokens=2500
+orchestr8://match?query=typescript+developer&mode=full&maxResults=2&maxTokens=2500
 ```
 
 ---
@@ -188,11 +188,11 @@ Orchestr8 provides four response modes optimized for different use cases. The de
 ### Dynamic Match URI Format
 
 ```
-@orchestr8://[category]/match?query=<search-terms>&[options]
+orchestr8://[category]/match?query=<search-terms>&[options]
 ```
 
 **Components:**
-- `@orchestr8://` - Protocol prefix
+- `orchestr8://` - Protocol prefix
 - `[category]/` - Optional category filter (agents, skills, patterns, examples, workflows)
 - `match` - Dynamic matching endpoint
 - `?query=<terms>` - Required search query (use `+` for spaces or URL encoding)
@@ -202,39 +202,39 @@ Orchestr8 provides four response modes optimized for different use cases. The de
 
 **Basic query (all categories):**
 ```
-@orchestr8://match?query=typescript+api
+orchestr8://match?query=typescript+api
 ```
 
 **Category-filtered query:**
 ```
-@orchestr8://agents/match?query=typescript+developer
-@orchestr8://agents/match?query=typescript+developer&mode=index  # same (index is default)
+orchestr8://agents/match?query=typescript+developer
+orchestr8://agents/match?query=typescript+developer&mode=index  # same (index is default)
 ```
 
 **Multi-category query:**
 ```
-@orchestr8://match?query=error+handling&categories=skills,patterns
+orchestr8://match?query=error+handling&categories=skills,patterns
 ```
 
 **Index mode (default):**
 ```
-@orchestr8://match?query=retry+timeout
-@orchestr8://match?query=retry+timeout&mode=index&maxResults=5
+orchestr8://match?query=retry+timeout
+orchestr8://match?query=retry+timeout&mode=index&maxResults=5
 ```
 
 **Minimal mode with compact JSON:**
 ```
-@orchestr8://match?query=testing+patterns&mode=minimal&maxResults=5
+orchestr8://match?query=testing+patterns&mode=minimal&maxResults=5
 ```
 
 **Catalog mode with full metadata:**
 ```
-@orchestr8://match?query=testing+patterns&mode=catalog&maxResults=8&minScore=15
+orchestr8://match?query=testing+patterns&mode=catalog&maxResults=8&minScore=15
 ```
 
 **Full content mode:**
 ```
-@orchestr8://match?query=kubernetes+deployment&mode=full&maxTokens=3000
+orchestr8://match?query=kubernetes+deployment&mode=full&maxTokens=3000
 ```
 
 ---
@@ -307,17 +307,17 @@ Index Response (~400 tokens):
   ## Resources Found: 3
 
   **1. TypeScript Developer Agent**
-  - URI: @orchestr8://agents/typescript-developer
+  - URI: orchestr8://agents/typescript-developer
   - Use When: Building TypeScript APIs, need type safety and async patterns
   - Score: 45
 
   **2. Async Patterns Skill**
-  - URI: @orchestr8://skills/async-patterns
+  - URI: orchestr8://skills/async-patterns
   - Use When: Implementing promise chains, async/await error handling
   - Score: 42
 
   **3. Error Handling Pattern**
-  - URI: @orchestr8://patterns/error-handling
+  - URI: orchestr8://patterns/error-handling
   - Use When: Robust error handling in async operations
   - Score: 38
 
@@ -333,19 +333,19 @@ Minimal Response (~350 tokens):
   "totalTokens": 3400,
   "results": [
     {
-      "uri": "@orchestr8://agents/typescript-developer",
+      "uri": "orchestr8://agents/typescript-developer",
       "score": 45,
       "tokens": 1200,
       "tags": ["typescript", "async", "api", "patterns", "testing"]
     },
     {
-      "uri": "@orchestr8://skills/async-patterns",
+      "uri": "orchestr8://skills/async-patterns",
       "score": 42,
       "tokens": 800,
       "tags": ["async", "promises", "error-handling", "patterns", "javascript"]
     },
     {
-      "uri": "@orchestr8://patterns/error-handling",
+      "uri": "orchestr8://patterns/error-handling",
       "score": 38,
       "tokens": 1400,
       "tags": ["error-handling", "resilience", "async", "patterns", "best-practices"]
@@ -389,14 +389,14 @@ Full Response (~8000 tokens):
 
 **Query:**
 ```
-@orchestr8://match?query=typescript+api+development&mode=catalog&maxResults=10
+orchestr8://match?query=typescript+api+development&mode=catalog&maxResults=10
 ```
 
 **Response:** Catalog with ~10 resources (~100 tokens)
 
 **Next Step:** Review catalog, then load specific resources:
 ```
-@orchestr8://agents/typescript-developer
+orchestr8://agents/typescript-developer
 ```
 
 ### Example 2: Fast Lookup for Specific Pattern
@@ -405,7 +405,7 @@ Full Response (~8000 tokens):
 
 **Query:**
 ```
-@orchestr8://match?query=retry+timeout+exponential&mode=index&maxResults=5
+orchestr8://match?query=retry+timeout+exponential&mode=index&maxResults=5
 ```
 
 **Response:** Top 5 matches from index (~60 tokens, ~5ms)
@@ -418,7 +418,7 @@ Full Response (~8000 tokens):
 
 **Query:**
 ```
-@orchestr8://match?query=typescript+developer&mode=full&maxTokens=2000&categories=agents
+orchestr8://match?query=typescript+developer&mode=full&maxTokens=2000&categories=agents
 ```
 
 **Response:** Full agent content (~1200 tokens)
@@ -431,7 +431,7 @@ Full Response (~8000 tokens):
 
 **Query:**
 ```
-@orchestr8://patterns/match?query=testing+unit+integration&mode=catalog&minScore=20
+orchestr8://patterns/match?query=testing+unit+integration&mode=catalog&minScore=20
 ```
 
 **Response:** High-relevance testing patterns only
@@ -444,7 +444,7 @@ Full Response (~8000 tokens):
 
 **Query:**
 ```
-@orchestr8://match?query=error+handling+resilience&categories=skills,patterns&mode=catalog
+orchestr8://match?query=error+handling+resilience&categories=skills,patterns&mode=catalog
 ```
 
 **Response:** Mixed results from skills and patterns

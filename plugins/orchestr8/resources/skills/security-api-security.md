@@ -9,11 +9,11 @@ capabilities:
   - Request signing and verification concepts
   - DDoS protection and threat mitigation
 relatedResources:
-  - @orchestr8://examples/security/api-rate-limiting-implementation
-  - @orchestr8://skills/security-owasp-top10
-  - @orchestr8://skills/security-authentication-jwt
-  - @orchestr8://skills/security-authentication-oauth
-  - @orchestr8://skills/security-input-validation
+  - orchestr8://examples/security/api-rate-limiting-implementation
+  - orchestr8://skills/security-owasp-top10
+  - orchestr8://skills/security-authentication-jwt
+  - orchestr8://skills/security-authentication-oauth
+  - orchestr8://skills/security-input-validation
 estimatedTokens: 250
 useWhen:
   - Implementing API security best practices with authentication, authorization, rate limiting, and input validation
@@ -29,7 +29,7 @@ useWhen:
 
 Comprehensive API security requires multiple layers of protection including rate limiting, CORS configuration, authentication, and DDoS mitigation. This skill covers security concepts and strategies for production APIs.
 
-For complete implementation code, see: `@orchestr8://examples/security/api-rate-limiting-implementation`
+For complete implementation code, see: `orchestr8://examples/security/api-rate-limiting-implementation`
 
 ## Rate Limiting Strategies
 
@@ -185,21 +185,21 @@ For complete implementation code, see: `@orchestr8://examples/security/api-rate-
 ## Related Security Skills
 
 ### Parent Skills
-- **OWASP Top 10**: `@orchestr8://skills/security-owasp-top10`
+- **OWASP Top 10**: `orchestr8://skills/security-owasp-top10`
   - General security vulnerabilities and mitigation strategies
   - Maps to API1 (Access Control), API4 (Rate Limiting), API8 (Misconfiguration)
 
 ### Authentication Skills
-- **JWT Authentication**: `@orchestr8://skills/security-authentication-jwt`
+- **JWT Authentication**: `orchestr8://skills/security-authentication-jwt`
   - Token-based API authentication
   - Access token validation in API middleware
 
-- **OAuth 2.0**: `@orchestr8://skills/security-authentication-oauth`
+- **OAuth 2.0**: `orchestr8://skills/security-authentication-oauth`
   - Third-party API access delegation
   - OAuth token management for APIs
 
 ### Input Validation
-- **Input Validation**: `@orchestr8://skills/security-input-validation`
+- **Input Validation**: `orchestr8://skills/security-input-validation`
   - Request payload validation
   - Protection against injection attacks in API parameters
 

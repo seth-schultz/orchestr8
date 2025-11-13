@@ -153,13 +153,13 @@ provider.register();
 ## Related Observability Skills
 
 **Three Pillars of Observability:**
-- @orchestr8://skills/observability-structured-logging - Logs pillar for contextual debugging
-- @orchestr8://skills/observability-metrics-prometheus - Metrics pillar for quantitative monitoring
-- @orchestr8://skills/observability-distributed-tracing - Traces pillar (this skill)
+- orchestr8://skills/observability-structured-logging - Logs pillar for contextual debugging
+- orchestr8://skills/observability-metrics-prometheus - Metrics pillar for quantitative monitoring
+- orchestr8://skills/observability-distributed-tracing - Traces pillar (this skill)
 
 **Reliability & SRE:**
-- @orchestr8://skills/observability-sli-slo-monitoring - SLI/SLO tracking and error budgets
+- orchestr8://skills/observability-sli-slo-monitoring - SLI/SLO tracking and error budgets
 
 **Performance:**
-- @orchestr8://patterns/performance-caching - Caching strategies
-- @orchestr8://skills/performance-profiling-techniques - Profiling and optimization
+- orchestr8://patterns/performance-caching - Caching strategies
+- orchestr8://skills/performance-profiling-techniques - Profiling and optimization

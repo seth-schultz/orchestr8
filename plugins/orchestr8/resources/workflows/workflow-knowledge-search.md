@@ -81,7 +81,7 @@ Filters: Last 2 years, code examples preferred
 "jwt authentication typescript"
 
 # Fuzzy matching (for Orchestr8)
-@orchestr8://match?query=jwt+auth+typescript
+orchestr8://match?query=jwt+auth+typescript
 
 # Code search (for repositories)
 pattern: "jwt.*verify" with glob: "**/*.ts"

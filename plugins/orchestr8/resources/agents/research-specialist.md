@@ -15,8 +15,8 @@ useWhen:
   - Extracting technical requirements from vague requests requiring AskUserQuestion clarification on architecture decisions (REST vs GraphQL, monolith vs microservices)
   - Researching unfamiliar domains using WebSearch for 2024-2025 best practices combined with codebase analysis via Grep and Glob tools
   - Evaluating technology stacks before implementation phase when security, performance, or compliance requirements are implied but not explicitly documented
-  - Conducting gap analysis to identify missing agent fragments, skill patterns, or examples needed for @orchestr8:// dynamic URI matching
-  - Building requirement documents with measurable success criteria before Phase 2 design work using @orchestr8://match?query= resource discovery
+  - Conducting gap analysis to identify missing agent fragments, skill patterns, or examples needed for orchestr8:// dynamic URI matching
+  - Building requirement documents with measurable success criteria before Phase 2 design work using orchestr8://match?query= resource discovery
   - Investigating framework-specific conventions, OWASP security standards, and testing strategies for domains outside current knowledge base
   - Researching unfamiliar technology stack before implementing authentication system with JWT and OAuth integration
   - Building knowledge base for GraphQL API design patterns when team has REST-only experience
@@ -78,7 +78,7 @@ Priority order:
 **Step 3: Quick Context Gathering**
 - Use WebSearch for current best practices (2024-2025)
 - Search codebase for existing related patterns: `Grep` + `Glob`
-- Check for existing fragments: `@orchestr8://match?query=${domain}`
+- Check for existing fragments: `orchestr8://match?query=${domain}`
 
 **Step 4: Technology Evaluation**
 ```markdown
@@ -223,7 +223,7 @@ Reuse or adapt for new context
 ### MCP Resource Discovery
 ```markdown
 Check existing fragments:
-@orchestr8://match?query=${topic}&categories=agent,skill,pattern,example
+orchestr8://match?query=${topic}&categories=agent,skill,pattern,example
 
 Analyze results:
 - What's already available?
@@ -272,8 +272,8 @@ After research, synthesize:
 - Common pitfalls to avoid
 
 **Recommended Resources:**
-- Static fragments: @orchestr8://category/resource
-- Dynamic queries: @orchestr8://match?query=...
+- Static fragments: orchestr8://category/resource
+- Dynamic queries: orchestr8://match?query=...
 - External docs: [URLs from WebSearch]
 
 **Gaps Identified:**
@@ -287,7 +287,7 @@ After research, synthesize:
 **Research → Design → Execute Pattern:**
 ```markdown
 ## Phase 1: Research (0-15%)
-**→ Research Agent:** `@orchestr8://agents/match?query=research+${domain}`
+**→ Research Agent:** `orchestr8://agents/match?query=research+${domain}`
 
 Tasks:
 1. Extract requirements from user request
@@ -299,7 +299,7 @@ Output: Requirement document + resource recommendations
 
 ## Phase 2: Design (15-30%)
 **→ Domain Experts:** Load based on Phase 1 findings
-`@orchestr8://match?query=${findings}&categories=agent,pattern`
+`orchestr8://match?query=${findings}&categories=agent,pattern`
 
 ## Phase 3: Execute (30-100%)
 Implement using researched approach

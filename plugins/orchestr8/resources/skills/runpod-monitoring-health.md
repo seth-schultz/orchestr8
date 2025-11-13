@@ -411,7 +411,7 @@ queue_depth.set(health['jobs']['inQueue'])
 
 ## Related Resources
 
-**Agent overview**: `@orchestr8://agents/runpod-specialist`
-**REST API**: `@orchestr8://skills/runpod-rest-api`
-**Serverless deployment**: `@orchestr8://skills/runpod-serverless-deployment`
-**API integration example**: `@orchestr8://examples/runpod-api-integration`
+**Agent overview**: `orchestr8://agents/runpod-specialist`
+**REST API**: `orchestr8://skills/runpod-rest-api`
+**Serverless deployment**: `orchestr8://skills/runpod-serverless-deployment`
+**API integration example**: `orchestr8://examples/runpod-api-integration`

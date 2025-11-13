@@ -256,7 +256,7 @@ mod tests {
 
 This agent is split into core and advanced modules:
 
-**Core Module:** `@orchestr8://agents/rust-expert-core` (~700 tokens)
+**Core Module:** `orchestr8://agents/rust-expert-core` (~700 tokens)
 - Essential Rust expertise: ownership, borrowing, lifetimes
 - Type system, traits, and pattern matching
 - Concurrent programming with threads and async/await
@@ -264,7 +264,7 @@ This agent is split into core and advanced modules:
 - Build tooling with Cargo
 - Covers 80% of typical Rust development needs
 
-**Advanced Module:** `@orchestr8://agents/rust-expert-advanced` (~680 tokens)
+**Advanced Module:** `orchestr8://agents/rust-expert-advanced` (~680 tokens)
 - Advanced ownership and borrowing patterns
 - Complex lifetime management and elision rules
 - Smart pointer patterns (Box, Rc, Arc, RefCell)

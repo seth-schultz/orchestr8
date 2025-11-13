@@ -17,7 +17,7 @@ You are creating a new skill fragment documenting a specific technique or capabi
 
 ## Phase 1: Skill Definition (0-25%)
 
-**→ Load:** @orchestr8://skills/match?query=skill+authoring+fragment&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=skill+authoring+fragment&mode=index&maxResults=5
 
 **Activities:**
 - Define skill scope for {{task}}
@@ -31,7 +31,7 @@ You are creating a new skill fragment documenting a specific technique or capabi
 
 ## Phase 2: Structure Planning (25-50%)
 
-**→ Load:** @orchestr8://skills/match?query=fragment+metadata&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=fragment+metadata&mode=index&maxResults=3
 
 **Activities:**
 - Plan content structure (technique, steps, examples)
@@ -45,7 +45,7 @@ You are creating a new skill fragment documenting a specific technique or capabi
 
 ## Phase 3: Content Creation (50-80%)
 
-**→ Load:** @orchestr8://match?query={{task}}&categories=skill,pattern,example&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query={{task}}&categories=skill,pattern,example&mode=index&maxResults=8
 
 **Activities:**
 - Write skill frontmatter (YAML metadata)
@@ -61,14 +61,14 @@ You are creating a new skill fragment documenting a specific technique or capabi
 
 ## Phase 4: Validation & Integration (80-100%)
 
-**→ Load:** @orchestr8://skills/match?query=testing+discovery&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=testing+discovery&mode=index&maxResults=3
 
 **Activities:**
 - Test fuzzy matching with queries
 - Verify metadata enables discovery
 - Optimize tags if needed
 - Save to /resources/skills/
-- Test loading via @orchestr8:// URI
+- Test loading via orchestr8:// URI
 - Verify token count matches estimate
 - Rebuild resource index
 - Test integration in workflows

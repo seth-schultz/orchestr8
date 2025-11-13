@@ -16,9 +16,9 @@ useWhen:
   - Documenting corrective actions
 estimatedTokens: 680
 relatedResources:
-  - @orchestr8://agents/iso27001-specialist
-  - @orchestr8://agents/compliance-audit-specialist
-  - @orchestr8://skills/compliance-documentation-requirements
+  - orchestr8://agents/iso27001-specialist
+  - orchestr8://agents/compliance-audit-specialist
+  - orchestr8://skills/compliance-documentation-requirements
 ---
 
 # ISO 27001 ISMS Documentation

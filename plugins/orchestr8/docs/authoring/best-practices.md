@@ -152,8 +152,8 @@ Why these work:
 id: error-handling-resilience
 estimatedTokens: 680  # Down from 1200
 examples:
-  - @orchestr8://examples/typescript-retry-patterns
-  - @orchestr8://examples/python-retry-patterns
+  - orchestr8://examples/typescript-retry-patterns
+  - orchestr8://examples/python-retry-patterns
 ---
 
 Content with brief inline examples and references to detailed implementations.
@@ -198,9 +198,9 @@ relatedTo:
 ---
 
 ## Related Testing Skills
-- [Unit Testing](@orchestr8://skills/testing-unit)
-- [Integration Testing](@orchestr8://skills/testing-integration-patterns)
-- [E2E Testing](@orchestr8://skills/testing-e2e-best-practices)
+- [Unit Testing](orchestr8://skills/testing-unit)
+- [Integration Testing](orchestr8://skills/testing-integration-patterns)
+- [E2E Testing](orchestr8://skills/testing-e2e-best-practices)
 
 # Child skill
 ---
@@ -210,11 +210,11 @@ relatedTo: [testing-unit, testing-e2e-best-practices]
 ---
 
 ## Prerequisites
-- [Testing Strategies](@orchestr8://skills/testing-strategies)
-- [Unit Testing](@orchestr8://skills/testing-unit)
+- [Testing Strategies](orchestr8://skills/testing-strategies)
+- [Unit Testing](orchestr8://skills/testing-unit)
 
 ## Related
-- [E2E Testing](@orchestr8://skills/testing-e2e-best-practices)
+- [E2E Testing](orchestr8://skills/testing-e2e-best-practices)
 ```
 
 **ROI Analysis:**
@@ -241,15 +241,15 @@ id: python-async-fundamentals
 category: agent
 estimatedTokens: 700  # Down from 1400
 advancedTopics:
-  - @orchestr8://agents/python-async-concurrency
-  - @orchestr8://agents/python-async-context-managers
+  - orchestr8://agents/python-async-concurrency
+  - orchestr8://agents/python-async-context-managers
 ---
 
 Core concepts with references to advanced topics.
 
 ## Advanced Topics
-- [Concurrency Patterns](@orchestr8://agents/python-async-concurrency)
-- [Context Managers](@orchestr8://agents/python-async-context-managers)
+- [Concurrency Patterns](orchestr8://agents/python-async-concurrency)
+- [Context Managers](orchestr8://agents/python-async-context-managers)
 
 # Advanced module
 ---
@@ -540,8 +540,8 @@ fix/fragment-name - Bug fixes or updates
    /orchestr8:mcp-ui
 
 2. Test core queries (4-6 per fragment)
-   @orchestr8://match?query=core+terms
-   @orchestr8://match?query=specialized+terms
+   orchestr8://match?query=core+terms
+   orchestr8://match?query=specialized+terms
 
 3. Verify ranking
    ✅ Top 3 for core queries

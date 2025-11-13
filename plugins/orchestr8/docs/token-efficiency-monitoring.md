@@ -54,7 +54,7 @@ Every resource load operation is tracked with microsecond precision:
   cacheCreationTokens: 1200,   // One-time cache creation
   totalTokens: 5250,
   category: "agent",
-  resourceUri: "@orchestr8://agents/typescript-developer",
+  resourceUri: "orchestr8://agents/typescript-developer",
   baselineTokens: 15000,       // Without JIT loading
   tokensSaved: 9750,
   efficiencyPercentage: 65.0,
@@ -128,7 +128,7 @@ Token usage grouped by resource type for granular insights:
   "costSavingsUSD": 2.0250,
   "topResources": [
     {
-      "uri": "@orchestr8://agents/typescript-developer",
+      "uri": "orchestr8://agents/typescript-developer",
       "loadCount": 15,
       "tokens": 22500
     }
@@ -170,7 +170,7 @@ Identify optimization opportunities:
 ```json
 [
   {
-    "uri": "@orchestr8://skills/api-optimization",
+    "uri": "orchestr8://skills/api-optimization",
     "category": "skill",
     "efficiency": 98.2,
     "tokensSaved": 15234
@@ -182,7 +182,7 @@ Identify optimization opportunities:
 ```json
 [
   {
-    "uri": "@orchestr8://agents/legacy-system-analyst",
+    "uri": "orchestr8://agents/legacy-system-analyst",
     "category": "agent",
     "efficiency": 52.1,
     "loadCount": 8
@@ -707,11 +707,11 @@ curl http://localhost:1337/api/tokens/efficiency | \
 **1. Split Large Resources**
 ```markdown
 <!-- Before: Monolithic agent (15KB) -->
-@orchestr8://agents/python-expert
+orchestr8://agents/python-expert
 
 <!-- After: Modular approach (2KB core + 5KB advanced) -->
-@orchestr8://agents/python-expert-core
-@orchestr8://agents/python-expert-advanced (loaded only when needed)
+orchestr8://agents/python-expert-core
+orchestr8://agents/python-expert-advanced (loaded only when needed)
 
 Efficiency improvement: 75% → 92%
 ```
@@ -736,8 +736,8 @@ if (context.requiresAdvanced) {
 <!-- After: External examples (2KB skill + 3KB examples) -->
 # Skill: API Security
 See examples:
-- @orchestr8://examples/security/jwt-auth
-- @orchestr8://examples/security/oauth-flows
+- orchestr8://examples/security/jwt-auth
+- orchestr8://examples/security/oauth-flows
 
 Efficiency improvement: 68% → 89%
 ```
@@ -892,8 +892,8 @@ curl -s http://localhost:1337/api/tokens/efficiency | \
     "⚠️ \(.uri) - Efficiency: \(.efficiency)% - Loads: \(.loadCount)"'
 
 # Output:
-# ⚠️ @orchestr8://agents/legacy-system - Efficiency: 52.1% - Loads: 8
-# ⚠️ @orchestr8://workflows/cloud-migration - Efficiency: 64.7% - Loads: 5
+# ⚠️ orchestr8://agents/legacy-system - Efficiency: 52.1% - Loads: 8
+# ⚠️ orchestr8://workflows/cloud-migration - Efficiency: 64.7% - Loads: 5
 ```
 
 **3. Monitor Cost in Real-time**

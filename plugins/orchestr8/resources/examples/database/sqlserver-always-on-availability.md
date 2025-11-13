@@ -14,7 +14,7 @@ useWhen:
   - Multi-region database replication
 estimatedTokens: 750
 relatedResources:
-  - @orchestr8://agents/sqlserver-specialist
+  - orchestr8://agents/sqlserver-specialist
 ---
 
 # SQL Server Always On Availability Groups

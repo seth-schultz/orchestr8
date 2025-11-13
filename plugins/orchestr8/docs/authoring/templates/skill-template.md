@@ -40,7 +40,7 @@ estimatedTokens: ${calculated-count}
 # Optional: Optimization fields (Phases 2-3)
 # prerequisite: [parent-skill-id]  # For child skills in hierarchy (Phase 2)
 # relatedTo: [related-skill-1, related-skill-2]  # Cross-references (Phase 2)
-# examples: [@orchestr8://examples/example-id]  # Example extraction (Phase 1)
+# examples: [orchestr8://examples/example-id]  # Example extraction (Phase 1)
 ---
 
 # ${Technique-Name}: ${Context-or-Specialization}
@@ -159,20 +159,20 @@ ${code-example}
 ## Related Skills
 
 **Prerequisites (Phase 2 - if child skill):**
-- [${Parent-Skill}](@orchestr8://skills/${parent-skill-id}) - Required foundation
+- [${Parent-Skill}](orchestr8://skills/${parent-skill-id}) - Required foundation
 
 **Parent Skill (if this is a child):**
-- [${Parent-Skill}](@orchestr8://skills/${parent-skill-id})
+- [${Parent-Skill}](orchestr8://skills/${parent-skill-id})
 
 **Complementary Skills (Phase 2 - Cross-references):**
-- [${Related-Skill-1}](@orchestr8://skills/${skill-id})
-- [${Related-Skill-2}](@orchestr8://skills/${skill-id})
+- [${Related-Skill-1}](orchestr8://skills/${skill-id})
+- [${Related-Skill-2}](orchestr8://skills/${skill-id})
 
 **Related Patterns:**
-- [${Related-Pattern}](@orchestr8://patterns/${pattern-id})
+- [${Related-Pattern}](orchestr8://patterns/${pattern-id})
 
 **Detailed Examples (Phase 1 - if extracted):**
-- [${Related-Example}](@orchestr8://examples/${example-id})
+- [${Related-Example}](orchestr8://examples/${example-id})
 
 ---
 
@@ -279,7 +279,7 @@ Apply these optimization patterns when appropriate:
 **Phase 1: Example Extraction**
 - [ ] Fragment >100 lines with multiple language examples?
 - [ ] Code examples >30% of content? Extract to example files
-- [ ] Added `examples: [@orchestr8://examples/...]` field?
+- [ ] Added `examples: [orchestr8://examples/...]` field?
 - [ ] Brief inline examples (10-15 lines) remain?
 
 **Phase 2: Skill Families**

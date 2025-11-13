@@ -13,7 +13,7 @@ useWhen:
   - Defining success criteria for validation
 estimatedTokens: 320
 relatedResources:
-  - @orchestr8://skills/assumption-validation
+  - orchestr8://skills/assumption-validation
 ---
 
 # Assumption Validation: Performance Measurement Plan

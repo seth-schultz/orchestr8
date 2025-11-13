@@ -18,7 +18,7 @@ useWhen:
   - When implementing schema-based validation with Zod
 estimatedTokens: 1450
 relatedResources:
-  - @orchestr8://skills/security-input-validation
+  - orchestr8://skills/security-input-validation
 ---
 
 # Input Validation & Sanitization Implementation

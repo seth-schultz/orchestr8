@@ -6,13 +6,13 @@ The Orchestr8 resource system organizes knowledge into seven primary categories,
 
 | Category | Purpose | Fragment Count | Avg Tokens | Example URI |
 |----------|---------|----------------|------------|-------------|
-| **agents** | AI agent expertise and specializations | 95 | 720 | `@orchestr8://agents/typescript-core` |
-| **skills** | Reusable techniques and best practices | 48 | 680 | `@orchestr8://skills/error-handling-resilience` |
-| **patterns** | Design and architectural patterns | 34 | 850 | `@orchestr8://patterns/autonomous-organization` |
-| **examples** | Code examples and implementations | 15 | 620 | `@orchestr8://examples/express-jwt-auth` |
-| **guides** | Setup and configuration guides | 10 | 780 | `@orchestr8://guides/aws-eks-cluster` |
-| **best-practices** | Code standards and quality guidelines | 6 | 740 | `@orchestr8://best-practices/api-design-rest` |
-| **workflows** | Execution strategies and processes | 13 | 640 | `@orchestr8://workflows/workflow-new-project` |
+| **agents** | AI agent expertise and specializations | 95 | 720 | `orchestr8://agents/typescript-core` |
+| **skills** | Reusable techniques and best practices | 48 | 680 | `orchestr8://skills/error-handling-resilience` |
+| **patterns** | Design and architectural patterns | 34 | 850 | `orchestr8://patterns/autonomous-organization` |
+| **examples** | Code examples and implementations | 15 | 620 | `orchestr8://examples/express-jwt-auth` |
+| **guides** | Setup and configuration guides | 10 | 780 | `orchestr8://guides/aws-eks-cluster` |
+| **best-practices** | Code standards and quality guidelines | 6 | 740 | `orchestr8://best-practices/api-design-rest` |
+| **workflows** | Execution strategies and processes | 13 | 640 | `orchestr8://workflows/workflow-new-project` |
 
 ---
 

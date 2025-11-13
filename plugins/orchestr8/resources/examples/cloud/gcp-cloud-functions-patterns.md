@@ -15,7 +15,7 @@ useWhen:
   - Reacting to Firestore changes
 estimatedTokens: 650
 relatedResources:
-  - @orchestr8://agents/gcp-specialist
+  - orchestr8://agents/gcp-specialist
 ---
 
 # GCP Cloud Functions Patterns

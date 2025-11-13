@@ -905,7 +905,7 @@ class ResourceLoader {
     const parsed = this.uriParser.parse(uri);
     
     if (parsed.type === "static") {
-      // Static URI: @orchestr8://agents/typescript-developer
+      // Static URI: orchestr8://agents/typescript-developer
       if (uri.startsWith("aitmpl://")) {
         return await this.loadFromProvider("aitmpl", parsed);
       } else if (uri.startsWith("github://")) {
@@ -914,7 +914,7 @@ class ResourceLoader {
         return await this.loadFromProvider("local", parsed);
       }
     } else {
-      // Dynamic URI: @orchestr8://match?query=...
+      // Dynamic URI: orchestr8://match?query=...
       return await this.loadDynamicResource(parsed);
     }
   }

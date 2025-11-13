@@ -15,7 +15,7 @@ useWhen:
   - Creating transformation approach comparison matrix
 estimatedTokens: 900
 relatedResources:
-  - @orchestr8://workflows/workflow-microservices-transformation
+  - orchestr8://workflows/workflow-microservices-transformation
 ---
 
 # Microservices Transformation - Detailed Roadmap Template

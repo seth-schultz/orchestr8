@@ -14,8 +14,8 @@ useWhen:
   - Managing model versions and production deployments
 estimatedTokens: 950
 relatedResources:
-  - @orchestr8://agents/mlops-specialist
-  - @orchestr8://skills/ml-model-evaluation
+  - orchestr8://agents/mlops-specialist
+  - orchestr8://skills/ml-model-evaluation
 ---
 
 # MLflow Experiment Tracking & Model Registry

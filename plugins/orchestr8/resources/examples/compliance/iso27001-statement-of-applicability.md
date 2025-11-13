@@ -16,9 +16,9 @@ useWhen:
   - Justifying control exclusions
 estimatedTokens: 620
 relatedResources:
-  - @orchestr8://agents/iso27001-specialist
-  - @orchestr8://agents/compliance-audit-specialist
-  - @orchestr8://agents/security-testing-compliance
+  - orchestr8://agents/iso27001-specialist
+  - orchestr8://agents/compliance-audit-specialist
+  - orchestr8://agents/security-testing-compliance
 ---
 
 # ISO 27001 Statement of Applicability (SoA)

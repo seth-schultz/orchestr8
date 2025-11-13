@@ -209,8 +209,8 @@ async function getOrder(orderId) {
 
 ## Related Event-Driven Patterns
 
-- **@orchestr8://patterns/event-driven-best-practices** - Event validation, versioning, and DLQ patterns
-- **@orchestr8://patterns/event-driven-cqrs** - Build read models from event streams
-- **@orchestr8://patterns/event-driven-pubsub** - Event distribution and pub/sub infrastructure
-- **@orchestr8://patterns/event-driven-saga** - Saga pattern for cross-aggregate workflows
-- **@orchestr8://patterns/architecture-microservices** - Event sourcing in microservices
+- **orchestr8://patterns/event-driven-best-practices** - Event validation, versioning, and DLQ patterns
+- **orchestr8://patterns/event-driven-cqrs** - Build read models from event streams
+- **orchestr8://patterns/event-driven-pubsub** - Event distribution and pub/sub infrastructure
+- **orchestr8://patterns/event-driven-saga** - Saga pattern for cross-aggregate workflows
+- **orchestr8://patterns/architecture-microservices** - Event sourcing in microservices

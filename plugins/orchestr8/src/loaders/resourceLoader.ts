@@ -631,9 +631,9 @@ export class ResourceLoader {
               .length,
           },
           searchUri:
-            "@orchestr8://match?query=<keywords>&mode=index&maxResults=5",
+            "orchestr8://match?query=<keywords>&mode=index&maxResults=5",
           usage:
-            "Use @orchestr8://match?query=... for resource discovery. Default mode is 'index' for optimal efficiency.",
+            "Use orchestr8://match?query=... for resource discovery. Default mode is 'index' for optimal efficiency.",
         };
 
         const content = JSON.stringify(catalog, null, 2);

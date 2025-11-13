@@ -134,7 +134,7 @@ arguments:
 
 ## Phase 1: ${Phase-Name} (0-X%)
 
-**→ JIT Load:** @orchestr8://match?query=${query}&maxTokens=${budget}
+**→ JIT Load:** orchestr8://match?query=${query}&maxTokens=${budget}
 
 **Activities:**
 - ${Activity-1}
@@ -145,7 +145,7 @@ arguments:
 
 ## Phase 2: ${Phase-Name} (X%-Y%)
 
-**→ JIT Load:** @orchestr8://agents/match?query=${query}&maxTokens=${budget}
+**→ JIT Load:** orchestr8://agents/match?query=${query}&maxTokens=${budget}
 
 **Activities:**
 - ${Activity-1}
@@ -179,7 +179,7 @@ arguments:
 
 ## Phase 1: Analysis (0-30%)
 
-**→ JIT Load:** @orchestr8://skills/match?query=debugging&maxTokens=800
+**→ JIT Load:** orchestr8://skills/match?query=debugging&maxTokens=800
 
 **Activities:**
 - Reproduce bug: ${bug-description}
@@ -190,7 +190,7 @@ arguments:
 
 ## Phase 2: Implementation (30-70%)
 
-**→ JIT Load:** @orchestr8://match?query=${bug-description}+fix&maxTokens=1500
+**→ JIT Load:** orchestr8://match?query=${bug-description}+fix&maxTokens=1500
 
 **Activities:**
 - Implement fix
@@ -201,7 +201,7 @@ arguments:
 
 ## Phase 3: Validation (70-100%)
 
-**→ JIT Load:** @orchestr8://skills/match?query=testing&maxTokens=600
+**→ JIT Load:** orchestr8://skills/match?query=testing&maxTokens=600
 
 **Activities:**
 - Run full test suite
@@ -242,7 +242,7 @@ You are the **${Role-Title}** ${role-description}. You ${responsibilities}.
 Load expertise on-demand via MCP:
 
 \`\`\`
-@orchestr8://match?query=<need>&categories=<cats>&minScore=15
+orchestr8://match?query=<need>&categories=<cats>&minScore=15
 \`\`\`
 
 The catalog indexes ${resource-types} with ${metadata-types} for selective loading.
@@ -253,7 +253,7 @@ The catalog indexes ${resource-types} with ${metadata-types} for selective loadi
 
 **REQUIRED:** ${Critical-first-step}
 \`\`\`
-@orchestr8://...
+orchestr8://...
 \`\`\`
 
 **Optional:** ${Additional-resources}
@@ -305,7 +305,7 @@ You are the **Chief Orchestrator** coordinating Project Managers. You manage org
 
 Load expertise on-demand:
 \`\`\`
-@orchestr8://match?query=<need>&categories=<cats>&minScore=15
+orchestr8://match?query=<need>&categories=<cats>&minScore=15
 \`\`\`
 
 ## Execution Workflow
@@ -314,7 +314,7 @@ Load expertise on-demand:
 
 **REQUIRED:** Load autonomous organization pattern
 \`\`\`
-@orchestr8://patterns/autonomous-organization
+orchestr8://patterns/autonomous-organization
 \`\`\`
 
 ### 2. Analyze Request & Dependencies
@@ -370,7 +370,7 @@ arguments:
 **Feature:** ${feature}
 
 ## Phase 1: Research ${technology}
-**→ Load:** @orchestr8://match?query=${technology}+${feature}
+**→ Load:** orchestr8://match?query=${technology}+${feature}
 ```
 
 ### JIT Loading in Commands
@@ -378,18 +378,18 @@ arguments:
 **Per-phase loading:**
 ```markdown
 ## Phase 1: Research
-**→ Load:** @orchestr8://skills/match?query=research&maxTokens=1000
+**→ Load:** orchestr8://skills/match?query=research&maxTokens=1000
 
 ## Phase 2: Implementation
-**→ Load:** @orchestr8://agents/match?query=${tech}&maxTokens=2000
+**→ Load:** orchestr8://agents/match?query=${tech}&maxTokens=2000
 
 ## Phase 3: Testing
-**→ Load:** @orchestr8://skills/match?query=testing&maxTokens=800
+**→ Load:** orchestr8://skills/match?query=testing&maxTokens=800
 ```
 
 **With constraints:**
 ```markdown
-@orchestr8://match?query=${need}&categories=agent,skill&maxTokens=1500&minScore=20
+orchestr8://match?query=${need}&categories=agent,skill&maxTokens=1500&minScore=20
 ```
 
 ### Command Locations

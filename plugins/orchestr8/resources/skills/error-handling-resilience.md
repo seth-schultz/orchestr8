@@ -22,16 +22,16 @@ useWhen:
 ## Related Error Handling Skills
 
 **Complementary Error Handling:**
-- @orchestr8://skills/error-handling-api-patterns - API error responses when resilience fails
-- @orchestr8://skills/error-handling-logging - Logging retry attempts and circuit breaker state
-- @orchestr8://skills/error-handling-validation - Validating inputs before retry
+- orchestr8://skills/error-handling-api-patterns - API error responses when resilience fails
+- orchestr8://skills/error-handling-logging - Logging retry attempts and circuit breaker state
+- orchestr8://skills/error-handling-validation - Validating inputs before retry
 
 **Related Patterns:**
-- @orchestr8://patterns/performance-caching - Caching for graceful degradation
-- @orchestr8://patterns/event-driven-saga - Saga pattern for distributed resilience
+- orchestr8://patterns/performance-caching - Caching for graceful degradation
+- orchestr8://patterns/event-driven-saga - Saga pattern for distributed resilience
 
 **Related Infrastructure:**
-- @orchestr8://skills/observability-metrics-prometheus - Monitoring circuit breaker metrics
+- orchestr8://skills/observability-metrics-prometheus - Monitoring circuit breaker metrics
 
 ## Retry Logic with Exponential Backoff
 

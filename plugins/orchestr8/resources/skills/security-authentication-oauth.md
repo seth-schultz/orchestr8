@@ -9,11 +9,11 @@ capabilities:
   - OpenID Connect integration strategies
   - OAuth token management best practices
 relatedResources:
-  - @orchestr8://examples/security/oauth-flows-implementation
-  - @orchestr8://skills/security-owasp-top10
-  - @orchestr8://skills/security-authentication-jwt
-  - @orchestr8://skills/security-api-security
-  - @orchestr8://skills/security-secrets-management
+  - orchestr8://examples/security/oauth-flows-implementation
+  - orchestr8://skills/security-owasp-top10
+  - orchestr8://skills/security-authentication-jwt
+  - orchestr8://skills/security-api-security
+  - orchestr8://skills/security-secrets-management
 estimatedTokens: 280
 useWhen:
   - Implementing OAuth 2.0 authorization code flow for third-party authentication with PKCE for enhanced security
@@ -29,7 +29,7 @@ useWhen:
 
 OAuth 2.0 is an authorization framework that enables secure third-party access to user resources without sharing credentials. This skill covers OAuth flows, security concepts, and implementation strategies.
 
-For complete implementation code, see: `@orchestr8://examples/security/oauth-flows-implementation`
+For complete implementation code, see: `orchestr8://examples/security/oauth-flows-implementation`
 
 ## OAuth 2.0 Core Concepts
 
@@ -177,24 +177,24 @@ OpenID Connect extends OAuth 2.0 with standardized identity features:
 ## Related Security Skills
 
 ### Parent Skills
-- **OWASP Top 10**: `@orchestr8://skills/security-owasp-top10`
+- **OWASP Top 10**: `orchestr8://skills/security-owasp-top10`
   - General authentication security principles
   - Maps to A07:2021 Authentication Failures
 
 ### Sibling Skills
-- **JWT Authentication**: `@orchestr8://skills/security-authentication-jwt`
+- **JWT Authentication**: `orchestr8://skills/security-authentication-jwt`
   - OpenID Connect extends OAuth with JWT ID tokens
   - OAuth access tokens can be JWTs
   - Similar token validation and storage patterns
   - JWT for internal APIs, OAuth for third-party delegation
 
 ### Related Domain Skills
-- **API Security**: `@orchestr8://skills/security-api-security`
+- **API Security**: `orchestr8://skills/security-api-security`
   - OAuth tokens used as Bearer tokens in API calls
   - Rate limiting on OAuth endpoints
   - CORS configuration for OAuth redirects
 
-- **Secrets Management**: `@orchestr8://skills/security-secrets-management`
+- **Secrets Management**: `orchestr8://skills/security-secrets-management`
   - OAuth client secret storage
   - Access and refresh token encryption at rest
   - Token encryption before database storage

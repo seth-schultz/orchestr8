@@ -15,7 +15,7 @@ useWhen:
   - Creating session tracking and cleanup utilities
 estimatedTokens: 1200
 relatedResources:
-  - @orchestr8://patterns/session-output-management
+  - orchestr8://patterns/session-output-management
 ---
 
 # Session Output Management - TypeScript Implementation

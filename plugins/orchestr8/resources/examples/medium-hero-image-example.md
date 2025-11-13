@@ -174,7 +174,7 @@ When running the Medium story creation workflow, hero image generation happens i
 
 ### 4. Generate Hero Image (Optional)
 
-**→ Load:** @orchestr8://skills/medium-hero-image-generation
+**→ Load:** orchestr8://skills/medium-hero-image-generation
 
 **Image generation options:**
 - If OPENAI_API_KEY available: Use DALL-E 3

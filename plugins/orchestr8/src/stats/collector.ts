@@ -192,10 +192,10 @@ export class StatsCollector {
       },
       errors: this.stats.errors,
       memory: {
-        heapUsed: Math.floor(memUsage.heapUsed / 1024 / 1024), // MB
-        heapTotal: Math.floor(memUsage.heapTotal / 1024 / 1024), // MB
-        external: Math.floor(memUsage.external / 1024 / 1024), // MB
-        rss: Math.floor(memUsage.rss / 1024 / 1024) // MB
+        heapUsed: memUsage.heapUsed, // Bytes (UI will format)
+        heapTotal: memUsage.heapTotal, // Bytes
+        external: memUsage.external, // Bytes
+        rss: memUsage.rss // Bytes
       },
       lastActivity: this.stats.lastActivity
     };

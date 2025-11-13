@@ -17,7 +17,7 @@ You are orchestrating a deployment with proper validation, rollout strategy, and
 
 ## Phase 1: Pre-deployment (0-20%)
 
-**→ Load:** @orchestr8://skills/match?query=deployment+preparation+validation&mode=index&maxResults=5
+**→ Load:** orchestr8://skills/match?query=deployment+preparation+validation&mode=index&maxResults=5
 
 **Activities:**
 - Run full test suite (unit, integration, E2E)
@@ -32,7 +32,7 @@ You are orchestrating a deployment with proper validation, rollout strategy, and
 
 ## Phase 2: Staging Deployment (20-50%)
 
-**→ Load:** @orchestr8://match?query={{task}}+staging+validation&categories=skill,guide&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query={{task}}+staging+validation&categories=skill,guide&mode=index&maxResults=8
 
 **Activities:**
 - Deploy to staging environment
@@ -47,7 +47,7 @@ You are orchestrating a deployment with proper validation, rollout strategy, and
 
 ## Phase 3: Production Deployment (50-80%)
 
-**→ Load:** @orchestr8://skills/match?query=production+deployment+strategy&mode=index&maxResults=8
+**→ Load:** orchestr8://skills/match?query=production+deployment+strategy&mode=index&maxResults=8
 
 **Activities:**
 - Execute deployment strategy (blue-green, canary, rolling)
@@ -62,7 +62,7 @@ You are orchestrating a deployment with proper validation, rollout strategy, and
 
 ## Phase 4: Post-deployment (80-100%)
 
-**→ Load:** @orchestr8://skills/match?query=monitoring+observability+validation&mode=index&maxResults=3
+**→ Load:** orchestr8://skills/match?query=monitoring+observability+validation&mode=index&maxResults=3
 
 **Activities:**
 - Monitor production health (15-30 minutes)

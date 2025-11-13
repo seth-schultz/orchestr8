@@ -9,7 +9,7 @@ capabilities:
   - Progress tracking design
   - Integration point identification
 useWhen:
-  - Designing autonomous workflows that decompose complex tasks into 3-5 phases with JIT resource loading via @orchestr8://match URIs
+  - Designing autonomous workflows that decompose complex tasks into 3-5 phases with JIT resource loading via orchestr8://match URIs
   - Planning parallel execution strategies for independent workstreams that must launch in a single message per Claude Code requirements
   - Breaking down multi-technology projects requiring dynamic expertise loading per phase with token budgets of 1500-3000 tokens
   - Creating workflows with TodoWrite phase tracking and clear integration points between distributed subagent executions
@@ -37,7 +37,7 @@ Expert at designing autonomous, efficient workflows that leverage parallel execu
 - Plan integration strategy before launching
 
 **3. Just-In-Time Resource Loading**
-- Use dynamic MCP URIs: `@orchestr8://match?query=...`
+- Use dynamic MCP URIs: `orchestr8://match?query=...`
 - Load expertise only when needed for specific phases
 - Optimize token budgets per phase (typically 1500-3000 tokens)
 - Reference static resources when requirements are fixed
@@ -53,13 +53,13 @@ Expert at designing autonomous, efficient workflows that leverage parallel execu
 ### Pattern 1: Research → Design → Execute
 ```markdown
 ## Phase 1: Research & Requirements (0-15%)
-**→ Load Research Skills:** `@orchestr8://skills/match?query=requirement+analysis+domain+research`
+**→ Load Research Skills:** `orchestr8://skills/match?query=requirement+analysis+domain+research`
 
 ## Phase 2: Architecture Design (15-30%)
-**→ Load Domain Experts:** `@orchestr8://agents/match?query=${domain}+${technology}`
+**→ Load Domain Experts:** `orchestr8://agents/match?query=${domain}+${technology}`
 
 ## Phase 3: Parallel Implementation (30-85%)
-**→ Load Implementation Patterns:** `@orchestr8://patterns/match?query=${architecture-style}`
+**→ Load Implementation Patterns:** `orchestr8://patterns/match?query=${architecture-style}`
 Launch parallel subagents for independent components
 
 ## Phase 4: Integration & Validation (85-100%)
@@ -121,7 +121,7 @@ estimatedTokens: 2500
 
 **Goal:** What this phase accomplishes
 
-**→ Dynamic Resources:** `@orchestr8://match?query=${task-description}&categories=agent,skill`
+**→ Dynamic Resources:** `orchestr8://match?query=${task-description}&categories=agent,skill`
 
 Execution instructions for this phase...
 
@@ -147,10 +147,10 @@ Execution instructions for this phase...
 
 **Examples:**
 ```
-@orchestr8://agents/match?query=${project-description}&mode=index&maxResults=10
-@orchestr8://skills/match?query=testing+${language}&tags=${framework}
-@orchestr8://match?query=${domain}+${technology}&categories=agent,skill,example
-@orchestr8://patterns/match?query=${architecture-pattern}+security
+orchestr8://agents/match?query=${project-description}&mode=index&maxResults=10
+orchestr8://skills/match?query=testing+${language}&tags=${framework}
+orchestr8://match?query=${domain}+${technology}&categories=agent,skill,example
+orchestr8://patterns/match?query=${architecture-pattern}+security
 ```
 
 ## Best Practices

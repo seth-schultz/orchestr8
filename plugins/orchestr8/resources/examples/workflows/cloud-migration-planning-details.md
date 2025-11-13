@@ -16,7 +16,7 @@ useWhen:
   - Creating cost analysis and TCO projections
 estimatedTokens: 1000
 relatedResources:
-  - @orchestr8://workflows/workflow-cloud-migration-planning
+  - orchestr8://workflows/workflow-cloud-migration-planning
 ---
 
 # Cloud Migration Planning - Detailed Implementation Guide

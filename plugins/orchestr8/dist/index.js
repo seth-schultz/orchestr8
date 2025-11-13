@@ -48576,12 +48576,12 @@ This catalog provides a lightweight index of relevant resources. Each entry incl
    - You need more specific or different expertise
 
 **To load a resource:**
-Simply reference it using the \`@orchestr8://\` URI shown in each entry below. Claude will automatically load it via MCP.
+Simply reference it using the \`orchestr8://\` URI shown in each entry below. Claude will automatically load it via MCP.
 
-Example: @orchestr8://agents/api-designer-rest
+Example: orchestr8://agents/api-designer-rest
 
 **To requery the catalog:**
-Reference: @orchestr8://match?query=<refined-search>&categories=<cats>&minScore=15
+Reference: orchestr8://match?query=<refined-search>&categories=<cats>&minScore=15
 
 ---
 
@@ -48603,7 +48603,7 @@ ${resource.capabilities.slice(0, 4).map((cap) => `  - ${cap}`).join("\n")}${reso
 ${useWhenSection}
 **Estimated Tokens:** ~${resource.estimatedTokens}
 
-**Load this resource:** @orchestr8://${resource.category}s/${resourceId}
+**Load this resource:** orchestr8://${resource.category}s/${resourceId}
 `;
     });
     const content = header + entries.join("\n---\n");
@@ -49019,7 +49019,7 @@ var IndexLookup = class {
 
 `;
     });
-    output += `**To load:** Simply reference the @orchestr8:// URIs shown above
+    output += `**To load:** Simply reference the orchestr8:// URIs shown above
 `;
     output += `**To refine:** Add more specific keywords to query
 `;
@@ -53587,8 +53587,8 @@ var ResourceLoader = class {
             examples: resources.filter((r) => r.category === "example").length,
             workflows: resources.filter((r) => r.category === "workflow").length
           },
-          searchUri: "@orchestr8://match?query=<keywords>&mode=index&maxResults=5",
-          usage: "Use @orchestr8://match?query=... for resource discovery. Default mode is 'index' for optimal efficiency."
+          searchUri: "orchestr8://match?query=<keywords>&mode=index&maxResults=5",
+          usage: "Use orchestr8://match?query=... for resource discovery. Default mode is 'index' for optimal efficiency."
         };
         const content = JSON.stringify(catalog, null, 2);
         this.cache.set(uri, content);
@@ -54168,14 +54168,14 @@ var StatsCollector = class {
       },
       errors: this.stats.errors,
       memory: {
-        heapUsed: Math.floor(memUsage.heapUsed / 1024 / 1024),
-        // MB
-        heapTotal: Math.floor(memUsage.heapTotal / 1024 / 1024),
-        // MB
-        external: Math.floor(memUsage.external / 1024 / 1024),
-        // MB
-        rss: Math.floor(memUsage.rss / 1024 / 1024)
-        // MB
+        heapUsed: memUsage.heapUsed,
+        // Bytes (UI will format)
+        heapTotal: memUsage.heapTotal,
+        // Bytes
+        external: memUsage.external,
+        // Bytes
+        rss: memUsage.rss
+        // Bytes
       },
       lastActivity: this.stats.lastActivity
     };
@@ -55961,8 +55961,8 @@ var Orchestr8Server = class {
             guides: resources.filter((r) => r.category === "guides").length,
             workflows: resources.filter((r) => r.category === "workflows").length
           },
-          searchUri: "@orchestr8://match?query=<keywords>&mode=index&maxResults=5",
-          usage: "Use @orchestr8://match?query=... for resource discovery. Default mode is 'index' for optimal efficiency."
+          searchUri: "orchestr8://match?query=<keywords>&mode=index&maxResults=5",
+          usage: "Use orchestr8://match?query=... for resource discovery. Default mode is 'index' for optimal efficiency."
         };
         return {
           contents: [

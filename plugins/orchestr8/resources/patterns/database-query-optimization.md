@@ -368,6 +368,6 @@ async function analyzeQuery() {
 
 ## Related Database Patterns
 
-- **@orchestr8://patterns/database-indexing-strategies** - Add indexes to speed up queries
-- **@orchestr8://patterns/database-connection-pooling-scaling** - Connection pooling and read replicas
-- **@orchestr8://patterns/performance-caching** - Cache queries with Redis to reduce database hits
+- **orchestr8://patterns/database-indexing-strategies** - Add indexes to speed up queries
+- **orchestr8://patterns/database-connection-pooling-scaling** - Connection pooling and read replicas
+- **orchestr8://patterns/performance-caching** - Cache queries with Redis to reduce database hits

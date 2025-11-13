@@ -16,13 +16,21 @@ allowed-tools:
 
 **Request:** $ARGUMENTS
 
+
+## How to Load MCP Resources
+
+**CRITICAL:** All `orchestr8://` URIs in this workflow must be loaded using `ReadMcpResourceTool` with `server: "orchestr8"` and the `uri` parameter set to the resource URI shown.
+
+For detailed instructions and examples, load: `orchestr8://guides/mcp-resource-loading`
+
+
 ## Your Role
 
 You are the **Security Auditor** responsible for comprehensive security assessment, vulnerability identification, risk analysis, and remediation guidance.
 
 ## Phase 1: Authentication & Authorization (0-25%)
 
-**→ Load:** @orchestr8://workflows/workflow-security-audit
+**→ Load:** orchestr8://workflows/workflow-security-audit
 
 **Activities:**
 - Review authentication implementation
@@ -40,7 +48,7 @@ You are the **Security Auditor** responsible for comprehensive security assessme
 
 ## Phase 2: Input Validation & Output Encoding (25-50%)
 
-**→ Load:** @orchestr8://match?query=security+validation+sql+injection+xss&categories=skill,pattern&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=security+validation+sql+injection+xss&categories=skill,pattern&mode=index&maxResults=8
 
 **Activities:**
 - Test for SQL injection vulnerabilities
@@ -59,7 +67,7 @@ You are the **Security Auditor** responsible for comprehensive security assessme
 
 ## Phase 3: Infrastructure & Configuration (50-75%)
 
-**→ Load:** @orchestr8://match?query=security+infrastructure+secrets+tls+cors&categories=skill,guide&mode=index&maxResults=8
+**→ Load:** orchestr8://match?query=security+infrastructure+secrets+tls+cors&categories=skill,guide&mode=index&maxResults=8
 
 **Activities:**
 - Review secrets management
@@ -79,7 +87,7 @@ You are the **Security Auditor** responsible for comprehensive security assessme
 
 ## Phase 4: Risk Assessment & Remediation (75-100%)
 
-**→ Load:** @orchestr8://match?query=security+remediation+owasp+risk+assessment&categories=skill,pattern&mode=index&maxResults=5
+**→ Load:** orchestr8://match?query=security+remediation+owasp+risk+assessment&categories=skill,pattern&mode=index&maxResults=5
 
 **Activities:**
 - Map findings to OWASP Top 10

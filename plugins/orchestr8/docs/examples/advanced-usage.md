@@ -24,7 +24,7 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 
 **Query:**
 ```
-@orchestr8://match?query=typescript+react+hooks+api+postgresql+authentication&mode=catalog&maxResults=20
+orchestr8://match?query=typescript+react+hooks+api+postgresql+authentication&mode=catalog&maxResults=20
 ```
 
 **Strategy:**
@@ -37,16 +37,16 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 **Next steps:**
 ```
 # Load core agents
-@orchestr8://agents/typescript-core
-@orchestr8://agents/react-hooks-patterns
+orchestr8://agents/typescript-core
+orchestr8://agents/react-hooks-patterns
 
 # Load specific skills
-@orchestr8://skills/api-design-rest
-@orchestr8://skills/database-postgresql
+orchestr8://skills/api-design-rest
+orchestr8://skills/database-postgresql
 
 # Load examples
-@orchestr8://examples/express-jwt-auth
-@orchestr8://examples/react-auth-flow
+orchestr8://examples/express-jwt-auth
+orchestr8://examples/react-auth-flow
 ```
 
 ---
@@ -57,21 +57,21 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 
 **Step 1 - Broad query:**
 ```
-@orchestr8://match?query=testing&mode=catalog&maxResults=20
+orchestr8://match?query=testing&mode=catalog&maxResults=20
 ```
 
 **Result:** Too many results, too generic
 
 **Step 2 - Add technology:**
 ```
-@orchestr8://match?query=typescript+testing&mode=catalog&maxResults=15
+orchestr8://match?query=typescript+testing&mode=catalog&maxResults=15
 ```
 
 **Result:** Better, but still broad
 
 **Step 3 - Add specificity:**
 ```
-@orchestr8://match?query=typescript+testing+unit+jest+mocking&mode=catalog&maxResults=10
+orchestr8://match?query=typescript+testing+unit+jest+mocking&mode=catalog&maxResults=10
 ```
 
 **Result:** Highly relevant resources
@@ -87,7 +87,7 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 **Example - During API development:**
 ```
 # Context: Building authentication endpoints
-@orchestr8://match?query=express+middleware+jwt+validation+error+handling
+orchestr8://match?query=express+middleware+jwt+validation+error+handling
 
 # Loads relevant patterns for current context
 ```
@@ -95,7 +95,7 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 **Example - During testing:**
 ```
 # Context: Writing integration tests
-@orchestr8://match?query=integration+testing+api+mocking+database
+orchestr8://match?query=integration+testing+api+mocking+database
 ```
 
 **Benefits:**
@@ -114,7 +114,7 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 **Approach:**
 ```
 # Step 1: Catalog discovery (100 tokens)
-@orchestr8://match?query=kubernetes+deployment+production&mode=catalog&maxResults=15
+orchestr8://match?query=kubernetes+deployment+production&mode=catalog&maxResults=15
 
 # Step 2: Review and plan
 # Available budget: 3000 tokens
@@ -125,9 +125,9 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 # Total: 2600 tokens (within budget)
 
 # Step 3: Load selected resources
-@orchestr8://guides/kubernetes-deployment
-@orchestr8://patterns/helm-charts
-@orchestr8://guides/monitoring-setup
+orchestr8://guides/kubernetes-deployment
+orchestr8://patterns/helm-charts
+orchestr8://guides/monitoring-setup
 ```
 
 **Total tokens:** 100 + 2600 = 2700 tokens
@@ -142,7 +142,7 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 
 **Approach:**
 ```
-@orchestr8://match?query=retry+exponential+backoff+circuit+breaker&mode=index&maxResults=5
+orchestr8://match?query=retry+exponential+backoff+circuit+breaker&mode=index&maxResults=5
 ```
 
 **Performance:**
@@ -164,27 +164,27 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 
 **Phase 1 - Core expertise (650 tokens):**
 ```
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 # Returns: Core TypeScript knowledge
 ```
 
 **Phase 2 - Add skills as needed (1,370 tokens):**
 ```
-@orchestr8://skills/api-design-rest  # 720 tokens
-@orchestr8://skills/error-handling-resilience  # 650 tokens
+orchestr8://skills/api-design-rest  # 720 tokens
+orchestr8://skills/error-handling-resilience  # 650 tokens
 ```
 
 **Phase 3 - Load examples only when needed (on-demand):**
 ```
 # Agent with progressive loading
-@orchestr8://agents/mlops-specialist  # 220 tokens core
+orchestr8://agents/mlops-specialist  # 220 tokens core
 
 # Returns core + on-demand example references:
-# → @orchestr8://examples/ml/mlops-pipeline-kubeflow
-# → @orchestr8://examples/ml/mlops-model-versioning
+# → orchestr8://examples/ml/mlops-pipeline-kubeflow
+# → orchestr8://examples/ml/mlops-model-versioning
 
 # Load example when implementing (900 tokens)
-@orchestr8://examples/ml/mlops-pipeline-kubeflow
+orchestr8://examples/ml/mlops-pipeline-kubeflow
 ```
 
 **Total comparison:**
@@ -210,16 +210,16 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 **Composition:**
 ```
 # Core (650 tokens)
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # API Design (720 tokens)
-@orchestr8://skills/api-design-rest
+orchestr8://skills/api-design-rest
 
 # Auth Pattern (680 tokens)
-@orchestr8://patterns/security-auth-jwt
+orchestr8://patterns/security-auth-jwt
 
 # Testing (450 tokens)
-@orchestr8://skills/testing-unit
+orchestr8://skills/testing-unit
 ```
 
 **Total:** 2500 tokens (exact budget match)
@@ -235,7 +235,7 @@ This guide covers advanced Orchestr8 usage patterns for power users, performance
 
 **Query:**
 ```
-@orchestr8://match?query=authentication+jwt+security&categories=agents,skills,patterns,examples&mode=catalog&maxResults=20
+orchestr8://match?query=authentication+jwt+security&categories=agents,skills,patterns,examples&mode=catalog&maxResults=20
 ```
 
 **Returns:**
@@ -272,10 +272,10 @@ Examples:
 **Strategy:**
 ```
 # Query emphasizing examples
-@orchestr8://examples/match?query=authentication+jwt&mode=catalog&maxResults=10
+orchestr8://examples/match?query=authentication+jwt&mode=catalog&maxResults=10
 
 # If insufficient, expand to patterns
-@orchestr8://match?query=authentication+jwt&categories=examples,patterns&mode=catalog
+orchestr8://match?query=authentication+jwt&categories=examples,patterns&mode=catalog
 ```
 
 **Benefits:**
@@ -292,13 +292,13 @@ Examples:
 **Approach:**
 ```
 # Level 1: Core agent
-@orchestr8://agents/typescript-core
+orchestr8://agents/typescript-core
 
 # Level 2: Related skills
-@orchestr8://skills/match?query=typescript+testing+error+handling&mode=catalog
+orchestr8://skills/match?query=typescript+testing+error+handling&mode=catalog
 
 # Level 3: Specific examples
-@orchestr8://examples/match?query=typescript+jest+mocking&mode=catalog
+orchestr8://examples/match?query=typescript+jest+mocking&mode=catalog
 ```
 
 **Benefits:**
@@ -316,7 +316,7 @@ Examples:
 
 **Implementation:**
 ```
-@orchestr8://match?query=circuit+breaker+timeout+retry&mode=index&maxResults=5
+orchestr8://match?query=circuit+breaker+timeout+retry&mode=index&maxResults=5
 ```
 
 **Performance characteristics:**
@@ -344,12 +344,12 @@ Examples:
 
 **Poor query (generic):**
 ```
-@orchestr8://match?query=error+handling&mode=index
+orchestr8://match?query=error+handling&mode=index
 ```
 
 **Better query (specific keywords):**
 ```
-@orchestr8://match?query=retry+exponential+backoff+circuit+breaker+timeout&mode=index
+orchestr8://match?query=retry+exponential+backoff+circuit+breaker+timeout&mode=index
 ```
 
 **Best practices:**
@@ -367,10 +367,10 @@ Examples:
 **Strategy:**
 ```
 # Try index first (fast, specific)
-@orchestr8://match?query=kubernetes+helm+deployment&mode=index&maxResults=5
+orchestr8://match?query=kubernetes+helm+deployment&mode=index&maxResults=5
 
 # If insufficient results, try fuzzy catalog
-@orchestr8://match?query=kubernetes+helm+deployment+production&mode=catalog&maxResults=10
+orchestr8://match?query=kubernetes+helm+deployment+production&mode=catalog&maxResults=10
 ```
 
 **Benefits:**
@@ -389,10 +389,10 @@ Examples:
 **Implementation:**
 ```
 # First query (cold, ~15ms)
-@orchestr8://match?query=typescript+testing&mode=catalog
+orchestr8://match?query=typescript+testing&mode=catalog
 
 # Subsequent queries (cached, <1ms)
-@orchestr8://match?query=typescript+testing&mode=catalog
+orchestr8://match?query=typescript+testing&mode=catalog
 ```
 
 **Cache characteristics:**
@@ -416,9 +416,9 @@ Examples:
 ```
 # Load in parallel (if supported by client)
 Promise.all([
-  loadResource('@orchestr8://agents/typescript-core'),
-  loadResource('@orchestr8://skills/api-design-rest'),
-  loadResource('@orchestr8://examples/express-minimal-api')
+  loadResource('orchestr8://agents/typescript-core'),
+  loadResource('orchestr8://skills/api-design-rest'),
+  loadResource('orchestr8://examples/express-minimal-api')
 ])
 ```
 
@@ -464,10 +464,10 @@ Task: Build authenticated API with testing
 **Implementation:**
 ```
 # Use index mode for speed
-@orchestr8://match?query=deployment+production+rollback&mode=index
+orchestr8://match?query=deployment+production+rollback&mode=index
 
 # Cache-friendly queries (exact same URI)
-@orchestr8://workflows/workflow-deploy
+orchestr8://workflows/workflow-deploy
 ```
 
 **Best practices:**
@@ -504,15 +504,15 @@ Task: Build authenticated API with testing
 ```
 try {
   // Try specific query
-  result = query('@orchestr8://match?query=specific+keywords&mode=index')
+  result = query('orchestr8://match?query=specific+keywords&mode=index')
 } catch (error) {
   // Fallback to broader fuzzy query
-  result = query('@orchestr8://match?query=broader+terms&mode=catalog')
+  result = query('orchestr8://match?query=broader+terms&mode=catalog')
 }
 
 // Ultimate fallback: Static resource
 if (!result) {
-  result = query('@orchestr8://agents/default-agent')
+  result = query('orchestr8://agents/default-agent')
 }
 ```
 
@@ -529,7 +529,7 @@ if (!result) {
 # Script that implements JIT loading pattern
 async function generateFeature(description, techStack) {
   // 1. Load workflow definition (2,400 tokens)
-  const workflow = await loadResource('@orchestr8://workflows/workflow-add-feature')
+  const workflow = await loadResource('orchestr8://workflows/workflow-add-feature')
 
   // 2. Phase-based JIT loading
   const phases = {
@@ -566,7 +566,7 @@ async function executeWorkflowWithJIT(workflow, phases, description) {
 
     // Load expertise for this phase only
     const expertise = await query(
-      `@orchestr8://match?query=${config.query}&maxTokens=${config.maxTokens}&mode=full`
+      `orchestr8://match?query=${config.query}&maxTokens=${config.maxTokens}&mode=full`
     )
 
     // Execute phase with loaded expertise
@@ -591,10 +591,10 @@ async function executeWorkflowWithJIT(workflow, phases, description) {
 1. Analyze requirements
    ↓
 2. Load relevant patterns
-   @orchestr8://patterns/match?query=...
+   orchestr8://patterns/match?query=...
    ↓
 3. Load code examples
-   @orchestr8://examples/match?query=...
+   orchestr8://examples/match?query=...
    ↓
 4. Generate code using patterns + examples
    ↓
@@ -610,7 +610,7 @@ async function executeWorkflowWithJIT(workflow, phases, description) {
 **Implementation:**
 ```
 # Load all resources in category
-const agents = await query('@orchestr8://agents/match?query=&mode=catalog&maxResults=100')
+const agents = await query('orchestr8://agents/match?query=&mode=catalog&maxResults=100')
 
 # Extract metadata for docs
 agents.forEach(agent => {
@@ -634,7 +634,7 @@ agents.forEach(agent => {
 describe('API Tests', () => {
   beforeAll(async () => {
     // Load testing patterns
-    testPatterns = await loadResource('@orchestr8://skills/testing-integration')
+    testPatterns = await loadResource('orchestr8://skills/testing-integration')
   })
 
   test('API endpoints', () => {

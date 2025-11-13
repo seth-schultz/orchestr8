@@ -14,11 +14,11 @@ useWhen:
   - Implementing database-specific features like indexing strategies, transaction management, backup/recovery, and high-availability configurations
 estimatedTokens: 140
 relatedResources:
-  - @orchestr8://examples/mysql-performance-tuning
-  - @orchestr8://examples/mysql-innodb-configuration
-  - @orchestr8://examples/mysql-replication-ha
-  - @orchestr8://examples/mysql-monitoring-queries
-  - @orchestr8://agents/database-architect-sql
+  - orchestr8://examples/mysql-performance-tuning
+  - orchestr8://examples/mysql-innodb-configuration
+  - orchestr8://examples/mysql-replication-ha
+  - orchestr8://examples/mysql-monitoring-queries
+  - orchestr8://agents/database-architect-sql
 ---
 
 
@@ -38,7 +38,7 @@ Expert in MySQL administration, performance tuning, replication, InnoDB optimiza
 
 ## Query Optimization
 
-**See:** @orchestr8://examples/mysql-performance-tuning
+**See:** orchestr8://examples/mysql-performance-tuning
 
 Key capabilities:
 - EXPLAIN query analysis for execution plan optimization
@@ -49,7 +49,7 @@ Key capabilities:
 
 ## Performance Tuning
 
-**See:** @orchestr8://examples/mysql-performance-tuning
+**See:** orchestr8://examples/mysql-performance-tuning
 
 Essential techniques:
 - Slow query identification and analysis
@@ -60,7 +60,7 @@ Essential techniques:
 
 ## InnoDB Configuration & Tuning
 
-**See:** @orchestr8://examples/mysql-innodb-configuration
+**See:** orchestr8://examples/mysql-innodb-configuration
 
 Production configuration includes:
 - Buffer pool sizing (70-80% of RAM recommended)
@@ -78,7 +78,7 @@ Key settings:
 
 ## Replication & High Availability
 
-**See:** @orchestr8://examples/mysql-replication-ha
+**See:** orchestr8://examples/mysql-replication-ha
 
 Comprehensive replication support:
 - Master-slave replication setup and configuration
@@ -280,7 +280,7 @@ SET GLOBAL innodb_ft_max_token_size = 84;
 
 ## Monitoring Queries
 
-**See:** @orchestr8://examples/mysql-monitoring-queries
+**See:** orchestr8://examples/mysql-monitoring-queries
 
 Production monitoring essentials:
 - Active connection tracking and long-running query detection

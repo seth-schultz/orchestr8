@@ -252,8 +252,8 @@ class EventMonitor {
 
 This pattern provides foundational best practices. Explore specific implementation patterns:
 
-- **@orchestr8://patterns/event-driven-pubsub** - Pub/sub messaging with Kafka/RabbitMQ
-- **@orchestr8://patterns/event-driven-cqrs** - Command Query Responsibility Segregation
-- **@orchestr8://patterns/event-driven-eventsourcing** - Event sourcing with aggregate patterns
-- **@orchestr8://patterns/event-driven-saga** - Distributed transactions with compensation
-- **@orchestr8://patterns/message-broker-comparison** - Kafka vs RabbitMQ vs AWS SQS/SNS
+- **orchestr8://patterns/event-driven-pubsub** - Pub/sub messaging with Kafka/RabbitMQ
+- **orchestr8://patterns/event-driven-cqrs** - Command Query Responsibility Segregation
+- **orchestr8://patterns/event-driven-eventsourcing** - Event sourcing with aggregate patterns
+- **orchestr8://patterns/event-driven-saga** - Distributed transactions with compensation
+- **orchestr8://patterns/message-broker-comparison** - Kafka vs RabbitMQ vs AWS SQS/SNS

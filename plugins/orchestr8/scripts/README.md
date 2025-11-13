@@ -2,6 +2,52 @@
 
 Utility scripts for enhancing Orchestr8 workflows.
 
+## Version Bump Script
+
+Automatically bump version numbers across all required files consistently.
+
+### Usage
+
+```bash
+# Using npm scripts (recommended)
+npm run version:patch  # 8.0.4 -> 8.0.5
+npm run version:minor  # 8.0.4 -> 8.1.0
+npm run version:major  # 8.0.4 -> 9.0.0
+
+# Or with explicit version
+npm run version:bump 8.0.5
+
+# Direct script usage
+./scripts/bump-version.sh patch
+./scripts/bump-version.sh 8.0.5
+```
+
+### What It Updates
+
+The script automatically updates version numbers in:
+1. `VERSION` (root file)
+2. `plugins/orchestr8/package.json` (`.version` field)
+3. `plugins/orchestr8/.claude-plugin/plugin.json` (`.version` field)
+4. `.claude-plugin/marketplace.json` (`.version` field)
+
+### CI Validation
+
+The GitHub CI workflow validates that all these files match on every PR and push. If they don't match, the build will fail.
+
+### Next Steps After Bumping
+
+After running the version bump script:
+
+1. **Update CHANGELOG.md** with release notes for the new version
+2. **Review changes**: `git diff`
+3. **Commit changes**: `git add -A && git commit -m "chore: Bump version to X.Y.Z"`
+4. **Create git tag**: `git tag vX.Y.Z`
+5. **Push changes**: `git push && git push --tags`
+
+The script will remind you of these steps after successfully updating the version.
+
+---
+
 ## Hero Image Generator
 
 Automatically generate professional hero images for Medium articles using AI image generation.

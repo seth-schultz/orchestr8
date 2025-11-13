@@ -8,12 +8,12 @@ This guide provides hands-on examples for using the Orchestr8 provider system in
 
 ```bash
 # Search across all providers
-@orchestr8://match?query=typescript+api&maxResults=10
+orchestr8://match?query=typescript+api&maxResults=10
 
 # Load from specific provider
 aitmpl://agents/rust-pro
 github://myorg/resources/agents/custom-agent
-@orchestr8://agents/typescript-developer  # Local
+orchestr8://agents/typescript-developer  # Local
 
 # Check provider health
 curl http://localhost:3000/api/providers/health/all
@@ -28,9 +28,9 @@ curl "http://localhost:3000/api/search/multi?q=authentication&categories=pattern
 
 **Local filesystem**:
 ```markdown
-**Agent:** `@orchestr8://agents/typescript-developer`
-**Skill:** `@orchestr8://skills/error-handling`
-**Pattern:** `@orchestr8://patterns/security/authentication`
+**Agent:** `orchestr8://agents/typescript-developer`
+**Skill:** `orchestr8://skills/error-handling`
+**Pattern:** `orchestr8://patterns/security/authentication`
 ```
 
 **AITMPL community**:
@@ -49,17 +49,17 @@ curl "http://localhost:3000/api/search/multi?q=authentication&categories=pattern
 
 **Basic search**:
 ```
-@orchestr8://match?query=typescript+rest+api
+orchestr8://match?query=typescript+rest+api
 ```
 
 **With filters**:
 ```
-@orchestr8://match?query=python+async&categories=agent,skill&maxTokens=2500
+orchestr8://match?query=python+async&categories=agent,skill&maxTokens=2500
 ```
 
 **Required tags**:
 ```
-@orchestr8://match?query=authentication&tags=security,jwt&maxResults=5
+orchestr8://match?query=authentication&tags=security,jwt&maxResults=5
 ```
 
 ## Multi-Provider Search
@@ -267,7 +267,7 @@ name: Build REST API
 
 **Dynamic Resource Loading** (searches all providers):
 
-@orchestr8://match?query=typescript+rest+api+authentication&maxTokens=3000&categories=agent,skill
+orchestr8://match?query=typescript+rest+api+authentication&maxTokens=3000&categories=agent,skill
 
 **What happens:**
 1. LocalProvider searches local resources
@@ -291,7 +291,7 @@ aitmpl://skills/api-design-rest
 
 **Multi-Source Pattern**:
 
-@orchestr8://match?query=jwt+authentication+security&tags=security&maxTokens=2000
+orchestr8://match?query=jwt+authentication+security&tags=security&maxTokens=2000
 
 **Benefits:**
 - Finds best security patterns across all sources
@@ -305,10 +305,10 @@ aitmpl://skills/api-design-rest
 
 ```markdown
 <!-- Good: Dynamic discovery -->
-@orchestr8://match?query=python+async+error+handling
+orchestr8://match?query=python+async+error+handling
 
 <!-- Less flexible: Hard-coded reference -->
-@orchestr8://agents/python-developer
+orchestr8://agents/python-developer
 ```
 
 ### 2. Leverage Caching
@@ -361,10 +361,10 @@ try {
 
 ```typescript
 // Specific query (better)
-@orchestr8://match?query=typescript+express+validation+zod&categories=example
+orchestr8://match?query=typescript+express+validation+zod&categories=example
 
 // Vague query (worse)
-@orchestr8://match?query=typescript
+orchestr8://match?query=typescript
 ```
 
 ## Common Patterns
@@ -374,7 +374,7 @@ try {
 ```typescript
 async function loadAgentWithFallback(agentId: string): Promise<string> {
   const sources = [
-    `@orchestr8://agents/${agentId}`,      // Local first
+    `orchestr8://agents/${agentId}`,      // Local first
     `aitmpl://agents/${agentId}`,         // Community second
     `github://backup/agents/${agentId}`   // GitHub third
   ];

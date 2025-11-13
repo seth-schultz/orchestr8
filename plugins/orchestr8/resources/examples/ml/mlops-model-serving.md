@@ -14,8 +14,8 @@ useWhen:
   - Implementing scalable model inference endpoints
 estimatedTokens: 1100
 relatedResources:
-  - @orchestr8://agents/mlops-specialist
-  - @orchestr8://skills/kubernetes-deployment-patterns
+  - orchestr8://agents/mlops-specialist
+  - orchestr8://skills/kubernetes-deployment-patterns
 ---
 
 # FastAPI Model Serving with Docker & Kubernetes

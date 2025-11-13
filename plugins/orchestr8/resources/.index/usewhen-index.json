@@ -91,7 +91,7 @@
       "relevance": 100
     },
     "scenario-a3487e672200": {
-      "scenario": "Designing complementary fragment sets like typescript-core + typescript-api-development + typescript-async-patterns that compose via @orchestr8://match queries",
+      "scenario": "Designing complementary fragment sets like typescript-core + typescript-api-development + typescript-async-patterns that compose via orchestr8://match queries",
       "keywords": [
         "designing",
         "complementary",
@@ -205,7 +205,7 @@
       "relevance": 100
     },
     "scenario-0a3c95e35e45": {
-      "scenario": "Improving agent discoverability through fuzzy matching by testing with @orchestr8://agents/match?query= and ensuring correct fragments appear for expected queries",
+      "scenario": "Improving agent discoverability through fuzzy matching by testing with orchestr8://agents/match?query= and ensuring correct fragments appear for expected queries",
       "keywords": [
         "improving",
         "agent",
@@ -405,7 +405,7 @@
       "relevance": 100
     },
     "scenario-6be0bb56205f": {
-      "scenario": "Optimizing token efficiency through @orchestr8://agents/match?query= dynamic loading based on specific user requests versus loading all expertise upfront",
+      "scenario": "Optimizing token efficiency through orchestr8://agents/match?query= dynamic loading based on specific user requests versus loading all expertise upfront",
       "keywords": [
         "optimizing",
         "token",
@@ -10378,7 +10378,7 @@
       "relevance": 100
     },
     "scenario-4065a59f1164": {
-      "scenario": "Conducting gap analysis to identify missing agent fragments, skill patterns, or examples needed for @orchestr8:// dynamic URI matching",
+      "scenario": "Conducting gap analysis to identify missing agent fragments, skill patterns, or examples needed for orchestr8:// dynamic URI matching",
       "keywords": [
         "conducting",
         "gap",
@@ -10402,7 +10402,7 @@
       "relevance": 100
     },
     "scenario-7b2bee96785a": {
-      "scenario": "Building requirement documents with measurable success criteria before Phase 2 design work using @orchestr8://match?query= resource discovery",
+      "scenario": "Building requirement documents with measurable success criteria before Phase 2 design work using orchestr8://match?query= resource discovery",
       "keywords": [
         "building",
         "requirement",
@@ -13231,7 +13231,7 @@
       "relevance": 100
     },
     "scenario-76ca7183b504": {
-      "scenario": "Designing autonomous workflows that decompose complex tasks into 3-5 phases with JIT resource loading via @orchestr8://match URIs",
+      "scenario": "Designing autonomous workflows that decompose complex tasks into 3-5 phases with JIT resource loading via orchestr8://match URIs",
       "keywords": [
         "designing",
         "autonomous",
@@ -17095,7 +17095,7 @@
       "relevance": 100
     },
     "scenario-bcdab6c0a3a6": {
-      "scenario": "Building @orchestr8:// URI scheme for agent and skill discovery enabling declarative workflow composition",
+      "scenario": "Building orchestr8:// URI scheme for agent and skill discovery enabling declarative workflow composition",
       "keywords": [
         "building",
         "orchestr8",
@@ -26577,7 +26577,7 @@
       "relevance": 100
     },
     "scenario-551f0d22ee99": {
-      "scenario": "Variable requirements across workflow invocations requiring JIT resource loading with @orchestr8:// URIs and fuzzy matching queries",
+      "scenario": "Variable requirements across workflow invocations requiring JIT resource loading with orchestr8:// URIs and fuzzy matching queries",
       "keywords": [
         "variable",
         "requirements",
@@ -26757,7 +26757,7 @@
       "relevance": 100
     },
     "scenario-699fcfcfd140": {
-      "scenario": "Adaptive workflow creation requiring dynamic @orchestr8:// URIs with query parameters determined by user input or prior phase results",
+      "scenario": "Adaptive workflow creation requiring dynamic orchestr8:// URIs with query parameters determined by user input or prior phase results",
       "keywords": [
         "adaptive",
         "workflow",
@@ -30188,7 +30188,7 @@
       "relevance": 100
     },
     "scenario-c848e941263a": {
-      "scenario": "Adaptive workflow design needing dynamic expertise assembly with @orchestr8:// URIs and progressive refinement patterns",
+      "scenario": "Adaptive workflow design needing dynamic expertise assembly with orchestr8:// URIs and progressive refinement patterns",
       "keywords": [
         "adaptive",
         "workflow",

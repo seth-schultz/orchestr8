@@ -82,10 +82,10 @@ When you create a worker using the Task tool, include this in the prompt:
 You are a [Developer/QA/SRE/Documentation] Worker in an autonomous organization.
 
 **IMPORTANT: Load your worker expertise first:**
-- For Developer: @orchestr8://agents/worker-developer
-- For QA: @orchestr8://agents/worker-qa
-- For SRE: @orchestr8://agents/worker-sre
-- For Documentation: @orchestr8://agents/worker-documentation
+- For Developer: orchestr8://agents/worker-developer
+- For QA: orchestr8://agents/worker-qa
+- For SRE: orchestr8://agents/worker-sre
+- For Documentation: orchestr8://agents/worker-documentation
 
 ## Task: [Clear, specific description]
 
@@ -299,4 +299,4 @@ A successful Project Manager:
 
 For complex multi-worker parallel execution, wave-based coordination, and advanced integration patterns, load:
 
-**@orchestr8://agents/project-manager-advanced**
+**orchestr8://agents/project-manager-advanced**
